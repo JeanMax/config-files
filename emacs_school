@@ -6,7 +6,7 @@
 ;    by: thor <thor@42.fr>                           +#+  +:+       +#+         ;
 ;                                                  +#+#+#+#+#+   +#+            ;
 ;    Created: 2013/06/18 14:01:14 by thor               #+#    #+#              ;
-;    Updated: 2015/01/30 19:26:15 by mcanal           ###   ########.fr        ;
+;    Updated: 2015/01/30 22:42:08 by mcanal           ###   ########.fr        ;
 ;                                                                               ;
 ;*******************************************************************************;
 
@@ -36,36 +36,42 @@
 ;(if (file-exists-p "~/.myemacs") (load-file "~/.myemacs"))
 
 ;; set keys for Apple keyboard, for emacs in OS X
-;(setq ns-option-modifier 'alt)
-(setq mac-option-modifier 'alt) ; make cmd key do Meta
+;(setq ns-right-option-modifier 'control)
+
+;color zboubing
+;(set-face-foreground 'font-lock-comment-face "SteelBlue")
+(set-face-foreground 'font-lock-string-face "#E6C28F")
+;(set-face-foreground 'font-lock-keyword-face "darkorange")
+;(set-face-foreground 'font-lock-type-face "yellow")
+(set-face-foreground 'font-lock-function-name-face "royal blue")
+(set-face-foreground 'font-lock-variable-name-face "orange")
+(set-face-foreground 'font-lock-builtin-face "magenta")
+;(set-face-foreground 'font-lock-constant-face "cornflowerblue")
+;(set-face-foreground 'font-lock-warning-face "red")
 
 ; Custom adds
 (or global-linum-mode)
-(global-linum-mode 0)
+;(global-linum-mode 0)
 (setq linum-format "%3d ")
 (column-number-mode 1)
 (line-number-mode 1)
+(global-set-key (kbd "<home>") 'move-beginning-of-line)
+(global-set-key (kbd "<end>") 'move-end-of-line)
 (global-set-key [(meta g)] 'goto-line)
-(global-set-key [(insertchar)] 'set-mark-command)
+;(global-set-key [(insertchar)] 'set-mark-command)
 (global-set-key [(backtab)] 'dabbrev-expand)
-(global-set-key (kbd "œ") 'tab-to-tab-stop)
+(global-set-key (kbd "ù") 'tab-to-tab-stop)
 (global-set-key (kbd "<f2>") 'kill-region)
 (global-set-key (kbd "<f3>") 'kill-ring-save)
 (global-set-key (kbd "<f4>") 'yank)
-(global-set-key (kbd "<C-f4>") 'yank-pop)
+;(global-set-key (kbd "<C-f4>") 'yank-pop)
 (global-set-key (kbd "<f5>") 'kill-line)
-(global-set-key (kbd "<C-f5>") 'kill-paragraph)
-(global-set-key [(f6)] 'backward-kill-word)
-(global-set-key (kbd "<C-f6>") 'backward-delete-char)
-(global-set-key [(f7)] 'kill-word)
-(global-set-key (kbd "<C-f7>") 'delete-char)
+(global-set-key [(f6)] 'kill-word)
+(global-set-key [(f7)] 'delete-char)
 (global-set-key [(f8)] 'undo)
 (global-set-key [(f9)] 'isearch-forward)
-(global-set-key (kbd "<C-f9>") 'transpose-chars)
 (global-set-key [(f10)] 'query-replace)
-(global-set-key (kbd "<C-f10>") 'transpose-words)
 (global-set-key [(f11)] 'save-buffer)
-(global-set-key (kbd "<C-f11>") 'transpose-lines)
 (global-set-key [(f12)] 'save-buffers-kill-emacs)
 (global-set-key (kbd "M-i") 'previous-line)
 (global-set-key (kbd "M-j") 'backward-char)
@@ -75,7 +81,14 @@
 (global-set-key (kbd "M-o") 'forward-word)
 (global-set-key (kbd "M-_") 'move-beginning-of-line)
 (global-set-key (kbd "M-ç") 'move-end-of-line)
-(global-set-key (kbd "<\C-f12>") 'global-linum-mode)
+(global-set-key (kbd "<kp-0>") 'global-linum-mode)
+(global-set-key (kbd "<kp-1>") 'set-mark-command)
+(global-set-key (kbd "<kp-4>") 'mainarg)
+(global-set-key (kbd "<kp-5>") 'main)
+(global-set-key (kbd "<kp-6>") 'kill-paragraph)
+(global-set-key (kbd "<kp-7>") 'transpose-chars)
+(global-set-key (kbd "<kp-8>") 'transpose-words)
+(global-set-key (kbd "<kp-9>") 'transpose-lines)
 (setq backup-directory-alist (list (cons "." "~/emacsbackups/")))
 (transient-mark-mode t)
 (setq make-backup-files nil)
@@ -129,14 +142,31 @@
 )
 (global-set-key (kbd "M-(") 'gui)
 
-(defun main()
+(defun inc()
+  "inc"
+  (interactive)
+  (insert "<")
+  (insert ">")
+  (backward-char 1)
+  )
+(global-set-key (kbd "M--") 'inc)
+
+(defun mainarg()
   "main"
   (interactive)
   (insert "int\t\tmain(int ac, char **av)\n{\n\t\n\treturn (0);\n}\n")
   (previous-line 3)
   (forward-char 1)
-)
-(global-set-key (kbd "M--") 'main)
+  )
+
+(defun main()
+  "main"
+  (interactive)
+  (insert "int\t\tmain(void)\n{\n\t\n\treturn (0);\n}\n")
+  (previous-line 3)
+  (forward-char 1)
+    )
+
 
 (defun normdown()
   "normdown"
