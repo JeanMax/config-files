@@ -1,16 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    shell.sh                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2015/01/30 18:00:59 by mcanal            #+#    #+#              #
-#    Updated: 2015/01/30 18:01:19 by mcanal           ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
-
 # default editor
 #EDITOR=/usr/bin/vim
 #export EDITOR
@@ -117,13 +104,12 @@ ors -b)"
     #alias ls='ls --color=auto'
     #alias dir='dir --color=auto'
     #alias vdir='vdir --color=auto'
+fi
+
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
-fi
 
-# Definition des alias raccourcis
-alias cdt='cd ~/test/'
 
 # Definition des alias de git
 alias ga="git add"
@@ -138,8 +124,9 @@ alias gu="git add -u"
 alias gl="git log"
 
 # Definition des alias
-alias norm='norminette --CheckForbiddenSourceHeader'
-alias normall='norminette --CheckForbiddenSourceHeader */*'
+alias norm='norminette'
+alias check='sh ~/check.sh'
+alias leak='sh ~/leaks.sh'
 alias gccf='gcc -Wall -Wextra -Werror'
 alias l='ls'
 alias ll='ls -l'
@@ -149,7 +136,7 @@ alias lh='ls -lh'
 alias ls='ls -G'
 #alias e='emacs'
 alias e='~/Applications/emacs24.app/Contents/MacOS/Emacs -nw'
-alias zconf='e ~/.zshrc'
+alias zconf='e ~/.myzshrc'
 alias econf='e ~/.emacs'
 alias re="make re;"
 

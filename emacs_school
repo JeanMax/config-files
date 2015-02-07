@@ -6,14 +6,14 @@
 ;    by: thor <thor@42.fr>                           +#+  +:+       +#+         ;
 ;                                                  +#+#+#+#+#+   +#+            ;
 ;    Created: 2013/06/18 14:01:14 by thor               #+#    #+#              ;
-;    Updated: 2015/01/30 22:42:08 by mcanal           ###   ########.fr        ;
+;    Updated: 2015/02/06 21:13:39 by mcanal           ###   ########.fr        ;
 ;                                                                               ;
 ;*******************************************************************************;
 
 ; Load general features files
-(setq config_files "/usr/share/emacs/site-lisp/")
-;(setq config_files "~/Applications/emacs24.app/Contents/Resources/site-lisp")
-(setq load-path (append (list nil config_files) load-path))
+;(setq config_files "/usr/share/emacs/site-lisp/")
+(setq config_files "~/Applications/emacs24.app/Contents/Resources/site-lisp")
+;(setq load-path (append (list () config_files) load-path))
 (load "list.el")
 (load "string.el")
 (load "comments.el")
@@ -22,7 +22,7 @@
 ; Set default emacs configuration
 (set-language-environment "UTF-8")
 (setq-default font-lock-default-modes t)
-(setq-default line-number-mode nil)
+;(setq-default line-number-mode ())
 (setq-default tab-width 4)
 (setq-default indent-tabs-mode t)
 (global-set-key (kbd "DEL") 'backward-delete-char)
@@ -50,8 +50,7 @@
 ;(set-face-foreground 'font-lock-warning-face "red")
 
 ; Custom adds
-(or global-linum-mode)
-;(global-linum-mode 0)
+;(or global-linum-mode)
 (setq linum-format "%3d ")
 (column-number-mode 1)
 (line-number-mode 1)
@@ -91,7 +90,7 @@
 (global-set-key (kbd "<kp-9>") 'transpose-lines)
 (setq backup-directory-alist (list (cons "." "~/emacsbackups/")))
 (transient-mark-mode t)
-(setq make-backup-files nil)
+(setq make-backup-files ())
 
 (defun par()
   "par"
@@ -171,7 +170,7 @@
 (defun normdown()
   "normdown"
   (interactive)
-  (next-line 25)
+  (next-line 24)
 )
 (global-set-key (kbd "M-m") 'normdown)
 
@@ -179,7 +178,7 @@
 (defun normup()
   "normup"
   (interactive)
-  (previous-line 25)
+  (previous-line 24)
 )
 (global-set-key (kbd "M-p") 'normup)
 
@@ -222,7 +221,7 @@
   (goto-line 12)
   (point-to-register 'o)
   (delete-trailing-whitespace)
-  (indent-region (point-min) (point-max) nil)
+  (indent-region (point-min) (point-max) ())
   (jump-to-register 'o)
   (replace-regexp "\\(\tint\\)\\([^\t]\\)" "\\1\t\t\\2")
   (jump-to-register 'o)
@@ -354,7 +353,7 @@
   (jump-to-register 's)
   (require 'whitespace)
  (setq whitespace-auto-cleanup t)
- (whitespace-global-mode 1)
+; (whitespace-global-mode 1)
 )
 (global-set-key "\C-g" 'indent-buffer)  
 
