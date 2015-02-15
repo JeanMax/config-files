@@ -117,7 +117,7 @@ alias gb="git branch"
 alias gcm="git commit -m"
 alias gco="git checkout"
 alias gpl="git pull"
-alias gpu="git push"
+alias gp="git push"
 alias gpom="git push origin master"
 alias gm="git merge"
 alias gu="git add -u"
@@ -125,8 +125,15 @@ alias gl="git log"
 
 # Definition des alias
 alias norm='norminette'
-alias check='sh ~/check.sh'
-alias leak='sh ~/leaks.sh'
+alias check='sh ~/sh_scripts/check.sh'
+alias drwho='sh ~/sh_scripts/who.sh'
+alias leak='sh ~/sh_scripts/leaks.sh'
+alias del='sh ~/sh_scripts/trash.sh'
+alias gg='sh ~/sh_scripts/git.sh'
+alias trash='la ~/.Trash/'
+alias gotrash='cd ~/.Trash/'
+alias usb='la /Volumes/Lexar/'
+alias gousb='cd /Volumes/Lexar/'
 alias gccf='gcc -Wall -Wextra -Werror'
 alias l='ls'
 alias ll='ls -l'
@@ -146,6 +153,9 @@ alias xs='cd'
 alias vf='cd'
 alias ms='ls'
 alias lq='ls'
+alias LS='LS'
+alias E='e'
+alias CD='cd'
 
 # Couleurs pour le man
 man()

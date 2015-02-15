@@ -6,7 +6,7 @@
 #    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/02/07 01:07:39 by mcanal            #+#    #+#              #
-#    Updated: 2015/02/07 19:56:32 by mcanal           ###   ########.fr        #
+#    Updated: 2015/02/15 22:14:42 by mcanal           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
     
@@ -35,7 +35,15 @@ fi
 rm auteur_test;
 echo "";
 
-ls *.md *~ *# *.sv* *.sw* 2>/dev/null > tmp_test
+ls -R * > ls_test;
+cat ls_test	| grep "\.o" > tmp_test;
+cat ls_test	| grep "\.a" >> tmp_test;
+cat ls_test	| grep "\.sw" >> tmp_test;
+cat ls_test	| grep "\.sv" >> tmp_test;
+cat ls_test	| grep "#" >> tmp_test;
+cat ls_test	| grep "~" >> tmp_test;
+cat ls_test	| grep "\.md" >> tmp_test;
+cat ls_test	| grep "\.sh" >> tmp_test;
 FILE_SIZE=$(du tmp_test | awk '{ print $1 }');
 if [ "$FILE_SIZE" = 0 ]; then
 	echo "\033[37;01mTesting temp files \033[32;01mOK\033[0m";
@@ -43,6 +51,7 @@ else
 	echo "\033[37;01mTesting temp files \033[31;01mKO\033[0m";
 	cat tmp_test;
 fi
+rm ls_test;
 rm tmp_test;
 echo "";
 
