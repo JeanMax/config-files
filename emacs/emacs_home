@@ -1,14 +1,14 @@
-;*******************************************************************************;
-;                                                                               ;
-;                                                          :::      ::::::::    ;
-;    dotemacs                                            :+:      :+:    :+:    ;
-;                                                      +:+ +:+         +:+      ;
-;    by: thor <thor@42.fr>                           +#+  +:+       +#+         ;
-;                                                  +#+#+#+#+#+   +#+            ;
-;    Created: 2013/06/18 14:01:14 by thor               #+#    #+#              ;
-;    Updated: 2015/01/28 23:46:18 by mcanal           ###   ########.fr        ;
-;                                                                               ;
-;*******************************************************************************;
+;******************************************************************************;
+;                                                                              ;
+;                                                         :::      ::::::::    ;
+;    .emacs                                             :+:      :+:    :+:    ;
+;                                                     +:+ +:+         +:+      ;
+;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
+;                                                 +#+#+#+#+#+   +#+            ;
+;    Created: 2015/04/26 16:54:03 by mcanal            #+#    #+#              ;
+;    Updated: 2015/07/28 00:05:39 by mcanal           ###   ########.fr        ;
+;                                                                              ;
+;******************************************************************************;
 
 ; Load general features files
 (setq config_files "~/emacs_stuff/site-lisp/")
@@ -18,59 +18,138 @@
 (load "string.el")
 (load "comments.el")
 (load "header.el")
+(load "php-mode.el")
+(load "web-mode.el")
+(load "bind-key.el")
+(load "yasnippet.el")
+(load "popup.el")
+(load "fuzzy.el")
+(load "auto-complete.el")
+(load "auto-complete-config.el")
 
 ; Set default emacs configuration
 (set-language-environment "UTF-8")
-(setq-default font-lock-global-modes nil)
-(setq-default line-number-mode nil)
+(setq-default font-lock-default-modes t)
+;(setq-default line-number-mode ())
 (setq-default tab-width 4)
 (setq-default indent-tabs-mode t)
-(global-set-key (kbd "DEL") 'backward-delete-char)
+(bind-key* (kbd "DEL") 'backward-delete-char)
 (setq-default c-backspace-function 'backward-delete-char)
 (setq-default c-basic-offset 4)
+(c-set-offset 'inclass '++)
+(c-set-offset 'case-label '+)
 (setq-default c-default-style "linux")
+(add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.hpp\\'" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.tpp\\'" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.cpp\\'" . c++-mode))
 (setq-default tab-stop-list '(4 8 12 16 20 24 28 32 36 40 44 48 52 56 60
                              64 68 72 76 80 84 88 92 96 100 104 108 112 116 120))
 
-; Load user configuration
-(if (file-exists-p "~/.myemacs") (load-file "~/.myemacs"))
+;color zboubing
+;(set-face-foreground 'font-lock-comment-face "SteelBlue")
+(set-face-foreground 'font-lock-string-face "#E6C28F")
+;(set-face-foreground 'font-lock-keyword-face "darkorange")
+;(set-face-foreground 'font-lock-type-face "yellow")
+(set-face-foreground 'font-lock-function-name-face "royal blue")
+(set-face-foreground 'font-lock-variable-name-face "orange")
+(set-face-foreground 'font-lock-builtin-face "magenta")
+;(set-face-foreground 'font-lock-constant-face "cornflowerblue")
+;(set-face-foreground 'font-lock-warning-face "red")
+(set-face-attribute 'web-mode-html-tag-bracket-face nil :foreground "green")
+(set-face-attribute 'web-mode-html-tag-face nil :foreground "green")
+(set-face-attribute 'web-mode-html-attr-name-face nil :foreground "yellow")
+(set-face-attribute 'web-mode-html-attr-value-face nil :foreground "firebrick2")
 
 ; Custom adds
 (column-number-mode 1)
 (line-number-mode 1)
-(global-set-key [(meta g)] 'goto-line)
-(global-set-key [(insertchar)] 'set-mark-command)
-(global-set-key [(backtab)] 'dabbrev-expand)
-(global-set-key (kbd "œ") 'tab-to-tab-stop)
-(global-set-key (kbd "<f2>") 'kill-region)
-(global-set-key (kbd "<f3>") 'kill-ring-save)
-(global-set-key (kbd "<f4>") 'yank)
-(global-set-key (kbd "<C-f4>") 'yank-pop)
-(global-set-key (kbd "<f5>") 'kill-line)
-(global-set-key (kbd "<C-f5>") 'kill-paragraph)
-(global-set-key [(f6)] 'backward-kill-word)
-(global-set-key (kbd "<C-f6>") 'backward-delete-char)
-(global-set-key [(f7)] 'kill-word)
-(global-set-key (kbd "<C-f7>") 'delete-char)
-(global-set-key [(f8)] 'undo)
-(global-set-key [(f9)] 'isearch-forward)
-(global-set-key (kbd "<C-f9>") 'transpose-chars)
-(global-set-key [(f10)] 'query-replace)
-(global-set-key (kbd "<C-f10>") 'transpose-words)
-(global-set-key [(f11)] 'save-buffer)
-(global-set-key (kbd "<C-f11>") 'transpose-lines)
-(global-set-key [(f12)] 'save-buffers-kill-emacs)
-(global-set-key (kbd "M-i") 'previous-line)
-(global-set-key (kbd "M-j") 'backward-char)
-(global-set-key (kbd "M-k") 'next-line)
-(global-set-key (kbd "M-l") 'forward-char)
-(global-set-key (kbd "M-u") 'backward-word)
-(global-set-key (kbd "M-o") 'forward-word)
-(global-set-key (kbd "M-_") 'move-beginning-of-line)
-(global-set-key (kbd "M-ç") 'move-end-of-line)
+(setq linum-format "%3d ")
 (setq backup-directory-alist (list (cons "." "~/emacsbackups/")))
 (transient-mark-mode t)
-(setq make-backup-files nil)
+(setq make-backup-files ())
+(add-hook 'prog-mode-hook #'hs-minor-mode)
+
+;completion
+(ac-config-default)
+
+;unbinds
+(add-hook 'c++-mode-hook
+          (lambda()
+            (local-unset-key (kbd "M-q"))))
+(global-unset-key (kbd "M-q"))
+
+;binds
+(bind-key* [(meta g)] 'goto-line)
+(bind-key* [(insertchar)] 'set-mark-command)
+(bind-key* [(backtab)] 'auto-complete)
+;(bind-key* [(backtab)] 'dabbrev-expand)
+(bind-key* (kbd "œ") 'tab-to-tab-stop)
+(bind-key* (kbd "<f2>") 'kill-region)
+(bind-key* (kbd "<f3>") 'kill-ring-save)
+(bind-key* (kbd "<f4>") 'yank)
+(bind-key* (kbd "<C-f4>") 'yank-pop)
+(bind-key* (kbd "<f5>") 'kill-line)
+(bind-key* (kbd "<C-f5>") 'kill-paragraph)
+(bind-key* [(f6)] 'backward-kill-word)
+(bind-key* (kbd "<C-f6>") 'backward-delete-char)
+(bind-key* [(f7)] 'kill-word)
+(bind-key* (kbd "<C-f7>") 'delete-char)
+(bind-key* [(f8)] 'undo)
+(bind-key* [(f9)] 'isearch-forward)
+(bind-key* (kbd "<C-f9>") 'transpose-chars)
+(bind-key* [(f10)] 'query-replace)
+(bind-key* (kbd "<C-f10>") 'transpose-words)
+(bind-key* [(f11)] 'save-buffer)
+(bind-key* (kbd "<C-f11>") 'transpose-lines)
+(bind-key* [(f12)] 'save-buffers-kill-emacs)
+(bind-key* (kbd "M-i") 'previous-line)
+(bind-key* (kbd "M-j") 'backward-char)
+(bind-key* (kbd "M-k") 'next-line)
+(bind-key* (kbd "M-l") 'forward-char)
+(bind-key* (kbd "M-u") 'backward-word)
+(bind-key* (kbd "M-o") 'forward-word)
+(bind-key* (kbd "M-_") 'move-beginning-of-line)
+(bind-key* (kbd "M-ç") 'move-end-of-line)
+(bind-key* (kbd "M-m") 'normdown) ;custom
+(bind-key* (kbd "M-p") 'normup) ;custom
+(bind-key* (kbd "M-;") 'semi-c)
+(bind-key* (kbd "C-c M-c") 'stuff)
+(bind-key* (kbd "<M-prior>") 'previous-multiframe-window)
+(bind-key* (kbd "<M-next>") 'next-multiframe-window)
+(bind-key* (kbd "<M-insert>") 'find-file-other-window)
+(bind-key* (kbd "<M-delete>") 'delete-window)
+(bind-key* (kbd "<M-up>") 'global-linum-mode)
+(bind-key* (kbd "<M-down>")  'hs-toggle-hiding)
+(bind-key* (kbd "<M-left>") 'hs-hide-all)
+(bind-key* (kbd "<M-right>")  'hs-show-all)
+(bind-key* (kbd "M-s") 'shell-that)
+
+;(bind-key* [(kp-0)] 'global-linum-mode)
+;(bind-key* (kbd "1") 'set-mark-command)
+;(bind-key* (kbd "2") 'other-window)
+;(bind-key* (kbd "3") 'find-file)
+;(bind-key* (kbd "4") 'mainarg) ;custom
+;(bind-key* (kbd "5") 'main) ;custom
+;(bind-key* (kbd "6") 'kill-paragraph)
+;(bind-key* (kbd "7") 'transpose-chars)
+;(bind-key* (kbd "8") 'transpose-words)
+;(bind-key* (kbd "9") 'transpose-line)
+(bind-key* (kbd "M-&") 'par) ;custom
+(bind-key* (kbd "M-é") 'cro) ;custom
+(bind-key* (kbd "M-\"") 'aco) ;custom
+(bind-key* (kbd "M-\'") 'guigui) ;custom
+(bind-key* (kbd "M-(") 'gui) ;custom
+(bind-key* (kbd "M--") 'inc) ;custom
+(bind-key* (kbd "M-è") 'main) ;custom
+(bind-key* "\C-c\C-g" 'headcomment) ;custom
+(bind-key* "M-q" 'comment) ;custom
+(bind-key* "\C-q" 'debug) ;custom
+(bind-key* "\C-g" 'indent-buffer) ;custom
+;(bind-key* (kbd "M-h") 'hpp-template) ;custom
+;(bind-key* (kbd "M-c") 'cpp-template) ;custom
+(bind-key* (kbd "M-c") 'cpp-get-set-template) ;custom
+(bind-key* (kbd "M-h") 'hpp-get-set-template) ;custom
 
 (defun par()
   "par"
@@ -79,7 +158,6 @@
   (insert ")")
   (backward-char 1)
 )
-(global-set-key (kbd "M-&") 'par)
 
 (defun cro()
   "cro"
@@ -88,20 +166,17 @@
   (insert "]")
   (backward-char 1)
 )
-(global-set-key (kbd "M-é") 'cro)
 
-(defun ac()
+(defun aco()
   "ac"
   (interactive)
-  (newline)
-  (insert "{")
-  (newline)
-  (c-indent-command)
-  (newline)
-  (insert "}")
+  (insert "\n{")
+  (indent-for-tab-command)
+  (insert "\n\n}")
+  (indent-for-tab-command)
   (previous-line 1)
+  (indent-for-tab-command)
 )
-(global-set-key (kbd "M-\"") 'ac)
 
 (defun guigui()
   "guigui"
@@ -110,7 +185,6 @@
   (insert "\"")
   (backward-char 1)
 )
-(global-set-key (kbd "M-\'") 'guigui)
 
 (defun gui()
   "gui"
@@ -119,31 +193,43 @@
   (insert "\'")
   (backward-char 1)
 )
-(global-set-key (kbd "M-(") 'gui)
 
-(defun main()
+(defun inc()
+  "inc"
+  (interactive)
+  (insert "<")
+  (insert ">")
+  (backward-char 1)
+  )
+
+(defun mainarg()
   "main"
   (interactive)
   (insert "int\t\tmain(int ac, char **av)\n{\n\t\n\treturn (0);\n}\n")
   (previous-line 3)
   (forward-char 1)
+  )
+
+(defun main()
+  "main"
+  (interactive)
+  (insert "int\t\tmain(void)\n{\n\t\n\treturn (0);\n}\n")
+  (previous-line 3)
+  (forward-char 1)
 )
-(global-set-key (kbd "M--") 'main)
 
 (defun normdown()
   "normdown"
   (interactive)
-  (next-line 25)
+  (next-line 24)
 )
-(global-set-key (kbd "M-m") 'normdown)
 
 
 (defun normup()
   "normup"
   (interactive)
-  (previous-line 25)
+  (previous-line 24)
 )
-(global-set-key (kbd "M-p") 'normup)
 
 
 (defun headcomment()
@@ -158,7 +244,6 @@
   (previous-line 2)
   (forward-char 4)  
 )
-(global-set-key "\C-c\C-g" 'headcomment)
 
 (defun comment()
   "comment"
@@ -166,7 +251,6 @@
   (insert "//")
   (backward-char 2)
 )
-(global-set-key "\M-q" 'comment)
 
 (defun debug()
   "debug"
@@ -174,7 +258,147 @@
   (insert " //debug")
   (backward-char 8)
 )
-(global-set-key "\C-q" 'debug)
+
+(defun hpp-template(class)
+  "hpp-template"
+  (interactive "sClass name? ")
+  (insert-hpp-template)
+  (replace-string "zz" class)
+;  (indent-buffer)
+)
+
+(defun cpp-template(class)
+  "cpp-template"
+  (interactive "sClass name? ")
+  (insert-cpp-template)
+  (replace-string "zz" class)
+;  (indent-buffer)
+)
+
+(defun insert-hpp-template()
+  "insert-hpp-template"
+  (interactive)
+  (header-insert)
+  (goto-line 12)
+;  (insert "\n#ifndef ZZ_HPP\n\n")
+  (insert "\n#ifndef ZZ_CLASS_HPP\n\n")
+  (insert "/*\n** defines\n*/\n")
+;  (insert "# define ZZ_HPP\n\n")
+  (insert "# define ZZ_CLASS_HPP\n\n")
+  (insert "/*\n** includes\n*/\n")
+  (insert "//# include <iostream>\n\n")
+  (insert "/*\n** class\n*/\n")
+  (insert "class Zz\n{\n")
+  (insert "\tpublic:\n")
+  (insert "\t\tZz(void);\n")
+  (insert "\t\tZz(Zz const &copy);\n")
+  (insert "\t\t~Zz(void);\n")
+  (insert "\t\tZz\t\t&operator=(Zz const &copy);\n\n")
+  (insert "\tprotected:\n\n")
+  (insert "};\n\n")
+;  (insert "#endif //ZZ_HPP")
+  (insert "#endif //ZZ_CLASS_HPP")
+  (goto-line 12)
+)
+
+(defun insert-cpp-template()
+  "insert-cpp-template"
+  (interactive)
+  (header-insert)
+  (goto-line 12)
+;  (insert "\n#include \"Zz.hpp\"\n\n")
+  (insert "\n#include \"Zz.class.hpp\"\n\n")
+  (insert "/*\n** constructor\n*/\n")
+  (insert "Zz::Zz(void)\n{\n\n}\n\n")
+  (insert "Zz::Zz(Zz const &copy)\n{\n")
+  (insert "\t*this = copy;\n}\n\n")
+  (insert "/*\n** destructor\n*/\n")
+  (insert "Zz::~Zz(void)\n{\n\n}\n\n")
+  (insert "/*\n** operator overload\n*/\n")
+  (insert "Zz\t\t\t\t\t&Zz::operator=(Zz const &copy)\n{\n")
+  (insert "\t//this->_z = copy._z;\n\n\treturn *this;\n}\n\n")
+  (insert "/*\n** public\n*/\n")
+  (insert "\n\n")
+  (insert "/*\n** getter/setter\n*/\n")
+  (insert "\n\n")
+  (insert "/*\n** protected\n*/\n")
+  (insert "\n\n")
+  (insert "")
+  (goto-line 12)
+)
+
+(defun hpp-get-set-template(type var)
+  "hpp-get-set-template"
+  (interactive "stype? \nsvar name? ")
+  (point-to-register 'p)
+  (insert "yyy\t\t_zzz;\n")
+  (insert "yyy\t\tgetZzz\(void\)\tconst;\n")
+  (insert "void\t\tsetZzz\(yyy zzz\);\n")
+  (goto-line 12)
+  (replace-string "yyy" type)
+  (goto-line 12)
+  (replace-string "int\t\t_zzz" "int\t\t\t_zzz")
+  (goto-line 12)
+  (replace-string "int\t\tget_zzz" "int\t\t\tget_zzz")
+  (goto-line 12)
+  (replace-string "zzz" var)
+  (indent-buffer)
+  (jump-to-register 'p)
+)
+
+(defun cpp-get-set-template(type var class)
+  "cpp-get-set-template"
+  (interactive "stype? \nsvar name? \nsclass name? ")
+  (point-to-register 'p)
+  (insert "yyy\t\t\tXxx::getZzz(void)\tconst\t{ return this->_zzz; }\n")
+  (insert "void\t\t\tXxx::setZzz(yyy zzz)\t\t{ this->_zzz = zzz; }\n")
+  (goto-line 12)
+  (replace-string "yyy" type)
+  (goto-line 12)
+  (replace-string "int\t\t\tXxx" "int\t\t\t\tXxx")
+  (goto-line 12)
+  (replace-string "zzz" var)
+  (goto-line 12)
+  (replace-string "xxx" class)
+  (indent-buffer)
+  (jump-to-register 'p)
+)
+
+(defun shell-that ()
+  "shell splitted"
+  (interactive)
+  (split-window-vertically)
+  (next-multiframe-window)
+  (shell)
+)
+
+(defun semi-c ()
+  "semi-colon at end of line, without moving!"
+  (interactive)
+  (point-to-register 'm)
+  (move-end-of-line nil)
+  (insert ";")
+  (jump-to-register 'm)
+)
+
+(defun stuff (class)
+  "Do stuffs."
+  (interactive "sClass name? ")
+;  (find-file-other-window (concat class ".cpp"))
+  (find-file-other-window (concat class ".class.cpp"))
+  (insert-cpp-template)
+  (replace-string "zz" class)
+  (save-buffer)
+  (delete-window)
+;  (find-file-other-window (concat class ".hpp"))
+  (find-file-other-window (concat class ".class.hpp"))
+  (insert-hpp-template)
+  (replace-string "zz" class)
+  (save-buffer)
+  (delete-window)
+  (shell-command "ls")
+)
+
 
 
 (defun indent-buffer ()
@@ -184,7 +408,7 @@
   (goto-line 12)
   (point-to-register 'o)
   (delete-trailing-whitespace)
-  (indent-region (point-min) (point-max) nil)
+  (indent-region (point-min) (point-max) ())
   (jump-to-register 'o)
   (replace-regexp "\\(\tint\\)\\([^\t]\\)" "\\1\t\t\\2")
   (jump-to-register 'o)
@@ -314,6 +538,23 @@
   (jump-to-register 'o)
   (replace-string "\n\n\n\n\n" "\n\n")
   (jump-to-register 's)
+  (require 'whitespace)
+  (setq whitespace-auto-cleanup t)
+; (whitespace-global-mode 1)
 )
-(global-set-key "\C-g" 'indent-buffer)  
+
 ;*******************************************************************************;
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(gud-gdb-command-name "gdb --annotate=1")
+ '(irony-server-build-dir nil)
+ '(large-file-warning-threshold nil))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

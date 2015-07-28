@@ -6,7 +6,7 @@
 #    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/02/12 20:45:47 by mcanal            #+#    #+#              #
-#    Updated: 2015/02/15 18:42:57 by mcanal           ###   ########.fr        #
+#    Updated: 2015/07/28 14:34:00 by mcanal           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,4 +17,4 @@ git status;
 if [ "$2" != "go" ]; then
 	sleep 3;
 fi
-git commit -m "$1" && git push;
+git commit -m "$1" && git push && git status;

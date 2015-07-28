@@ -6,23 +6,28 @@
 #    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/23 17:38:59 by mcanal            #+#    #+#              #
-#    Updated: 2015/01/26 17:48:26 by mcanal           ###   ########.fr        #
+#    Updated: 2015/07/28 14:32:58 by mcanal           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # default editor
-#EDITOR=/usr/bin/vim
-#export EDITOR
+EDITOR='/usr/bin/emacs24 -nw'
+export EDITOR
 
 # Reglage du terminal
 TERM=xterm-256color
 
+#clang debuging stuff
+ASAN_SYMBOLIZER_PATH=$(which llvm-symbolizer-3.4) #'/usr/bin/llvm-symbolizer-3.4'
+export ASAN_SYMBOLIZER_PATH
+
 # Big boys use big history
-HISTSIZE=1200
-SAVEHIST=1000
+HISTSIZE=2000
+SAVEHIST=1500
 HISTFILE=~/.zsh_history
 setopt APPEND_HISTORY
 setopt HIST_EXPIRE_DUPS_FIRST
+stty -ixon #forward search with ^s
 #setopt EXTENDED_HISTORY
 
 # Correction de la touche Delete
@@ -50,12 +55,12 @@ zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' 'm:{a-zA-Z}={A-Za-z}' 'r:
 #zstyle ':completion:*' use-compctl false
 #zstyle ':completion:*' verbose true
 
-# des couleurs pour la complétion
+# des couleurs pour la complétion 
 zmodload zsh/complist
 setopt extendedglob
 export TAB_COLORS="no=00:fi=00:di=01;34:ln=01;36:\ 
   pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:\ 
-  or=40;31;01:ex=01;32:*.tar=01;31:*.tgz=01;31:\ 
+  or=40;31;01:ex=01;31:tw=40;1;41:ow=40;1;41:*.tar=01;31:*.tgz=01;31:\ 
   *.arj=01;31:*.taz=01;31:*.lzh=01;31:*.zip=01;31:\ 
   *.z=01;31:*.Z=01;31:*.gz=01;31:*.deb=01;31:\ 
   *.jpg=01;35:*.gif=01;35:*.bmp=01;35:*.ppm=01;35:\ 
@@ -67,22 +72,6 @@ zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
 # Couleur prompt
 autoload -U colors && colors
-
-# Definition des couleurs pour ls
-# { Répertoires/Liens symboliques/Sockets/Pipes/Exécutables/Blocs spéciaux/
-#   Caractères spéciaux/Exécutables(setuid)/Exécutables(setgid)/
-#   Répertoires(777 sticky bit)/Répertoires (777 sans le sticky bit)}
-# { x défaut x défauta Noir A Noir(gras)b Rouge B Rouge(gras)
-#   c Vert C Vert(gras)d Marron D Marron(gras)e Bleu E Bleu(gras)
-#   f Violet F Violet(gras)g Cyan GCyan(gras)h Gris H Gris(gras)}
-LS=dontdothat
-if [ "$LS" = "default" ]; then
-	export LSCOLORS="exfxcxdxbxegedabagacad"
-elif [ "$LS" = "dontdothat" ]; then
-	;
-else
-	export LSCOLORS="ExfxcxdxbxegedabagacEx"
-fi
 
 # git setup
 git config --global user.email "mcanal@student.42.fr"
@@ -133,24 +122,26 @@ precmd ()
 }
 
 # enable color support of ls and also add handy aliases 
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircol\
-ors -b)"
+#if [ -x /usr/bin/dircolors ]; then
+#    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
     #alias dir='dir --color=auto'
     #alias vdir='vdir --color=auto'
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
-fi
+#fi
+
+export LS_COLORS="no=00:fi=00:di=01;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:ex=01;31:tw=40;1;41:ow=40;1;41:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.gz=01;31:*.deb=01;31:*.jpg=01;35:*.gif=01;35:*.bmp=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.mpg=01;37:*.avi=01;37:*.gl=01;37:*.dl=01;37:"
 
 # Definition des alias de git
-alias ga="git add"
+alias gg="sh ~/git.sh"
+alias ga="git add -A"
 alias gb="git branch"
 alias gcm="git commit -m"
 alias gco="git checkout"
 alias gpl="git pull"
-alias gpu="git push"
+alias gp="git push"
 alias gpom="git push origin master"
 alias gm="git merge"
 alias gu="git add -u"
@@ -162,6 +153,7 @@ alias normall='norminette --CheckForbiddenSourceHeader */*'
 alias gcc='gcc -std=c11'
 alias gccf='gcc -std=c11 -Wall -Wextra -Werror'
 alias gcc99='gcc -std=c99 -Wall -Wextra -Werror'
+alias pp='clang++ -Wall -Werror -Wextra -Wpedantic -O2'
 alias l='ls'
 alias ll='ls -l'
 alias la='ls -lA'
@@ -174,15 +166,22 @@ alias usb='cd /media/mcanal/Lexar/'
 alias del='mv -t ~/.local/share/Trash/files'
 alias zconf='e ~/.zshrc'
 alias econf='e ~/.emacs'
-alias e='emacs22'
+alias e='emacs24 -nw'
 alias re="make re;"
+alias gdb="gdb -quiet"
+alias sql="mysql -u root -p --silent"
+alias se="sudo emacs24 -nw"
+alias loc="sh ~/loc.sh"
+alias ht='cd /var/www/html/'
+alias ap='cd /var/www/html/fuel/app/'
 
 # typo alias
-alias z='emacs22'
+alias z='emacs24 -nw'
 alias xs='cd'
 alias vf='cd'
 alias ms='ls'
 alias lq='ls'
+alias ks='ls'
 
 # Couleurs pour le man
 man()
