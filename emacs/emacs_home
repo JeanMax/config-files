@@ -6,7 +6,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2015/04/26 16:54:03 by mcanal            #+#    #+#              ;
-;    Updated: 2015/07/28 00:05:39 by mcanal           ###   ########.fr        ;
+;    Updated: 2015/09/02 11:31:18 by mcanal           ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -14,18 +14,20 @@
 (setq config_files "~/emacs_stuff/site-lisp/")
 (setq load-path (append (list nil config_files) load-path))
 
-(load "list.el")
-(load "string.el")
-(load "comments.el")
-(load "header.el")
-(load "php-mode.el")
-(load "web-mode.el")
-(load "bind-key.el")
-(load "yasnippet.el")
-(load "popup.el")
-(load "fuzzy.el")
-(load "auto-complete.el")
-(load "auto-complete-config.el")
+(require 'list)
+(require 'string)
+(require 'comments)
+(require 'header)
+(require 'bind-key)
+(require 'yasnippet)
+(require 'web-mode)
+(require 'auto-complete)
+(require 'auto-complete-config)
+;(require 'fuzzy)
+;(require 'php-mode)
+;(require 'popup)
+;(require 'flyspell)
+;(require 'auto-complete-c-headers)
 
 ; Set default emacs configuration
 (set-language-environment "UTF-8")
@@ -40,6 +42,8 @@
 (c-set-offset 'case-label '+)
 (setq-default c-default-style "linux")
 (add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.css\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.hpp\\'" . c++-mode))
 (add-to-list 'auto-mode-alist '("\\.tpp\\'" . c++-mode))
 (add-to-list 'auto-mode-alist '("\\.cpp\\'" . c++-mode))
@@ -56,10 +60,16 @@
 (set-face-foreground 'font-lock-builtin-face "magenta")
 ;(set-face-foreground 'font-lock-constant-face "cornflowerblue")
 ;(set-face-foreground 'font-lock-warning-face "red")
-(set-face-attribute 'web-mode-html-tag-bracket-face nil :foreground "green")
-(set-face-attribute 'web-mode-html-tag-face nil :foreground "green")
-(set-face-attribute 'web-mode-html-attr-name-face nil :foreground "yellow")
-(set-face-attribute 'web-mode-html-attr-value-face nil :foreground "firebrick2")
+
+(defun my-web-mode-hook ()
+  "Hooks for Web mode."
+ (set-face-attribute 'web-mode-html-tag-bracket-face nil :foreground "green")
+ (set-face-attribute 'web-mode-html-tag-face nil :foreground "green")
+ (set-face-attribute 'web-mode-html-attr-name-face nil :foreground "yellow")
+ (set-face-attribute 'web-mode-html-attr-value-face nil :foreground "firebrick2")
+)
+(add-hook 'web-mode-hook  'my-web-mode-hook)
+
 
 ; Custom adds
 (column-number-mode 1)
@@ -69,9 +79,55 @@
 (transient-mark-mode t)
 (setq make-backup-files ())
 (add-hook 'prog-mode-hook #'hs-minor-mode)
+;(add-hook 'emacs-startup-hook 'toggle-window-split)
+(setq split-height-threshold 25)
+(setq split-width-threshold 80)
 
 ;completion
 (ac-config-default)
+(set-default 'ac-sources
+			 '(
+;			   ac-source-semantic
+;			   ac-source-yasnippet
+;			   ac-source-abbrev
+			   ac-source-dictionary
+			   ac-source-words-in-same-mode-buffers
+;			   ac-source-imenu
+;			   ac-source-files-in-current-dir
+;			   ac-source-filename
+			   ))
+;(setq ac-auto-start 2)         ;; 2
+(setq ac-delay 0)              ;; 0.1
+(setq ac-auto-show-menu 0.4)     ;; 0.8
+;(setq ac-quick-help-delay 0.6) ;; 1.5
+;(setq ac-use-fuzzy 1)
+(setq ac-fuzzy-cursor-color 'color-160)
+(add-hook 'auto-complete-mode-hook
+          (lambda()
+	    (setq ac-use-menu-map t)
+	    (local-set-key [(backtab)] 'auto-complete)
+	    (define-key ac-menu-map [(next)] 'ac-next)
+	    (define-key ac-menu-map [(prior)] 'ac-previous)
+		(define-key ac-completing-map [down] nil)
+		(define-key ac-completing-map [up] nil)
+	    ))
+
+;flyspell
+;(autoload 'flyspell-mode "flyspell" "On-the-fly spelling checker." t)
+;(autoload 'flyspell-delay-command "flyspell" "Delay on command." t)
+;(autoload 'tex-mode-flyspell-verify "flyspell" "" t) 
+;(add-hook 'c-mode-hook (lambda ()
+; (flyspell-prog-mode) (flyspell-issue-message-flag nil)
+; ))
+;(add-hook 'c++-mode-hook (lambda ()
+; (flyspell-prog-mode) (flyspell-issue-message-flag nil)
+; ))
+;(ac-flyspell-workaround)
+
+;mouse scrolling workaround
+;(xterm-mouse-mode 1)
+(bind-key* (kbd "<mouse-4>") 'previous-line)
+(bind-key* (kbd "<mouse-5>") 'next-line)
 
 ;unbinds
 (add-hook 'c++-mode-hook
@@ -81,9 +137,11 @@
 
 ;binds
 (bind-key* [(meta g)] 'goto-line)
+(bind-key* [(meta g)] 'goto-line)
 (bind-key* [(insertchar)] 'set-mark-command)
-(bind-key* [(backtab)] 'auto-complete)
-;(bind-key* [(backtab)] 'dabbrev-expand)
+;(bind-key* [(backtab)] 'auto-complete)
+(bind-key [(backtab)] 'dabbrev-expand)
+(bind-key* (kbd "Œ") 'auto-complete-mode)
 (bind-key* (kbd "œ") 'tab-to-tab-stop)
 (bind-key* (kbd "<f2>") 'kill-region)
 (bind-key* (kbd "<f3>") 'kill-ring-save)
@@ -103,6 +161,8 @@
 (bind-key* [(f11)] 'save-buffer)
 (bind-key* (kbd "<C-f11>") 'transpose-lines)
 (bind-key* [(f12)] 'save-buffers-kill-emacs)
+(bind-key* [(up)] 'previous-line)
+(bind-key* [(down)] 'next-line)
 (bind-key* (kbd "M-i") 'previous-line)
 (bind-key* (kbd "M-j") 'backward-char)
 (bind-key* (kbd "M-k") 'next-line)
@@ -124,6 +184,7 @@
 (bind-key* (kbd "<M-left>") 'hs-hide-all)
 (bind-key* (kbd "<M-right>")  'hs-show-all)
 (bind-key* (kbd "M-s") 'shell-that)
+(bind-key* (kbd "M-d") 'compile)
 
 ;(bind-key* [(kp-0)] 'global-linum-mode)
 ;(bind-key* (kbd "1") 'set-mark-command)
@@ -150,6 +211,7 @@
 ;(bind-key* (kbd "M-c") 'cpp-template) ;custom
 (bind-key* (kbd "M-c") 'cpp-get-set-template) ;custom
 (bind-key* (kbd "M-h") 'hpp-get-set-template) ;custom
+(bind-key* (kbd "M-w") 'compile)
 
 (defun par()
   "par"

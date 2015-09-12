@@ -1,512 +1,7 @@
-ls includes
-mv Makefile toto
-cp ../mcanal/Makefile .
-rm -rf objs
-grep -ri fun_surface
-grep -ri reset_ring_vel(
-grep -ri reset_ring_vel
-grep -ri lmesh_len
-grep -ri real_rain
-grep -ri "real_rain("
-grep -ri "put_rain("
-grep -ri fill_r
-grep -ri plan_n
-grep -ri part_ha
-e srcs/check_errors.c
-e srcs/event_handle_01.c
-grep -ri main
-e srcs/main.c
-man signal
-e set_lm_up.c 
-e ../Makefile
-grep -ri set_lm_rain
-e srcs/real_rain.c
-grep -ri absf
-make r
-grep -ri get_und
-grep -ri und
-grep -ri und_
-grep -ri und_ srcs/*
-grep -ri part_h srcs/*
-e map_builder.c
-gg "norm, makefile, flags fix"
-sudo add-apt-repository "deb http://archive.canonical.com/ $(lsb_release -sc) partner" && sudo apt-get update
-sudo apt-get install skype
-cp ../elhmn/includes/X.h includes/.
-e srcs/destroy_mod
-e srcs/destroy_mod.c
-./mod1 resources/demo2.mod1
-cd re
-grep -ri "//"
-grep -ri "//" srcs/*
-./mod1 resources/demo5.mod1
-./mod1 resources/demo5_bis.mod1
-e srcs/get_dir_und_vel.c
-cd srcs
-grep -ri hook
-e event_handle_01.c
-grep -ri refresh
-e rea
-e real_time.c
-rm -rf includes/mod1.h
-e includes/elhmn.h
-cd includes
-grep -ri s_mod
-e mod1.h
-e includes/mod1.h
-./mod1
-make; ./mod1 resources/demo1.mod1
-cd mod1/rendu
-e includes/mod1.h 
-e srcs/init_mod.c
-e srcs/init_mod_var.c
-e rendu/srcs/destroy_mod.c
-e .gitignore
-cd rendu
-gg "framestuff"
-e srcs/key_press.c
-e srcs/real_time.c
-cp ../quarantedeux/ftp/Makefile .
-cp -r ~/quarantedeux/ftp/libft .
-rm -rf ft_p
-git clone https://github.com/JeanMax/ft_p.git 
-cp -r ~/ft_p/libft .
-diff libft/io/ft_putchar_clr.c ~/ft_p/libft/io/ft_putchar_clr.c
-rm -rf libft; cp -r ~/libft .
-rm -rf libft; cp -r ~/ft_p/libft .
-rm -rf libft; cp -r ~/ft_p/libft .; make; ./Server 4242
-grep -ri $Server
-grep -ri "$Server"
-grep -ri "\$Server"
-diff libft/io/ft_putstr_clr.c ~/libft/io/ft_putstr_clr.c
-cat libft/io/ft_putstr_clr.c ~/libft/io/ft_putstr_clr.c
-cat libft/io/ft_putchar_clr.c ~/libft/io/ft_putchar_clr.c
-diff libft/io/ft_putchar_clr.c ~/libft/io/ft_putchar_clr.c
-diff libft/io/* ~/libft/io/*
-cat libft/io/ft_putendl.c ~/libft/io/ft_putendl.c
-diff libft/io/ft_putendl.c ~/libft/io/ft_putendl.c
-rm -rf libft ;cp -r ~/libft .
-kill 14783
-grep -ri "\$Serv"
-cd emacs_stuff
-cd site-lisp
-e hideshow.el
-emacs hideshow.el
-vim hideshow.el
-rm hideshow.el
-e dotemacs
-grep -ri slowmo
-./mod1 resources/demo1.mod1
-make home; ./mod1 resources/demo1.mod1
-make home
-cd quarantedeux/ftp
-./Server 42
-./Server 424
-./Server 1000
-./Server 10
-./Server 1
-./Server 14000
-rm -rf libft; cp -r ~/libft .;
-e libft/io/ft_debugnbr.c
-grep -ri debugnbr
-grep -ri debugstr
-e libft/io/ft_debugstr.c
-e libft/io/ft_putstr_clr.c
-cp ~/libft/Makefile libft/.
-rm -rf libft
-cp -r ~/libft .
-rm -rf libft/.git
-cp -r ../ftp/* .
-e s_main.c 
-e ../../Makefile 
-rm .depend
-git clone https://github.com/JeanMax/libft.git 
-cp -r ~/quarantedeux/ftp/libft/* .
-cd ../quarantedeux/moulitest_42projects
-e ~/libft/is/ft_isalpha.c
-e ~/libft/is/ft_isascii.c
-e ~/libft/is/ft_isdigit.c
-gg "makefile + flags"
-git push
-gg "eheh"
-cd io
-e ft_putchar.c
-e ft_putchar_fd.c
-e ft_putstr.c
-e ft_putstr_fd.c
-e ft_putchar_clr.c
-e ft_putendl.c
-e ft_putendl_clr.c
-e ft_putendl_fd.c
-grep -ri "return ;"
-./;5~;5~;5~;5~
-clang -O2 test.c libft.a
-./a.out totoesf
-rm -rf a.out
-gg "oups"
-cp -r ~/quarantedeux/ftp_2/libft/* .
-clang -O2 test.c libft.a -I inc
-./a.out toto
-e libft.a io/ft_debugstr.c
-e io/ft_putchar.c
-cat io/*
-e io/fail.c
-e io/failn.c
-clang -O2 test.c libft.a -I inc; ./a.out toto
-make; clang -O2 test.c libft.a -I inc; ./a.out toto
-clang -g test.c libft.a -I inc; ./a.out toto
-clang -g test.c libft.a -I inc; ./a.out totfffffffffffffffffffffffffff
-clang test.c libft.a -I inc; ./a.out totfffffffffffffffffffffffffff
-clang -O2 test.c libft.a -I inc; ./a.out totfffffffffffffffffffffffffff
-e io/ft_debugstr.c
-cat test.c
-e io/ft_putstr_clr.c
-e io/ft_putendl_clr.c
-e io/ft_debugnbr.c
-e io/ft_putnbr_clr.c
-e io/ft_putdbl_clr.c
-e io/ft_debugdbl.c
-gdb a.out
-e inc/libft.h 
-make debug 
-clang -g -O2 test.c libft.a -I inc; ./a.out totfffffffffffffffffffffffffff
-e io/ft_putchar_clr.c
-grep -ri size_t
-grep -ri size_t **/*.c
-e str/ft_strlen.c
-clang -g -O2 test.c libft.a -I inc;
-./a.out toto tata
-./a.out toto tota
-./a.out toto tosa
-e str/ft_strcmp.c
-e str/ft_strchr.c
-e str/ft_strcpy.c
-e str/ft_strdel.c
-e str/ft_strdup.c
-e str/ft_strindex.c
-e str/ft_strrindex.c
-e str/ft_strrchr.c
-e str/ft_striter.c
-e str/ft_strjoin.c
-e str/ft_strstr.c
-e str/ft_strnstr.c
-gg "clr fix"
-ls -R | grep -ri class
-rm src/server/toto*
-e elhmn/srcs
-e elhmn/srcs/set_lm.c
-e .
-rm mod1
-grep -ri mcanal 
-man awk
-find . -type f -print0 
-find * -type f -print0 
-find * -type f | grep mcanal
-grep -ri mcanal
-man grep
-grep -rli mcanal
-man exec
-\grep -rli mcanal
-man xargs
-\grep -rli mcanal * | xargs sed -i "s/mcanal/bmbarga/g"
-\grep -rli mcanal *
-grep -ri bmbm
-grep -ri bmb
-man sed
-ls ~
-la ~
-cd quarantedeux/moulitest_42projects/
-cd quarantedeux/ftp_2
-man 3 getaddrinfo
-grep -ri _fd
-grep -ri '_fd('
-grep -ri '_fd(' src/*
-\grep -rl ft_putstr_fd
-\grep -rl ft_putstr_fd src/*
-\grep -ril ft_putstr_fd src/*
-\grep -ril ft_putstr_fd src/* | xargs sed -i "s/ft_putstr_fd/send_str/g"
-\grep -ri ft_putstr_fd src/*
-\grep -ril ft_putendl_fd src/* | xargs sed -i "s/ft_putendl_fd/send_endl/g"
-\grep -ri ft_putendl_fd src/*
-\grep -ri get_line src/*
-\grep -ri 'get_line(' src/* | xargs sed -i "s/get_line/recv_line/g"
-\grep -ri 'get_line(' src/*
-\grep -lri 'get_line(' src/* | xargs sed -i "s/get_line/recv_line/g"
-grep -ri 'get_line(' src/*
-cd ../q
-cd ~/ft_p
-sl
-makee
-rm libft/a.out libft/test.c
-gg "LOT of changes, old version pushed... gl"
-cd 2048
-cd ../ls
-cd ../ftp_2
-cd ../ftp
-git rebase -i HEAD~3
-git rebase -i HEAD~10
-git rebase -i HEAD~8
- /usr/bin/emacs24 toto
-cd  ../Qt
-cd  ../quarantedeux
-git clone https://github.com/jeanmax/sh1.git
-cd sh
-cd sh1
-git pull
-gg "cleaned exec"
-git clone https://github.com/jeanmax/computor-v1.git
-cd computor-v1/
-git rebase -i HEAD~3 
-git rebase -i HEAD~2
-git push --force
-lq
-e config.ini
-cd /media
-ls Desktop
-ls Documents
-cd test
-cd mo
-cd moulitest_42projects
-make libft_
-rm s_exec.c
-grep -ri send_str
-grep -ri send_str *.c
-grep -ri send_str "*.c"
-grep -ri send_str src/*
-grep -ril send_str src/*
-\grep -ril send_str src/*
-\grep -ril send_str src/* | xargs sed -i "s/send_str/send_msg/g"
-grep -ri send_str src/*.c
-grep -ri send_msg src/*.c
-grep -ri send_ src/*.c
-grep -ri send_ src/*
-grep -ri send_msg src/*
-\grep -ril send_msg src/* | xargs sed -i "s/send_msg/send_str/g"
-\grep -ril recv_line src/* | xargs sed -i "s/recv_line/recv_msg/g"
-make LIB=
-make lib
-make fclean; make me_cry
-grep -ri _fd src/*
-MSAN_SYMBOLIZER_PATH=$(which llvm-symbolizer-3.4)
-kill 18322 
-ls lskfj 2>&1 /dev/null
-ls lskfj 2> /dev/null
-ls lskfj auteur 2> /dev/null
-./Server 4242  2> /dev/null
-addr2line -Cfe Server 0x47d853
-addr2line -Cfe Server 0x47d1b8
-setenv toto tata
-csh
-tcsh
-e -Cfe a.out 0x804bc04
-addr2line -Cfe a.out 0x804bc04
-addr2line -Cfe Client 0x804bc04
-addr2line -Cfe Client 0x46b97f
-addr2line -Cfe Client 0x47bcac
-addr2line -Cfe Client 0x46ff20
-addr2line -Cfe Client 0x465a16
-addr2line -Cfe Client 0x47dabc
-cd ft_p/
-mkdir old
-mv * old/.
-la
-mv old 1.0
-mkdir 2.0
-cp -r 1.0/* 2.0/.
-./Client 127.0.0.1 4141
-kill 19017
-kill 19078
-gdb Server 4242
-kill 20501
-make debug;
-man recv
-kill 21636
-kill 22878
-ASAN_OPTIONS=debug=1
-man 2 recv
-man send
-kill 1348
-man malloc
-kill 3794
-kill 3790
-gdb Client
-grep -ri kill src/*
-kill 30291
-i
-kill 25216
-ls -R
-./Server 422
-sfe
-kill 30072
-cat libft/mem/ft_memdel.c
-kill 30354
-kill  32009
-grep -r Accepting src/*
-cat src/error.c
-grep -r ACCEPT src/*
-gdb Server
-kill 4078
-kill 4098
-kill 5698 
-kill 5917 
-grep -ri SIGINT src/server/*
-cd ../libft
-e inc/libft.h
-e ../libft/io/get_line.c
-rm s_get.c
-cd ../server
-mv put.c s_put.c
-mv get.c s_get.c
-kill 7343
-kill 7347
-kill 7804
-kill 12580
-kill 12581
-make debug_lib; ./Server 4241
-kill 13986
-e src/server/s_get.c
-ls -R src
-ls -R src/.*
-e Server 
-kill 17466
-kill 18189
-kill 19533
-kill 19534
-kill 19890
-e zerver
-diff zerver Server
-rm z$'\377' 
-diff Server zerver
-cat z$'\377'
-rm z$'\377'
-cat Server
-grep Server donesending
-grep donese Server
-grep doneses Server
-grep doneserving Server
-grep donesending Server
-kill 22625
-kill 6508
-kill 6514 6513 6516 6517 6518 6520
-kill 6907 
-kill 7636
-kill 8145
-make debug_leaks
-make debug_leak
-./Server
-e send_recv.c
-cd 1.0/
-cat libft/str/ft_strnew.c
-grep -ri kill
-cd ../client
-alias ''=ls
-alias '\n'=ls
-alias '\0'=ls
-alias =ls
-cp -r ~/quarantedeux/ftp_2/* .
-rm -rf auteur inc libft src Makefile README.md
-e client.c
-e c_signal.c
-e server
-cd server
-e ft_cd.c
-rm ft_cd.c
-grep -ri cd *
-e s_main.c
-wc Server
-man readdir
-e c_main.c
-e c_read.c
-e s_read.c
-e s_signal.c
-./Server 4243
-man open
-q
-e libft/str/ft_strlen.c
-e libft/mem/ft_memalloc.c
-e libft/io/get_line.c
-kill 6699
-kill 6702 6694
-kill 7481
-kill 7485
-man 7 signal
-cp ../1.0/src/server/ft_cd.c src/server/.
-cp ../1.0/src/server/s_exec.c src/server/.
-e src/server/s_put.c
-cd src/client
-e c_put.c
-e simple_left.c
-e ../../libft/io/get_line.c
-e ../../libft/io/get_all.c
-e ../../libft/io/get_next_line.c
-sloccount rendu/srcs
-cd Downloads
-ms
-unzip sloccount-2.26.tar.gz 
-tar -xf sloccount-2.26.tar.gz 
-cd sloccount-2.26/
-e README
-cd sh2
-e src/client/c_put.c
-e src/client/c_get.c
-rm src/client/c_get.c
-rm src/server/s_get.c
-alias gcc=clang
-alias clang=gcc
-gcc sfsef
-clang rge
-alias cat=ls
-cat auteur
-alias cat=ls; alias ls=cat
-ls Makefile
-alias
-kill 10787
-kill 11551
-rm zuteur 
-kill 13273
-kill 13313
-man 2 read
-cd quarantedeux/sh2
-cd src/redirection
-e simple_right.c
-make brute; make fclean; make me_cry
-./Server 4241
-rm z zuteur
-kill 10935
-kill 11072 11071
-rm zuteur u
-cat -e zuteur
-cat zuteur; rm zuteur
-kill 11772
-kill 12451
-kill 12623
-kill 15092
-kill 15181
-kill 15353
-make debug; ./Server 4243
-kill 15354 15577 15725
-kill 15724
-kill 15578
-ll /tmp
-man 2 open
-man wait4
-kill 17073
-kill 17074
-kill 17479
-sloccount src inc Makefile
-man process_terminated
-rm -rf *
-cp -r ~/ft_p/2.0/libft/* .
-e libft_tests/tests/00_part1_ft_strncmp.spec.c
-e str/ft_strtrim.c
-e str/ft_strsub.c
-make libft_part2
-ls libft_tests/tests/00_part1_ft_strncpy.spec.c
 e libft_tests/tests/00_part1_ft_strncpy.spec.c
 make libft_part1
 rm -rf *;cp -r ~/ft_p/2.0/libft/* .
 cd quarantedeux/moulitest_42projects
-make libft_bonus
 sudo apt-get install sloccount 
 cd 2.0
 sloccount
@@ -516,33 +11,26 @@ rm src/server/s_put.c
 grep -ri s_put src/*
 grep -ri c_put src/*
 cat src/is_cmd.c
-k
-e server.c
 ls /tmp/1
 man lseek
-e libft/str/ft_strdup.c
 e libft/str/ft_strndup.c
 e libft/str/ft_strcmp.c
 rm -rf libft/*
 cp -r ~/libft/* libft/.
-e libft/str/ft_atoi.c
 e libft/str/ft_strsplit.c
 clang test.c libft.a -Iinc -g -ggdb -O2 -fsanitize=address,undefined
 e mem/ft_freestab.c
 clang test.c libft.a -Iinc -g -ggdb -O2 -fsanitize=address,undefined; ./a.out
-rm test.c a.out
 grep -ri "\[i\]" libft/*
 e libft/str/ft_strncmp.c
 man strncmp
 clang test.c libft.a
 clang test.c libft.a; ./a.out
 make; clang test.c libft.a; ./a.out
-rm a.out test.c
 sloccount 
 ls libft
 usb
 cd quarantedeux/s1/main-test
-cd l
 cp -r main-test ~/quarantedeux/.
 cd quarantedeux/main-test
 rm -rf ~/libft/*
@@ -561,28 +49,16 @@ clang test_libft.c libft.a
 clang check.c libft.a
 clang check.c libft.a -Iinc
 clang test.c libft.a -Iinc
-./a.out
 make; clang test.c libft.a -Iinc
-e str/ft_strncmp.c
 e str/ft_strncpy.c
 make; clang test.c libft.a -Iinc; ./a.out
 make; clang test.c libft.a -Iinc -fsanitize=address,undefined -g -ggdb -O2; ./a.out
-rm a.out
 rm  *.c
 rm ~/ft_p/2.0/libft/*; cp -r * ~/ft_p/2.0/libft/.
 rm -rf ~/ft_p/2.0/libft/*; cp -r * ~/ft_p/2.0/libft/.
-kill 12820
-kill 12821
-cat z
-cat zEADME.md
-rm zEADME.md
-cat 1
-cat 2
-rm 1 2
 make debug; ./Server 4241
 ./Client 127.0.0.1 4241
 ./Client 127.0.0.1 4243
-*
 cat /tmp/1
 cat /tmp/2
 man wait
@@ -595,21 +71,16 @@ rm -rf 1.0
 mv 2.0/* .
 rm -rf 2.0
 gg "rewrote send/recv, libft tweaks, some more stuffs"
-sloccount .
 sloccount libft
-sudo apt-get install valgrind
-sudo apt-get update
 man 2 connect
 man accept
 man man
 man -k accept
-man getprotobyname
 man -k bind
 man 2 bind
 man 2 accept
 kill 6002
 ./Server 127.0.0.1 4242
-which llvm-symbolizer-3.4
 valgrind; ./Client 127.0.0.1 4242
 chmod 777 asan_symbolise.py
 rm asan_symbolise.py
@@ -636,131 +107,79 @@ make leaks
 valgrind ./Server 4242
 valgrind -v ./Server 4242
 make sanitize_lib
-kill 14147
-kill 14209
-kill 14843
 make sanitize ;./Server 4242
 e libft
-make zclean; make sanitize
 e src/error.c 
-e libft/inc/edit.h
 valgrind --leak-check=full ./Server 4242
 valgrind --leak-check=full --show-leak-kinds=all./Server 4242
 valgrind --leak-check=full --show-leak-kinds=all ./Server 4242
-./Server 4242
-make; ./Server 4242
 make sanitize; gdb ./Server 4242
 e libft/str/ft_strchr.c
-kill 19360
 make  sanitize;./Client 127.0.0.1 4243
 make debug; valgrind --leak-check=full  ./Client 127.0.0.1 4242
-kill 20089
 make  sanitize;./Client 127.0.0.1 4242
 make debug; valgrind --leak-check=full --show-leak-kinds=all ./Client 127.0.0.1 4242
-e src/server/whoami.c
 grep -ri send_endl  *
-kill 21319
-kill 21320 21373
 make sanitize ;./Client 127.0.0.1 4324
 make sanitize ;./Client 127.0.0.1 4242
 leaks
 leak
 grep -ri DEBUG *
 grep -r DEBUG src/*
-cd ../..
 man execv
 env -i ./Server
 make sanitize; env -i ./Server 4242
 make sanitize; ./Server 4243
 cd quarantedeux/Piscine_CPP
-cd j02
-cd 2 1
-cd ex01
-cd 1 2
-cd ex01 ex02
-cd x01 x02
-cd x02 x01
-cd 
 cd quarantedeux/ls
 grep -ri fstat *
 grep -ri stat *
 grep -ri lstat *
-e read.c
 ./Client 4242
 kill 8758
 kill 8759
 env -i ./Client 127.0.0.1 4243
 kill 8868 8869 8904 8905
-env -i ./Client 127.0.0.1 4242
-env
 man fstat
 man getcwd
-clang test.c
 clang -I libft/inc test.c
-sloccount src
 man strstr
 man chdir
-kill 10920
-kill ./
-cat zob
-rm zob
-grep -ri TODO *
 whoami
 rm z\ \ copy\ file\ from\ server\ to\ client$'\n'
-git add -A .
 gg "job mostly done"
 make sanitize; ./Client 127.0.0.1 42425444444444444444
- ./Client 127.0.0.1. 4242
- ./Client 127.0.0.1 4242
- ./Client 1trsh.1 4242
- ./Client 127.0.0.1 4242 gh
- ./Client
+./Client 127.0.0.1. 4242
+./Client 1trsh.1 4242
+./Client 127.0.0.1 4242 gh
+./Client
 e src/is_cmd.c 
 e src/server/ft_cd.c
-cd src/server
-ks
 diff s_exec.c \#s_exec.c\#
 rm \#s_exec.c\#
-e s_exec.c
 e get_env.c
 mv get_env.c env.c
 e is_cmd.c
-e libft/Makefile
 ./Server zboub
 cat libft/is/ft_istoobig.c
-./Server 44444444444444444444444444444444444444444444444444444444444444444444
-./Server 29999999
-./Server 123456789
-./Server 223456789
-./Server 2147483647
-./Server 2147483648
-./Server -2147483648
-./Server -147483648
-./Server 147483648
 ./Server 4242 elsjs
 ./Server 
-e src/server/s_exec.c
 rm Server
 make Server
 make debug_lib
 make zclean; make debug_lib
 e src/server/s_main.c
-e src/server/env.c
 e inc/header.h 
-make sanitize; ./Server 4242
 make sanitize; ./Server 4242 ./././././.
 make sanitize; ./Server 4242 ../../../../..
 make sanitize; ./Server 4242 sdg
 make sanitize; ./Server 4242 .*
-e src/is_cmd.c
 kill 14384
 man read
-e libft/mem/ft_memchr.c
 make sanitize; ./Server 4242 ../..
 kill 16765
 kill 16766
 e src/server
-e src/server/s_read.c
 chmod 777 zest
 make sanitize; ./zest 4242 .
 make sanitize; ./zest 424dsf2 .
@@ -770,8 +189,6 @@ cd quarantedeux/fract-ol
 e ../wolf/inc/header.h
 cp ../fract-ol/src/hooks.c ../fract-ol/src/mlx.c ../fract-ol/src/main.c ../fract-ol/src/error.c src/.
 e src
-e error.c
-make 
 cd mod1
 grep -ri line
 grep -ri line src
@@ -783,7 +200,6 @@ cd ../fract-ol
 e src/julia.c
 cd ../wolf
 e julia.c
-ls src
 makez
 e ../fract-ol/src/main.c
 man 2 exit
@@ -793,7 +209,6 @@ cat zakefile
 cat Makefile > test
 cat test >> test
 cat test >> toto; cat toto >> test;
-while true do; cat test >> toto; cat toto >> test; done;
 while true do cat test >> toto; cat toto >> test; done;
 while true do cat test >> toto; cat toto >> test; done
 while true; do cat test >> toto; cat toto >> test; done
@@ -805,37 +220,24 @@ cat zerver
 e Server
 cp Server test
 rm zerver
-ll
 diff test zest
-man 2 write
 diff zakefile Makefile
 cat Makefile
 cat zakefile
 rm zakefile
-e src/client/c_main.c
-e src/error.c
-e src/send_recv.c
 grep -ri todo *
 e libft/str/ft_strncpy.c
-e src/client/c_signal.c
-e src/server/s_signal.c
-e src/server/permission.c
 e src/server/server.c
 grep -ri "//" *
 sloccount src inc
 cat 
-cat README.md
-e README.md
 gg "done?"
-cd
 mkdir wolf
-cd wolf
 cp -r ~/ft_p/libft libft
 cp -r ~/ft_p/Makefile Makefile
 cp -r ~/ft_p/README.md README.md
 echo "mcanal" > auteur
 cat -e auteur
-mkdir src
 mkdir inc
 cp ~/ft_p/inc/header.h inc/.
 e %
@@ -851,17 +253,8 @@ gdb wolf3d
 make sanitize ; ./wolf3d
 make sanitize; ./wolf3d | more
 make sanitize; ./wolf3d | less
-e m
-cd ft_p
 e src/client/client.c
-git status
-git diff
 make sanitize; ./Server 4242 .
-make sanitize; ./Client 127.0.0.1 4242
-e src/client/c_read.c
-cd q
-cd quarantedeux
-cd f
 cd fdf
 ./fdf ~/Desktop/pdf/fdf/test_maps/gen.fdf
 kill 5887
@@ -870,7 +263,6 @@ while true; do echo zboub > toto; done
 rm toto
 git clone https://github.com/jeanmax/snake.git
 cd snake
-cd libft
 ./snake
 ./snake 20 20 500
 ./snake 20 20 500 bob john
@@ -879,11 +271,9 @@ cd libft
 ./snake 20 20 100 bob johns
 ./snake 50 50 100 bob johns
 ./snake 40 40 100 bob johns
-make z
 cd libft && make fclean&& cd -
 mv snake quarantedeux/.
 ls q
-ls quarantedeux
 cd framework0_save
 ls*
 mv stuff2.c ray.c
@@ -893,7 +283,6 @@ git clone https://github.com/jeanmax/fract_ol.git
 git clone https://github.com/jeanmax/fract-ol.git
 git clone https://github.com/jeanmax/fract-ol.git fract-ol2
 cd fract-ol2
-make re
 ./fractol -J
 make; ./fractol -J
 cd ../../fract-ol2
@@ -903,9 +292,6 @@ make; ./fractol -M
 g++ src/raycaster_flat.c 
 g++ *.cpp -lSDL src/raycaster_flat.c
 g++ -lSDL src/raycaster_flat.c
-man ascii
-;5A
- e libft/inc/libft.h
 man abs
 man printf
 man 2 printf
@@ -914,50 +300,30 @@ man 3 printf
 e ../sh1/prompt.c
 grep -ri "033" ../sh1/*.c
 e src/mlx.c
-make sanitize; ./wolf3d
 e stuff
 e stuff.c
 e mlx.c
 e ray.c
-fg
 cd ../fract-ol2
-cd src
 mka
-make fclean
-make me_cry
 alias 
-e Makefile
 cat libft/mem/ft_freestab.c
-while true; do make me_cry; sleep 3; clear; done
 e src/raycaster_flat.c
 rm src/raycaster_flat.c
 e src/raycaster_flat.cpp
-e main.c
 e hooks.c
 cd ../fdf
 grep -ri mlx *
 man gettimeofday
 man usleep
-./wolf3d
-make sanitize
-make sanitize ;./wolf3d
-make brute
-make zclean
-make debug
 valgrind ./wolf3d
 valgrind --leak-check=full ./wolf3d
 valgrind --leak-check=full  --show-leak-kinds=all ./wolf3d
-cd quarantedeux/wolf
 ls inc
 diff inc/\#header.h\# inc/header.h 
 rm inc/\#header.h\#
-e src/main.c
-e src/ray.c
-e src/hooks.c
 ls inc/header.h
-e inc/header.h
 rm test
-rm test.c
 find init.el -type f
 find . -type f init.el
 locate init.el
@@ -968,155 +334,1126 @@ e .emacs.d/elpa/archives/org/archive-contents
 rm emacs_stuff/site-lisp/package.el
 e emacs_stuff/site-lisp/my-packages.el
 e emacs_stuff/site-lisp/my-loadpackages.el
-zconf
 e emacs_stuff/site-lisp/my-packages.el 
 e emacs_stuff/site-lisp/my-packages.el  --debug-init
 git clone https://github.com/auto-complete/auto-complete.git
-rm emacs_stuff/site-lisp/my-loadpackages.el emacs_stuff/site-lisp/my-packages.el 
+rm emacs_stuff/site-lisp/my-loadpackages.el emacs_stuff/site-lisp/my-packages.el
 ls emacs_stuff/
 rm -rf emacs_stuff/ac-dict emacs_stuff/auto-complete-config.el emacs_stuff/auto-complete.el emacs_stuff/auto-complete-pkg.el 
 ls emacs_stuff
-cd auto-complete
-make
 sudo apt-get install cask
 make byte-compile
 curl -fsSL https://raw.githubusercontent.com/cask/cask/master/go | python
 rm -rf .cask
 sudo curl -fsSL https://raw.githubusercontent.com/cask/cask/master/go | python
-ls
-cd -
 make install
-cd ..
-e test.c
-e test.c --debug-init
 locate string.h
-e test
-econf
 cd emacs_stuff/site-lisp/
-l
 ls server
 e server/docs/irony-server.cfg.in
-ls
-econf
 e emacs_stuff/site-lisp/auto-complete-c-headers.el
-rm emacs_stuff/site-lisp/auto-complete-c-headers.el
-e emacs_stuff/site-lisp/auto-complete-c-headers.el
-e emacs_stuff/site-lisp/auto-complete-c-headers.el
-e test.c
-e test.c
-e test.c
-e test.c
 locate lib
 locate stdio
-locate stdlib.h
-e test.c
-e test.c
-e test.c
-e test.c
-e test.c
-e test.c
-e test.c
-e test.c
-e test.c
-e test.c
-e test.c
-e test.c
 rm emacs_stuff/site-lisp/auto-complete-c-headers.el
-e test.c
-;5A
-e test.c
-e test.c --debug-init
-e test.c --debug-init
-e test.c
-e test.c
-e test.c
 e emacs_stuff/site-lisp/ac-c-headers.el
-e test.c
-e test.c --debug-init
-e test.c --debug-init
-e test.c --debug-init
-e test.c --debug-init
-e test.c --debug-init
 gcc -xc++ -E -v -
-clang -xc++ -E -v -
-e test.c --debug-init
-e test.c --debug-init
-e test.c --debug-init
-e test.c --debug-init
-e test.c --debug-init
 locate yasni
 locate yasnippe
 locate yasnippet
 locate yasnippet.el
 cp /usr/share/emacs/site-lisp/yasnippet/yasnippet.el ~/emacs_stuff/site-lisp/.
-e test.c --debug-init
-e test.c --debug-init
-e test.c --debug-init
-e test.c --debug-init
-e test.c --debug-init
-e test.c --debug-init
-e test.c --debug-init
-e test.c --debug-init
-e test.c --debug-init
-e test.c --debug-init
-e test.c --debug-init
-e test.c --debug-init
-e test.c --debug-init
-;5A
-e test.c --debug-init
-e test.c --debug-init
-e test.c --debug-init
-e test.c --debug-init
-e test.c --debug-init
-e test.c --debug-init
-e emacs_stuff/site-lisp/company-irony.el
-e emacs_stuff/site-lisp/company-irony.el
-e emacs_stuff/site-lisp/company-irony.el
-e emacs_stuff/site-lisp/company-irony.el
 e emacs_stuff/site-lisp/company-irony.el
 git clone https://github.com/Sarcasm/irony-mode.git emacs_stuff/irony-mode
 ls emacs_stuff/irony-mode
 cd emacs_stuff/irony-mode
 cat COPYING
-ls
 rm -rf screenshots
-cd ..
-cd ..
-e test
 mv emacs_stuff/irony-mode emacs_stuff/site-lisp/.
 mv emacs_stuff/site-lisp/irony-mode/* emacs_stuff/site-lisp/.
 rm -rf emacs_stuff/site-lisp/irony-mode
-;5A
 e emacs_stuff/site-lisp/flycheck-irony.el
-e test.c --debug-init
-cd quarantedeux/wolf
-ls
-e src/main.c
-e test.c
-cd -
 sudo apt-get install libclang1
-sudo apt-get install libclang-dev
-cd -
 e .clang_complete
-e src/main.c
-e test.c
-rm test.c
-make
-rm test.c
-e test.c
-ls
-cd
 cd emacs_stuff/site-lisp/ac-dict
-ls
 e c-mode
-e test
 mv test test.c
-e test.c
-rm test.c
 cat inc/header.h 
-cd
 cd emacs_stuff/site-lisp
-ls
 rm *irony*
 rm ac-c-headers.el
 rm -rf ~/.emacs.d/irony 
+git grep -p
+git grep -p --show-c-function
+git grep -p --show-function
+git grep -p --show-function 
+git grep -p --show-function *
+git grep -p --show-function * *
+git grep -p --show-function * .
+git grep -p --show-function *.c
+cd sh2
+grep -ri function *
+grep -ri " function " *
+grep -ri "\t*(*)\n{" *
+grep -ri "\t*\(*\)" *
+grep -ri "\t*\(\)" *
+grep -ri "\t*()" *
+grep -ri "\t*(*)" *
+grep -ri "\t*(*)\n" *
+man gtags
+find . -name *.c -type f
+find . -name "*.c" -type f
+find redirection -name "*.c" -type f
+find redirection -name "*.c" -type f > test
+lls
+etags < test
+etags - < test
+mv TAGS ~/emacs_stuff/TAGS/.
+rm test test.c
+sudo apt-get install emacs-goodies-el globalauto-complete-el cscope-el
+sudo apt-get install emacs-goodies-el global auto-complete-el cscope-el
+tar -xvf emacs-conf.tar.bz2
+cd emacs-conf
+rm -rf emacs-color-theme-solarized
+mv *.el ~/emacs_stuff/site-lisp/.
+e GPATH
+echo "" | clang -v -x -E -
+echo "" | clang -v -x c -E -
+echo "" | clang -v -x c++ -E -
+locate stdio.h
+locate stdlib.h
+ls /usr/include
+e /usr/include/malloc.h
+echo "" | clang++ -v -x c++ -E -
+echo "" | g++ -v -x c++ -E -
+mkdir ~/emacs_stuff/TAGS
+cd ~/emacs_stuff/TAGS
+gtags -v
+ctags -e --extra=+q -R /usr/include /usr/include/x86_64-linux-gnu /usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed /usr/local/include /usr/lib/gcc/x86_64-linux-gnu/4.8/include /usr/include/c++/4.8/backward /usr/include/x86_64-linux-gnu/c++/4.8 /usr/include/c++/4.8
+ctags --extra=+q -R /usr/include /usr/include/x86_64-linux-gnu /usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed /usr/local/include /usr/lib/gcc/x86_64-linux-gnu/4.8/include /usr/include/c++/4.8/backward /usr/include/x86_64-linux-gnu/c++/4.8 /usr/include/c++/4.8
+gtags -e --extra=+q -R /usr/include /usr/include/x86_64-linux-gnu /usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed /usr/local/include /usr/lib/gcc/x86_64-linux-gnu/4.8/include /usr/include/c++/4.8/backward /usr/include/x86_64-linux-gnu/c++/4.8 /usr/include/c++/4.8
+man ctags
+find / -regex ".*\(h$\|cpp$\|hpp$\|c$\)" > files.txt
+etags.exe - < files.txt 
+e files.txt
+etags - < files.txt 
+cat src/cat src/
+make fclean 
+man pipe
+man execve
+man dup2
+cat ft_p/Makefile 
+./a.out 
+../wolf3d 
+cd config-files
+diff emacs_home ~/.emacs
+cp ~/.emacs emacs_home 
+cp -r ~/emacs_stuff/ .
+cd zsh
+diff ~/.zshrc zshrc_home
+e ~/.zsh_history 
+cp ~/.zsh_history zsh_history
+e zsh_history
+cp ~/.zshrc zshrc_home 
+cd sh_script
+diff git.sh ~/git.sh
+ls ~/*.sh
+cat ~/loc.sh
+gg "home update"
+e \*message\*-20150727-234540
+rm \*message\*-20150727-234540
+rm test.c\~
+cat ft_p/Makefile
+rm wolf3d;make sanitize ;./wolf3d
+e server.c
+ifconf
+ifconfig
+ifconfig|grep inet
+./Server
+ifconfig|grep  "inet "
+make zclean; make sanitize
+rm src/server/test
+gg "32/64 bits fix"
+./Server 4242 ~
+gg "lil fix"
+./Client 10.0.0.12 42
+cd /media/mcanal/Data/Doc/BORDEL/TrcusArchos/
+cd DATA/autre/t
+cat recette.txt
+cat -e recette.txt
+e recette.txt
+cd emacs
+cd emacs_stuff
+ls ../emacsbackups
+git clone https://github.com/mooz/auto-complete-c-headers.git 
+cd auto-complete-c-headers
+alias | grep emacs
+rm README.md
+mv * ..
+rmdir auto-complete-c-headers
+rm -rf auto-complete-c-headers
+mv auto-complete-c-headers.el Makefile site-lisp/.
+cd site-lisp
+cd cl
+mv ../Makefile .
+mv ../auto-complete-c-headers.el .
+mv auto-complete-c-headers.el ..
+rm *.elc
+gcc -xc++ -E -v 
+clang -xc++ -E -v 
+clang -xc++ -E -v -
+clang -xc -E -v -
+find libft -type f
+find libft -type f -name *.[ch]
+ls **/*.[ch]
+ls -1 **/*.[ch]
+ls -1 **/*.[ch] > files
+ls -1 libft/**/*.[ch] > files
+cat files
+etags - < files
+rm files
+e TAGS
+cat src/*
+e ~/emacs_stuff/site-lisp/ac-dict/c-mode
+rm test.c test.z
+cd src/server
+rm test.c 
+man emacs24
+man emacs22-nox
+e *.c
+vim env.c
+vim *
+vim -o *
+emacs -o env.c ft_cd.c permission.c server.c s_exec.c s_main.c s_read.c s_signal.c test whoami.c 
+emacs -O env.c ft_cd.c permission.c 
+e src/server/env.c
+e src/server/env.c src/server/ft_cd.c src/server/permission.c src/server/server.c src/server/s_exec.c src/server/s_main.c src/server/s_read.c src/server/s_signal.c src/server/test src/server/whoami.c 
+e src/server/env.c src/server/ft_cd.c 
+e src/server/env.c src/server/ft_cd.c src/error.c
+e src/**/*.[ch]
+e src/client/* src/server/* src/*.c
+e src/client/client.c src/*.c
+clang test.c
+gcc test.c
+gcc -Wall test.c
+gcc -O2 test.c
+gcc -O2 -s test.c
+gcc -O2 -S test.c
+gcc -S test.c
+e test.s
+e libft/str/ft_strstr.c
+e libft/str/ft_strnstr.c
+e src/ray.c
+make sanitize; ./Client 127.0.0.1 4242
+rm TAGS
+make sanitize; ./wolf3d
+kill 4748
+e youjam
+e youjam/fuel/app/bootstrap.php
+e youjam/fuel/app/views/template.php
+e test.c --debug-init
+man emacs
+make sanitize ;./wolf3d
+emacs ~/.emacs
+emacs22 ~/.emacs
+e src/hooks.c
+sudo apt-get install beep
+echo \A
+echo \b
+say ef
+beep --verbose
+(define-key ac-completing-map [down] nil)
+echo -n '^G' 
+echo '\007\c' 
+echo -n '\a' 
+while true; do beep; sleep 1; done
+e /etc/modprobe.d/blacklist.conf
+Se /etc/modprobe.d/blacklist.conf
+se /etc/modprobe.d/blacklist.conf
+cd /etc/modprobe.d/
+grep -ri beep
+grep -ri pcspkr
+se blacklist.conf
+BEEP
+echo -e '\a' 
+man beep
+beep 440
+beep 550
+beep 1000
+beep -f 1000
+beep -f 550
+beep -f 550; beep 440
+beep -f 440; beep 550
+beep -f 440; beep -f 550
+beep; beep -f 550; beep
+beep; beep -f 662
+beep; beep -f 331
+beep -f 331; beep
+beep; sleep 1; beep -f 331; beep
+beep; sleep 0.3; beep -f 331; beep
+beep; sleep 0.4; beep -f 331; beep
+; beep -f 331; beep
+beep; sleep 0.5; beep -f 331; beep
+beep_and_count.sh
+echo "" >> count
+wc -l count
+rm count
+sh ~/beep_and_count.sh 
+sudo apt-get install xbindkeys-config
+xbindkeys_autostart
+xbindkeys_show
+bash ~/beep_and_count.sh
+sh ~/beep_and_count.sh
+man xbindkeys
+xmodmap
+sudo apt-get install xvkbd
+xbindkeys -v
+xbindkeys -k
+man write
+write mcanal yo
+who
+write mcanal 
+e beep_and_count.sh
+rm beep_and_count.sh
+rm ctrl_pushed
+xdotool key ctrl+c
+xdotool key ctrl+d
+xdotool key ctrl+
+xdoto
+xdotool key alt+a
+xdotool key CONTROL_L+c
+xdotool key CTRL_L+c
+man xdotool
+xdotool key Control_L+c
+xdotool keydown Control_L+c
+xdotool keydown Control_L
+xdotool keydown Control_R
+;5A
+sudo apt-get install xdotool
+sh test.sh
+xbindkeys --key
+e .xbindkeysrc
+xbindkeys
+beep
+kill 3953
+sudo apt-get install git
+sudo apt-get install google-chrome-stable
+chsh
+wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+sudo apt-get autoremove autoclean
+se /etc/hosts
+sudo apt-get install pepperflashplugin-nonfree
+sudo update-pepperflashplugin-nonfree --status
+sudo apt-get remove google-chrome-stable
+cp ./mlx/* /usr/lib/
+sudo cp ./mlx/* /usr/lib/
+sudo cp ./mlx/mlx.h /usr/include/
+cd ftp_2
+clang -v
+gcc -v
+gcc --version
+alias | grep std
+rm test.c a.out
+sudo apt-get install g++
+sudo apt-get remove clang
+sudo apt-get install clang-3.5
+clang-3.6
+sudo apt-get install python-clang-3.5
+sudo apt-get install clang
+cd ft_p/libft/inc
+e libft.h
+e libft/inc/libft.h
+sudo apt-get install valgrind
+sudo apt-get upgrade -y
+sudo apt-get install xorg openbox
+sudo apt-get install xauth
+xcode-select --install
+sudo apt-get install libclang-dev
+sudo apt-get install libc++
+sudo apt-get install clang++
+g++
+clang++
+apt-file search X11/Xlib.h
+sudo apt-get install libx11-dev
+sudo apt-get install libxext6
+sudo apt-get install  libxext-dev
+tar -xvf Ubuntu.tar.gz
+l
+cd Ubuntu/
+e script.sh
+e school/bin/check_sm
+e school/bin/ns_hwho
+e school/bin/ns_send_msg
+e script.sh 
+cd mlx
+cat ../script.sh
+tar -xvf mlx-2014-01-06.tgz
+cd minilibx
+e configure
+cp libmlx_Linux.a /usr/lib/.
+sudo cp libmlx_Linux.a /usr/lib/.
+rm /usr/lib/libmlx4.a /usr/lib/libmlx4-rdmav2.so /usr/lib/libmlx.a /usr/lib/libmlx_Linux.a /usr/lib/libmlx_x86_64-linux.a 
+sudo rm /usr/lib/libmlx4.a /usr/lib/libmlx4-rdmav2.so /usr/lib/libmlx.a /usr/lib/libmlx_Linux.a /usr/lib/libmlx_x86_64-linux.a 
+sudo cp libmlx_Linux.a /usr/lib/libmlx.a
+sudo apt-get install lxterminal
+gconftool --type string --set /desktop/gnome/applications/terminal/exec lxterminal
+lxterm
+sudo update-alternatives --config x-terminal-emulator
+locale -a
+-T toto
+toto -T
+q
+e computor.js
+e ets
+sudo apt-get remove lilyterm terminator
+sudo apt-get remove lilyterm
+se /etc/xdg/lilyterm.conf
+e ~/.config/lxterminal/lxterminal.conf
+e .config/lilyterm/default.conf
+se /usr/share/themes/Ambiance/metacity-1/metacity-theme-1.xml
+se /usr/share/themes/Ambiance/gtk-3.0/apps/unity.css
+e -Q test.c
+emacs24 
+emacs24 -nw -Q
+emacs24 -nw -Q test.c
+while true do; cat test >> toto; cat toto >> test; done;
+while true; do make; sleep 3; clear; done
+clang-3.5
+chmod 755 test.zsh
+e test.zsh
+./test.zsh
+zsh test.zsh
+ll
+shopt -s expand_aliases
+alias clang=clang-3.5
+clang --version
+sudo apt-get remove clang-3.6
+e ~/.bashrc
+cma,g
+clang
+make clean
+rm test.zsh
+e libft/mem/ft_memchr.c
+e .shrc
+cp -r /media/mcanal/MYLINUXLIVE2/ft_p ft_p_38
+cd ft_p_38/
+e <keybind key="C-A-T">
+<action name="Execute"> 
+<command>lxterminal --geometry=140x40</command> 
+</action>
+</keybind>
+se /usr/share/applications/lxterminal.desktop
+mkdir -p ~/.config/openbox/; sudo cp /etc/xdg/openbox/* ~/.config/openbox/
+sl
+e menu.xml
+se rc.xml
+lxterminal
+lxterminal --geometry=81x45
+cd .config/openbox
+locate compiz-1
+cd ../compiz-1
+cd compizconfig
+e config
+cd ../
+cd ../lxterminal
+e lxterminal.conf
+cd openbox
+e autostart
+e environment
+e rc.xml
+e ubuntu-rc.xml
+se ubuntu-rc.xml
+mv ubuntu-rc.xml lubuntu-rc.xml
+openbox --reconfigure
+locate openbox
+e /etc/X11/openbox/rc.xml
+se /etc/X11/openbox/rc.xml
+se /etc/xdg/openbox/rc.xml
+e dev
+PROMPT_COMMAND='echo -ne "\033]0;YOUR TITLE GOES HERE\007"'
+sh tab_emacs.sh zboub
+sh tab_emacs.sh
+sh tab_emacs.sh emacs_save
+sh tab_emacs.sh quarantedeux/test.c
+t lesf
+echo -ne "\033]0;YOUR TITLE GOES HERE\007"
+e git.sh
+e quarantedeux/test.c
+e rename_tab.sh
+e test/youjam.sh
+sudo apt-get remove lxterminal
+sh tab_cd.sh admingenerator
+env
+sh . tab_cd.sh admingenerator
+. tab_cd.sh admingenerator
+chmod 777 tab_cd.sh
+./tab_cd.sh
+./tab_cd.sh admingenerator
+. ./tab_cd.sh admingenerator
+ sh ~/tab_cd.sh
+. sh ~/tab_cd.sh
+. ~/tab_cd.sh
+. ~/tab_cd.sh admingenerator
+. ~/tab_cd.sh 
+echo $HOME
+cd admingenerator
+echo ${PWD/HOME/"~"}
+zco
+cd gen
+pwd
+man pwd
+pwd -degf
+$PWD
+echo $PWD
+echo ${PWD/"/home/mcanal"/"~"}
+cd auto-complete
+e .zsh_history
+e tab_emacs.sh
+./Client 127.0.0.1 4242
+env -i ./Client 127.0.0.1 4242
+e src/is_cmd.c
+e tab_cd.sh
+grep -r shared.h
+grep -ri shared.h
+\grep -ril shared * 
+\grep -ri shared * 
+grep -ri shared * 
+grep -ri shared inc/* 
+\grep -ril shared.h * | xargs sed -i "s/shared.h/ft_p.h/g"
+grep -ri shared
+mv shared.h ft_p.h
+e client.h
+\grep -lr header.h src/* | xargs sed -i "s/header.h/ft_p.h/g"
+grep -r header.h src/*
+cd client
+e c_cmd.c client.c c_main.c c_read.c c_signal.c 
+grep -r ft_p.h src/*
+grep -r ft_p.h *
+\grep -lr ft_p.h * | xargs sed -i "s/ft_p.h/client.h/g"
+cd ../server
+\grep -lr ft_p.h * | xargs sed -i "s/ft_p.h/server.h/g"
+grep -ri TODO *
+man recv
+man close
+man getprotobyname
+man inet_addr
+make sanitize; ./Server 4242
+kill 10378
+cd inc
+e ft_p.h
+e client.h ft_p.h server.h 
+cd ../quarantedeux/wolf
+cd .
+./Client localhoste 4242
+./Client 124.2.2.2 4242
+cd 
+cd Downloads
+tar -xvf xautoclick-0.31.tar.gz
+cd xautoclick-0.31
+cat AUTHORS
+make c
+man xautoclick
+qtautoclick
+cat INSTALL
+sudo make uninstall
+sudo apt-get install xserver-xorg-dev getk2-dev
+sudo apt-get install xserver-xorg-dev
+sudo apt-get install qt-sdk
+sudo apt-get install libqt4-dev
+rm -rf xautoclick-0.31*
+tar -xvf LinuxAutoMouseClick64Bit.zip
+unzip LinuxAutoMouseClick64Bit.zip
+cd LinuxAutoMouseClick64Bit
+chmod 777 AutoMouseClick LaunchAutoMouseClick
+./LaunchAutoMouseClick
+e AutoMouseClick LaunchAutoMouseClick
+e ReadMe
+./AutoMouseClick
+e AutoMouseClick
+bash
+e $'\001'$'\254'$'\222'@@$'\220'k$'\003'@8
+cd libs
+e LaunchAutoMouseClick
+rm -rf LinuxAutoMouseClick64Bit
+cd sikulix/
+sudo apt-get install default-jre icedtea-plugin
+kill 1364
+sudo make install
+./configure
+cd ft_p_38
+gg "adding client-side cmd, still broken"
+cd /root
+sudo cd /root
+sudo \cd /root
+sudo
+man sudo
+sudo -p
+sudo -p zboub
+cd /
+csh
+sh
+sudo ls root
+sudo la root
+sudo ls -la root
+sudo cat root/*
+sudo cat root/.*
+sudo cat root/.
+sudo cat root/.bashrc
+sudo cat root/deadletter
+sudo cat root/dead.letter
+cd /media/mcanal/disk
+cd wolf
+git clone https://github.com/jeanmax/philo.git
+cd philo
+sudo apt-get install libsdl2-dev
+sdl-config --cflags --libs
+gcc sdl-config --cflags --libs
+gcc src/error.c src/main.c     sdl-config --cflags --libs
+gcc src/error.c src/main.c     `sdl-config --cflags --libs` 
+sudo apt-get install libsdl2-2.0-0
+sudo apt-get update && sudo apt-get upgrade
+e inc/header.h
+locate SDl
+locate SDL
+man SDL
+cd quarantedeux/philo
+sudo apt-get install libsdl1.2-dev
+./philo
+gcc -dumpmachine
+make printvars
+env | grep -i clanf
+env | grep -i clang
+env | grep -i c
+make clean; make debug
+man uame
+uname -s
+man uname
+man arch
+arch
+uname
+uname -all
+uname -a
+uname --all
+make brute
+rm -rf libft
+git clone https://github.com/jeanmax/libft.git
+cp ../philo/libft/Makefile .
+e inc/edit.h
+grep -r "[i]" *
+grep -r "\[i\]" *
+diff str/ft_strsplit.c ../wolf/libft/str/ft_strsplit.c
+e str/ft_strsplit.c
+cp ../wolf/libft/str/* str/.
+cp ../wolf/libft/mem/* mem/.
+cp ../wolf/libft/io/* io/.
+diff -rq . ../wolf/libft/.
+diff inc/libft.h ../wolf/libft/inc/libft.h
+diff inc/edit.h ../wolf/libft/inc/edit.h
+cp ../wolf/libft/inc/libft.h inc/.
+diff -rq . ../ft_p/libft/.
+diff mem/ft_memchr.c ../ft_p/libft/mem/ft_memchr.c 
+diff inc/libft.h ../ft_p/libft/inc/libft.h
+diff inc/edit.h ../ft_p/libft/inc/edit.h
+cd moulitest_42projects
+make libft_part2
+git clone https://github.com/yyang42/moulitest.git
+cd moulitest
+mv config.ini.template config.ini
+e config.ini
+cd libft_tests
+e libft_tests/Makefile
+cd template_tests/Makefile
+e testframework/v3/srcs/mt/mt_exec.c
+\grep -lr "-Wall -Wextra -Werror" * 
+\grep -r "\-Wall \-Wextra \-Werror" * 
+\grep -r "-Wall -Wextra -Werror" * 
+grep Werror *
+grep -r Werror *
+grep -r gcc *
+e template_tests/Makefile
+e testframework/v3/Makefile
+e testframework/fake_rendu/makefile_templates/Makefile
+make libft_
+make libft_bonus
+cd ../philo
+cd ../ftp_2
+ls -R
+cd ../ftp
+del ftp ft_p ftp_2 
+mv ft_p f_tp
+del f_tp
+mv ft_p f_t_p
+del f_t_p
+mv ft_p_38 quarantedeux/ft_p
+rm test.c\~ test.c test.s 
+e test_pwd.php
+rm test_pwd.php 
+e test.sh
+rm a.out
+ls quarantedeux
+mv sh2/ quarantedeux/sh2_2
+cd push_me/
+clang libft.a main.c
+clang libft.a main.c -Iinc
+gcc libft.a main.c -Iinc
+rm main.c
+man diff
+diff -r libft quarantedeux/libft
+diff -rq libft quarantedeux/libft
+cd quarantedeux/libft
+diff -rq . ../wolf/libft
+diff -rq . ../ft_p/libft
+grepp -ri \[
+grep -ri \[
+grep -ri "\["
+grep -ri "\[" **/*.c
+e mem/ft_cpystab.c
+cat check.delme
+e src/server/whoami.c
+e src/server/server.c 
+e src/server/s_signal.c
+e src/client/c_signal.c
+e src/client/c_main.c
+rm check.delme
+ls obj
+sudo apt-get install sloccount
+sloccount .
+sloccount src inc libft
+sudo apt-get install wmctrl libcv4 libhighgui4 libcvaux4
+sudo apt-get install wmctrl
+sudo apt-get install libcv2.4 libhighgui2.4 libcvaux2.4
+sudo apt-get upgrade
+sudo apt-get auto-remove
+sudo apt-get autoclean
+sudo apt-get autoremove
+./sikuli-setup.jar
+java sikuli-setup.jar
+java -jar sikuli-setup.jar
+e SikuliLog.txt
+ldd libVisionProxy.so
+ldd libs/libVisionProxy.so
+ldd libs/libVisionProxy.so | grep found
+sudo apt-get install libtesseract3
+java -jar sikuli-ide.jar
+wget http://launchpad.net/sikuli/trunk/0.10.2/+download/Sikuli-IDE-linux-i686-0.10.2.zip
+grep -ri wait src/*
+grep -ri wait
+make; ./Client localhost 4243
+man getrusage
+man wait4
+make; ./Client localhost 4242
+gg "local cmd done"
+lq
+kill 7748
+e src/client/c_cmd.c
+e inc/client.h
+cd quarantedeux/ft_p/*
+cd quarantedeux/ft_p/
+econf
+grep -r c_cd *
+grep -r c_cd src/*
+kill 9659 
+make; ./Server 4243
+make; ./Server 4242
+kill 8826
+kill 8827
+kill 8835
+e src/client/c_cd.c src/client/c_cmd.c src/client/client.c src/client/c_main.c src/client/c_read.c 
+e src/env.c
+e src/*
+e src/client src/env.c src/error.c src/is_cmd.c src/send_recv.c src/server 
+e  src/env.c src/error.c src/is_cmd.c src/send_recv.c 
+t src
+e src/server/*
+e src/server/permission.c src/server/s_cd.c src/server/server.c src/server/s_exec.c src/server/s_main.c src/server/s_read.c 
+grep -r client src/client/*
+grep -r Client src/client/*
+grep -r \$Client src/client/*
+t server
+e src/client/c_signal.c 
+e ~/tab_emacs.sh
+e src/client/prompt.c
+mv src/client/prompt.c src/client/c_prompt.c
+e src/client/c_prompt.c
+e src/server/s_read.c
+t client
+make sanitize; ./Client localhost 4242
+is atty
+man isatty
+man ttyname
+man ttyslot
+man ioctl
+tgetent
+man tgetflag
+sudo apt-get install libncurses5-dev
+sudo apt-get install ncurses-doc
+e inc/client.h inc/ft_p.h inc/server.h 
+man getenv
+env -i ft_select
+man tcsetattr
+esgsgeegesg
+esgegegsg
+sloccount src
+sloccount src inc 
+man tgetent
+rm -rf inc libft obj 
+rm -rf src
+rm Makefile
+cp -r ../ft_p/libft .
+cp -r ../ft_p/Makefile .
+cp -r ../ft_p/inc .
+mkdir src
+rm inc/client.h inc/server.h
+mv inc/ft_p.h inc/ft_select.h
+e ../philo/Makefile
+cp ../philo/Makefile .
+cp ../ft_p/src/error.c src/.
+e ../ft_p/src/server/s_signal.c
+cp ../ft_p/src/server/s_signal.c src/.
+mv src/s_signal.c src/signal.c
+e src/signal.c
+~~;5A;6A;6A;6A;6A;6A;6A;6C;6D;6B;5A;5A;5B~~;2~;2~;2~;2~;2~;2~~~;6A;6A;6A;6A;6A;6A;6A;6A;6A;6D;5A;5A;5A;5B;5C;5C;5C
+which llvm-symbolizer-3.4
+which llvm-symbolizer-3.5
+zconf
+cd ../snake
+e getarrowkey.c
+make SRC
+make sanitize; ./ft_select | less
+make sanitize; ./ft_select | more
+man 2 re
+e libft/io/get_line.c
+e libft/io/get_all.c
+man 2 read
+make sanitize; ./ft_select
+make f
+cd sikulix
+./runIDE
+za
+zf
+sudo apt-get install unity-tweak-tool
+git clone https://github.com/lambda2/_42_ftselect.git
+./ft_select auteur ft_elt.c 
+./ft_select auteur ft_elt.c ft_elt_del.c ft_elt_del.o ft_elt.o ft_envutils.c ft_envutils.o ft_process.c ft_process_move.c ft_process_move.o ft_process.o ft_select ft_select.c ft_select.h ft_select.o ft_select_utils.c ft_select_utils.o ft_shenv.c ft_shenv.o libft main.c main.o Makefile 
+sudo add-apt-repository ppa:broken/ppa
+sudo apt-get update
+sudo apt-get install qllauncher
+sudo apt-get install openarena
+man ascii
+e ls
+cd ls
+grep -ri listù
+grep -ri list
+grep -ri list sr*
+grep -ri list *.c
+e read.c
+e src/get_key.c
+e libft/edit
+e libft/inc/edit.h 
+cd libft/edit/lst2
+e ft_lfree.c
+e ft_lnew.c
+e ../../inc/edit.h
+e ft_lfind.c
+e libft/lst2/ft_ladd.c
+./ft_select toto tata
+cat libft/io/ft_putchar.c
+man 2 write
+./ft_select azfk
+./ft_select zf
+man tputs
+./ft_select azlkf fùz
+./ft_select ter egk
+make sanitize; ./ft_select ter egk
+e libft/inc/edit.h
+./ft_select src/\#error.c\# src/error.c src/get_key.c src/main.c src/signal.c 
+./ft_select libft/edit libft/edit/lst1 libft/edit/lst1/ft_lstdelone.c libft/edit/lst1/ft_lstfind.c libft/edit/lst1/ft_lstmap.c libft/edit/lst1/ft_lstnew.c libft/edit/lst2 libft/edit/lst2/ft_lfind.c libft/edit/lst2/ft_lfree.c libft/edit/lst2/ft_lnew.c libft/inc libft/inc/edit.h libft/inc/libft.h libft/io libft/io/fail.c libft/io/failn.c libft/io/ft_debugdbl.c libft/io/ft_debugnbr.c libft/io/ft_debugstr.c libft/io/ft_putchar.c libft/io/ft_putchar_clr.c libft/io/ft_putchar_fd.c libft/io/ft_putdbl.c libft/io/ft_putdbl_clr.c libft/io/ft_putdbl_fd.c libft/io/ft_putendl.c libft/io/ft_putendl_clr.c libft/io/ft_putendl_fd.c libft/io/ft_putnbr.c libft/io/ft_putnbr_clr.c libft/io/ft_putnbr_fd.c libft/io/ft_putstr.c libft/io/ft_putstr_clr.c libft/io/ft_putstr_fd.c libft/io/get_all.c libft/io/get_line.c libft/io/get_next_line.c libft/is libft/is/ft_isalnum.c libft/is/ft_isalpha.c libft/is/ft_isascii.c libft/is/ft_isblank.c libft/is/ft_iscntrl.c libft/is/ft_isdigit.c libft/is/ft_isgraph.c libft/is/ft_islower.c libft/is/ft_isprint.c libft/is/ft_ispunct.c libft/is/ft_isspace.c libft/is/ft_istoobig.c libft/is/ft_isupper.c libft/is/ft_isxdigit.c libft/libft.a libft/lst1 libft/lst1/ft_lstadd.c libft/lst1/ft_lstaddlast.c libft/lst1/ft_lstat.c libft/lst1/ft_lstdel.c libft/lst1/ft_lstdellink.c libft/lst1/ft_lstinser.c libft/lst1/ft_lstisempty.c libft/lst1/ft_lstislast.c libft/lst1/ft_lstisn.c libft/lst1/ft_lstiter.c libft/lst1/ft_lstlast.c libft/lst1/ft_lstlen.c libft/lst1/ft_lstrplc.c libft/lst2 libft/lst2/ft_ladd.c libft/lst2/ft_laddlast.c libft/lst2/ft_lat.c libft/lst2/ft_lclean.c libft/lst2/ft_ldellink.c libft/lst2/ft_lfirst.c libft/lst2/ft_linser.c libft/lst2/ft_lisempty.c libft/lst2/ft_lisfirst.c libft/lst2/ft_lislast.c libft/lst2/ft_lisn.c libft/lst2/ft_liter.c libft/lst2/ft_llast.c libft/lst2/ft_llen.c libft/lst2/ft_lrplc.c libft/lst2/ft_lswap.c libft/Makefile libft/mem libft/mem/ft_bzero.c libft/mem/ft_cpystab.c libft/mem/ft_freestab.c libft/mem/ft_memalloc.c libft/mem/ft_memccpy.c libft/mem/ft_memchr.c libft/mem/ft_memcmp.c libft/mem/ft_memcpy.c libft/mem/ft_memdel.c libft/mem/ft_memmove.c libft/mem/ft_memset.c libft/mem/ft_realloc.c libft/obj libft/obj/fail.d libft/obj/failn.d libft/obj/failn.o libft/obj/fail.o libft/obj/ft_atoi.d libft/obj/ft_atoi.o libft/obj/ft_bzero.d libft/obj/ft_bzero.o libft/obj/ft_cpystab.d libft/obj/ft_cpystab.o libft/obj/ft_debugdbl.d libft/obj/ft_debugdbl.o libft/obj/ft_debugnbr.d libft/obj/ft_debugnbr.o libft/obj/ft_debugstr.d libft/obj/ft_debugstr.o libft/obj/ft_freestab.d libft/obj/ft_freestab.o libft/obj/ft_isalnum.d libft/obj/ft_isalnum.o libft/obj/ft_isalpha.d libft/obj/ft_isalpha.o libft/obj/ft_isascii.d libft/obj/ft_isascii.o libft/obj/ft_isblank.d libft/obj/ft_isblank.o libft/obj/ft_iscntrl.d libft/obj/ft_iscntrl.o libft/obj/ft_isdigit.d libft/obj/ft_isdigit.o libft/obj/ft_isgraph.d libft/obj/ft_isgraph.o libft/obj/ft_islower.d libft/obj/ft_islower.o libft/obj/ft_isprint.d libft/obj/ft_isprint.o libft/obj/ft_ispunct.d libft/obj/ft_ispunct.o libft/obj/ft_isspace.d libft/obj/ft_isspace.o libft/obj/ft_istoobig.d libft/obj/ft_istoobig.o libft/obj/ft_isupper.d libft/obj/ft_isupper.o libft/obj/ft_isxdigit.d libft/obj/ft_isxdigit.o libft/obj/ft_itoa.d libft/obj/ft_itoa.o libft/obj/ft_ladd.d libft/obj/ft_laddlast.d libft/obj/ft_laddlast.o libft/obj/ft_ladd.o libft/obj/ft_lat.d libft/obj/ft_lat.o libft/obj/ft_lclean.d libft/obj/ft_lclean.o libft/obj/ft_ldellink.d libft/obj/ft_ldellink.o libft/obj/ft_lfind.d libft/obj/ft_lfind.o libft/obj/ft_lfirst.d libft/obj/ft_lfirst.o libft/obj/ft_lfree.d libft/obj/ft_lfree.o libft/obj/ft_linser.d libft/obj/ft_linser.o libft/obj/ft_lisempty.d libft/obj/ft_lisempty.o libft/obj/ft_lisfirst.d libft/obj/ft_lisfirst.o libft/obj/ft_lislast.d libft/obj/ft_lislast.o libft/obj/ft_lisn.d libft/obj/ft_lisn.o libft/obj/ft_liter.d libft/obj/ft_liter.o libft/obj/ft_llast.d libft/obj/ft_llast.o libft/obj/ft_llen.d libft/obj/ft_llen.o libft/obj/ft_lnew.d libft/obj/ft_lnew.o libft/obj/ft_lrplc.d libft/obj/ft_lrplc.o libft/obj/ft_lstadd.d libft/obj/ft_lstaddlast.d libft/obj/ft_lstaddlast.o libft/obj/ft_lstadd.o libft/obj/ft_lstat.d libft/obj/ft_lstat.o libft/obj/ft_lstdel.d libft/obj/ft_lstdellink.d libft/obj/ft_lstdellink.o libft/obj/ft_lstdel.o libft/obj/ft_lstdelone.d libft/obj/ft_lstdelone.o libft/obj/ft_lstfind.d libft/obj/ft_lstfind.o libft/obj/ft_lstinser.d libft/obj/ft_lstinser.o libft/obj/ft_lstisempty.d libft/obj/ft_lstisempty.o libft/obj/ft_lstislast.d libft/obj/ft_lstislast.o libft/obj/ft_lstisn.d libft/obj/ft_lstisn.o libft/obj/ft_lstiter.d libft/obj/ft_lstiter.o libft/obj/ft_lstlast.d libft/obj/ft_lstlast.o libft/obj/ft_lstlen.d libft/obj/ft_lstlen.o libft/obj/ft_lstmap.d libft/obj/ft_lstmap.o libft/obj/ft_lstnew.d libft/obj/ft_lstnew.o libft/obj/ft_lstrplc.d libft/obj/ft_lstrplc.o libft/obj/ft_lswap.d libft/obj/ft_lswap.o libft/obj/ft_memalloc.d libft/obj/ft_memalloc.o libft/obj/ft_memccpy.d libft/obj/ft_memccpy.o libft/obj/ft_memchr.d libft/obj/ft_memchr.o libft/obj/ft_memcmp.d libft/obj/ft_memcmp.o libft/obj/ft_memcpy.d libft/obj/ft_memcpy.o libft/obj/ft_memdel.d libft/obj/ft_memdel.o libft/obj/ft_memmove.d libft/obj/ft_memmove.o libft/obj/ft_memset.d libft/obj/ft_memset.o libft/obj/ft_putchar_clr.d libft/obj/ft_putchar_clr.o libft/obj/ft_putchar.d libft/obj/ft_putchar_fd.d libft/obj/ft_putchar_fd.o libft/obj/ft_putchar.o libft/obj/ft_putdbl_clr.d libft/obj/ft_putdbl_clr.o libft/obj/ft_putdbl.d libft/obj/ft_putdbl_fd.d libft/obj/ft_putdbl_fd.o libft/obj/ft_putdbl.o libft/obj/ft_putendl_clr.d libft/obj/ft_putendl_clr.o libft/obj/ft_putendl.d libft/obj/ft_putendl_fd.d libft/obj/ft_putendl_fd.o libft/obj/ft_putendl.o libft/obj/ft_putnbr_clr.d libft/obj/ft_putnbr_clr.o libft/obj/ft_putnbr.d libft/obj/ft_putnbr_fd.d libft/obj/ft_putnbr_fd.o libft/obj/ft_putnbr.o libft/obj/ft_putstr_clr.d libft/obj/ft_putstr_clr.o libft/obj/ft_putstr.d libft/obj/ft_putstr_fd.d libft/obj/ft_putstr_fd.o libft/obj/ft_putstr.o libft/obj/ft_realloc.d libft/obj/ft_realloc.o libft/obj/ft_strcat.d libft/obj/ft_strcat.o libft/obj/ft_strchr.d libft/obj/ft_strchr.o libft/obj/ft_strclr.d libft/obj/ft_strclr.o libft/obj/ft_strcmp.d libft/obj/ft_strcmp.o libft/obj/ft_strcpy.d libft/obj/ft_strcpy.o libft/obj/ft_strdel.d libft/obj/ft_strdel.o libft/obj/ft_strdup.d libft/obj/ft_strdup.o libft/obj/ft_strequ.d libft/obj/ft_strequ.o libft/obj/ft_strindex.d libft/obj/ft_strindex.o libft/obj/ft_striter.d libft/obj/ft_striteri.d libft/obj/ft_striteri.o libft/obj/ft_striter.o libft/obj/ft_strjoin.d libft/obj/ft_strjoin.o libft/obj/ft_strlcat.d libft/obj/ft_strlcat.o libft/obj/ft_strlen.d libft/obj/ft_strlen.o libft/obj/ft_strmap.d libft/obj/ft_strmapi.d libft/obj/ft_strmapi.o libft/obj/ft_strmap.o libft/obj/ft_strncat.d libft/obj/ft_strncat.o libft/obj/ft_strncmp.d libft/obj/ft_strncmp.o libft/obj/ft_strncpy.d libft/obj/ft_strncpy.o libft/obj/ft_strndup.d libft/obj/ft_strndup.o libft/obj/ft_strnequ.d libft/obj/ft_strnequ.o libft/obj/ft_strnew.d libft/obj/ft_strnew.o libft/obj/ft_strnstr.d libft/obj/ft_strnstr.o libft/obj/ft_strrchr.d libft/obj/ft_strrchr.o libft/obj/ft_strrindex.d libft/obj/ft_strrindex.o libft/obj/ft_strsplit.d libft/obj/ft_strsplit.o libft/obj/ft_strstr.d libft/obj/ft_strstr.o libft/obj/ft_strsub.d libft/obj/ft_strsub.o libft/obj/ft_strtrim.d libft/obj/ft_strtrim.o libft/obj/ft_tolower.d libft/obj/ft_tolower.o libft/obj/ft_toupper.d libft/obj/ft_toupper.o libft/obj/get_all.d libft/obj/get_all.o libft/obj/get_line.d libft/obj/get_line.o libft/obj/get_next_line.d libft/obj/get_next_line.o libft/str libft/str/ft_atoi.c libft/str/ft_itoa.c libft/str/ft_strcat.c libft/str/ft_strchr.c libft/str/ft_strclr.c libft/str/ft_strcmp.c libft/str/ft_strcpy.c libft/str/ft_strdel.c libft/str/ft_strdup.c libft/str/ft_strequ.c libft/str/ft_strindex.c libft/str/ft_striter.c libft/str/ft_striteri.c libft/str/ft_strjoin.c libft/str/ft_strlcat.c libft/str/ft_strlen.c libft/str/ft_strmap.c libft/str/ft_strmapi.c libft/str/ft_strncat.c libft/str/ft_strncmp.c libft/str/ft_strncpy.c libft/str/ft_strndup.c libft/str/ft_strnequ.c libft/str/ft_strnew.c libft/str/ft_strnstr.c libft/str/ft_strrchr.c libft/str/ft_strrindex.c libft/str/ft_strsplit.c libft/str/ft_strstr.c libft/str/ft_strsub.c libft/str/ft_strtrim.c libft/str/ft_tolower.c libft/str/ft_toupper.c 
+ls obj/error.d obj/error.o obj/get_key.d obj/get_key.o obj/main.d obj/main.o obj/signal.d obj/signal.o 
+./ft_select obj/error.d obj/error.o obj/get_key.d obj/get_key.o obj/main.d obj/main.o obj/signal.d obj/signal.o 
+mkdir test
+cd test
+touch thisisreallytoolong1
+touch thisisreallytoolong2
+touch thisisreallytoolong3
+touch thisisreallytoolong4
+touch thisisreallytoolong5
+touch thisisreallytoolong6
+touch thisisreallytoolong7
+touch thisisreallytoolong8
+touch thisisreallytoolong9
+touch thisisreallytoolong0
+make sanitize*
+ls test/thisisreallytoolong0 test/thisisreallytoolong1 test/thisisreallytoolong2 test/thisisreallytoolong3 test/thisisreallytoolong4 test/thisisreallytoolong5 test/thisisreallytoolong6 test/thisisreallytoolong7 test/thisisreallytoolong8 test/thisisreallytoolong9 
+./ft_select src/error.c src/get_key.c src/main.c src/signal.c obj/error.d obj/error.o obj/get_key.d obj/get_key.o obj/main.d obj/main.o obj/signal.d obj/signal.o test/thisisreallytoolong0 test/thisisreallytoolong1 test/thisisreallytoolong2 test/thisisreallytoolong3 test/thisisreallytoolong4 test/thisisreallytoolong5 test/thisisreallytoolong6 test/thisisreallytoolong7 test/thisisreallytoolong8 test/thisisreallytoolong9 
+ls src/error.c src/get_key.c src/main.c src/signal.c obj/error.d obj/error.o obj/get_key.d obj/get_key.o obj/main.d obj/main.o obj/signal.d obj/signal.o test/thisisreallytoolong0 test/thisisreallytoolong1 test/thisisreallytoolong2 test/thisisreallytoolong3 test/thisisreallytoolong4 test/thisisreallytoolong5 test/thisisreallytoolong6 test/thisisreallytoolong7 test/thisisreallytoolong8 test/thisisreallytoolong9 
+rm *.o
+ms
+e ft_process.c
+e ft_select.h
+e ft_shenv.c 
+cd quarantedeux/wolf
+./wolf3d
+cd quarantedeux/ft_select/
+la
+cd _42_ftselect/
+./ft_select ft_elt.c ft_elt_del.c ft_envutils.c ft_process.c ft_process_move.c ft_select.c ft_select_utils.c ft_shenv.c main.c 
+e ft_elt.c ft_elt_del.c ft_envutils.c ft_process.c ft_process_move.c ft_select.c ft_select_utils.c ft_shenv.c main.c 
+e libft/obj/failn.d
+./ft_select src/error.c src/get_key.c src/main.c src/print_list.c src/signal.c src/term.c test/thisisreallytoolong0 test/thisisreallytoolong1 test/thisisreallytoolong2 test/thisisreallytoolong3 test/thisisreallytoolong4 test/thisisreallytoolong5 test/thisisreallytoolong6 test/thisisreallytoolong7 test/thisisreallytoolong8 test/thisisreallytoolong9 
+ls src/*
+./ft_select src/error.c src/get_key.c src/main.c src/print_list.c src/signal.c src/term.c 
+ls src
+mv src/edit_term.c src/term.c
+man tgoto
+cd libft/lst2
+e ft_laddlast.c
+git clone https://github.com/Wouterbeets/ft_select.git 42bis_ftselect
+cd 42bis_ftselect/
+make re
+e libft/ft_strsplit.c
+./ft_select src/iskey2.c src/iskey.c src/listfunctions2.c src/listfunctions.c src/main.c src/moves.c src/print2.c src/print.c src/select_del_list.c src/set_get.c src/signal.c 
+rm -rf 42bis_ftselect
+e error.c 
+man tgetstr
+./ft_select src/*
+./ft_select test/thisisreallytoolong0 test/thisisreallytoolong1 test/thisisreallytoolong2 test/thisisreallytoolong3 test/thisisreallytoolong4 test/thisisreallytoolong5 test/thisisreallytoolong6 test/thisisreallytoolong7 test/thisisreallytoolong8 test/thisisreallytoolong9 
+make sanitize;  ./ft_select src/error.c src/get_key.c src/main.c src/move.c src/print_list.c src/signal.c src/term.c 
+make sanitize;  ./ft_select src/error.c src/get_key.c src/main.c src/move.c src/print_list.c src/signal.c src/term.c  test/thisisreallytoolong0 test/thisisreallytoolong1 test/thisisreallytoolong2 test/thisisreallytoolong3 test/thisisreallytoolong4 test/thisisreallytoolong5 test/thisisreallytoolong6 test/thisisreallytoolong7 test/thisisreallytoolong8 test/thisisreallytoolong9 
+ls src/error.c src/get_key.c src/main.c src/move.c src/print_list.c src/signal.c src/term.c 
+ls src/error.c src/get_key.c src/main.c src/move.c src/print_list.c src/signal.c src/term.c  test/thisisreallytoolong0 test/thisisreallytoolong1 test/thisisreallytoolong2 test/thisisreallytoolong3 test/thisisreallytoolong4 test/thisisreallytoolong5 test/thisisreallytoolong6 test/thisisreallytoolong7 test/thisisreallytoolong8 test/thisisreallytoolong9 
+1 + 1
+"1" + "1"
+man 2 open
+tty
+./ft_select obj/error.d obj/error.o obj/get_key.d obj/get_key.o obj/main.d obj/main.o obj/move.d obj/move.o obj/print_list.d obj/print_list.o obj/signal.d obj/signal.o obj/term.d obj/term.o test/thisisreallytoolong0 test/thisisreallytoolong1 test/thisisreallytoolong2 test/thisisreallytoolong3 test/thisisreallytoolong4 test/thisisreallytoolong5 test/thisisreallytoolong6 test/thisisreallytoolong7 test/thisisreallytoolong8 test/thisisreallytoolong9 src/error.c src/get_key.c src/main.c src/move.c src/print_list.c src/signal.c src/term.c 
+env -i ./ft_select obj/error.d obj/error.o obj/get_key.d obj/get_key.o obj/main.d obj/main.o obj/move.d obj/move.o obj/print_list.d obj/print_list.o obj/signal.d obj/signal.o obj/term.d obj/term.o test/thisisreallytoolong0 test/thisisreallytoolong1 test/thisisreallytoolong2 test/thisisreallytoolong3 test/thisisreallytoolong4 test/thisisreallytoolong5 test/thisisreallytoolong6 test/thisisreallytoolong7 test/thisisreallytoolong8 test/thisisreallytoolong9 src/error.c src/get_key.c src/main.c src/move.c src/print_list.c src/signal.c src/term.c 
+grep g_ ../ft_p/src/*
+grep g_ ../ft_p/src/**/*
+e ../ft_p/src/server/s_main.c
+grep g_ ../ft_p/src/server/permission.c ../ft_p/src/server/s_cd.c ../ft_p/src/server/server.c ../ft_p/src/server/s_exec.c ../ft_p/src/server/s_main.c ../ft_p/src/server/s_read.c ../ft_p/src/server/s_signal.c ../ft_p/src/server/whoami.c 
+e ../ft_p/src/server/server.c
+t zboub
+while true; do make sanitize; sleep 2; clear; done
+man tcgetattr
+while true; do make sanitize; sleep 3; clear; done
+./ft_select src/error.c src/get_key.c src/main.c src/move.c src/print_list.c src/signal.c src/term.c obj/error.d obj/error.o obj/get_key.d obj/get_key.o obj/main.d obj/main.o obj/move.d obj/move.o obj/print_list.d obj/print_list.o obj/signal.d obj/signal.o obj/term.d obj/term.o 
+t zob
+./ft_select src/error.c src/get_key.c src/main.c src/move.c src/print_list.c src/signal.c src/term.c obj/error.d obj/error.o obj/get_key.d obj/get_key.o obj/main.d obj/main.o obj/move.d obj/move.o obj/print_list.d obj/print_list.o obj/signal.d obj/signal.o obj/term.d obj/term.o  test/thisisreallytoolong0 test/thisisreallytoolong1 test/thisisreallytoolong2 test/thisisreallytoolong3 test/thisisreallytoolong4 test/thisisreallytoolong5 test/thisisreallytoolong6 test/thisisreallytoolong7 test/thisisreallytoolong8 test/thisisreallytoolong9 
+grep -ri todo src/*
+gg "almost functional, jobcontrol todo"
+git push
+sloccount src/*
+sloccount src/* inc/ft_select.h
+./ft_select src/error.c obj/error.d obj/error.o obj/get_key.d obj/get_key.o obj/main.d obj/main.o obj/move.d obj/move.o obj/print_list.d obj/print_list.o obj/signal.d obj/signal.o obj/term.d obj/term.o 
+make z
+./ft_select obj/error.d obj/error.o obj/get_key.d obj/get_key.o obj/main.d obj/main.o obj/move.d obj/move.o obj/print_list.d obj/print_list.o obj/signal.d obj/signal.o obj/term.d obj/term.o 
+gg "mostly done
+gg "mostly done\!"
+e zboub.c
+ks
+e get_key.c
+./ft_select *.c
+git clone https://github.com/tcoppin/ft_select.git _42_ftselectux
+cd _42_ftselectux
+e libft/Makefile
+make 
+clang-3.5 srcs/ft_action.c srcs/ft_enter.c srcs/ft_keyhook.c srcs/ft_list.c srcs/ft_moves.c srcs/ft_myputchar.c srcs/ft_print_select.c srcs/ft_select_all.c srcs/ft_select.c srcs/ft_select_misc.c srcs/ft_select_resize.c srcs/ft_select_signal.c srcs/ft_term_change.c 
+clang-3.5 srcs/ft_action.c srcs/ft_enter.c srcs/ft_keyhook.c srcs/ft_list.c srcs/ft_moves.c srcs/ft_myputchar.c srcs/ft_print_select.c srcs/ft_select_all.c srcs/ft_select.c srcs/ft_select_misc.c srcs/ft_select_resize.c srcs/ft_select_signal.c srcs/ft_term_change.c -Iinc
+clang-3.5 srcs/ft_action.c srcs/ft_enter.c srcs/ft_keyhook.c srcs/ft_list.c srcs/ft_moves.c srcs/ft_myputchar.c srcs/ft_print_select.c srcs/ft_select_all.c srcs/ft_select.c srcs/ft_select_misc.c srcs/ft_select_resize.c srcs/ft_select_signal.c srcs/ft_term_change.c -I includes
+clang-3.5 srcs/ft_action.c srcs/ft_enter.c srcs/ft_keyhook.c srcs/ft_list.c srcs/ft_moves.c srcs/ft_myputchar.c srcs/ft_print_select.c srcs/ft_select_all.c srcs/ft_select.c srcs/ft_select_misc.c srcs/ft_select_resize.c srcs/ft_select_signal.c srcs/ft_term_change.c -I includes -I libft/includes
+clang-3.5 srcs/ft_action.c srcs/ft_enter.c srcs/ft_keyhook.c srcs/ft_list.c srcs/ft_moves.c srcs/ft_myputchar.c srcs/ft_print_select.c srcs/ft_select_all.c srcs/ft_select.c srcs/ft_select_misc.c srcs/ft_select_resize.c srcs/ft_select_signal.c srcs/ft_term_change.c -I includes -I libft/includes -ncurses
+clang-3.5 srcs/ft_action.c srcs/ft_enter.c srcs/ft_keyhook.c srcs/ft_list.c srcs/ft_moves.c srcs/ft_myputchar.c srcs/ft_print_select.c srcs/ft_select_all.c srcs/ft_select.c srcs/ft_select_misc.c srcs/ft_select_resize.c srcs/ft_select_signal.c srcs/ft_term_change.c -I includes -I libft/includes -lncurses
+e includes/ft_select.h
+clang-3.5 libft/libft.a srcs/ft_action.c srcs/ft_enter.c srcs/ft_keyhook.c srcs/ft_list.c srcs/ft_moves.c srcs/ft_myputchar.c srcs/ft_print_select.c srcs/ft_select_all.c srcs/ft_select.c srcs/ft_select_misc.c srcs/ft_select_resize.c srcs/ft_select_signal.c srcs/ft_term_change.c -I includes -I libft/includes -lncurses
+make
+env -i ./ft_select
+env -i ./ft_select srcs/ft_action.c srcs/ft_enter.c srcs/ft_keyhook.c srcs/ft_list.c srcs/ft_moves.c srcs/ft_myputchar.c srcs/ft_print_select.c srcs/ft_select_all.c srcs/ft_select.c srcs/ft_select_misc.c srcs/ft_select_resize.c srcs/ft_select_signal.c srcs/ft_term_change.c 
+./ft_select srcs/ft_action.c srcs/ft_enter.c srcs/ft_keyhook.c srcs/ft_list.c srcs/ft_moves.c srcs/ft_myputchar.c srcs/ft_print_select.c srcs/ft_select_all.c srcs/ft_select.c srcs/ft_select_misc.c srcs/ft_select_resize.c srcs/ft_select_signal.c srcs/ft_term_change.c 
+e srcs/ft_select_signal.c
+rm -rf _42_ftselectux
+grep -r sig
+grep -r sig *.c
+e signal.c
+e term.c
+e libft/edit/lst2/ft_lnew.c
+e move.c
+cd
+cd _42_ftselect
+e ft_process_move.c
+grep -r getstr *.c
+e ft_elt_del.c
+grep -r print_final *
+e main.c
+./ft_select ft_elt_del.c
+./ft_select ft_select.c
+e ft_select.c
+e ft_elt.c
+e ft_envutils.c
+e print_list.c
+\grep -lr "return (1" * | xargs sed -i "s/return (0/return (TRUE/g"
+\grep -lr "return (8" * | xargs sed -i "s/return (0/return (TRUE/g"
+\grep -lr "return (8" * | xargs sed -i "s/return (8/return (TRUE/g"
+grep -r "return (8"
+grep -r "return (1"
+e src/error.c
+e test
+e test.html
+mv test.html smooth_lyrics
+cd quake
+rm -rf qua
+rm -rf quake
+cd quarantedeux
+del ft_p
+mv ft_p ft_p_11_09_15
+git clone https://github.com/jeanmax/ft_select.git
+git clone https://github.com/jeanmax/ft_p.git
+cd ft_
+e inc/ft_p.h
+e inc/server.h
+e libft/io/ft_debugstr.c
+cd libft
+e io/ft_putchar_clr.c
+e io/ft_putchar_fd.c
+e io/ft_putdbl.c
+e io/ft_putstr_clr.c
+cd is
+e ft_isblank.c ft_iscntrl.c ft_isgraph.c ft_ispunct.c ft_isspace.c ft_isxdigit.c
+cd ../lst1
+e ft_lstadd.c e ft_lstaddlast.c ft_lstdel.c  ft_lstisn.c ft_lstiter.c ft_lstlast.c
+e ft_lstadd.c 
+\grep -lr "marvin@42.fr>" * | xargs sed -i "s/marvin@42.fr>/zboub@42.fr> /g"
+e lst2/ft_llast.c
+grep -r "marvin@42.fr>" *
+grep -r zboub
+cd lst2
+e ft_ladd.c ft_laddlast.c ft_lfirst.c ft_lisn.c ft_liter.c ft_llast.c
+e libft/mem/ft_bzero.c libft/mem/ft_memccpy.c libft/mem/ft_memchr.c libft/mem/ft_memcmp.c libft/mem/ft_memcpy.c libft/mem/ft_memmove.c libft/mem/ft_memset.c
+e libft/str/ft_atoi.c libft/str/ft_strchr.c  libft/str/ft_strcmp.c  libft/str/ft_strcpy.c libft/str/ft_strdup.c  libft/str/ft_strlcat.c libft/str/ft_strlen.c libft/str/ft_strncat.c
+cd libft/str
+e ft_atoi.c
+e ft_strchr.c
+e ft_strcmp.c
+e ft_cpy.c
+e ft_strcpy.c
+e ft_strdup.c
+e ft_strlcat.c
+e ft_strncat.c
+e ft_strncmp.c
+e ft_strncpy.c
+e ft_strnstr.c
+e ft_strrchr.c
+e ft_strstr.c
+cd ../edit/lst1
+e ft_lstdelone.c ft_lstfind.c ft_lstmap.c ../lst2/ft_lfind.c
+e inc/libft.h
+del ../../ft_p_11_09_15
+rm test.c
+e str/ft_strlen.c
+e str/ft_
+e str/ft_atoi.c
+cd src
+e env.c
+e error.c
+e send_recv.c
+e client/c_cd.c
+e client/c_cmd.c
+e client/c_main.c
+\grep -lr "return (0" * | xargs sed -i "s/return (0/return (FALSE/g"
+\grep -lr "return (1" * | xargs sed -i "s/return (1/return (TRUE/g"
+grep -r "return (0"
+e client/c_read.c
+cd server
+e permission.c
+e s_cd.c
+cd ..
+grep -r exit
+e s_exec.c
+e s_signal.c
+gg "some norm'ing done, libft cleaned"
+cat norm >> README.md
+cat README.md
+rm norm
+mv README.md test
+mv test README.md
+git add -A .
+gg "oups"
+gg "readme"
+cat norm
+e norm
+cd ../ft_p/libft
+e lst1/ft_lstisempty.c
+e edit/lst1/ft_lstnew.c
+e edit/lst1/ft_lstmap.c
+e mem/ft_memchr.c
+e mem/ft_memccpy.c
+e str/ft_strequ.c
+str/ft_strmapi.c
+e str/ft_strmapi.c
+e str/ft_strncmp.c
+e str/ft_strmap.c
+e str/ft_strjoin.c
+e str/ft_itoa.c
+e str/ft_strtrim.c
+e str/ft_strnstr.c
+e io/get_all.c:
+e io/get_all.c
+e io/get_next_line.c
+diff mem/ft_memchr.c ../ft_p/libft/mem/ft_memchr.c
+e mem/ft_memchr.c ../ft_p/libft/mem/ft_memchr.c
+e str/ft_strcmp.c ../ft_p/libft/str/ft_strcmp.c
+e mem/ft_memchr.c 
+cd ../..
+cd ft_p
+cd quarantedeux/ft_select
+./ft_select src/error.c
+e test.c
+clang -g -ggdb -O2 -fsanitize=address,undefined -ferror-limit=5 test.c
+./a.out
+make fclean
+rm a.out test.c
+make debug
+e src/m
+e libft/str/ft_strlen.c
+./ft_select src/error.c src/get_key.c src/main.c src/move.c src/print_list.c src/signal.c src/term.c 
+cp libft/str/ft_strcpy.c libft/str/ft_strdup.c libft/str/ft_strlen.c libft/str/ft_strndup.c ../ft_p/libft/str/.
+gg "eheh bug found"
+cd ../ft_p
+git status
+e libft/str/ft_atoi.c
+cp libft/str/ft_atoi.c ../ft_select/libft/str/.
+gg "ooooops"
+cd -
+gg "oops"
+cd ../libft
+git diff | grep ft_debugnbr
+git diff
+e libft/str/ft_strdup.c
+./ft_select
+e Makefile
+while true; do make me_cry; sleep 3; clear; done
+cd quarantedeux/ft_p
+make sa
+make sanitize
+./Server 4242
+e src/server/s_exec.c
+e src/server/s_cd.c
+fg
+e src/server/permission.c
+e src/send_recv.c
+e src/client/c_read.c
+cd ft_p ft_select
+cd ../ft_select
+gg "norm"
+git pull
+e inc/ft_select.h
+e src/main.c
+e src/move.c
+e src/print_list.c
+grep -ri head src/*
+e README.md
+gg "conflict ftw... norm anyway"
+make me_cry
+ls
+./ft_select src/error.c src/get_key.c src/main.c src/move2.c src/move.c src/print_list.c src/signal.c src/term.c 
+make zclean
+./Client localhost 4242
+./Client localhost 4242
