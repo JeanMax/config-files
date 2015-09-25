@@ -6,7 +6,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2015/04/26 16:54:03 by mcanal            #+#    #+#              ;
-;    Updated: 2015/09/02 11:31:18 by mcanal           ###   ########.fr        ;
+;    Updated: 2015/09/24 00:03:14 by mcanal           ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -23,6 +23,7 @@
 (require 'web-mode)
 (require 'auto-complete)
 (require 'auto-complete-config)
+(require 'scala-mode2)
 ;(require 'fuzzy)
 ;(require 'php-mode)
 ;(require 'popup)
@@ -38,7 +39,7 @@
 (bind-key* (kbd "DEL") 'backward-delete-char)
 (setq-default c-backspace-function 'backward-delete-char)
 (setq-default c-basic-offset 4)
-(c-set-offset 'inclass '++)
+(c-set-offset 'inclass '+) ;++ me for c++ only please :O
 (c-set-offset 'case-label '+)
 (setq-default c-default-style "linux")
 (add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
@@ -47,8 +48,27 @@
 (add-to-list 'auto-mode-alist '("\\.hpp\\'" . c++-mode))
 (add-to-list 'auto-mode-alist '("\\.tpp\\'" . c++-mode))
 (add-to-list 'auto-mode-alist '("\\.cpp\\'" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.jvm\\'" . scala-mode))
 (setq-default tab-stop-list '(4 8 12 16 20 24 28 32 36 40 44 48 52 56 60
                              64 68 72 76 80 84 88 92 96 100 104 108 112 116 120))
+
+;scala
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(gud-gdb-command-name "gdb --annotate=1")
+ '(irony-server-build-dir nil)
+ '(large-file-warning-threshold nil)
+ '(scala-font-lock:constant-list nil)
+ '(scala-indent:step 4))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
 
 ;color zboubing
 ;(set-face-foreground 'font-lock-comment-face "SteelBlue")
@@ -141,8 +161,8 @@
 (bind-key* [(insertchar)] 'set-mark-command)
 ;(bind-key* [(backtab)] 'auto-complete)
 (bind-key [(backtab)] 'dabbrev-expand)
-(bind-key* (kbd "Œ") 'auto-complete-mode)
-(bind-key* (kbd "œ") 'tab-to-tab-stop)
+(bind-key* (kbd "ø") 'auto-complete-mode)
+(bind-key* (kbd "ÿ") 'tab-to-tab-stop)
 (bind-key* (kbd "<f2>") 'kill-region)
 (bind-key* (kbd "<f3>") 'kill-ring-save)
 (bind-key* (kbd "<f4>") 'yank)
@@ -606,17 +626,3 @@
 )
 
 ;*******************************************************************************;
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(gud-gdb-command-name "gdb --annotate=1")
- '(irony-server-build-dir nil)
- '(large-file-warning-threshold nil))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
