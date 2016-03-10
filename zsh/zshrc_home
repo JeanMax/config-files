@@ -6,7 +6,7 @@
 #    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/23 17:38:59 by mcanal            #+#    #+#              #
-#    Updated: 2016/03/10 19:49:56 by mcanal           ###   ########.fr        #
+#    Updated: 2016/03/10 21:37:54 by mcanal           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -139,7 +139,7 @@ precmd ()
 export LS_COLORS="no=00:fi=00:di=01;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:ex=01;31:tw=40;1;41:ow=40;1;41:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.gz=01;31:*.deb=01;31:*.jpg=01;35:*.gif=01;35:*.bmp=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.mpg=01;37:*.avi=01;37:*.gl=01;37:*.dl=01;37:"
 
 # Definition des alias de git
-alias gg="sh ~/git.sh"
+alias gg="sh ~/sh_script/git.sh"
 alias ga="git add -A"
 alias gb="git branch"
 alias gcm="git commit -m"
@@ -171,14 +171,14 @@ alias usb='cd /media/mcanal/Lexar/'
 alias del='mv -t ~/.local/share/Trash/files'
 alias zconf='e ~/.zshrc'
 alias econf='e ~/.emacs'
-alias e='sh ~/tab_emacs.sh'
-alias cd='. ~/tab_cd.sh'
-alias t='sh ~/rename_tab.sh'
+alias e='sh ~/sh_script/tab_emacs.sh'
+alias cd='. ~/sh_script/tab_cd.sh'
+alias t='sh ~/sh_script/rename_tab.sh'
 alias re="make re;"
 alias gdb="gdb -quiet"
 alias sql="mysql -u root -p --silent"
 alias se="sudo emacs24 -nw"
-alias loc="sh ~/loc.sh"
+alias loc="sh ~/sh_script/loc.sh"
 alias ht='cd /var/www/html/'
 alias ap='cd /var/www/html/fuel/app/'
 alias ocaml='rlwrap ocaml'
@@ -186,9 +186,9 @@ alias py='python3'
 alias copy='xsel --clipboard'
 
 # typo alias
-alias xs='. ~/tab_cd.sh'
-alias vf='. ~/tab_cd.sh'
-alias z='sh ~/tab_emacs.sh'
+alias xs='. ~/sh_script/tab_cd.sh'
+alias vf='. ~/sh_script/tab_cd.sh'
+alias z='sh ~/sh_script/tab_emacs.sh'
 alias ms='ls'
 alias lq='ls'
 alias ks='ls'
