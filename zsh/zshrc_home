@@ -6,7 +6,7 @@
 #    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/23 17:38:59 by mcanal            #+#    #+#              #
-#    Updated: 2015/09/05 14:24:48 by mcanal           ###   ########.fr        #
+#    Updated: 2016/03/10 19:49:56 by mcanal           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,12 +14,15 @@
 EDITOR='/usr/bin/emacs24 -nw'
 export EDITOR
 
+#ocaml shit
+. /home/mcanal/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+
 # Reglage du terminal
 TERM=xterm-256color
 echo -n "\033]0;$PWD\007";
 
 #clang debuging stuff
-ASAN_SYMBOLIZER_PATH=$(which llvm-symbolizer-3.5) #'/usr/bin/llvm-symbolizer-3.4'
+ASAN_SYMBOLIZER_PATH=$(which llvm-symbolizer-3.6)
 export ASAN_SYMBOLIZER_PATH
 
 # Big boys use big history
@@ -156,7 +159,6 @@ alias gcc='gcc -std=c11'
 alias gccf='gcc -std=c11 -Wall -Wextra -Werror'
 alias gcc99='gcc -std=c99 -Wall -Wextra -Werror'
 alias pp='clang++ -Wall -Werror -Wextra -Wpedantic -O2'
-alias clang=clang-3.5
 alias l='ls'
 alias ll='ls -l'
 alias la='ls -lA'
@@ -179,6 +181,9 @@ alias se="sudo emacs24 -nw"
 alias loc="sh ~/loc.sh"
 alias ht='cd /var/www/html/'
 alias ap='cd /var/www/html/fuel/app/'
+alias ocaml='rlwrap ocaml'
+alias py='python3'
+alias copy='xsel --clipboard'
 
 # typo alias
 alias xs='. ~/tab_cd.sh'

@@ -6,11 +6,11 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2015/04/26 16:54:03 by mcanal            #+#    #+#              ;
-;    Updated: 2015/09/24 00:03:14 by mcanal           ###   ########.fr        ;
+;    Updated: 2016/01/19 20:28:07 by mcanal           ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
-; Load general features files
+;external config
 (setq config_files "~/emacs_stuff/site-lisp/")
 (setq load-path (append (list nil config_files) load-path))
 
@@ -24,24 +24,19 @@
 (require 'auto-complete)
 (require 'auto-complete-config)
 (require 'scala-mode2)
+(require 'tuareg)
+(require 'highlight-chars)
 ;(require 'fuzzy)
 ;(require 'php-mode)
 ;(require 'popup)
 ;(require 'flyspell)
 ;(require 'auto-complete-c-headers)
+;(setq package-archives '(("melpa" . "http://melpa.org/packages/")))
 
-; Set default emacs configuration
+;encoding
 (set-language-environment "UTF-8")
-(setq-default font-lock-default-modes t)
-;(setq-default line-number-mode ())
-(setq-default tab-width 4)
-(setq-default indent-tabs-mode t)
-(bind-key* (kbd "DEL") 'backward-delete-char)
-(setq-default c-backspace-function 'backward-delete-char)
-(setq-default c-basic-offset 4)
-(c-set-offset 'inclass '+) ;++ me for c++ only please :O
-(c-set-offset 'case-label '+)
-(setq-default c-default-style "linux")
+
+;extensions handling
 (add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.css\\'" . web-mode))
@@ -49,38 +44,70 @@
 (add-to-list 'auto-mode-alist '("\\.tpp\\'" . c++-mode))
 (add-to-list 'auto-mode-alist '("\\.cpp\\'" . c++-mode))
 (add-to-list 'auto-mode-alist '("\\.jvm\\'" . scala-mode))
-(setq-default tab-stop-list '(4 8 12 16 20 24 28 32 36 40 44 48 52 56 60
-                             64 68 72 76 80 84 88 92 96 100 104 108 112 116 120))
+(add-to-list 'auto-mode-alist '("\\.ml\\'" . tuareg-mode))
+(add-to-list 'auto-mode-alist '("\\.mli\\'" . tuareg-mode))
+(add-to-list 'auto-mode-alist '("\\.\\(?:cap\\|gemspec\\|irbrc\\|gemrc\\|rake\\|rb\\|ru\\|thor\\)\\'" . ruby-mode))
+(add-to-list 'auto-mode-alist '("\\(?:Brewfile\\|Capfile\\|Gemfile\\(?:\\.[a-zA-Z0-9._-]+\\)?\\|[rR]akefile\\)\\'" . ruby-mode))
 
-;scala
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(gud-gdb-command-name "gdb --annotate=1")
- '(irony-server-build-dir nil)
- '(large-file-warning-threshold nil)
- '(scala-font-lock:constant-list nil)
- '(scala-indent:step 4))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+;indentation
+(setq-default c-basic-offset 4)
+(setq-default c-default-style "linux")
+(setq-default tab-width 4)
+(setq-default indent-tabs-mode t)
+(setq-default tab-stop-list '(4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64 68 72 76 80 84 88 92 96 100 104 108 112 116 120))
 
-;color zboubing
-;(set-face-foreground 'font-lock-comment-face "SteelBlue")
+;del key workaround
+(global-set-key (kbd "DEL") 'backward-delete-char)
+(setq-default c-backspace-function 'backward-delete-char)
+
+;color
 (set-face-foreground 'font-lock-string-face "#E6C28F")
-;(set-face-foreground 'font-lock-keyword-face "darkorange")
-;(set-face-foreground 'font-lock-type-face "yellow")
 (set-face-foreground 'font-lock-function-name-face "royal blue")
 (set-face-foreground 'font-lock-variable-name-face "orange")
 (set-face-foreground 'font-lock-builtin-face "magenta")
-;(set-face-foreground 'font-lock-constant-face "cornflowerblue")
-;(set-face-foreground 'font-lock-warning-face "red")
 
+;col/line number
+(column-number-mode 1)
+(setq linum-format "%3d ")
+
+;backup
+(setq backup-directory-alist `((".*" . ,"~/emacs_stuff/backup")))
+(setq auto-save-file-name-transforms `((".*" ,"~/emacs_stuff/backup" t)))
+(setq kept-new-versions 42)
+(setq kept-old-versions 42)
+(setq version-control t)
+
+;C hook
+(add-hook 'c-mode-hook
+		  (lambda()
+			;highlighting
+			(hc-highlight-trailing-whitespace)
+			(highlight-lines-matching-regexp ".\\{81\\}" 'hi-red-b)
+			;; (highlight-regexp "{\n\\(.*\n\\)\\{26,\\}}\n\\(\n\\|\\'\\)" 'hi-red-b)
+			;TODO: catch unspaced operator
+			(highlight-regexp "  +")
+			(highlight-regexp "( ")
+			(highlight-regexp " )")
+			(highlight-regexp " ]")
+			(highlight-regexp "[ ")
+			(highlight-regexp "if(")
+			(highlight-regexp "while(")
+			(highlight-regexp "return(")
+			(highlight-regexp "return;")
+			(highlight-regexp "break;")
+			(highlight-regexp "continue;")
+			(highlight-regexp "\t ")
+			(highlight-regexp " \t")
+			;; (highlight-regexp "\n\n\n+")
+			
+
+			;indentation fix (struct/switch)
+			(c-set-offset 'inclass '+) ;++ me for c++ only please :O
+			(c-set-offset 'case-label '+)
+		  )
+)
+
+;web hook
 (defun my-web-mode-hook ()
   "Hooks for Web mode."
  (set-face-attribute 'web-mode-html-tag-bracket-face nil :foreground "green")
@@ -90,16 +117,16 @@
 )
 (add-hook 'web-mode-hook  'my-web-mode-hook)
 
+;scala
+(custom-set-variables
+ '(gud-gdb-command-name "gdb --annotate=1")
+ '(irony-server-build-dir nil)
+ '(large-file-warning-threshold nil)
+ '(scala-font-lock:constant-list nil)
+ '(scala-indent:step 4)
+)
 
-; Custom adds
-(column-number-mode 1)
-(line-number-mode 1)
-(setq linum-format "%3d ")
-(setq backup-directory-alist (list (cons "." "~/emacsbackups/")))
-(transient-mark-mode t)
-(setq make-backup-files ())
-(add-hook 'prog-mode-hook #'hs-minor-mode)
-;(add-hook 'emacs-startup-hook 'toggle-window-split)
+;window splitting at launch
 (setq split-height-threshold 25)
 (setq split-width-threshold 80)
 
@@ -107,20 +134,11 @@
 (ac-config-default)
 (set-default 'ac-sources
 			 '(
-;			   ac-source-semantic
-;			   ac-source-yasnippet
-;			   ac-source-abbrev
 			   ac-source-dictionary
 			   ac-source-words-in-same-mode-buffers
-;			   ac-source-imenu
-;			   ac-source-files-in-current-dir
-;			   ac-source-filename
 			   ))
-;(setq ac-auto-start 2)         ;; 2
 (setq ac-delay 0)              ;; 0.1
 (setq ac-auto-show-menu 0.4)     ;; 0.8
-;(setq ac-quick-help-delay 0.6) ;; 1.5
-;(setq ac-use-fuzzy 1)
 (setq ac-fuzzy-cursor-color 'color-160)
 (add-hook 'auto-complete-mode-hook
           (lambda()
@@ -132,22 +150,16 @@
 		(define-key ac-completing-map [up] nil)
 	    ))
 
-;flyspell
-;(autoload 'flyspell-mode "flyspell" "On-the-fly spelling checker." t)
-;(autoload 'flyspell-delay-command "flyspell" "Delay on command." t)
-;(autoload 'tex-mode-flyspell-verify "flyspell" "" t) 
-;(add-hook 'c-mode-hook (lambda ()
-; (flyspell-prog-mode) (flyspell-issue-message-flag nil)
-; ))
-;(add-hook 'c++-mode-hook (lambda ()
-; (flyspell-prog-mode) (flyspell-issue-message-flag nil)
-; ))
-;(ac-flyspell-workaround)
-
 ;mouse scrolling workaround
 ;(xterm-mouse-mode 1)
 (bind-key* (kbd "<mouse-4>") 'previous-line)
 (bind-key* (kbd "<mouse-5>") 'next-line)
+
+;selecting region with shift
+(transient-mark-mode t) ;??
+
+;hide/show mod
+(add-hook 'prog-mode-hook #'hs-minor-mode)
 
 ;unbinds
 (add-hook 'c++-mode-hook
@@ -205,17 +217,6 @@
 (bind-key* (kbd "<M-right>")  'hs-show-all)
 (bind-key* (kbd "M-s") 'shell-that)
 (bind-key* (kbd "M-d") 'compile)
-
-;(bind-key* [(kp-0)] 'global-linum-mode)
-;(bind-key* (kbd "1") 'set-mark-command)
-;(bind-key* (kbd "2") 'other-window)
-;(bind-key* (kbd "3") 'find-file)
-;(bind-key* (kbd "4") 'mainarg) ;custom
-;(bind-key* (kbd "5") 'main) ;custom
-;(bind-key* (kbd "6") 'kill-paragraph)
-;(bind-key* (kbd "7") 'transpose-chars)
-;(bind-key* (kbd "8") 'transpose-words)
-;(bind-key* (kbd "9") 'transpose-line)
 (bind-key* (kbd "M-&") 'par) ;custom
 (bind-key* (kbd "M-é") 'cro) ;custom
 (bind-key* (kbd "M-\"") 'aco) ;custom
@@ -236,22 +237,21 @@
 (defun par()
   "par"
   (interactive)
-  (insert "(")
-  (insert ")")
+  (insert "()")
   (backward-char 1)
 )
 
 (defun cro()
   "cro"
   (interactive)
-  (insert "[")
-  (insert "]")
+  (insert "[]")
   (backward-char 1)
 )
 
 (defun aco()
   "ac"
   (interactive)
+  (move-end-of-line 1)
   (insert "\n{")
   (indent-for-tab-command)
   (insert "\n\n}")
@@ -263,24 +263,21 @@
 (defun guigui()
   "guigui"
   (interactive)
-  (insert "\"")
-  (insert "\"")
+  (insert "\"\"")
   (backward-char 1)
 )
 
 (defun gui()
   "gui"
   (interactive)
-  (insert "\'")
-  (insert "\'")
+  (insert "\'\'")
   (backward-char 1)
 )
 
 (defun inc()
   "inc"
   (interactive)
-  (insert "<")
-  (insert ">")
+  (insert "<>")
   (backward-char 1)
   )
 
@@ -330,15 +327,16 @@
 (defun comment()
   "comment"
   (interactive)
-  (insert "//")
-  (backward-char 2)
+  (comment-or-uncomment-region (line-beginning-position) (line-end-position))
 )
 
 (defun debug()
   "debug"
   (interactive)
-  (insert " //debug")
-  (backward-char 8)
+  (point-to-register 'm)
+  (comment-dwim nil)
+  (insert "debug")
+  (jump-to-register 'm)
 )
 
 (defun hpp-template(class)
@@ -558,7 +556,9 @@
   (jump-to-register 'o)
   (replace-string "\t\t\n" "\n")
   (jump-to-register 'o)
-  (replace-string "\tint " "\tint\t")
+  (replace-string "\t " "\t")
+  (jump-to-register 'o)
+  (replace-string " \t" "\t")
   (jump-to-register 'o)
   (replace-string "int\t " "int\t\t")
   (jump-to-register 'o)
@@ -571,6 +571,10 @@
   (replace-string "static double " "static double\t")
   (jump-to-register 'o)
   (replace-string "static t_lst " "static t_lst\t")
+  (jump-to-register 'o)
+  (replace-string "static t_list " "static t_list\t")
+  (jump-to-register 'o)
+  (replace-string "static t_bool " "static t_bool\t")
   (jump-to-register 'o)
   (replace-string "static size_t " "static size_t\t")
   (jump-to-register 'o)
@@ -589,6 +593,10 @@
   (replace-string "\ndouble " "\ndouble\t")
   (jump-to-register 'o)
   (replace-string "\nt_lst " "\nt_lst\t")
+  (jump-to-register 'o)
+  (replace-string "\nt_list " "\nt_list\t")
+  (jump-to-register 'o)
+  (replace-string "\nt_bool " "\nt_bool\t")
   (jump-to-register 'o)
   (replace-string "\nsize_t " "\nsize_t\t")
   (jump-to-register 'o)
@@ -624,5 +632,3 @@
   (setq whitespace-auto-cleanup t)
 ; (whitespace-global-mode 1)
 )
-
-;*******************************************************************************;

@@ -1,0 +1,14 @@
+clear control
+clear mod1
+clear mod4
+keycode 133 = Alt_L Meta_L
+keycode 64 = Control_L
+keycode 134 = Alt_R Meta_R
+add control = Control_L Control_R
+add mod1 = Alt_L Meta_L Alt_R Meta_R
+keycode 49 = less greater
+remove lock = Caps_Lock
+keysym Caps_Lock = ydiaeresis oslash
+keycode 191 = Cyrillic_zhe Cyrillic_ZHE
+keycode 192 = Cyrillic_ef Cyrillic_EF
+keycode 193 = Cyrillic_shorti Cyrillic_SHORTI
