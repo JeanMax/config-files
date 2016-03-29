@@ -6,12 +6,13 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2015/04/26 16:54:03 by mcanal            #+#    #+#              ;
-;    Updated: 2016/01/19 20:28:07 by mcanal           ###   ########.fr        ;
+;    Updated: 2016/03/29 02:28:57 by mcanal           ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
 ;external config
-(setq config_files "~/emacs_stuff/site-lisp/")
+;; (setq config_files "~/emacs_stuff/site-lisp/")
+(setq config_files "~/.emacs.d/stuff")
 (setq load-path (append (list nil config_files) load-path))
 
 (require 'list)
@@ -19,25 +20,39 @@
 (require 'comments)
 (require 'header)
 (require 'bind-key)
+(require 'highlight-chars)
 (require 'yasnippet)
-(require 'web-mode)
 (require 'auto-complete)
 (require 'auto-complete-config)
-(require 'scala-mode2)
-(require 'tuareg)
-(require 'highlight-chars)
+;; (require 'scala-mode2)
+;; (require 'tuareg)
+;; (require 'web-mode)
+(require 'php-mode)
+
 ;(require 'fuzzy)
-;(require 'php-mode)
 ;(require 'popup)
 ;(require 'flyspell)
 ;(require 'auto-complete-c-headers)
-;(setq package-archives '(("melpa" . "http://melpa.org/packages/")))
+
+;; (require 'package)
+;; (add-to-list 'package-archives 
+             ;; '("marmalade" . "http://marmalade-repo.org/packages/") t)
+;; (add-to-list 'package-archives
+             ;; '("mepla" . "http://melpa.org/packages/") t)
+;; (package-initialize)
+
+
+
+;; (global-flycheck-mode)
+(add-hook 'after-init-hook #'global-flycheck-mode)
+
 
 ;encoding
 (set-language-environment "UTF-8")
 
 ;extensions handling
-(add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
+;(add-to-list 'auto-mode-alist '("\\.php\\'" . php-mode))
+;(add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.css\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.hpp\\'" . c++-mode))
@@ -71,11 +86,12 @@
 (setq linum-format "%3d ")
 
 ;backup
-(setq backup-directory-alist `((".*" . ,"~/emacs_stuff/backup")))
-(setq auto-save-file-name-transforms `((".*" ,"~/emacs_stuff/backup" t)))
+(setq backup-directory-alist `((".*" . ,"~/.emacs.d/backup")))
+(setq auto-save-file-name-transforms `((".*" ,"~/.emacs.d/backup" t)))
 (setq kept-new-versions 42)
 (setq kept-old-versions 42)
 (setq version-control t)
+
 
 ;C hook
 (add-hook 'c-mode-hook
@@ -84,20 +100,19 @@
 			(hc-highlight-trailing-whitespace)
 			(highlight-lines-matching-regexp ".\\{81\\}" 'hi-red-b)
 			;; (highlight-regexp "{\n\\(.*\n\\)\\{26,\\}}\n\\(\n\\|\\'\\)" 'hi-red-b)
-			;TODO: catch unspaced operator
-			(highlight-regexp "  +")
-			(highlight-regexp "( ")
-			(highlight-regexp " )")
-			(highlight-regexp " ]")
-			(highlight-regexp "[ ")
+
+			;; (highlight-phrase "^[^#/].*  +")
+			;; (highlight-regexp "\[([\][[:space:]]")
+			;; (highlight-regexp "[[:space:]]\[])\]")
+
+			(highlight-regexp "\t ")
+			(highlight-regexp " \t")
 			(highlight-regexp "if(")
 			(highlight-regexp "while(")
 			(highlight-regexp "return(")
 			(highlight-regexp "return;")
 			(highlight-regexp "break;")
 			(highlight-regexp "continue;")
-			(highlight-regexp "\t ")
-			(highlight-regexp " \t")
 			;; (highlight-regexp "\n\n\n+")
 			
 
@@ -119,12 +134,16 @@
 
 ;scala
 (custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(flycheck-clang-include-path (quote ("../inc")))
  '(gud-gdb-command-name "gdb --annotate=1")
  '(irony-server-build-dir nil)
  '(large-file-warning-threshold nil)
  '(scala-font-lock:constant-list nil)
- '(scala-indent:step 4)
-)
+ '(scala-indent:step 4))
 
 ;window splitting at launch
 (setq split-height-threshold 25)
@@ -189,7 +208,7 @@
 (bind-key* [(f9)] 'isearch-forward)
 (bind-key* (kbd "<C-f9>") 'transpose-chars)
 (bind-key* [(f10)] 'query-replace)
-(bind-key* (kbd "<C-f10>") 'transpose-words)
+(bind-key* (kbd "<C-f10>") 'query-replace-regexp)
 (bind-key* [(f11)] 'save-buffer)
 (bind-key* (kbd "<C-f11>") 'transpose-lines)
 (bind-key* [(f12)] 'save-buffers-kill-emacs)

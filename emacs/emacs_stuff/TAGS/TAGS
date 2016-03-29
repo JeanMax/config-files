@@ -1,41 +1,0 @@
-
-redirection/simple_pipe.c,59
-static void		fork_that(22,983
-void			simple_pipe(52,1504
-
-redirection/double_right.c,136
-static void	check_error(20,975
-static char	**check_cmd(check_cmd43,1365
-static int			is_ambiguous(72,1775
-void	doble_right(88,2040
-
-redirection/double_left.c,166
-static void			fork_that(21,973
-static int			get_that_line(50,1482
-static void			get_text(78,2002
-static void			compress_cmd(102,2454
-void				doble_left(119,2773
-
-redirection/semicolon.c,23
-void	semicolon(19,970
-
-redirection/redirection.c,22
-void	redirect(19,967
-
-redirection/space_error.c,201
-static int	spaces_error_aux_b(22,1119
-static void	spaces_error_aux_a(35,1398
-static void	del_multi(65,2012
-static char	**check_multi(check_multi75,2218
-char		**spaces_error(spaces_error102,2531
-
-redirection/simple_right.c,136
-static void	check_error(20,978
-static char	**check_cmd(check_cmd43,1366
-static int	is_ambiguous(72,1775
-void		simple_right(88,2043
-
-redirection/simple_left.c,94
-static void		fork_that(22,999
-static void		compress_cmd(51,1507
-void			simple_left(68,1824
