@@ -6,7 +6,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2015/04/26 16:54:03 by mcanal            #+#    #+#              ;
-;    Updated: 2016/03/29 02:28:57 by mcanal           ###   ########.fr        ;
+;    Updated: 2016/07/25 16:27:51 by mcanal           ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -18,7 +18,7 @@
 (require 'list)
 (require 'string)
 (require 'comments)
-(require 'header)
+;; (require 'header)
 (require 'bind-key)
 (require 'highlight-chars)
 (require 'yasnippet)
@@ -26,7 +26,7 @@
 (require 'auto-complete-config)
 ;; (require 'scala-mode2)
 ;; (require 'tuareg)
-;; (require 'web-mode)
+(require 'web-mode)
 (require 'php-mode)
 
 ;(require 'fuzzy)
@@ -47,6 +47,10 @@
 (add-hook 'after-init-hook #'global-flycheck-mode)
 
 
+;;IMPORTANT stuff
+(setq tetris-score-file "~/.emacs.d/tetris-scores")
+(setq tetris-score-file "~/.emacs.d/snake-scores")
+
 ;encoding
 (set-language-environment "UTF-8")
 
@@ -54,6 +58,7 @@
 ;(add-to-list 'auto-mode-alist '("\\.php\\'" . php-mode))
 ;(add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.twig\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.css\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.hpp\\'" . c++-mode))
 (add-to-list 'auto-mode-alist '("\\.tpp\\'" . c++-mode))
@@ -86,11 +91,11 @@
 (setq linum-format "%3d ")
 
 ;backup
-(setq backup-directory-alist `((".*" . ,"~/.emacs.d/backup")))
-(setq auto-save-file-name-transforms `((".*" ,"~/.emacs.d/backup" t)))
-(setq kept-new-versions 42)
-(setq kept-old-versions 42)
-(setq version-control t)
+ (setq backup-directory-alist `((".*" . ,"~/.emacs.d/backup")))
+ (setq auto-save-file-name-transforms `((".*" ,"~/.emacs.d/backup" t)))
+ (setq kept-new-versions 42)
+ (setq kept-old-versions 42)
+ (setq version-control t)
 
 
 ;C hook
@@ -98,7 +103,7 @@
 		  (lambda()
 			;highlighting
 			(hc-highlight-trailing-whitespace)
-			(highlight-lines-matching-regexp ".\\{81\\}" 'hi-red-b)
+			;; (highlight-lines-matching-regexp ".\\{81\\}" 'hi-red-b)
 			;; (highlight-regexp "{\n\\(.*\n\\)\\{26,\\}}\n\\(\n\\|\\'\\)" 'hi-red-b)
 
 			;; (highlight-phrase "^[^#/].*  +")
@@ -110,9 +115,9 @@
 			(highlight-regexp "if(")
 			(highlight-regexp "while(")
 			(highlight-regexp "return(")
-			(highlight-regexp "return;")
-			(highlight-regexp "break;")
-			(highlight-regexp "continue;")
+			;; (highlight-regexp "return;")
+			;; (highlight-regexp "break;")
+			;; (highlight-regexp "continue;")
 			;; (highlight-regexp "\n\n\n+")
 			
 
@@ -132,18 +137,84 @@
 )
 (add-hook 'web-mode-hook  'my-web-mode-hook)
 
-;scala
+;;erc
+(setq erc-save-buffer-on-part t)
+
+;ibuffer
+(setq ibuffer-saved-filter-groups
+	   '(("home"
+			("mail" (or
+                            (mode . message-mode)
+                            (mode . bbdb-mode)
+                            (mode . mail-mode)
+                            (mode . gnus-group-mode)
+                            (mode . gnus-summary-mode)
+                            (mode . gnus-article-mode)
+                            (name . "^\\.bbdb$")
+                            (name . "^\\.newsrc-dribble")))
+			("irc" (mode . erc-mode))
+			("*.*" (name . "^\*.*\*$"))
+			("dir" (mode . dired-mode)))))
+(add-hook 'ibuffer-mode-hook
+		    '(lambda ()
+			        (ibuffer-switch-to-saved-filter-groups "home")))
+(setq ibuffer-expert t)
+(add-hook 'ibuffer-mode-hook
+		    '(lambda ()
+			        (ibuffer-auto-mode 1)
+					     (ibuffer-switch-to-saved-filter-groups "home")))
+;; Use human readable Size column instead of original one
+(define-ibuffer-column size-h
+  (:name "Size")
+  (cond
+   ((> (buffer-size) 1000000) (format "%7.1fM" (/ (buffer-size) 1000000.0)))
+   ((> (buffer-size) 100000) (format "%7.0fk" (/ (buffer-size) 1000.0)))
+   ((> (buffer-size) 1000) (format "%7.1fk" (/ (buffer-size) 1000.0)))
+   (t (format "%8d" (buffer-size)))))
+
+;; Modify the default ibuffer-formats
+  (setq ibuffer-formats
+		'((mark modified read-only " "
+				(name 18 18 :left :elide)
+				" "
+				(size-h 9 -1 :right)
+				" "
+				(mode 16 16 :left :elide)
+				" "
+				filename-and-process)))
+
+
+;gnus (account infos in .authinfo)
+(setq gnus-select-method
+      '(nnimap "gmail"
+			          (nnimap-address "imap.gmail.com")
+					         (nnimap-server-port "imaps")
+							        (nnimap-stream ssl)))
+(setq smtpmail-smtp-service 587
+      gnus-ignored-newsgroups "^to\\.\\|^[0-9. ]+\\( \\|$\\)\\|^[\"]\"[#'()]")
+
+
+;vars
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(flycheck-clang-include-path (quote ("../inc")))
+ '(diff-hl-flydiff-mode nil)
+ '(diff-hl-highlight-function nil)
+ '(diff-hl-margin-mode t)
+ '(erc-log-channels-directory "~/.emacs.d/erc-log")
+ '(erc-nick "JeanMax")
+ '(erc-track-exclude-types (quote ("JOIN" "NICK" "PART" "QUIT" "MODE" "333" "353")))
+ '(erc-track-mode t)
+ '(flycheck-clang-include-path (quote ("../inc" "../../inc" "../libft/inc/" "../../libft/inc/")))
  '(gud-gdb-command-name "gdb --annotate=1")
+ '(ibuffer-fontification-alist (quote ((10 buffer-read-only font-lock-constant-face) (15 (and buffer-file-name (string-match ibuffer-compressed-file-name-regexp buffer-file-name)) font-lock-doc-face) (20 (string-match "^*" (buffer-name)) font-lock-keyword-face) (25 (and (string-match "^ " (buffer-name)) (null buffer-file-name)) italic) (30 (memq major-mode ibuffer-help-buffer-modes) font-lock-comment-face) (35 (eq major-mode (quote dired-mode)) font-lock-function-name-face) (12 (eq major-mode (quote erc-mode)) font-lock-type-face))))
  '(irony-server-build-dir nil)
  '(large-file-warning-threshold nil)
  '(scala-font-lock:constant-list nil)
- '(scala-indent:step 4))
+ '(scala-indent:step 4)
+ '(woman-locale "en_US.UTF-8"))
 
 ;window splitting at launch
 (setq split-height-threshold 25)
@@ -169,6 +240,26 @@
 		(define-key ac-completing-map [up] nil)
 	    ))
 
+; diff-hl
+(add-hook 'dired-mode-hook 'diff-hl-dired-mode)
+(setq diff-hl-mode 1)
+
+;; Customizing colors used in diff mode
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(Man-overstrike ((t (:inherit bold :foreground "brightred"))))
+ '(Man-underline ((t (:inherit bold :foreground "brightgreen"))))
+ '(diff-added ((t (:foreground "green"))))
+ '(diff-changed ((t (:foreground "purple"))))
+ '(diff-hl-change ((t (:background "color-130" :foreground "white"))))
+ '(diff-hl-dired-change ((t (:inherit diff-hl-change :foreground "red"))))
+ '(diff-removed ((t (:foreground "red"))))
+ '(match ((t (:inherit bold :foreground "brightred")))))
+
+
 ;mouse scrolling workaround
 ;(xterm-mouse-mode 1)
 (bind-key* (kbd "<mouse-4>") 'previous-line)
@@ -185,6 +276,8 @@
           (lambda()
             (local-unset-key (kbd "M-q"))))
 (global-unset-key (kbd "M-q"))
+(defalias 'yes-or-no-p 'y-or-n-p)
+(defalias 'list-buffers 'ibuffer-other-window)
 
 ;binds
 (bind-key* [(meta g)] 'goto-line)
@@ -211,9 +304,9 @@
 (bind-key* (kbd "<C-f10>") 'query-replace-regexp)
 (bind-key* [(f11)] 'save-buffer)
 (bind-key* (kbd "<C-f11>") 'transpose-lines)
-(bind-key* [(f12)] 'save-buffers-kill-emacs)
-(bind-key* [(up)] 'previous-line)
-(bind-key* [(down)] 'next-line)
+(bind-key* [(f12)] 'save-buffers-kill-terminal)
+;; (bind-key* [(up)] 'previous-line)
+;; (bind-key* [(down)] 'next-line)
 (bind-key* (kbd "M-i") 'previous-line)
 (bind-key* (kbd "M-j") 'backward-char)
 (bind-key* (kbd "M-k") 'next-line)
@@ -246,12 +339,17 @@
 (bind-key* "\C-c\C-g" 'headcomment) ;custom
 (bind-key* "M-q" 'comment) ;custom
 (bind-key* "\C-q" 'debug) ;custom
-(bind-key* "\C-g" 'indent-buffer) ;custom
+(bind-key* "\C-i" 'indent-buffer) ;custom
 ;(bind-key* (kbd "M-h") 'hpp-template) ;custom
 ;(bind-key* (kbd "M-c") 'cpp-template) ;custom
-(bind-key* (kbd "M-c") 'cpp-get-set-template) ;custom
-(bind-key* (kbd "M-h") 'hpp-get-set-template) ;custom
-(bind-key* (kbd "M-w") 'compile)
+;; (bind-key* (kbd "M-c") 'cpp-get-set-template) ;custom
+;; (bind-key* (kbd "M-h") 'hpp-get-set-template) ;custom
+;; (bind-key* (kbd "M-w") 'compile) ;M-d
+(bind-key* (kbd "M-v") 'vc-dir)
+(bind-key* "\C-c\C-d" 'diff-hl-margin-mode)
+(bind-key* (kbd "C-x f") 'find-file)
+(bind-key* (kbd "C-x C-f") 'find-file-other-window)
+;; (bind-key* (kbd "C-x C-b") 'ibuffer-other-window)
 
 (defun par()
   "par"
