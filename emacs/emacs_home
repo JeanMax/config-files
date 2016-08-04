@@ -28,6 +28,7 @@
 ;; (require 'tuareg)
 (require 'web-mode)
 (require 'php-mode)
+(require 'highlight-indent-guides)
 
 ;(require 'fuzzy)
 ;(require 'popup)
@@ -75,6 +76,7 @@
 (setq-default tab-width 4)
 (setq-default indent-tabs-mode t)
 (setq-default tab-stop-list '(4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64 68 72 76 80 84 88 92 96 100 104 108 112 116 120))
+(add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
 
 ;del key workaround
 (global-set-key (kbd "DEL") 'backward-delete-char)
@@ -96,7 +98,6 @@
  (setq kept-new-versions 42)
  (setq kept-old-versions 42)
  (setq version-control t)
-
 
 ;C hook
 (add-hook 'c-mode-hook
@@ -139,6 +140,20 @@
 
 ;;erc
 (setq erc-save-buffer-on-part t)
+(setq erc-autojoin-channels-alist
+  '((".*\\.freenode.net" "#emacs" "#trisquel")
+	(".*\\.synirc.net" "#d2bs")))
+(setq erc-keywords '("jean" "smurf"))
+(erc-match-mode)
+
+(defun ercs ()
+  "Connect to IRC."
+  (interactive)
+  (when (y-or-n-p "freenode? ")
+    (erc :server "irc.freenode.net" :port 6667 :nick "JeanMax"))
+  (when (y-or-n-p "synirc? ")
+    (erc :server "irc.synirc.net" :port 6667 :nick "Smurf")))
+
 
 ;ibuffer
 (setq ibuffer-saved-filter-groups
@@ -204,11 +219,13 @@
  '(diff-hl-highlight-function nil)
  '(diff-hl-margin-mode t)
  '(erc-log-channels-directory "~/.emacs.d/erc-log")
+ '(erc-modules (quote (autojoin button completion fill irccontrols keep-place list log match menu move-to-prompt netsplit networks noncommands readonly ring stamp track)))
  '(erc-nick "JeanMax")
  '(erc-track-exclude-types (quote ("JOIN" "NICK" "PART" "QUIT" "MODE" "333" "353")))
  '(erc-track-mode t)
  '(flycheck-clang-include-path (quote ("../inc" "../../inc" "../libft/inc/" "../../libft/inc/")))
  '(gud-gdb-command-name "gdb --annotate=1")
+ '(highlight-indent-guides-method (quote character))
  '(ibuffer-fontification-alist (quote ((10 buffer-read-only font-lock-constant-face) (15 (and buffer-file-name (string-match ibuffer-compressed-file-name-regexp buffer-file-name)) font-lock-doc-face) (20 (string-match "^*" (buffer-name)) font-lock-keyword-face) (25 (and (string-match "^ " (buffer-name)) (null buffer-file-name)) italic) (30 (memq major-mode ibuffer-help-buffer-modes) font-lock-comment-face) (35 (eq major-mode (quote dired-mode)) font-lock-function-name-face) (12 (eq major-mode (quote erc-mode)) font-lock-type-face))))
  '(irony-server-build-dir nil)
  '(large-file-warning-threshold nil)

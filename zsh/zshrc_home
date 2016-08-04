@@ -6,13 +6,13 @@
 #    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/23 17:38:59 by mcanal            #+#    #+#              #
-#    Updated: 2016/03/10 21:37:54 by mcanal           ###   ########.fr        #
+#    Updated: 2016/07/21 12:07:29 by mcanal           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # default editor
-EDITOR='/usr/bin/emacs24 -nw'
-export EDITOR
+export ALTERNATE_EDITOR=""
+export EDITOR="emacsclient -t"
 
 #ocaml shit
 . /home/mcanal/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
@@ -20,6 +20,11 @@ export EDITOR
 # Reglage du terminal
 TERM=xterm-256color
 echo -n "\033]0;$PWD\007";
+
+#mail
+export EMAIL="mc.maxcanal@gmail.com"
+export NAME="Max Canal"
+export SMTPSERVER="smtp.gmail.com"
 
 #clang debuging stuff
 ASAN_SYMBOLIZER_PATH=$(which llvm-symbolizer-3.6)
@@ -34,8 +39,11 @@ setopt HIST_EXPIRE_DUPS_FIRST
 stty -ixon #forward search with ^s
 #setopt EXTENDED_HISTORY
 
-# Correction de la touche Delete
+# Correction de la touche Delete / ctrl-left / ctrl-right
 bindkey "\e[3~"   delete-char
+bindkey "\e[1;5D" backward-word
+bindkey "\e[1;5C" forward-word
+bindkey "\e[3;5~" kill-word
 
 # Autocompletion de type menu
 autoload -U compinit && compinit
@@ -177,18 +185,22 @@ alias t='sh ~/sh_script/rename_tab.sh'
 alias re="make re;"
 alias gdb="gdb -quiet"
 alias sql="mysql -u root -p --silent"
-alias se="sudo emacs24 -nw"
+alias se="SUDO_EDITOR=\"emacsclient -t -a emacs\" sudoedit"
 alias loc="sh ~/sh_script/loc.sh"
 alias ht='cd /var/www/html/'
 alias ap='cd /var/www/html/fuel/app/'
 alias ocaml='rlwrap ocaml'
 alias py='python3'
 alias copy='xsel --clipboard'
+alias con='sudo php app/console'
+alias cs='sudo php-cs-fixer -vvv --level=symfony fix'
+alias server='cd /run/user/1000/gvfs/smb-share:server=freebox,share=disque%20dur/dev'
 
 # typo alias
 alias xs='. ~/sh_script/tab_cd.sh'
 alias vf='. ~/sh_script/tab_cd.sh'
 alias z='sh ~/sh_script/tab_emacs.sh'
+alias m='ls'
 alias ms='ls'
 alias lq='ls'
 alias ks='ls'

@@ -1,2 +1,5 @@
 emacs/emacs.d/backup
 emacs/emacs.d/auto-save-list
+emacs/emacs.d/erc-log
+emacs/emacs.d/\#\!*
+ssh
