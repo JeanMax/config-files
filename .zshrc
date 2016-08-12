@@ -6,13 +6,15 @@
 #    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/23 17:38:59 by mcanal            #+#    #+#              #
-#    Updated: 2016/07/21 12:07:29 by mcanal           ###   ########.fr        #
+#    Updated: 2016/08/11 16:17:56 by mcanal           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # default editor
 export ALTERNATE_EDITOR=""
 export EDITOR="emacsclient -t"
+EDITOR='/usr/local/bin/emacs'
+export EDITOR
 
 #ocaml shit
 . /home/mcanal/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
@@ -179,7 +181,8 @@ alias usb='cd /media/mcanal/Lexar/'
 alias del='mv -t ~/.local/share/Trash/files'
 alias zconf='e ~/.zshrc'
 alias econf='e ~/.emacs'
-alias e='sh ~/sh_script/tab_emacs.sh'
+# alias e='sh ~/sh_script/tab_emacs.sh'
+alias e='emacsclient -t'
 alias cd='. ~/sh_script/tab_cd.sh'
 alias t='sh ~/sh_script/rename_tab.sh'
 alias re="make re;"
@@ -194,13 +197,15 @@ alias py='python3'
 alias copy='xsel --clipboard'
 alias con='sudo php app/console'
 alias cs='sudo php-cs-fixer -vvv --level=symfony fix'
-alias server='cd /run/user/1000/gvfs/smb-share:server=freebox,share=disque%20dur/dev'
+alias sbcl='sbcl --noinform'
+alias cl='sbcl'
 
 # typo alias
 alias xs='. ~/sh_script/tab_cd.sh'
 alias vf='. ~/sh_script/tab_cd.sh'
-alias z='sh ~/sh_script/tab_emacs.sh'
+alias z='emacsclient -t'
 alias m='ls'
+alias k='ls'
 alias ms='ls'
 alias lq='ls'
 alias ks='ls'

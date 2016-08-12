@@ -22,7 +22,7 @@
 ;    By: login____ <mail_______@student.42.fr>      +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: yyyy/mm/dd 15:27:11 by login____         #+#    #+#              ;
-;    Updated: yyyy/mm/dd 15:27:11 by login____        ###   ########.fr        ;
+;    Updated: 2016/07/30 14:33:39 by mcanal           ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -253,7 +253,7 @@
     (if (buffer-modified-p)
         (progn
           (goto-char (point-min))
-          (if (search-forward "Updated" nil t)
+          (if (search-forward-regexp "Updated: [0-9]\\{4\\}/[0-9]\\{2\\}/[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}:[0-9]\\{2\\} by " nil t)
               (progn
                 (delete-region
                  (progn (beginning-of-line) (point))

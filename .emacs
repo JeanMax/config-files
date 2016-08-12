@@ -1,3 +1,4 @@
+
 ;******************************************************************************;
 ;                                                                              ;
 ;                                                         :::      ::::::::    ;
@@ -6,14 +7,17 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2015/04/26 16:54:03 by mcanal            #+#    #+#              ;
-;    Updated: 2016/07/25 16:27:51 by mcanal           ###   ########.fr        ;
+;    Updated: 2016/08/11 13:15:47 by mcanal           ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
 ;external config
 ;; (setq config_files "~/emacs_stuff/site-lisp/")
-(setq config_files "~/.emacs.d/stuff")
-(setq load-path (append (list nil config_files) load-path))
+;; (setq config_files "~/.emacs.d/stuff")
+;; (setq load-path (append (list nil config_files) load-path))
+
+;;; Code:
+(setq load-path (append (list nil "~/.emacs.d/stuff") load-path))
 
 (require 'list)
 (require 'string)
@@ -21,7 +25,7 @@
 ;; (require 'header)
 (require 'bind-key)
 (require 'highlight-chars)
-(require 'yasnippet)
+;; (require 'yasnippet)
 (require 'auto-complete)
 (require 'auto-complete-config)
 ;; (require 'scala-mode2)
@@ -29,20 +33,19 @@
 (require 'web-mode)
 (require 'php-mode)
 (require 'highlight-indent-guides)
+(require 'rx)
 
 ;(require 'fuzzy)
 ;(require 'popup)
 ;(require 'flyspell)
 ;(require 'auto-complete-c-headers)
 
-;; (require 'package)
-;; (add-to-list 'package-archives 
-             ;; '("marmalade" . "http://marmalade-repo.org/packages/") t)
-;; (add-to-list 'package-archives
-             ;; '("mepla" . "http://melpa.org/packages/") t)
-;; (package-initialize)
-
-
+(require 'package)
+(add-to-list 'package-archives
+	     '("marmalade" . "http://marmalade-repo.org/packages/") t)
+;;(add-to-list 'package-archives
+  ;;           '("mepla" . "http://melpa.org/packages/") t)
+(package-initialize)
 
 ;; (global-flycheck-mode)
 (add-hook 'after-init-hook #'global-flycheck-mode)
@@ -57,7 +60,7 @@
 
 ;extensions handling
 ;(add-to-list 'auto-mode-alist '("\\.php\\'" . php-mode))
-;(add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.twig\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.css\\'" . web-mode))
@@ -93,11 +96,11 @@
 (setq linum-format "%3d ")
 
 ;backup
- (setq backup-directory-alist `((".*" . ,"~/.emacs.d/backup")))
- (setq auto-save-file-name-transforms `((".*" ,"~/.emacs.d/backup" t)))
- (setq kept-new-versions 42)
- (setq kept-old-versions 42)
- (setq version-control t)
+(setq backup-directory-alist `((".*" . ,"~/.emacs.d/backup")))
+(setq auto-save-file-name-transforms `((".*" ,"~/.emacs.d/backup" t)))
+(setq kept-new-versions 42)
+(setq kept-old-versions 42)
+(setq version-control t)
 
 ;C hook
 (add-hook 'c-mode-hook
@@ -149,9 +152,9 @@
 (defun ercs ()
   "Connect to IRC."
   (interactive)
-  (when (y-or-n-p "freenode? ")
+  (when (y-or-n-p "Freenode? ")
     (erc :server "irc.freenode.net" :port 6667 :nick "JeanMax"))
-  (when (y-or-n-p "synirc? ")
+  (when (y-or-n-p "Synirc? ")
     (erc :server "irc.synirc.net" :port 6667 :nick "Smurf")))
 
 
@@ -209,30 +212,6 @@
       gnus-ignored-newsgroups "^to\\.\\|^[0-9. ]+\\( \\|$\\)\\|^[\"]\"[#'()]")
 
 
-;vars
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(diff-hl-flydiff-mode nil)
- '(diff-hl-highlight-function nil)
- '(diff-hl-margin-mode t)
- '(erc-log-channels-directory "~/.emacs.d/erc-log")
- '(erc-modules (quote (autojoin button completion fill irccontrols keep-place list log match menu move-to-prompt netsplit networks noncommands readonly ring stamp track)))
- '(erc-nick "JeanMax")
- '(erc-track-exclude-types (quote ("JOIN" "NICK" "PART" "QUIT" "MODE" "333" "353")))
- '(erc-track-mode t)
- '(flycheck-clang-include-path (quote ("../inc" "../../inc" "../libft/inc/" "../../libft/inc/")))
- '(gud-gdb-command-name "gdb --annotate=1")
- '(highlight-indent-guides-method (quote character))
- '(ibuffer-fontification-alist (quote ((10 buffer-read-only font-lock-constant-face) (15 (and buffer-file-name (string-match ibuffer-compressed-file-name-regexp buffer-file-name)) font-lock-doc-face) (20 (string-match "^*" (buffer-name)) font-lock-keyword-face) (25 (and (string-match "^ " (buffer-name)) (null buffer-file-name)) italic) (30 (memq major-mode ibuffer-help-buffer-modes) font-lock-comment-face) (35 (eq major-mode (quote dired-mode)) font-lock-function-name-face) (12 (eq major-mode (quote erc-mode)) font-lock-type-face))))
- '(irony-server-build-dir nil)
- '(large-file-warning-threshold nil)
- '(scala-font-lock:constant-list nil)
- '(scala-indent:step 4)
- '(woman-locale "en_US.UTF-8"))
-
 ;window splitting at launch
 (setq split-height-threshold 25)
 (setq split-width-threshold 80)
@@ -257,9 +236,17 @@
 		(define-key ac-completing-map [up] nil)
 	    ))
 
-; diff-hl
+;; git status in dired mode
 (add-hook 'dired-mode-hook 'diff-hl-dired-mode)
-(setq diff-hl-mode 1)
+(setq diff-hl-mode t)
+
+
+;selecting region with shift
+(transient-mark-mode t) ;??
+
+;hide/show mod
+(add-hook 'prog-mode-hook #'hs-minor-mode)
+
 
 ;; Customizing colors used in diff mode
 (custom-set-faces
@@ -274,19 +261,68 @@
  '(diff-hl-change ((t (:background "color-130" :foreground "white"))))
  '(diff-hl-dired-change ((t (:inherit diff-hl-change :foreground "red"))))
  '(diff-removed ((t (:foreground "red"))))
- '(match ((t (:inherit bold :foreground "brightred")))))
+ '(highlight-indent-guides-character-face ((t (:foreground "color-241"))))
+ '(match ((t (:inherit bold :foreground "brightred"))))
+ '(shr-strike-through ((t (:strike-through "red")))))
 
 
-;mouse scrolling workaround
-;(xterm-mouse-mode 1)
-(bind-key* (kbd "<mouse-4>") 'previous-line)
-(bind-key* (kbd "<mouse-5>") 'next-line)
-
-;selecting region with shift
-(transient-mark-mode t) ;??
-
-;hide/show mod
-(add-hook 'prog-mode-hook #'hs-minor-mode)
+;vars
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(diff-hl-highlight-function nil)
+ '(diff-hl-margin-mode t)
+ '(erc-log-channels-directory "~/.emacs.d/erc-log")
+ '(erc-modules
+   (quote
+	(autojoin button completion fill irccontrols keep-place list log match menu move-to-prompt netsplit networks noncommands readonly ring stamp track)))
+ '(erc-nick "JeanMax")
+ '(erc-track-exclude-types (quote ("JOIN" "NICK" "PART" "QUIT" "MODE" "333" "353")))
+ '(erc-track-mode t)
+ '(eww-search-prefix
+   "https://www.startpage.com/do/dsearch?cat=web&pl=opensearch&language=english&query=")
+ '(flycheck-clang-include-path
+   (quote
+	("../../../../../../../usr/include/SDL" "../inc" "../../inc" "../libft/inc" "../../libft/inc")))
+ '(flycheck-clang-warnings (quote ("all" "extra" "error")))
+ '(gud-gdb-command-name "gdb --annotate=1")
+ '(highlight-indent-guides-method (quote column))
+ '(ibuffer-fontification-alist
+   (quote
+	((10 buffer-read-only font-lock-constant-face)
+	 (15
+	  (and buffer-file-name
+		   (string-match ibuffer-compressed-file-name-regexp buffer-file-name))
+	  font-lock-doc-face)
+	 (20
+	  (string-match "^*"
+					(buffer-name))
+	  font-lock-keyword-face)
+	 (25
+	  (and
+	   (string-match "^ "
+					 (buffer-name))
+	   (null buffer-file-name))
+	  italic)
+	 (30
+	  (memq major-mode ibuffer-help-buffer-modes)
+	  font-lock-comment-face)
+	 (35
+	  (eq major-mode
+		  (quote dired-mode))
+	  font-lock-function-name-face)
+	 (12
+	  (eq major-mode
+		  (quote erc-mode))
+	  font-lock-type-face))))
+ '(irony-server-build-dir nil)
+ '(large-file-warning-threshold nil)
+ '(package-selected-packages (quote (yasnippet flylisp flycheck diff-hl company)))
+ '(scala-font-lock:constant-list nil)
+ '(scala-indent:step 4)
+ '(woman-locale "en_US.UTF-8"))
 
 ;unbinds
 (add-hook 'c++-mode-hook
@@ -296,8 +332,19 @@
 (defalias 'yes-or-no-p 'y-or-n-p)
 (defalias 'list-buffers 'ibuffer-other-window)
 
+;mouse scrolling workaround
+;(xterm-mouse-mode 1)
+(bind-key* (kbd "<mouse-4>") 'previous-line)
+(bind-key* (kbd "<mouse-5>") 'next-line)
+
 ;binds
-(bind-key* [(meta g)] 'goto-line)
+;; (bind-key* (kbd "<C-f4>") 'yank-pop)
+;; (bind-key* (kbd "<C-f5>") 'kill-paragraph)
+;; (bind-key* (kbd "<C-f6>") 'backward-delete-char)
+;; (bind-key* (kbd "<C-f7>") 'delete-char)
+;; (bind-key* (kbd "<C-f9>") 'transpose-chars)
+;; (bind-key* (kbd "<C-f10>") 'query-replace-regexp)
+;; (bind-key* (kbd "<C-f11>") 'transpose-lines)
 (bind-key* [(meta g)] 'goto-line)
 (bind-key* [(insertchar)] 'set-mark-command)
 ;(bind-key* [(backtab)] 'auto-complete)
@@ -307,23 +354,17 @@
 (bind-key* (kbd "<f2>") 'kill-region)
 (bind-key* (kbd "<f3>") 'kill-ring-save)
 (bind-key* (kbd "<f4>") 'yank)
-(bind-key* (kbd "<C-f4>") 'yank-pop)
 (bind-key* (kbd "<f5>") 'kill-line)
-(bind-key* (kbd "<C-f5>") 'kill-paragraph)
-(bind-key* [(f6)] 'backward-kill-word)
-(bind-key* (kbd "<C-f6>") 'backward-delete-char)
-(bind-key* [(f7)] 'kill-word)
-(bind-key* (kbd "<C-f7>") 'delete-char)
+;(bind-key* [(f6)] 'backward-kill-word)
+(bind-key* [(f6)] 'point-to-register)
+;(bind-key* [(f7)] 'kill-word)
+(bind-key* [(f7)] 'jump-to-register)
 (bind-key* [(f8)] 'undo)
 (bind-key* [(f9)] 'isearch-forward)
-(bind-key* (kbd "<C-f9>") 'transpose-chars)
 (bind-key* [(f10)] 'query-replace)
-(bind-key* (kbd "<C-f10>") 'query-replace-regexp)
 (bind-key* [(f11)] 'save-buffer)
 (bind-key* (kbd "<C-f11>") 'transpose-lines)
 (bind-key* [(f12)] 'save-buffers-kill-terminal)
-;; (bind-key* [(up)] 'previous-line)
-;; (bind-key* [(down)] 'next-line)
 (bind-key* (kbd "M-i") 'previous-line)
 (bind-key* (kbd "M-j") 'backward-char)
 (bind-key* (kbd "M-k") 'next-line)
@@ -345,6 +386,12 @@
 (bind-key* (kbd "<M-left>") 'hs-hide-all)
 (bind-key* (kbd "<M-right>")  'hs-show-all)
 (bind-key* (kbd "M-s") 'shell-that)
+(bind-key* (kbd "C-f") 'isearch-forward)
+(bind-key* (kbd "M-f") 'find-name-dired)
+(bind-key* (kbd "C-r") 'query-replace)
+(bind-key* (kbd "M-r") 'query-replace-regexp)
+(bind-key* (kbd "C-t") 'occur)
+(bind-key* (kbd "M-t") 'rgrep)
 (bind-key* (kbd "M-d") 'compile)
 (bind-key* (kbd "M-&") 'par) ;custom
 (bind-key* (kbd "M-é") 'cro) ;custom
@@ -357,6 +404,7 @@
 (bind-key* "M-q" 'comment) ;custom
 (bind-key* "\C-q" 'debug) ;custom
 (bind-key* "\C-i" 'indent-buffer) ;custom
+;;(bind-key* "\C-g" 'indent-buffer) ;custom
 ;(bind-key* (kbd "M-h") 'hpp-template) ;custom
 ;(bind-key* (kbd "M-c") 'cpp-template) ;custom
 ;; (bind-key* (kbd "M-c") 'cpp-get-set-template) ;custom
@@ -366,7 +414,8 @@
 (bind-key* "\C-c\C-d" 'diff-hl-margin-mode)
 (bind-key* (kbd "C-x f") 'find-file)
 (bind-key* (kbd "C-x C-f") 'find-file-other-window)
-;; (bind-key* (kbd "C-x C-b") 'ibuffer-other-window)
+;(bind-key* (kbd "\C-x\C-b") 'ibuffer-other-window)g
+(bind-key* (kbd "\C-c )") 'slime-close-all-parens-in-sexp)
 
 (defun par()
   "par"
@@ -455,7 +504,7 @@
   (newline)
   (insert "*/")
   (previous-line 2)
-  (forward-char 4)  
+  (forward-char 4)
 )
 
 (defun comment()
@@ -579,7 +628,7 @@
 )
 
 (defun shell-that ()
-  "shell splitted"
+  "Shell splitted."
   (interactive)
   (split-window-vertically)
   (next-multiframe-window)
@@ -587,7 +636,7 @@
 )
 
 (defun semi-c ()
-  "semi-colon at end of line, without moving!"
+  "Semi-colon at end of line, without moving!"
   (interactive)
   (point-to-register 'm)
   (move-end-of-line nil)
@@ -596,7 +645,7 @@
 )
 
 (defun stuff (class)
-  "Do stuffs."
+  "Stuffs with CLASS."
   (interactive "sClass name? ")
 ;  (find-file-other-window (concat class ".cpp"))
   (find-file-other-window (concat class ".class.cpp"))
@@ -616,7 +665,7 @@
 
 
 (defun indent-buffer ()
-  "Indents an entire buffer using the default intenting scheme."
+  "Indent an entire buffer using the default intenting scheme."
   (interactive)
   (point-to-register 's)
   (goto-line 12)
@@ -766,3 +815,4 @@
   (setq whitespace-auto-cleanup t)
 ; (whitespace-global-mode 1)
 )
+

@@ -1,5 +1,7 @@
-emacs/emacs.d/backup
-emacs/emacs.d/auto-save-list
-emacs/emacs.d/erc-log
-emacs/emacs.d/\#\!*
+.emacs.d/backup
+.emacs.d/auto-save-list
+.emacs.d/erc-log
+.emacs.d/\#\!*
+.emacs.d/url
+.emacs.d/ac-comphist.dat
 ssh
