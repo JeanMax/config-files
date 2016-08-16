@@ -18,7 +18,8 @@ TARGET=~
 TO_SAVE="sh_script
 .zshrc
 .emacs.d
-.Xmodmap"
+.Xmodmap
+.xbindkeysrc"
 
 BASIC="\033[0m"
 WHITE="\033[37;01m"
@@ -31,7 +32,7 @@ function backup {
 	DATE=$(date "+%y-%m-%d--%H-%M")
 	for i in $TO_SAVE; do
 		echo "$TARGET/$i -> $BACKUP_FOLDER/backup_$i@$DATE"
-		mv "$TARGET/$i" "$BACKUP_FOLDER/backup_$i@$DATE" || (echo -e "$TARGET/$i: "$RED"fail."$BASIC; exit 42)
+		mv "$TARGET/$i" "$BACKUP_FOLDER/backup_$i@$DATE" || echo -e "$TARGET/$i: "$RED"fail."$BASIC
 	done
 	echo
 }
