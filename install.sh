@@ -7,7 +7,7 @@
 #    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/11 14:03:35 by mcanal            #+#    #+#              #
-#    Updated: 2016/08/11 16:12:53 by mcanal           ###   ########.fr        #
+#    Updated: 2016/08/16 08:33:53 by mcanal           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 set -e
@@ -17,9 +17,8 @@ CONFIG_FOLDER=~/config-files
 TARGET=~
 TO_SAVE="sh_script
 .zshrc
-.emacs
 .emacs.d
-.xmodmap"
+.Xmodmap"
 
 BASIC="\033[0m"
 WHITE="\033[37;01m"

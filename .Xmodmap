@@ -1,0 +1,21 @@
+!Control_L
+remove Control = Control_L	
+!keycode 37 = ydiaeresis oslash NoSymbol
+keycode 37 = ISO_Level3_Shift NoSymbol ISO_Level3_Shift
+
+!capslock
+remove lock = Caps_Lock
+!keycode 66 = ydiaeresis oslash
+keycode 66 = Control_L	NoSymbol Control_L
+
+!winkey
+remove mod4 = Super_L Super_R
+keycode 133 = Control_L NoSymbol Control_L
+keycode 134 = Control_R NoSymbol Control_R
+add control = Control_L Control_R
+
+!menu key? the weird on the right
+keycode 135 = Alt_R Meta_R Alt_R Meta_R
+
+
+
