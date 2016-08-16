@@ -4,4 +4,5 @@
 .emacs.d/\#\!*
 .emacs.d/url
 .emacs.d/ac-comphist.dat
+.emacs.d/network-security.data
 ssh
