@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/15 15:31:08 by mcanal            #+#    #+#              ;
-;    Updated: 2016/08/17 09:12:46 by mcanal           ###   ########.fr        ;
+;    Updated: 2016/08/17 16:40:16 by mcanal           ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -29,23 +29,27 @@
 ;; auto-complete
 (add-hook 'auto-complete-mode-hook
           (lambda()
-			(local-set-key [(backtab)] 'auto-complete)
-			(define-key ac-menu-map [(next)] 'ac-next)
-			(define-key ac-menu-map [(prior)] 'ac-previous)
-			(define-key ac-completing-map [down] nil)
-			(define-key ac-completing-map [up] nil)
-			))
+            (local-set-key [(backtab)] 'auto-complete)
+            (define-key ac-menu-map [(next)] 'ac-next)
+            (define-key ac-menu-map [(prior)] 'ac-previous)
+            (define-key ac-completing-map [down] nil)
+            (define-key ac-completing-map [up] nil)
+            ))
 
-; cpp
+;; cpp
 (add-hook 'c++-mode-hook
           (lambda()
             (local-unset-key (kbd "M-q"))
-			;; (local-set-key (kbd "M-h") 'hpp-template) ; -> elisp-functions.el
-			;; (local-set-key (kbd "M-c") 'cpp-template) ; -> elisp-functions.el
-			;; (local-set-key (kbd "M-c") 'cpp-get-set-template) ; -> elisp-functions.el
-			;; (local-set-key (kbd "M-h") 'hpp-get-set-template)) ; -> elisp-functions.el
-			))
+            ;; (local-set-key (kbd "M-h") 'hpp-template) ; -> elisp-functions.el
+            ;; (local-set-key (kbd "M-c") 'cpp-template) ; -> elisp-functions.el
+            ;; (local-set-key (kbd "M-c") 'cpp-get-set-template) ; -> elisp-functions.el
+            ;; (local-set-key (kbd "M-h") 'hpp-get-set-template)) ; -> elisp-functions.el
+            ))
 
+;; dired
+(add-hook 'dired-mode-hook
+          (lambda()
+            (local-set-key (kbd "F") 'dired-find-files)))
 ;; move
 (bind-key* (kbd "M-i") 'previous-line)
 (bind-key* (kbd "M-j") 'backward-char)
@@ -112,21 +116,22 @@
 (bind-key* (kbd "C-c C-d") 'diff-hl-mode)
 (bind-key* (kbd "C-x f") 'find-file)
 (bind-key* (kbd "C-x C-f") 'find-file-other-window)
-(bind-key* (kbd "C-c C-b") 'erc-switch-to-buffer)
+;; (bind-key* (kbd "C-c C-b") 'erc-switch-to-buffer) ; C-c C-SPC
 (bind-key* (kbd "C-c )") 'slime-close-all-parens-in-sexp)
 (bind-key* (kbd "C-x c") 'copy-killring-to-clipboard) ; -> elisp-functions.el
 
 (bind-key* (kbd "æ") 'tab-to-tab-stop) ;Altgr a
 (bind-key* (kbd "¢") 'auto-complete-mode) ;Altgr c
 (bind-key* (kbd "ĸ") 'kill-paragraph) ;Altgr k
-(bind-key* (kbd "¶") 'transpose-chars) ;Altgr r
 (bind-key* (kbd "đ") 'ac-fuzzy-complete) ;Altgr f
 (bind-key* (kbd "ŧ") 'tags-make-n-visit) ;Altgr t/o -> elisp-functions.el
 (bind-key* (kbd "ŋ") 'xref-find-definitions-other-window) ;Altgr g ;find-tag-other-window
-;; (bind-key* (kbd "”") (lambda() (switch-to-buffer (other-buffer)))) ;Altgr b
+(bind-key* (kbd "”") 'mode-line-other-buffer) ;Altgr b
+(bind-key* (kbd "ß") 'ibuffer) ;Altgr s
 
 ;; something something transpose?
 
+;; (bind-key* (kbd "¶") 'transpose-chars) ;Altgr r
 ;; (bind-key* (kbd "“") 'free) ;Altgr v
 ;; (bind-key* (kbd "→") 'free) ;Altgr i
 ;; (bind-key* (kbd "ø") 'free) ;Altgr o

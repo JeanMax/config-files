@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2015/04/26 16:54:03 by mcanal            #+#    #+#              ;
-;    Updated: 2016/08/17 00:04:08 by mcanal           ###   ########.fr        ;
+;    Updated: 2016/08/17 17:11:23 by mcanal           ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -20,10 +20,10 @@
 (defconst initial-file-name-handler-alist file-name-handler-alist
   "Initial value of `file-name-handler-alist' at start-up time.")
 (add-hook 'after-init-hook '
-		  (lambda()
-			(setq gc-cons-threshold initial-gc-cons-threshold)
-			(setq file-name-handler-alist initial-file-name-handler-alist)
-			(message "Init-time: %s" (emacs-init-time))))
+          (lambda()
+            (setq gc-cons-threshold initial-gc-cons-threshold)
+            (setq file-name-handler-alist initial-file-name-handler-alist)
+            (message "Init-time: %s" (emacs-init-time))))
 (add-hook 'after-init-hook #'global-flycheck-mode)
 
 (setq gc-cons-threshold 134217728)
@@ -32,19 +32,19 @@
 ;; install the missing packages (be sure it matches package-selected-packages in custom-set-variables)
 (require 'package)
 (add-to-list 'package-archives
-			 '("marmalade" . "http://marmalade-repo.org/packages/") t)
+             '("marmalade" . "http://marmalade-repo.org/packages/") t)
 (add-to-list 'package-archives
-			 '("melpa" . "http://melpa.org/packages/") t)
+             '("melpa" . "http://melpa.org/packages/") t)
 (add-to-list 'package-archives
-			 '("gnu" . "http://elpa.gnu.org/packages/") t)
+             '("gnu" . "http://elpa.gnu.org/packages/") t)
 (package-initialize)
 (unless package-archive-contents
   (package-refresh-contents))
 (setq package-list
-	  '(diff-hl flycheck web-mode php-mode tuareg highlight-chars highlight-indent-guides bind-key auto-complete fuzzy ac-etags))
+      '(git-timemachine diff-hl flycheck web-mode php-mode tuareg highlight-indent-guides bind-key auto-complete fuzzy ac-etags))
 (dolist (package package-list)
   (unless (package-installed-p package)
-	(package-install package)))
+    (package-install package)))
 
 ;; external config
 (add-to-list 'load-path "~/.emacs.d/manually-installed/scala-mode2")
@@ -71,7 +71,7 @@
 ;; (setq *linux* (or (eq system-type 'gnu/linux) (eq system-type 'linux)))
 
 ;; function history (cf elisp-functions.el)
-(defvar tags-make-n-visit-history '("etags --regex='/.*\\(public\\|static\\|abstract\\|protected\\|private\\).*function.*(/' ~/Pliizz/src/**/*.php"))
+(defvar tags-make-n-visit-history '("--regex='/.*\\(public\\|static\\|abstract\\|protected\\|private\\).*function.*(/' ~/Pliizz/src/**/*.php"))
 (eval-after-load "savehist"
   '(add-to-list 'savehist-additional-variables 'tags-make-n-visit-history))
 (savehist-mode 1)
@@ -97,7 +97,7 @@
 (setq-default c-basic-offset 4)
 (setq-default c-default-style "linux")
 (setq-default tab-width 4)
-(setq-default indent-tabs-mode t)
+(setq-default indent-tabs-mode nil) ; set to true later for c-mode
 (setq-default tab-stop-list '(4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64 68 72 76 80 84 88 92 96 100 104 108 112 116 120))
 (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
 (setq fill-column 80)
@@ -121,44 +121,47 @@
 
 ;; C hook
 (add-hook 'c-mode-hook
-		  (lambda()
-			;; highlighting
-			(hc-highlight-trailing-whitespace)
-			;; (highlight-lines-matching-regexp ".\\{81\\}" 'hi-red-b)
-			;; (highlight-regexp "{\n\\(.*\n\\)\\{26,\\}}\n\\(\n\\|\\'\\)" 'hi-red-b)
-			;; (highlight-phrase "^[^#/].*  +")
-			;; (highlight-regexp "\[([\][[:space:]]")
-			;; (highlight-regexp "[[:space:]]\[])\]")
+          (lambda()
+            ;; highlighting
+            ;; (highlight-lines-matching-regexp ".\\{81\\}" 'hi-red-b)
+            ;; (highlight-regexp "{\n\\(.*\n\\)\\{26,\\}}\n\\(\n\\|\\'\\)" 'hi-red-b)
+            ;; (highlight-phrase "^[^#/].*  +")
+            ;; (highlight-regexp "\[([\][[:space:]]")
+            ;; (highlight-regexp "[[:space:]]\[])\]")
 
-			(highlight-regexp "\t ")
-			(highlight-regexp " \t")
-			(highlight-regexp "if(")
-			(highlight-regexp "while(")
-			(highlight-regexp "return(")
-			;; (highlight-regexp "return;")
-			;; (highlight-regexp "break;")
-			;; (highlight-regexp "continue;")
-			;; (highlight-regexp "\n\n\n+")
+            (highlight-regexp "\t ")
+            (highlight-regexp " \t")
+            (highlight-regexp "if(")
+            (highlight-regexp "while(")
+            (highlight-regexp "return(")
+            ;; (highlight-regexp "return;")
+            ;; (highlight-regexp "break;")
+            ;; (highlight-regexp "continue;")
+            ;; (highlight-regexp "\n\n\n+")
 
-			;; indentation fix (struct/switch)
-			(c-set-offset 'inclass '+) ;++ me for c++ only please :O
-			(c-set-offset 'case-label '+)
-			)
-		  )
+            ;; indentation fix (struct/switch)
+            (c-set-offset 'inclass '+) ;++ me for c++ only please :O
+            (c-set-offset 'case-label '+)
+            (setq indent-tabs-mode t)))
 
 ;; rasta web-mode
 (add-hook 'web-mode-hook
-		  '(lambda ()
-			 (set-face-attribute 'web-mode-html-tag-bracket-face nil :foreground "green")
-			 (set-face-attribute 'web-mode-html-tag-face nil :foreground "green")
-			 (set-face-attribute 'web-mode-html-attr-name-face nil :foreground "yellow")
-			 (set-face-attribute 'web-mode-html-attr-value-face nil :foreground "firebrick2")))
+          '(lambda ()
+             (set-face-attribute 'web-mode-html-tag-bracket-face nil :foreground "green")
+             (set-face-attribute 'web-mode-html-tag-face nil :foreground "green")
+             (set-face-attribute 'web-mode-html-attr-name-face nil :foreground "yellow")
+             (set-face-attribute 'web-mode-html-attr-value-face nil :foreground "firebrick2")
+             (setq indent-tabs-mode nil)
+             (setq web-mode-markup-indent-offset 4)
+             (setq web-mode-css-indent-offset 4)
+             (setq web-mode-code-indent-offset 4)
+             (setq web-mode-indent-style 4)))
 
 ;; erc
 (setq erc-save-buffer-on-part t)
 (setq erc-autojoin-channels-alist
-	  '((".*\\.freenode.net" "#emacs" "#trisquel" "#zboub")
-		(".*\\.synirc.net" "#d2bs")))
+      '((".*\\.freenode.net" "#emacs" "#trisquel" "#zboub")
+        (".*\\.synirc.net" "#d2bs")))
 (setq erc-keywords '("jean" "smurf"))
 (erc-match-mode)
 ;; Truncate buffers so they don't hog core. ;;TODO: be sure it still logs
@@ -169,37 +172,50 @@
 
 ;; highlight matching parenthesis
 (defadvice show-paren-function
-  (after show-matching-paren-offscreen activate)
+    (after show-matching-paren-offscreen activate)
   "If the matching paren is offscreen, show the matching line in the
         echo area. Has no effect if the character before point is not of
         the syntax class ')'."
   (interactive)
   (let* ((cb (char-before (point)))
-		 (matching-text (and cb
-							 (char-equal (char-syntax cb) ?\) )
-							 (blink-matching-open))))
-	(when matching-text (message matching-text))))
+         (matching-text (and cb
+                             (char-equal (char-syntax cb) ?\) )
+                        (blink-matching-open))))
+  (when matching-text (message matching-text))))
 
 ;; ibuffer
 (setq ibuffer-saved-filter-groups
-	  '(("home"
-		 ("mail" (or
-				  (mode . message-mode)
-				  (mode . bbdb-mode)
-				  (mode . mail-mode)
-				  (mode . gnus-group-mode)
-				  (mode . gnus-summary-mode)
-				  (mode . gnus-article-mode)
-				  (name . "^\\.bbdb$")
-				  (name . "^\\.newsrc-dribble")))
-		 ("irc" (mode . erc-mode))
-		 ("*.*" (name . "^\*.*\*$"))
-		 ("dir" (mode . dired-mode)))))
+      '(("home"
+         ("git" (or (name . "^\*vc-.*\*$")
+                    (name . "^timemachine:.*")))
+         ("Base" (filename . ".*/Base.*\\.php$")) ;tmp
+         ("Rest" (filename . ".*/Rest/.*\\.php$")) ;tmp
+         ("Web" (filename . ".*/Web/.*\\.php$")) ;tmp
+         ("Views" (filename . ".*\\.twig$")) ;tmp
+         ("Tests" (filename . ".*/Tests/.*\\.php$")) ;tmp
+         ("C" (filename . ".*\\.c$"))
+         ("H" (filename . ".*\\.h$"))
+         ("Php" (filename . ".*\\.php$"))
+         ("Sh" (filename . ".*\\.sh$"))
+         ("dir" (mode . dired-mode))
+         ("elisp" (filename . ".*\\.el$"))
+         ("mail" (or (mode . message-mode)
+                     (mode . bbdb-mode)
+                     (mode . mail-mode)
+                     (mode . gnus-group-mode)
+                     (mode . gnus-summary-mode)
+                     (mode . gnus-article-mode)
+                     (name . "^\\.bbdb$")
+                     (name . "^\\.newsrc-dribble")))
+         ("irc" (mode . erc-mode))
+         ("*.*" (or (name . "^\*.*\*$")
+                    (name . "TAGS"))))))
 (setq ibuffer-expert t)
+(setq ibuffer-show-empty-filter-groups nil)
 (add-hook 'ibuffer-mode-hook
-		  '(lambda ()
-			 (ibuffer-auto-mode 1)
-			 (ibuffer-switch-to-saved-filter-groups "home")))
+          '(lambda ()
+             (ibuffer-auto-mode 1)
+             (ibuffer-switch-to-saved-filter-groups "home")))
 ;; Use human readable Size column instead of original one
 (define-ibuffer-column size-h
   (:name "Size")
@@ -210,34 +226,34 @@
    (t (format "%8d" (buffer-size)))))
 ;; Modify the default ibuffer-formats
 (setq ibuffer-formats
-	  '((mark modified read-only " "
-			  (name 18 18 :left :elide)
-			  " "
-			  (size-h 9 -1 :right)
-			  " "
-			  (mode 16 16 :left :elide)
-			  " "
-			  filename-and-process)))
+      '((mark modified read-only " "
+              (name 18 18 :left :elide)
+              " "
+              (size-h 9 -1 :right)
+              " "
+              (mode 16 16 :left :elide)
+              " "
+              filename-and-process)))
 
 ;; gnus (account infos in .authinfo)
 (setq gnus-select-method
-	  '(nnimap "gmail"
-			   (nnimap-address "imap.gmail.com")
-			   (nnimap-server-port "imaps")
-			   (nnimap-stream ssl)))
+      '(nnimap "gmail"
+               (nnimap-address "imap.gmail.com")
+               (nnimap-server-port "imaps")
+               (nnimap-stream ssl)))
 (setq gnus-ignored-newsgroups "^to\\.\\|^[0-9. ]+\\( \\|$\\)\\|^[\"]\"[#'()]")
 (setq message-send-mail-function 'smtpmail-send-it
-	  smtpmail-starttls-credentials '(("smtp.gmail.com" 587 nil nil))
-	  smtpmail-auth-credentials '(("smtp.gmail.com" 587 "mc.maxcanal@gmail.com" nil))
-	  smtpmail-default-smtp-server "smtp.gmail.com"
-	  smtpmail-smtp-server "smtp.gmail.com"
-	  smtpmail-smtp-service 587)
+      smtpmail-starttls-credentials '(("smtp.gmail.com" 587 nil nil))
+      smtpmail-auth-credentials '(("smtp.gmail.com" 587 "mc.maxcanal@gmail.com" nil))
+      smtpmail-default-smtp-server "smtp.gmail.com"
+      smtpmail-smtp-server "smtp.gmail.com"
+      smtpmail-smtp-service 587)
 (setq-default
  gnus-summary-line-format "%U%R%z %(%&user-date;  %-21,21f  %B%s%)\n"
  gnus-user-date-format-alist '((t . "%Y-%m-%d %H:%M"))
  gnus-summary-thread-gathering-function 'gnus-gather-threads-by-references
  gnus-thread-sort-functions '(gnus-thread-sort-by-number
-							  (not gnus-thread-sort-by-date)))
+                              (not gnus-thread-sort-by-date)))
 
 ;; window splitting at launch
 (setq split-height-threshold 25)
@@ -250,20 +266,15 @@
 (ac-config-default)
 (add-hook 'prog-mode-hook 'ac-etags-ac-setup)
 (set-default 'ac-sources
-			 '(
-			   ac-source-dictionary
-			   ac-source-words-in-same-mode-buffers
-			   ac-source-etags))
+             '(
+               ac-source-dictionary
+               ac-source-words-in-same-mode-buffers))
 (setq ac-delay 0)              ;; 0.1
 (setq ac-auto-show-menu 0.4)     ;; 0.8
 (setq ac-fuzzy-cursor-color 'color-160)
 (setq ac-use-menu-map t)
 (setq ac-use-fuzzy t)
-(eval-after-load "etags"
-  '(progn
-	 (ac-etags-setup)))
 
-;; git status in dired mode
 (add-hook 'dired-mode-hook 'diff-hl-dired-mode)
 ;; (add-hook 'prog-mode-hook 'diff-hl-mode)
 
@@ -274,7 +285,7 @@
 (defadvice kill-new (before strip-leading-diff-chars activate)
   "When copying from a diff buffer, strip the leading -, +, ! characters."
   (if (eq major-mode 'diff-mode)
-	  (ad-set-arg 0 (replace-regexp-in-string "^." "" (ad-get-arg 0)))))
+      (ad-set-arg 0 (replace-regexp-in-string "^." "" (ad-get-arg 0)))))
 
 
 
@@ -291,7 +302,7 @@
  '(erc-log-channels-directory "~/.emacs.d/erc-log")
  '(erc-modules
    (quote
-	(autojoin button completion fill irccontrols keep-place list log match menu move-to-prompt netsplit networks noncommands readonly ring stamp track)))
+    (autojoin button completion fill irccontrols keep-place list log match menu move-to-prompt netsplit networks noncommands readonly ring stamp track)))
  '(erc-nick "JeanMax")
  '(erc-nickserv-passwords (quote ((freenode (("JeanMax" . "password"))))))
  '(erc-prompt-for-nickserv-password nil)
@@ -303,49 +314,53 @@
    "https://www.startpage.com/do/dsearch?cat=web&pl=opensearch&language=english&query=")
  '(flycheck-clang-include-path
    (quote
-	("../../../../../../../usr/include/SDL" "../inc" "../../inc" "../libft/inc" "../../libft/inc")))
+    ("../../../../../../../usr/include/SDL" "../inc" "../../inc" "../libft/inc" "../../libft/inc")))
  '(flycheck-clang-warnings (quote ("all" "extra" "error")))
  '(gud-gdb-command-name "gdb --annotate=1")
  '(highlight-indent-guides-method (quote column))
+ '(ibuffer-default-sorting-mode (quote alphabetic))
  '(ibuffer-fontification-alist
    (quote
-	((10 buffer-read-only font-lock-constant-face)
-	 (15
-	  (and buffer-file-name
-		   (string-match ibuffer-compressed-file-name-regexp buffer-file-name))
-	  font-lock-doc-face)
-	 (20
-	  (string-match "^*"
-					(buffer-name))
-	  font-lock-keyword-face)
-	 (25
-	  (and
-	   (string-match "^ "
-					 (buffer-name))
-	   (null buffer-file-name))
-	  italic)
-	 (30
-	  (memq major-mode ibuffer-help-buffer-modes)
-	  font-lock-comment-face)
-	 (35
-	  (eq major-mode
-		  (quote dired-mode))
-	  font-lock-function-name-face)
-	 (12
-	  (eq major-mode
-		  (quote erc-mode))
-	  font-lock-type-face))))
+    ((10 buffer-read-only font-lock-constant-face)
+     (15
+      (and buffer-file-name
+           (string-match ibuffer-compressed-file-name-regexp buffer-file-name))
+      font-lock-doc-face)
+     (20
+      (string-match "^*"
+                    (buffer-name))
+      font-lock-keyword-face)
+     (25
+      (and
+       (string-match "^ "
+                     (buffer-name))
+       (null buffer-file-name))
+      italic)
+     (30
+      (memq major-mode ibuffer-help-buffer-modes)
+      font-lock-comment-face)
+     (35
+      (eq major-mode
+          (quote dired-mode))
+      font-lock-function-name-face)
+     (12
+      (eq major-mode
+          (quote erc-mode))
+      font-lock-type-face)
+     (10
+      (eq major-mode
+          (quote emacs-lisp-mode))
+      font-lock-variable-name-face))))
  '(irony-server-build-dir nil)
  '(large-file-warning-threshold nil)
  '(package-selected-packages
    (quote
-	(diff-hl flycheck web-mode php-mode tuareg highlight-chars highlight-indent-guides bind-key auto-complete fuzzy ac-etags)))
+    (git-timemachine diff-hl flycheck web-mode php-mode tuareg highlight-indent-guides bind-key auto-complete fuzzy ac-etags)))
  '(scala-font-lock:constant-list nil)
  '(scala-indent:step 4)
- '(setq show-paren-delay t)
+ '(send-mail-function (quote smtpmail-send-it))
  '(show-paren-delay 0.1)
  '(show-paren-mode t)
- '(send-mail-function (quote smtpmail-send-it))
  '(woman-locale "en_US.UTF-8"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -355,10 +370,14 @@
  '(Man-overstrike ((t (:inherit bold :foreground "brightred"))))
  '(Man-underline ((t (:inherit bold :foreground "brightgreen"))))
  '(diff-added ((t (:foreground "green"))))
- '(diff-changed ((t (:foreground "purple"))))
- '(diff-hl-change ((t (:background "color-130" :foreground "white"))))
- '(diff-hl-dired-change ((t (:inherit diff-hl-change :foreground "red"))))
+ '(diff-changed ((t (:foreground "color-130"))))
  '(diff-removed ((t (:foreground "red"))))
+ '(diff-hl-change ((t (:background "color-130" :foreground "white"))))
+ '(diff-hl-dired-change ((t (:inherit diff-hl-change))))
+ '(diff-hl-delete ((t (:background "red" :foreground "white"))))
+ '(diff-hl-dired-delete ((t (:inherit diff-hl-delete))))
+ '(diff-hl-insert ((t (:background "green" :foreground "white"))))
+ '(diff-hl-dired-insert ((t (:inherit diff-hl-insert))))
  '(highlight-indent-guides-character-face ((t (:foreground "color-241"))))
  '(match ((t (:inherit bold :foreground "brightred"))))
  '(shr-strike-through ((t (:strike-through "red")))))

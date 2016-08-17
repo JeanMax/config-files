@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/15 15:31:23 by mcanal            #+#    #+#              ;
-;    Updated: 2016/08/17 09:11:39 by mcanal           ###   ########.fr        ;
+;    Updated: 2016/08/17 17:15:59 by mcanal           ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -16,16 +16,23 @@
 
 (require 'header)
 
+(defun dired-find-files (&optional arg)
+  "Open each of the marked files, or the file under the point, or when prefix ARG, the next N files."
+  (interactive "P")
+  (let* ((fn-list (dired-get-marked-files nil arg)))
+    (mapc 'find-file fn-list)))
+
 (defun tags-make-n-visit (file-pattern)
   "Create a tag file corresponding to FILE-PATTERN, then visit it."
   (interactive
    (list (read-from-minibuffer
-		  (concat "tag pattern (default " (nth 0 tags-make-n-visit-history) "): ")
-		  nil nil nil 'tags-make-n-visit-history)))
+          (concat "tag pattern (default " (nth 0 tags-make-n-visit-history) "): ")
+          nil nil nil 'tags-make-n-visit-history)))
   (shell-command (concat "etags -o ~/.emacs.d/TAGS "
-						 (if (string= "" file-pattern)
-							 (nth 0 tags-make-n-visit-history)
-						   file-pattern)))
+                         (if (string= "" file-pattern)
+                             (nth 0 tags-make-n-visit-history)
+                           file-pattern)))
+  (ac-etags-clear-cache)
   (visit-tags-table "~/.emacs.d/TAGS"))
 
 (defun ercs ()
