@@ -1,3 +1,5 @@
+;;; key-binding.el --- user defined keys binding
+;;; Commentary:
 ;******************************************************************************;
 ;                                                                              ;
 ;                                                         :::      ::::::::    ;
@@ -6,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/15 15:31:08 by mcanal            #+#    #+#              ;
-;    Updated: 2016/08/16 01:56:00 by mcanal           ###   ########.fr        ;
+;    Updated: 2016/08/17 09:12:46 by mcanal           ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -51,22 +53,23 @@
 (bind-key* (kbd "M-l") 'forward-char)
 (bind-key* (kbd "M-u") 'backward-word)
 (bind-key* (kbd "M-o") 'forward-word)
-(bind-key* (kbd "M-_") 'move-beginning-of-line)
-(bind-key* (kbd "M-ç") 'move-end-of-line)
 (bind-key* (kbd "M-m") 'normdown) ; -> elisp-functions.el
 (bind-key* (kbd "M-p") 'normup) ; -> elisp-functions.el
+(bind-key* (kbd "M-_") 'move-beginning-of-line) ; 8
+(bind-key* (kbd "M-ç") 'move-end-of-line) ; 9
 
 ;; insert pair
-(bind-key* (kbd "M-&") 'par) ; -> elisp-functions.el
-(bind-key* (kbd "M-é") 'cro) ; -> elisp-functions.el
-(bind-key* (kbd "M-\"") 'aco) ; -> elisp-functions.el
-(bind-key* (kbd "M-\'") 'guigui) ; -> elisp-functions.el
-(bind-key* (kbd "M-(") 'gui) ; -> elisp-functions.el
-(bind-key* (kbd "M--") 'inc) ; -> elisp-functions.el
+(bind-key* (kbd "M-&") 'par) ; 1 -> elisp-functions.el
+(bind-key* (kbd "M-é") 'cro) ; 2 -> elisp-functions.el
+(bind-key* (kbd "M-\"") 'aco) ; 3 -> elisp-functions.el
+(bind-key* (kbd "M-\'") 'guigui) ; 4 -> elisp-functions.el
+(bind-key* (kbd "M-(") 'gui) ; 5 -> elisp-functions.el
+(bind-key* (kbd "M--") 'inc) ; 6 -> elisp-functions.el
 
-(bind-key* (kbd "M-è") 'main) ; -> elisp-functions.el
+(bind-key* (kbd "M-è") 'main) ; 7 -> elisp-functions.el
 (bind-key* (kbd "M-g") 'goto-line)
 (bind-key (kbd "<backtab>") 'dabbrev-expand)
+(bind-key (kbd "€") 'dabbrev-expand)  ;Altgr e
 (bind-key* (kbd "<f2>") 'kill-region)
 (bind-key* (kbd "<f3>") 'kill-ring-save)
 (bind-key* (kbd "<f4>") 'yank)
@@ -118,19 +121,13 @@
 (bind-key* (kbd "ĸ") 'kill-paragraph) ;Altgr k
 (bind-key* (kbd "¶") 'transpose-chars) ;Altgr r
 (bind-key* (kbd "đ") 'ac-fuzzy-complete) ;Altgr f
+(bind-key* (kbd "ŧ") 'tags-make-n-visit) ;Altgr t/o -> elisp-functions.el
+(bind-key* (kbd "ŋ") 'xref-find-definitions-other-window) ;Altgr g ;find-tag-other-window
+;; (bind-key* (kbd "”") (lambda() (switch-to-buffer (other-buffer)))) ;Altgr b
 
+;; something something transpose?
 
-;; (bind-key* (kbd "¶") 'transpose-chars) ;Altgr r
-;; (bind-key* (kbd "ŧ") '(lambda() (interactive) (transpose-chars -1))) ;Altgr t/o
-;; (bind-key* (kbd "đ") 'transpose-words) ;Altgr f
-;; (bind-key* (kbd "ŋ") '(lambda() (interactive) (transpose-words -1))) ;Altgr g
-;; (bind-key* (kbd "“") 'transpose-lines) ;Altgr v
-;; (bind-key* (kbd "”") '(lambda() (interactive) (transpose-lines -1))) ;Altgr b
-
-;; (bind-key* (kbd "ŧ") 'free) ;Altgr t/o
-;; (bind-key* (kbd "ŋ") 'free) ;Altgr g
 ;; (bind-key* (kbd "“") 'free) ;Altgr v
-;; (bind-key* (kbd "”") 'free) ;Altgr b
 ;; (bind-key* (kbd "→") 'free) ;Altgr i
 ;; (bind-key* (kbd "ø") 'free) ;Altgr o
 ;; (bind-key* (kbd "þ") 'free) ;Altgr p
@@ -145,4 +142,5 @@
 ;; (bind-key* (kbd "µ") 'free) ;Altgr m
 ;; (bind-key* (kbd "»") 'free) ;Altgr x
 
-;; zboub
+(provide 'key-binding)
+;;; key-binding.el ends here

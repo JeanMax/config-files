@@ -1,3 +1,5 @@
+;;; elisp-functions.el --- misc functions
+;;; Commentary:
 ;******************************************************************************;
 ;                                                                              ;
 ;                                                         :::      ::::::::    ;
@@ -6,11 +8,25 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/15 15:31:23 by mcanal            #+#    #+#              ;
-;    Updated: 2016/08/15 20:29:16 by mcanal           ###   ########.fr        ;
+;    Updated: 2016/08/17 09:11:39 by mcanal           ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
 ;;; Code:
+
+(require 'header)
+
+(defun tags-make-n-visit (file-pattern)
+  "Create a tag file corresponding to FILE-PATTERN, then visit it."
+  (interactive
+   (list (read-from-minibuffer
+		  (concat "tag pattern (default " (nth 0 tags-make-n-visit-history) "): ")
+		  nil nil nil 'tags-make-n-visit-history)))
+  (shell-command (concat "etags -o ~/.emacs.d/TAGS "
+						 (if (string= "" file-pattern)
+							 (nth 0 tags-make-n-visit-history)
+						   file-pattern)))
+  (visit-tags-table "~/.emacs.d/TAGS"))
 
 (defun ercs ()
   "Connect to some IRC."
@@ -218,7 +234,7 @@
   (interactive)
   (split-window-vertically)
   (next-multiframe-window)
-  (shell))
+  (ansi-term "/bin/zsh"))
 
 (defun semi-c ()
   "Semi-colon at end of line, without moving!"
@@ -399,4 +415,5 @@
   ;; (whitespace-global-mode 1)
   )
 
-;; zboub
+(provide 'elisp-functions)
+;;; elisp-functions.el ends here

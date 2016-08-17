@@ -1,3 +1,5 @@
+;;; init.el --- init emacs
+;;; Commentary:
 ;******************************************************************************;
 ;                                                                              ;
 ;                                                         :::      ::::::::    ;
@@ -6,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2015/04/26 16:54:03 by mcanal            #+#    #+#              ;
-;    Updated: 2016/08/16 12:23:58 by mcanal           ###   ########.fr        ;
+;    Updated: 2016/08/17 00:04:08 by mcanal           ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -22,10 +24,12 @@
 			(setq gc-cons-threshold initial-gc-cons-threshold)
 			(setq file-name-handler-alist initial-file-name-handler-alist)
 			(message "Init-time: %s" (emacs-init-time))))
+(add-hook 'after-init-hook #'global-flycheck-mode)
+
 (setq gc-cons-threshold 134217728)
 (setq file-name-handler-alist nil)
 
-;; external config
+;; install the missing packages (be sure it matches package-selected-packages in custom-set-variables)
 (require 'package)
 (add-to-list 'package-archives
 			 '("marmalade" . "http://marmalade-repo.org/packages/") t)
@@ -36,14 +40,13 @@
 (package-initialize)
 (unless package-archive-contents
   (package-refresh-contents))
-
-;; install the missing packages (be sure it matches package-selected-packages in custom-set-variables)
 (setq package-list
 	  '(diff-hl flycheck web-mode php-mode tuareg highlight-chars highlight-indent-guides bind-key auto-complete fuzzy ac-etags))
 (dolist (package package-list)
   (unless (package-installed-p package)
 	(package-install package)))
 
+;; external config
 (add-to-list 'load-path "~/.emacs.d/manually-installed/scala-mode2")
 (require 'scala-mode2)
 
@@ -54,8 +57,8 @@
 (require 'header)
 
 (add-to-list 'load-path "~/.emacs.d/config")
-(load "elisp-functions")
-(load "key-binding")
+(require 'elisp-functions)
+(require 'key-binding)
 
 
 
@@ -67,8 +70,11 @@
 ;; (setq *cygwin* (eq system-type 'cygwin) )
 ;; (setq *linux* (or (eq system-type 'gnu/linux) (eq system-type 'linux)))
 
-;; (global-flycheck-mode)
-(add-hook 'after-init-hook #'global-flycheck-mode)
+;; function history (cf elisp-functions.el)
+(defvar tags-make-n-visit-history '("etags --regex='/.*\\(public\\|static\\|abstract\\|protected\\|private\\).*function.*(/' ~/Pliizz/src/**/*.php"))
+(eval-after-load "savehist"
+  '(add-to-list 'savehist-additional-variables 'tags-make-n-visit-history))
+(savehist-mode 1)
 
 ;; encoding
 (set-language-environment "UTF-8")
@@ -189,9 +195,6 @@
 		 ("irc" (mode . erc-mode))
 		 ("*.*" (name . "^\*.*\*$"))
 		 ("dir" (mode . dired-mode)))))
-(add-hook 'ibuffer-mode-hook
-		  '(lambda ()
-			 (ibuffer-switch-to-saved-filter-groups "home")))
 (setq ibuffer-expert t)
 (add-hook 'ibuffer-mode-hook
 		  '(lambda ()
@@ -216,7 +219,6 @@
 			  " "
 			  filename-and-process)))
 
-
 ;; gnus (account infos in .authinfo)
 (setq gnus-select-method
 	  '(nnimap "gmail"
@@ -237,10 +239,12 @@
  gnus-thread-sort-functions '(gnus-thread-sort-by-number
 							  (not gnus-thread-sort-by-date)))
 
-
 ;; window splitting at launch
 (setq split-height-threshold 25)
 (setq split-width-threshold 80)
+
+;; hide/show mod
+(add-hook 'prog-mode-hook #'hs-minor-mode)
 
 ;; completion
 (ac-config-default)
@@ -261,13 +265,10 @@
 
 ;; git status in dired mode
 (add-hook 'dired-mode-hook 'diff-hl-dired-mode)
-;; (add-hook 'prog-mode-hook 'diff-hl-mode) ;debug
+;; (add-hook 'prog-mode-hook 'diff-hl-mode)
 
 ;; selecting region with shift
 (transient-mark-mode t) ;??
-
-;; hide/show mod
-(add-hook 'prog-mode-hook #'hs-minor-mode)
 
 ;; diff (killring)
 (defadvice kill-new (before strip-leading-diff-chars activate)
@@ -362,4 +363,5 @@
  '(match ((t (:inherit bold :foreground "brightred"))))
  '(shr-strike-through ((t (:strike-through "red")))))
 
-;; zboub
+(provide 'init)
+;;; init.el ends here
