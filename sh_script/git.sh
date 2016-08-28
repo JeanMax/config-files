@@ -6,15 +6,15 @@
 #    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/02/14 04:38:01 by mcanal            #+#    #+#              #
-#    Updated: 2015/02/18 07:12:49 by mcanal           ###   ########.fr        #
+#    Updated: 2016/08/23 23:44:23 by mcanal           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-make zclean;
-make fclean;
-git add -A *;
+make zclean
+make fclean
+git add -A .
 git status;
 if [ "$2" != "go" ]; then
-	sleep 3;
+	sleep 3
 fi
-git commit -m "$1" && git push && git status;
+git commit -m "$1" && git push && git status

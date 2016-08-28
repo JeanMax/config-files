@@ -6,7 +6,7 @@
 #    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/02/07 01:07:39 by mcanal            #+#    #+#              #
-#    Updated: 2015/02/15 22:14:42 by mcanal           ###   ########.fr        #
+#    Updated: 2016/08/28 14:12:02 by mcanal           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
     
@@ -26,7 +26,7 @@ echo "";
 echo $USER > auteur_test;
 AUTEUR=$(cat -e auteur);
 AUTEUR_TEST=$(cat -e auteur_test);
-if [ $AUTEUR == $AUTEUR_TEST ]; then
+if [ $AUTEUR = $AUTEUR_TEST ]; then
 	echo "\033[37;01mTesting auteur \033[32;01mOK\033[0m";
 else
 	echo "\033[37;01mTesting auteur \033[31;01mKO\033[0m";

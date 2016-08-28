@@ -6,22 +6,26 @@
 #    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/23 17:38:59 by mcanal            #+#    #+#              #
-#    Updated: 2016/08/11 16:17:56 by mcanal           ###   ########.fr        #
+#    Updated: 2016/08/28 02:40:37 by mcanal           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # default editor
 export ALTERNATE_EDITOR=""
 export EDITOR="emacsclient -t"
-EDITOR='/usr/local/bin/emacs'
-export EDITOR
 
 #ocaml shit
 . /home/mcanal/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
 
 # Reglage du terminal
-TERM=xterm-256color
-echo -n "\033]0;$PWD\007";
+if [[ $TERM = dumb ]]; then
+    # disable weird escape sequences
+    unsetopt zle
+else
+    TERM=xterm-256color
+    echo -n "\033]0;$PWD\007";
+fi
+
 
 #mail
 export EMAIL="mc.maxcanal@gmail.com"
@@ -40,6 +44,8 @@ setopt APPEND_HISTORY
 setopt HIST_EXPIRE_DUPS_FIRST
 stty -ixon #forward search with ^s
 #setopt EXTENDED_HISTORY
+
+export TRASH=$(test $(uname -s) = "Linux" && echo ~/.local/share/Trash/files || echo ~/.Trash)
 
 # Correction de la touche Delete / ctrl-left / ctrl-right
 bindkey "\e[3~"   delete-char
@@ -164,7 +170,7 @@ alias gl="git log"
 # Definition des alias
 alias lxterminal='lxterminal --geometry=81x45'
 alias norm='norminette --CheckForbiddenSourceHeader'
-alias normall='norminette --CheckForbiddenSourceHeader */*'
+alias normall='norminette --CheckForbiddenSourceHeader **/*.[ch]'
 alias gcc='gcc -std=c11'
 alias gccf='gcc -std=c11 -Wall -Wextra -Werror'
 alias gcc99='gcc -std=c99 -Wall -Wextra -Werror'
@@ -175,14 +181,12 @@ alias la='ls -lA'
 alias lah='ls -lAh'
 alias lh='ls -lh'
 #alias ls='ls -G'
-alias trash='ls -la ~/.local/share/Trash/files'
-alias gotrash='cd ~/.local/share/Trash/files'
 alias usb='cd /media/mcanal/Lexar/'
-alias del='mv -t ~/.local/share/Trash/files'
+alias del='~/sh_script/trash.sh'
 alias zconf='e ~/.zshrc'
 alias econf='e ~/.emacs'
 # alias e='sh ~/sh_script/tab_emacs.sh'
-alias e='emacsclient -t'
+alias e="$EDITOR"
 alias cd='. ~/sh_script/tab_cd.sh'
 alias t='sh ~/sh_script/rename_tab.sh'
 alias re="make re;"
@@ -201,9 +205,9 @@ alias sbcl='sbcl --noinform'
 alias cl='sbcl'
 
 # typo alias
-alias xs='. ~/sh_script/tab_cd.sh'
-alias vf='. ~/sh_script/tab_cd.sh'
-alias z='emacsclient -t'
+alias xs='cd'
+alias vf='cd'
+alias z='e'
 alias m='ls'
 alias k='ls'
 alias ms='ls'

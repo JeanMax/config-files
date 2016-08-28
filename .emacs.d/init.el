@@ -8,29 +8,39 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2015/04/26 16:54:03 by mcanal            #+#    #+#              ;
-;    Updated: 2016/08/17 17:11:23 by mcanal           ###   ########.fr        ;
+;    Updated: 2016/08/29 01:01:54 by mcanal           ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
 ;;; Code:
 
 ;; tricks to save some startup time
-(defconst initial-gc-cons-threshold gc-cons-threshold
-  "Initial value of `gc-cons-threshold' at start-up time.")
-(defconst initial-file-name-handler-alist file-name-handler-alist
-  "Initial value of `file-name-handler-alist' at start-up time.")
+(defconst initial-gc-cons-threshold gc-cons-threshold)
+(defconst initial-file-name-handler-alist file-name-handler-alist)
 (add-hook 'after-init-hook '
           (lambda()
             (setq gc-cons-threshold initial-gc-cons-threshold)
             (setq file-name-handler-alist initial-file-name-handler-alist)
             (message "Init-time: %s" (emacs-init-time))))
-(add-hook 'after-init-hook #'global-flycheck-mode)
+
+
+;; detect emacsclient
+(defconst *is-a-server* (string-equal "emacsclient"
+                                      (file-name-nondirectory (getenv "_"))))
+
+(defconst *is-a-mac* (eq system-type 'darwin))
+
 
 (setq gc-cons-threshold 134217728)
 (setq file-name-handler-alist nil)
+;; (setq debug-on-error t)
 
-;; install the missing packages (be sure it matches package-selected-packages in custom-set-variables)
+;; tell emacs where to read abbrev
+(setq save-abbrevs 'silently)
+(setq abbrev-file-name "~/.emacs.d/misc/abbrev_defs")
+
 (require 'package)
+(setq package-enable-at-startup nil)
 (add-to-list 'package-archives
              '("marmalade" . "http://marmalade-repo.org/packages/") t)
 (add-to-list 'package-archives
@@ -38,60 +48,77 @@
 (add-to-list 'package-archives
              '("gnu" . "http://elpa.gnu.org/packages/") t)
 (package-initialize)
-(unless package-archive-contents
-  (package-refresh-contents))
-(setq package-list
-      '(git-timemachine diff-hl flycheck web-mode php-mode tuareg highlight-indent-guides bind-key auto-complete fuzzy ac-etags))
-(dolist (package package-list)
-  (unless (package-installed-p package)
-    (package-install package)))
+
+;; Bootstrap `use-package'
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+(eval-when-compile
+  (require 'use-package))
+;; (setq use-package-always-ensure t)
+(when *is-a-server*
+  (setq use-package-verbose t))
+;; (require 'bind-key)
+;; (require 'diminish)
+
+;; compile config
+(setq load-prefer-newer t)
+(add-hook 'after-init-hook (lambda ()
+                             (byte-recompile-directory "~/.emacs.d/lisp" 0)
+                             (byte-recompile-directory "~/.emacs.d/site-lisp" 0)))
 
 ;; external config
-(add-to-list 'load-path "~/.emacs.d/manually-installed/scala-mode2")
-(require 'scala-mode2)
-
-(add-to-list 'load-path "~/.emacs.d/manually-installed/42")
-(require 'list)
-(require 'string)
-(require 'comments)
+(add-to-list 'load-path "~/.emacs.d/site-lisp/42")
 (require 'header)
 
-(add-to-list 'load-path "~/.emacs.d/config")
+(add-to-list 'load-path "~/.emacs.d/lisp")
 (require 'elisp-functions)
-(require 'key-binding)
+(require 'keybinding)
 
+;; builtin packages
+(require 'init-erc)
+(require 'init-gnus)
+(require 'init-ibuffer)
+(require 'init-hideshow)
+(require 'init-paren)
+(require 'init-recentf)
+(require 'init-diff)
+(require 'init-cc-mode)
+(require 'init-ruby-mode)
 
+;; packages to download
+(require 'init-ample-theme)
+(require 'init-company)
+(require 'init-flycheck)
+(require 'init-git-timemachine)
+(require 'init-diff-hl)
+(require 'init-highlight-indent-guides)
+(require 'init-web-mode)
+(require 'init-php-mode)
+(require 'init-tuareg)
 
+;; auto-generated customizations
+(setq custom-file "~/.emacs.d/lisp/custom.el")
+(load custom-file)
 
-
-;; IMPORTANT stuff
-(setq tetris-score-file "~/.emacs.d/tetris-scores")
-;; (setq *is-a-mac* (eq system-type 'darwin))
-;; (setq *cygwin* (eq system-type 'cygwin) )
-;; (setq *linux* (or (eq system-type 'gnu/linux) (eq system-type 'linux)))
 
 ;; function history (cf elisp-functions.el)
 (defvar tags-make-n-visit-history '("--regex='/.*\\(public\\|static\\|abstract\\|protected\\|private\\).*function.*(/' ~/Pliizz/src/**/*.php"))
 (eval-after-load "savehist"
   '(add-to-list 'savehist-additional-variables 'tags-make-n-visit-history))
+(setq savehist-file "~/.emacs.d/misc/history")
 (savehist-mode 1)
+
+;; eww/erc I guess...
+(setq nsm-settings-file "~/.emacs.d/misc/network-security.data")
+(setq url-configuration-directory  "~/.emacs.d/misc/url/")
+(setq url-cookie-file "~/.emacs.d/misc/misc/url/cookies")
+
+(setq eshell-history-file-name "~/.emacs.d/misc/misc/eshell/history")
+
 
 ;; encoding
 (set-language-environment "UTF-8")
-
-;; extensions handling
-(add-to-list 'auto-mode-alist '("\\.php\\'" . php-mode))
-(add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.twig\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.css\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.hpp\\'" . c++-mode))
-(add-to-list 'auto-mode-alist '("\\.tpp\\'" . c++-mode))
-(add-to-list 'auto-mode-alist '("\\.cpp\\'" . c++-mode))
-(add-to-list 'auto-mode-alist '("\\.jvm\\'" . scala-mode))
-(add-to-list 'auto-mode-alist '("\\.ml\\'" . tuareg-mode))
-(add-to-list 'auto-mode-alist '("\\.mli\\'" . tuareg-mode))
-(add-to-list 'auto-mode-alist '("\\.\\(?:cap\\|gemspec\\|irbrc\\|gemrc\\|rake\\|rb\\|ru\\|thor\\)\\'" . ruby-mode))
-(add-to-list 'auto-mode-alist '("\\(?:Brewfile\\|Capfile\\|Gemfile\\(?:\\.[a-zA-Z0-9._-]+\\)?\\|[rR]akefile\\)\\'" . ruby-mode))
 
 ;; indentation
 (setq-default c-basic-offset 4)
@@ -99,288 +126,127 @@
 (setq-default tab-width 4)
 (setq-default indent-tabs-mode nil) ; set to true later for c-mode
 (setq-default tab-stop-list '(4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64 68 72 76 80 84 88 92 96 100 104 108 112 116 120))
-(add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
 (setq fill-column 80)
 
-;; color
-(set-face-foreground 'font-lock-string-face "#E6C28F")
-(set-face-foreground 'font-lock-function-name-face "royal blue")
-(set-face-foreground 'font-lock-variable-name-face "orange")
-(set-face-foreground 'font-lock-builtin-face "magenta")
+;; disable top menu bar
+(menu-bar-mode -1)
+
+
+;; (defun right-padding (str len)
+;;   "Padd a string STR with space to the right (till total length >= LEN)."
+;;   (let ((space-len (- len (length str))))
+;;     (if (> space-len 0)
+;;         (concat str (make-string space-len ? ))
+;;       str)))
+
+(defun shorten-directory (dir max-length)
+  "DIR... Show up to MAX-LENGTH characters of a directory name DIR."
+  (let ((path (reverse (split-string (abbreviate-file-name dir) "/")))
+        (output ""))
+    (when (and path (equal "" (car path)))
+      (setq path (cdr path)))
+    (while (and path (< (length output) (- max-length 4)))
+      (setq output (concat (car path) "/" output))
+      (setq path (cdr path)))
+    (when path
+      (setq output (concat ".../" output)))
+    output))
+
+(defun extra-shorten-directory (dir)
+  "MOAR DIR!"
+  (shorten-directory
+   (replace-regexp-in-string (expand-file-name "~") "~" dir)
+   30))
+        
+;; mode line customization (bottom bar)
+(setq-default mode-line-format
+              '("%e"
+                ;TODO: and what if it's read-only And Mofified? (do we even care?!)
+                (:eval (propertize " %b " 'face
+                                   (cond ((eql buffer-read-only t)
+                                          '(:foreground "black" :background "#5180b3" :weight bold))
+                                         ((buffer-modified-p)
+                                          '(:foreground "black" :background "#dF9522" :weight bold))
+                                         (t
+                                          '(:foreground "black"  :background "#6aaf50" :weight bold)))))
+                ;; (vc-mode vc-mode)
+                (:propertize "%4l:")
+                (:eval (propertize (format "%-3s" (format-mode-line "%c")) 'face
+                                   (when (> (current-column) 80)
+                                       '(:background "#cd5542"))))
+                (:eval (propertize  (if (frame-parameter nil 'client) "@" " ") 'face
+                                   (when flycheck-current-errors
+                                     '(:background "#cd5542"))))
+                (:propertize "%6p")
+                (flycheck-mode flycheck-mode-line)
+                "     "
+                (:eval (propertize (extra-shorten-directory default-directory) 'face '(:weight bold)))
+                "   "
+                mode-line-modes
+                mode-line-misc-info))
 
 ;; col/line number
 (column-number-mode 1)
 (setq linum-format "%3d ")
 
-;; backup
+;; Ignore case when completing file/buffer names
+(setq read-file-name-completion-ignore-case 't)
+(setq read-buffer-completion-ignore-case 't)
+
+;; Increase number of undo
+(setq undo-limit 100000)
+
+;; no problem
+(setq large-file-warning-threshold nil)
+
+;; restore session (buffers, frames...)
+
+(when *is-a-server*
+  (desktop-save-mode 1)
+  (setq desktop-save nil)
+  (setq desktop-path '("~/.emacs.d/misc/")))
+
+;; backup (files.el ... TODO: use-package?)
 (setq backup-directory-alist `((".*" . ,"~/.emacs.d/backup")))
+(setq auto-save-list-file-prefix "~/.emacs.d/misc/auto-save-list/.saves-")
 (setq auto-save-file-name-transforms `((".*" ,"~/.emacs.d/backup" t)))
+(setq delete-old-versions 42) ;never delete or ask stuff about deleting my precious backups!
 (setq kept-new-versions 42)
-(setq kept-old-versions 42)
+;; (setq kept-old-versions 42)
 (setq version-control t)
 
-;; C hook
-(add-hook 'c-mode-hook
-          (lambda()
-            ;; highlighting
-            ;; (highlight-lines-matching-regexp ".\\{81\\}" 'hi-red-b)
-            ;; (highlight-regexp "{\n\\(.*\n\\)\\{26,\\}}\n\\(\n\\|\\'\\)" 'hi-red-b)
-            ;; (highlight-phrase "^[^#/].*  +")
-            ;; (highlight-regexp "\[([\][[:space:]]")
-            ;; (highlight-regexp "[[:space:]]\[])\]")
 
-            (highlight-regexp "\t ")
-            (highlight-regexp " \t")
-            (highlight-regexp "if(")
-            (highlight-regexp "while(")
-            (highlight-regexp "return(")
-            ;; (highlight-regexp "return;")
-            ;; (highlight-regexp "break;")
-            ;; (highlight-regexp "continue;")
-            ;; (highlight-regexp "\n\n\n+")
+;; line wrap
+(setq-default fill-column 80)
+(setq-default truncate-partial-width-windows 40)
 
-            ;; indentation fix (struct/switch)
-            (c-set-offset 'inclass '+) ;++ me for c++ only please :O
-            (c-set-offset 'case-label '+)
-            (setq indent-tabs-mode t)))
-
-;; rasta web-mode
-(add-hook 'web-mode-hook
-          '(lambda ()
-             (set-face-attribute 'web-mode-html-tag-bracket-face nil :foreground "green")
-             (set-face-attribute 'web-mode-html-tag-face nil :foreground "green")
-             (set-face-attribute 'web-mode-html-attr-name-face nil :foreground "yellow")
-             (set-face-attribute 'web-mode-html-attr-value-face nil :foreground "firebrick2")
-             (setq indent-tabs-mode nil)
-             (setq web-mode-markup-indent-offset 4)
-             (setq web-mode-css-indent-offset 4)
-             (setq web-mode-code-indent-offset 4)
-             (setq web-mode-indent-style 4)))
-
-;; erc
-(setq erc-save-buffer-on-part t)
-(setq erc-autojoin-channels-alist
-      '((".*\\.freenode.net" "#emacs" "#trisquel" "#zboub")
-        (".*\\.synirc.net" "#d2bs")))
-(setq erc-keywords '("jean" "smurf"))
-(erc-match-mode)
-;; Truncate buffers so they don't hog core. ;;TODO: be sure it still logs
-(setq erc-max-buffer-size 20000)
-(defvar erc-insert-post-hook)
-(add-hook 'erc-insert-post-hook 'erc-truncate-buffer)
-(setq erc-truncate-buffer-on-save t)
-
-;; highlight matching parenthesis
-(defadvice show-paren-function
-    (after show-matching-paren-offscreen activate)
-  "If the matching paren is offscreen, show the matching line in the
-        echo area. Has no effect if the character before point is not of
-        the syntax class ')'."
-  (interactive)
-  (let* ((cb (char-before (point)))
-         (matching-text (and cb
-                             (char-equal (char-syntax cb) ?\) )
-                        (blink-matching-open))))
-  (when matching-text (message matching-text))))
-
-;; ibuffer
-(setq ibuffer-saved-filter-groups
-      '(("home"
-         ("git" (or (name . "^\*vc-.*\*$")
-                    (name . "^timemachine:.*")))
-         ("Base" (filename . ".*/Base.*\\.php$")) ;tmp
-         ("Rest" (filename . ".*/Rest/.*\\.php$")) ;tmp
-         ("Web" (filename . ".*/Web/.*\\.php$")) ;tmp
-         ("Views" (filename . ".*\\.twig$")) ;tmp
-         ("Tests" (filename . ".*/Tests/.*\\.php$")) ;tmp
-         ("C" (filename . ".*\\.c$"))
-         ("H" (filename . ".*\\.h$"))
-         ("Php" (filename . ".*\\.php$"))
-         ("Sh" (filename . ".*\\.sh$"))
-         ("dir" (mode . dired-mode))
-         ("elisp" (filename . ".*\\.el$"))
-         ("mail" (or (mode . message-mode)
-                     (mode . bbdb-mode)
-                     (mode . mail-mode)
-                     (mode . gnus-group-mode)
-                     (mode . gnus-summary-mode)
-                     (mode . gnus-article-mode)
-                     (name . "^\\.bbdb$")
-                     (name . "^\\.newsrc-dribble")))
-         ("irc" (mode . erc-mode))
-         ("*.*" (or (name . "^\*.*\*$")
-                    (name . "TAGS"))))))
-(setq ibuffer-expert t)
-(setq ibuffer-show-empty-filter-groups nil)
-(add-hook 'ibuffer-mode-hook
-          '(lambda ()
-             (ibuffer-auto-mode 1)
-             (ibuffer-switch-to-saved-filter-groups "home")))
-;; Use human readable Size column instead of original one
-(define-ibuffer-column size-h
-  (:name "Size")
-  (cond
-   ((> (buffer-size) 1000000) (format "%7.1fM" (/ (buffer-size) 1000000.0)))
-   ((> (buffer-size) 100000) (format "%7.0fk" (/ (buffer-size) 1000.0)))
-   ((> (buffer-size) 1000) (format "%7.1fk" (/ (buffer-size) 1000.0)))
-   (t (format "%8d" (buffer-size)))))
-;; Modify the default ibuffer-formats
-(setq ibuffer-formats
-      '((mark modified read-only " "
-              (name 18 18 :left :elide)
-              " "
-              (size-h 9 -1 :right)
-              " "
-              (mode 16 16 :left :elide)
-              " "
-              filename-and-process)))
-
-;; gnus (account infos in .authinfo)
-(setq gnus-select-method
-      '(nnimap "gmail"
-               (nnimap-address "imap.gmail.com")
-               (nnimap-server-port "imaps")
-               (nnimap-stream ssl)))
-(setq gnus-ignored-newsgroups "^to\\.\\|^[0-9. ]+\\( \\|$\\)\\|^[\"]\"[#'()]")
-(setq message-send-mail-function 'smtpmail-send-it
-      smtpmail-starttls-credentials '(("smtp.gmail.com" 587 nil nil))
-      smtpmail-auth-credentials '(("smtp.gmail.com" 587 "mc.maxcanal@gmail.com" nil))
-      smtpmail-default-smtp-server "smtp.gmail.com"
-      smtpmail-smtp-server "smtp.gmail.com"
-      smtpmail-smtp-service 587)
-(setq-default
- gnus-summary-line-format "%U%R%z %(%&user-date;  %-21,21f  %B%s%)\n"
- gnus-user-date-format-alist '((t . "%Y-%m-%d %H:%M"))
- gnus-summary-thread-gathering-function 'gnus-gather-threads-by-references
- gnus-thread-sort-functions '(gnus-thread-sort-by-number
-                              (not gnus-thread-sort-by-date)))
+;; limit mouse selection to active window
+;; TODO; do not move the cursor...
+;; (xterm-mouse-mode)
 
 ;; window splitting at launch
-(setq split-height-threshold 25)
-(setq split-width-threshold 80)
-
-;; hide/show mod
-(add-hook 'prog-mode-hook #'hs-minor-mode)
-
-;; completion
-(ac-config-default)
-(add-hook 'prog-mode-hook 'ac-etags-ac-setup)
-(set-default 'ac-sources
-             '(
-               ac-source-dictionary
-               ac-source-words-in-same-mode-buffers))
-(setq ac-delay 0)              ;; 0.1
-(setq ac-auto-show-menu 0.4)     ;; 0.8
-(setq ac-fuzzy-cursor-color 'color-160)
-(setq ac-use-menu-map t)
-(setq ac-use-fuzzy t)
-
-(add-hook 'dired-mode-hook 'diff-hl-dired-mode)
-;; (add-hook 'prog-mode-hook 'diff-hl-mode)
+(setq split-height-threshold 40)
+(setq split-width-threshold 25)
+;; (setq window-min-height 15)
+;; (setq window-min-width 15)
 
 ;; selecting region with shift
-(transient-mark-mode t) ;??
+(transient-mark-mode t)
 
-;; diff (killring)
-(defadvice kill-new (before strip-leading-diff-chars activate)
-  "When copying from a diff buffer, strip the leading -, +, ! characters."
-  (if (eq major-mode 'diff-mode)
-      (ad-set-arg 0 (replace-regexp-in-string "^." "" (ad-get-arg 0)))))
+;; bookmark
+;; (setq inhibit-splash-screen t)
+(when *is-a-server*
+  (bookmark-bmenu-list))
+(setq bookmark-file "~/.emacs.d/misc/bookmarks")
 
-
-
-
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(ac-etags-requires 2)
- '(diff-hl-highlight-function nil)
- '(diff-hl-margin-mode t)
- '(erc-log-channels-directory "~/.emacs.d/erc-log")
- '(erc-modules
-   (quote
-    (autojoin button completion fill irccontrols keep-place list log match menu move-to-prompt netsplit networks noncommands readonly ring stamp track)))
- '(erc-nick "JeanMax")
- '(erc-nickserv-passwords (quote ((freenode (("JeanMax" . "password"))))))
- '(erc-prompt-for-nickserv-password nil)
- '(erc-prompt-for-password nil)
- '(erc-services-mode t)
- '(erc-track-exclude-types (quote ("JOIN" "NICK" "PART" "QUIT" "MODE" "333" "353")))
- '(erc-track-mode t)
- '(eww-search-prefix
-   "https://www.startpage.com/do/dsearch?cat=web&pl=opensearch&language=english&query=")
- '(flycheck-clang-include-path
-   (quote
-    ("../../../../../../../usr/include/SDL" "../inc" "../../inc" "../libft/inc" "../../libft/inc")))
- '(flycheck-clang-warnings (quote ("all" "extra" "error")))
- '(gud-gdb-command-name "gdb --annotate=1")
- '(highlight-indent-guides-method (quote column))
- '(ibuffer-default-sorting-mode (quote alphabetic))
- '(ibuffer-fontification-alist
-   (quote
-    ((10 buffer-read-only font-lock-constant-face)
-     (15
-      (and buffer-file-name
-           (string-match ibuffer-compressed-file-name-regexp buffer-file-name))
-      font-lock-doc-face)
-     (20
-      (string-match "^*"
-                    (buffer-name))
-      font-lock-keyword-face)
-     (25
-      (and
-       (string-match "^ "
-                     (buffer-name))
-       (null buffer-file-name))
-      italic)
-     (30
-      (memq major-mode ibuffer-help-buffer-modes)
-      font-lock-comment-face)
-     (35
-      (eq major-mode
-          (quote dired-mode))
-      font-lock-function-name-face)
-     (12
-      (eq major-mode
-          (quote erc-mode))
-      font-lock-type-face)
-     (10
-      (eq major-mode
-          (quote emacs-lisp-mode))
-      font-lock-variable-name-face))))
- '(irony-server-build-dir nil)
- '(large-file-warning-threshold nil)
- '(package-selected-packages
-   (quote
-    (git-timemachine diff-hl flycheck web-mode php-mode tuareg highlight-indent-guides bind-key auto-complete fuzzy ac-etags)))
- '(scala-font-lock:constant-list nil)
- '(scala-indent:step 4)
- '(send-mail-function (quote smtpmail-send-it))
- '(show-paren-delay 0.1)
- '(show-paren-mode t)
- '(woman-locale "en_US.UTF-8"))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(Man-overstrike ((t (:inherit bold :foreground "brightred"))))
- '(Man-underline ((t (:inherit bold :foreground "brightgreen"))))
- '(diff-added ((t (:foreground "green"))))
- '(diff-changed ((t (:foreground "color-130"))))
- '(diff-removed ((t (:foreground "red"))))
- '(diff-hl-change ((t (:background "color-130" :foreground "white"))))
- '(diff-hl-dired-change ((t (:inherit diff-hl-change))))
- '(diff-hl-delete ((t (:background "red" :foreground "white"))))
- '(diff-hl-dired-delete ((t (:inherit diff-hl-delete))))
- '(diff-hl-insert ((t (:background "green" :foreground "white"))))
- '(diff-hl-dired-insert ((t (:inherit diff-hl-insert))))
- '(highlight-indent-guides-character-face ((t (:foreground "color-241"))))
- '(match ((t (:inherit bold :foreground "brightred"))))
- '(shr-strike-through ((t (:strike-through "red")))))
+;; version-control stuffs
+(setq vc-follow-symlinks t)
+(when *is-a-server*
+  (ignore-errors (vc-dir default-directory)))
+;; (message "---%s---" (if (null buffer-file-name)
+                        ;; dired-directory
+                      ;; (file-name-directory buffer-file-name)))))
 
 (provide 'init)
 ;;; init.el ends here
+
