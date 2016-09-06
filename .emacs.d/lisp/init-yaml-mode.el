@@ -1,30 +1,25 @@
-;;; init-highlight-indent-guides.el --- init highlight-indent-guides
+;;; init-yaml-mode.el --- init yaml-mode
 ;;; Commentary:
 ;******************************************************************************;
 ;                                                                              ;
 ;                                                         :::      ::::::::    ;
-;    init-highlight-indent-guides.el                    :+:      :+:    :+:    ;
+;    init-yaml-mode.el                                  :+:      :+:    :+:    ;
 ;                                                     +:+ +:+         +:+      ;
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2016/08/29 16:40:53 by mcanal           ###   ########.fr        ;
+;    Updated: 2016/08/30 11:08:22 by mcanal           ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
 ;;; Code:
 
-(use-package highlight-indent-guides
+(use-package yaml-mode
   :ensure t
-  :defer t
 
-  ;; :init
-  ;; (add-hook 'prog-mode-hook 'highlight-indent-guides-mode) ;that thing fuck up the syntax highlighting :/
-
-  :config
-  (setq highlight-indent-guides-method 'column)
-  (set-face-attribute 'highlight-indent-guides-character-face t :foreground "color-241"))
+  :mode
+  ("\\.yml\\'" . yaml-mode))
 
 
-(provide 'init-highlight-indent-guides)
-;;; init-highlight-indent-guides.el ends here
+(provide 'init-yaml-mode)
+;;; init-yaml-mode.el ends here

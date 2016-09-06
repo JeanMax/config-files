@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2016/08/29 00:00:09 by mcanal           ###   ########.fr        ;
+;    Updated: 2016/09/01 16:47:48 by mcanal           ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -39,7 +39,7 @@
 
               ;; indentation fix (struct/switch)
               (c-set-offset 'case-label '+)
-              (setq indent-tabs-mode t)))
+              (setq-default indent-tabs-mode t))) ;DEFAUUUULT! (><)
   
   (add-hook 'c++-mode-hook
             (lambda ()

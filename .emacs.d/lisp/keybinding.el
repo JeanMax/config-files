@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/15 15:31:08 by mcanal            #+#    #+#              ;
-;    Updated: 2016/08/28 22:37:01 by mcanal           ###   ########.fr        ;
+;    Updated: 2016/08/29 17:45:25 by mcanal           ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -123,9 +123,10 @@
 ;; (bind-key* (kbd "”") 'mode-line-other-buffer) ;Altgr b
 (bind-key* (kbd "þ") 'mode-line-other-buffer) ;Altgr p
 
-(bind-key* (kbd "→") 'move-mode) ;Altgr i
+(bind-key* (kbd "→") 'move-mode) ;Altgr i TODO
+(bind-key* (kbd "̉ħ") 'highlight-indent-guides-mode) ;Altgr h
 
-;; something something transpose?
+;; TODO: something something transpose?  'e' to eval region if marked
 
 ;; (bind-key* (kbd "“") 'free) ;Altgr v
 ;; (bind-key* (kbd "ø") 'free) ;Altgr o
@@ -135,7 +136,6 @@
 ;; (bind-key* (kbd "¤") 'free) ;Altgr $
 ;; (bind-key* (kbd "ß") 'free) ;Altgr s
 ;; (bind-key* (kbd "ð") 'free) ;Altgr d
-;; (bind-key* (kbd "̉ħ") 'free) ;Altgr h
 ;; (bind-key* (kbd "ł") 'free) ;Altgr l/w
 
 (provide 'keybinding)

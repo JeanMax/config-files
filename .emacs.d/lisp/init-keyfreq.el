@@ -1,30 +1,29 @@
-;;; init-highlight-indent-guides.el --- init highlight-indent-guides
+;;; init-keyfreq.el --- init keyfreq
 ;;; Commentary:
 ;******************************************************************************;
 ;                                                                              ;
 ;                                                         :::      ::::::::    ;
-;    init-highlight-indent-guides.el                    :+:      :+:    :+:    ;
+;    init-keyfreq.el                                    :+:      :+:    :+:    ;
 ;                                                     +:+ +:+         +:+      ;
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2016/08/29 16:40:53 by mcanal           ###   ########.fr        ;
+;    Updated: 2016/09/02 11:27:08 by mcanal           ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
 ;;; Code:
 
-(use-package highlight-indent-guides
+(use-package keyfreq
   :ensure t
-  :defer t
+  :diminish keyfreq-mode
 
-  ;; :init
-  ;; (add-hook 'prog-mode-hook 'highlight-indent-guides-mode) ;that thing fuck up the syntax highlighting :/
 
   :config
-  (setq highlight-indent-guides-method 'column)
-  (set-face-attribute 'highlight-indent-guides-character-face t :foreground "color-241"))
+  (keyfreq-mode 1)
+  (keyfreq-autosave-mode 1)
+  (setq keyfreq-file "~/.emacs.d/misc/keyfreq")
+  )
 
-
-(provide 'init-highlight-indent-guides)
-;;; init-highlight-indent-guides.el ends here
+(provide 'init-keyfreq)
+;;; init-keyfreq.el ends here

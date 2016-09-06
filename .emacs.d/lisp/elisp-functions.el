@@ -8,11 +8,19 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/15 15:31:23 by mcanal            #+#    #+#              ;
-;    Updated: 2016/08/28 16:39:06 by mcanal           ###   ########.fr        ;
+;    Updated: 2016/09/05 22:46:06 by mcanal           ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
 ;;; Code:
+
+(defun set-comment-char (char)
+  "Set comment CHAR for current buffer."
+  (interactive "sComment char: ")
+  (setq comment-start char)
+  (font-lock-add-keywords
+   nil
+   `((,(concat comment-start ".+") . font-lock-comment-face))))
 
 (defun k-thx-bye ()
   "Exit server and save desktop."
@@ -21,7 +29,6 @@
     (desktop-save "~/.emacs.d/misc"))
   (save-buffers-kill-terminal)
   (kill-emacs))
-
 
 (defun insert-eol ()
   "Insert a pretty \\n !"
@@ -170,9 +177,8 @@
   (interactive)
   (point-to-register 'm)
   (comment-dwim nil)
-  (insert "debug")
+  (insert "DEBUG")
   (jump-to-register 'm))
-
 
 
 (defun indent-buffer ()

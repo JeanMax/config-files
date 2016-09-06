@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2015/04/26 16:54:03 by mcanal            #+#    #+#              ;
-;    Updated: 2016/08/29 01:01:54 by mcanal           ###   ########.fr        ;
+;    Updated: 2016/09/05 22:52:31 by mcanal           ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -24,10 +24,9 @@
             (message "Init-time: %s" (emacs-init-time))))
 
 
-;; detect emacsclient
+;; detect enemacsclient/os
 (defconst *is-a-server* (string-equal "emacsclient"
                                       (file-name-nondirectory (getenv "_"))))
-
 (defconst *is-a-mac* (eq system-type 'darwin))
 
 
@@ -58,8 +57,6 @@
 ;; (setq use-package-always-ensure t)
 (when *is-a-server*
   (setq use-package-verbose t))
-;; (require 'bind-key)
-;; (require 'diminish)
 
 ;; compile config
 (setq load-prefer-newer t)
@@ -76,6 +73,7 @@
 (require 'keybinding)
 
 ;; builtin packages
+(require 'init-emacs)
 (require 'init-erc)
 (require 'init-gnus)
 (require 'init-ibuffer)
@@ -88,33 +86,38 @@
 
 ;; packages to download
 (require 'init-ample-theme)
+(require 'init-keyfreq)
 (require 'init-company)
-(require 'init-flycheck)
 (require 'init-git-timemachine)
 (require 'init-diff-hl)
 (require 'init-highlight-indent-guides)
 (require 'init-web-mode)
 (require 'init-php-mode)
+(require 'init-yaml-mode)
 (require 'init-tuareg)
+(require 'init-flycheck) ;TODO: do not compile flycheck temp files :/
 
 ;; auto-generated customizations
 (setq custom-file "~/.emacs.d/lisp/custom.el")
 (load custom-file)
 
 
-;; function history (cf elisp-functions.el)
+;; function history (cf elisp-functions.el) FIXME
 (defvar tags-make-n-visit-history '("--regex='/.*\\(public\\|static\\|abstract\\|protected\\|private\\).*function.*(/' ~/Pliizz/src/**/*.php"))
 (eval-after-load "savehist"
   '(add-to-list 'savehist-additional-variables 'tags-make-n-visit-history))
 (setq savehist-file "~/.emacs.d/misc/history")
 (savehist-mode 1)
 
+(setq eshell-history-file-name "~/.emacs.d/misc/misc/eshell/history")
+
 ;; eww/erc I guess...
 (setq nsm-settings-file "~/.emacs.d/misc/network-security.data")
+;; eww
 (setq url-configuration-directory  "~/.emacs.d/misc/url/")
 (setq url-cookie-file "~/.emacs.d/misc/misc/url/cookies")
-
-(setq eshell-history-file-name "~/.emacs.d/misc/misc/eshell/history")
+(setq eww-search-prefix
+	  "https://www.startpage.com/do/dsearch?cat=web&pl=opensearch&language=english&query=")
 
 
 ;; encoding
@@ -131,62 +134,7 @@
 ;; disable top menu bar
 (menu-bar-mode -1)
 
-
-;; (defun right-padding (str len)
-;;   "Padd a string STR with space to the right (till total length >= LEN)."
-;;   (let ((space-len (- len (length str))))
-;;     (if (> space-len 0)
-;;         (concat str (make-string space-len ? ))
-;;       str)))
-
-(defun shorten-directory (dir max-length)
-  "DIR... Show up to MAX-LENGTH characters of a directory name DIR."
-  (let ((path (reverse (split-string (abbreviate-file-name dir) "/")))
-        (output ""))
-    (when (and path (equal "" (car path)))
-      (setq path (cdr path)))
-    (while (and path (< (length output) (- max-length 4)))
-      (setq output (concat (car path) "/" output))
-      (setq path (cdr path)))
-    (when path
-      (setq output (concat ".../" output)))
-    output))
-
-(defun extra-shorten-directory (dir)
-  "MOAR DIR!"
-  (shorten-directory
-   (replace-regexp-in-string (expand-file-name "~") "~" dir)
-   30))
-        
-;; mode line customization (bottom bar)
-(setq-default mode-line-format
-              '("%e"
-                ;TODO: and what if it's read-only And Mofified? (do we even care?!)
-                (:eval (propertize " %b " 'face
-                                   (cond ((eql buffer-read-only t)
-                                          '(:foreground "black" :background "#5180b3" :weight bold))
-                                         ((buffer-modified-p)
-                                          '(:foreground "black" :background "#dF9522" :weight bold))
-                                         (t
-                                          '(:foreground "black"  :background "#6aaf50" :weight bold)))))
-                ;; (vc-mode vc-mode)
-                (:propertize "%4l:")
-                (:eval (propertize (format "%-3s" (format-mode-line "%c")) 'face
-                                   (when (> (current-column) 80)
-                                       '(:background "#cd5542"))))
-                (:eval (propertize  (if (frame-parameter nil 'client) "@" " ") 'face
-                                   (when flycheck-current-errors
-                                     '(:background "#cd5542"))))
-                (:propertize "%6p")
-                (flycheck-mode flycheck-mode-line)
-                "     "
-                (:eval (propertize (extra-shorten-directory default-directory) 'face '(:weight bold)))
-                "   "
-                mode-line-modes
-                mode-line-misc-info))
-
-;; col/line number
-(column-number-mode 1)
+;; format line number (fringe)
 (setq linum-format "%3d ")
 
 ;; Ignore case when completing file/buffer names

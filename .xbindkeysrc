@@ -37,38 +37,38 @@
 
 #wl
 "/home/mcanal/sh_script/move_window.sh -l"
-    m:0x28 + c:83
-    Alt+Mod3 + KP_Left 
+    m:0x14 + c:83
+    Control+Mod2 + KP_Left 
 
 #wr
 "/home/mcanal/sh_script/move_window.sh -r"
-    m:0x28 + c:85
-    Alt+Mod3 + KP_Right 
+    m:0x14 + c:85
+    Control+Mod2 + KP_Right 
 
 #wf
 "/home/mcanal/sh_script/move_window.sh -f"
-    m:0x28 + c:84
-    Alt+Mod3 + KP_Begin 
+    m:0x14 + c:84
+    Control+Mod2 + KP_Begin 
 
 #wtl
 "/home/mcanal/sh_script/move_window.sh -tl"
-    m:0x28 + c:79
-    Alt+Mod3 + KP_Home 
+    m:0x14 + c:79
+    Control+Mod2 + KP_Home 
 
 #wtr
 "/home/mcanal/sh_script/move_window.sh -tr"
-    m:0x28 + c:81
-    Alt+Mod3 + KP_Prior 
+    m:0x14 + c:81
+    Control+Mod2 + KP_Prior 
 
 #wbl
 "/home/mcanal/sh_script/move_window.sh -bl"
-    m:0x28 + c:87
-    Alt+Mod3 + KP_End 
+    m:0x14 + c:87
+    Control+Mod2 + KP_End 
 
 #wbr
 "/home/mcanal/sh_script/move_window.sh -br"
-    m:0x28 + c:89
-    Alt+Mod3 + KP_Next 
+    m:0x14 + c:89
+    Control+Mod2 + KP_Next 
 
 #
 # End of xbindkeys configuration

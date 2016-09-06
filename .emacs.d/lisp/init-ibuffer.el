@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2015/04/26 16:54:03 by mcanal            #+#    #+#              ;
-;    Updated: 2016/08/27 18:41:28 by mcanal           ###   ########.fr        ;
+;    Updated: 2016/09/06 00:54:22 by mcanal           ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -30,6 +30,7 @@
            ("C" (filename . ".*\\.c$"))
            ("H" (filename . ".*\\.h$"))
            ("Php" (filename . ".*\\.php$"))
+           ("Yaml" (filename . ".*\\.yml$"))
            ("Sh" (filename . ".*\\.sh$"))
            ("Dir" (mode . dired-mode))
            ("eLisp" (filename . ".*\\.el$"))
@@ -79,14 +80,14 @@
                   (string-match ibuffer-compressed-file-name-regexp buffer-file-name))
              font-lock-doc-face)
          (20 (string-match "^*"  (buffer-name))
-             font-lock-keyword-face)
+             font-lock-function-name-face)
          (25 (and (string-match "^ " (buffer-name))
                   (null buffer-file-name))
              italic)
          (30 (memq major-mode ibuffer-help-buffer-modes)
              font-lock-comment-face)
          (35 (eq major-mode 'dired-mode)
-             font-lock-function-name-face)
+             font-lock-keyword-face)
          (12 (eq major-mode 'erc-mode)
              font-lock-type-face)
          (10 (eq major-mode 'emacs-lisp-mode)

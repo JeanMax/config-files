@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2015/04/26 16:54:03 by mcanal            #+#    #+#              ;
-;    Updated: 2016/08/28 23:57:27 by mcanal           ###   ########.fr        ;
+;    Updated: 2016/08/29 16:14:48 by mcanal           ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -16,11 +16,16 @@
 
 ;; (account infos in .authinfo)
 (use-package gnus
-  :functions gnus-demon-add-handler
-  :defer t
+  ;; :defer t
+  :commands (gnus)
+
 
   :config
   (progn
+    (setq gnus-save-newsrc-file nil)
+    (setq gnus-use-dribble-file nil)
+    (setq gnus-agent nil)
+    (setq gnus-use-full-window nil)
     (setq send-mail-function (quote smtpmail-send-it))
     (setq gnus-select-method
           '(nnimap "gmail"
@@ -34,12 +39,28 @@
      gnus-thread-sort-functions '(gnus-thread-sort-by-number
                                   (not gnus-thread-sort-by-date)))
 
-    ;; Demon to fetch email every 5 minutes when Emacs has been idle for 1 minutes
-    (eval-when-compile (require 'gnus-demon))
-    (gnus-demon-add-handler '(lambda()
-                              (gnus-demon-scan-news)
-                              (message "*Ninja-Mail-Check!*"))
-                            5 1)))
+    ;; Demon to fetch email every 2.5 minutes when Emacs has been idle for 20 seconds
+    (use-package gnus-demon
+      :defer t
+
+      :config
+      (eval-when-compile (require 'gnus-demon))
+      (setq gnus-demon-timestep 1)
+      (gnus-demon-add-handler '(lambda()
+                                 (gnus-demon-scan-news)
+                                 ;; (gnus-group-get-new-news)
+                                 (message "*Ninja-Mail-Check @%s!*"
+                                          (format-time-string "%T")))
+                              150 20))
+
+    ;; (use-package gnus-notifications
+      ;; :defer t))
+
+  (defun gnu ()
+    "Launch gnus then gnus-demon (Ok I missed something in the config)..."
+    (interactive)
+    (gnus)
+    (gnus-demon-init))))
 
 
 (provide 'init-gnus)

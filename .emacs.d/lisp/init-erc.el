@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2015/04/26 16:54:03 by mcanal            #+#    #+#              ;
-;    Updated: 2016/08/27 21:52:10 by mcanal           ###   ########.fr        ;
+;    Updated: 2016/09/06 00:44:27 by mcanal           ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -44,7 +44,10 @@
   ;; (setq erc-prompt-for-password nil)
   (erc-track-mode)
   (setq erc-track-exclude-types '("JOIN" "NICK" "PART" "QUIT" "MODE" "333" "353"))
-)
+
+  (set-face-attribute 'erc-input-face nil :foreground "#cd5542")
+  (set-face-attribute 'erc-notice-face t :foreground "#757575")
+  (set-face-attribute 'erc-keyword-face t :background "#6aaf50"))
 
 
 (provide 'init-erc)

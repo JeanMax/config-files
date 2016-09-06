@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2016/08/29 01:03:39 by mcanal           ###   ########.fr        ;
+;    Updated: 2016/09/06 00:17:18 by mcanal           ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -23,19 +23,22 @@
   (add-hook 'prog-mode-hook 'global-flycheck-mode)
   
   :config
-  (progn
-    ;; (setq flycheck-mode-line-prefix "f")
-    (setq flycheck-clang-include-path
-          '("../../../../../../../usr/include/SDL" "../inc" "../../inc" "../libft/inc" "../../libft/inc"))
-    (setq flycheck-clang-warnings '("all" "extra" "error")))
-
-  (use-package flycheck-status-emoji
-    :ensure t
-    :defer t
-
-    :init
-    (add-hook 'flycheck-mode-hook 'flycheck-status-emoji-mode))
-  )
+  ;; (setq flycheck-mode-line-prefix "f")
+  (setq flycheck-clang-include-path
+		'("../../../../../../../usr/include/SDL"
+		  "../inc"
+		  "../../inc"
+		  "../libft/inc"
+		  "../../libft/inc")) ; -.-
+  (setq flycheck-clang-warnings
+		'("all"
+		  "extra"
+		  "error"))
+  ;; (setq flycheck-check-syntax-automatically
+  ;; 		'(save
+  ;; 		  mode-enabled
+  ;; 		  new-line))
+  (setq flycheck-idle-change-delay 2))
 
 
 (provide 'init-flycheck)

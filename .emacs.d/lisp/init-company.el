@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2016/08/28 03:58:39 by mcanal           ###   ########.fr        ;
+;    Updated: 2016/08/29 17:46:41 by mcanal           ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -51,13 +51,13 @@
     :config
     (setq company-statistics-file "~/.emacs.d/misc/company-statistics-cache.el")))
 
-  (defun complete-or-indent ()
-    (interactive)
-    (if (company-manual-begin)
-        (company-complete-common)
-      (indent-according-to-mode)))
+  ;; (defun complete-or-indent ()
+  ;;   (interactive)
+  ;;   (if (company-manual-begin)
+  ;;       (company-complete-common)
+  ;;     (indent-according-to-mode)))
 
-  (defun indent-or-complete ()
+  (defun indent-or-complete () ;TODO: upgrade it!
     (interactive)
     (if (looking-at "\\_>")
         (company-complete-common)
