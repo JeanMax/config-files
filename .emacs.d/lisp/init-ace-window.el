@@ -1,45 +1,36 @@
-;;; init-flycheck.el --- init flycheck
+;;; init-ace-window.el --- init ace-window
 ;;; Commentary:
 ;******************************************************************************;
 ;                                                                              ;
 ;                                                         :::      ::::::::    ;
-;    init-flycheck.el                                   :+:      :+:    :+:    ;
+;    init-ace-window.el                                 :+:      :+:    :+:    ;
 ;                                                     +:+ +:+         +:+      ;
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2016/09/17 19:52:03 by mcanal           ###   ########.fr        ;
+;    Updated: 2016/09/17 19:20:14 by mcanal           ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
-;;; Code:
+;; x - delete window
+;; m - swap (move) window
+;; v - split window vertically
+;; b - split window horizontally
+;; n - select the previous window
+;; i - maximize window (select which window)
+;; o - maximize current window
 
-(use-package flycheck
+;;; Code:
+(use-package ace-window
   :ensure t
   :defer t
-  :diminish flycheck-mode
 
   :init
-  (add-hook 'prog-mode-hook 'global-flycheck-mode)
-  
+  (bind-key (kbd "ø") 'ace-window) ;altrg o
+
   :config
-  ;; (setq flycheck-mode-line-prefix "f")
-  (setq flycheck-clang-include-path
-		'("../../../../../../../usr/include/SDL"
-		  "../inc"
-		  "../../inc"
-		  "../libft/inc"
-		  "../../libft/inc")) ; -.-
-  (setq flycheck-clang-warnings
-		'("all"
-		  "extra"
-		  "error"))
-  ;; (setq flycheck-idle-change-delay 2)
-  (setq flycheck-check-syntax-automatically
-  		'(save
-  		  mode-enabled
-  		  new-line)))
+  (setq aw-dispatch-always t)
+  (setq aw-keys '(?a ?z ?e ?r ?t ?y ?u)))
 
-
-(provide 'init-flycheck)
-;;; init-flycheck.el ends here
+(provide 'init-ace-window)
+;;; init-ace-window.el ends here

@@ -1,4 +1,4 @@
-;;; move-mode.el --- init ample-theme
+;;; move-mode.el --- move-mode!
 ;;; Commentary:
 ;******************************************************************************;
 ;                                                                              ;
@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2016/08/28 04:38:00 by mcanal           ###   ########.fr        ;
+;    Updated: 2016/09/18 14:34:10 by mcanal           ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -35,7 +35,7 @@
             (define-key map (kbd "x") 'kill-region)
             (define-key map (kbd "c") 'kill-ring-save)
             (define-key map (kbd "v") 'yank)
-            
+
             (define-key map (kbd "g") 'goto-line)
             (define-key map (kbd "z") 'undo)
             (define-key map (kbd "s") 'save-buffer)

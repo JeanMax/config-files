@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2016/08/29 17:46:41 by mcanal           ###   ########.fr        ;
+;    Updated: 2016/09/17 18:16:55 by mcanal           ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -23,10 +23,11 @@
 
   :init
   (add-hook 'after-init-hook 'global-company-mode)
-  (add-hook 'minibuffer-inactive-mode 'company-mode)
+  ;; (add-hook 'minibuffer-inactive-mode 'company-mode)
 
   :config
   (progn
+    (setq company-require-match 'never)
     (setq company-backends '((company-files
                               company-keywords
                               company-capf
@@ -35,8 +36,9 @@
                               company-dabbrev-code
                               company-etags
                               company-gtags)))
-    (setq company-echo-delay 0)
-    (setq company-idle-delay nil) ; do not autostart
+    ;; (setq company-echo-delay 0)
+    ;; (setq company-idle-delay nil) ; do not autostart
+    (setq company-idle-delay 0.1)
     (setq company-minimum-prefix-length 1) ; 0 to complete '.'
     ;; (setq company-show-numbers t)
 
@@ -57,7 +59,8 @@
   ;;       (company-complete-common)
   ;;     (indent-according-to-mode)))
 
-  (defun indent-or-complete () ;TODO: upgrade it!
+    ;TODO: cf ido
+  (defun indent-or-complete () ;TODO: upgrade it! (cf ~smart-indent or something like that)
     (interactive)
     (if (looking-at "\\_>")
         (company-complete-common)
@@ -73,6 +76,7 @@
             ;; (define-key company-active-map (kbd "<down>") nil)
             ;; (define-key company-active-map (kbd "<up>") nil)
             (define-key company-active-map (kbd "TAB") 'company-complete-common-or-cycle)
+            (define-key company-active-map (kbd "C-j") 'company-complete-selection)
             ;; (define-key company-active-map (kbd "<backtab>") 'company-complete-selection)
             (define-key company-active-map (kbd "<backtab>") 'company-select-previous-or-abort)
             (define-key company-active-map (kbd "<next>") 'company-select-next-or-abort)

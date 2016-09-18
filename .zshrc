@@ -6,16 +6,13 @@
 #    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/23 17:38:59 by mcanal            #+#    #+#              #
-#    Updated: 2016/08/28 02:40:37 by mcanal           ###   ########.fr        #
+#    Updated: 2016/09/18 14:32:20 by mcanal           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # default editor
 export ALTERNATE_EDITOR=""
 export EDITOR="emacsclient -t"
-
-#ocaml shit
-. /home/mcanal/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
 
 # Reglage du terminal
 if [[ $TERM = dumb ]]; then
@@ -26,8 +23,7 @@ else
     echo -n "\033]0;$PWD\007";
 fi
 
-
-#mail
+#mail TODO: move these in another file
 export EMAIL="mc.maxcanal@gmail.com"
 export NAME="Max Canal"
 export SMTPSERVER="smtp.gmail.com"
@@ -75,16 +71,16 @@ zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' 'm:{a-zA-Z}={A-Za-z}' 'r:
 #zstyle ':completion:*' use-compctl false
 #zstyle ':completion:*' verbose true
 
-# des couleurs pour la complétion 
+# des couleurs pour la complétion
 zmodload zsh/complist
 setopt extendedglob
-export TAB_COLORS="no=00:fi=00:di=01;34:ln=01;36:\ 
-  pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:\ 
-  or=40;31;01:ex=01;31:tw=40;1;41:ow=40;1;41:*.tar=01;31:*.tgz=01;31:\ 
-  *.arj=01;31:*.taz=01;31:*.lzh=01;31:*.zip=01;31:\ 
-  *.z=01;31:*.Z=01;31:*.gz=01;31:*.deb=01;31:\ 
-  *.jpg=01;35:*.gif=01;35:*.bmp=01;35:*.ppm=01;35:\ 
-  *.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:\ 
+export TAB_COLORS="no=00:fi=00:di=01;34:ln=01;36:\
+  pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:\
+  or=40;31;01:ex=01;31:tw=40;1;41:ow=40;1;41:*.tar=01;31:*.tgz=01;31:\
+  *.arj=01;31:*.taz=01;31:*.lzh=01;31:*.zip=01;31:\
+  *.z=01;31:*.Z=01;31:*.gz=01;31:*.deb=01;31:\
+  *.jpg=01;35:*.gif=01;35:*.bmp=01;35:*.ppm=01;35:\
+  *.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:\
   *.mpg=01;37:*.avi=01;37:*.gl=01;37:*.dl=01;37:"
 zstyle ':completion:*' list-colors ${(s.:.)TAB_COLORS}
 zstyle ':completion:*:*:kill:*:processes' list-colors "=(#b) #([0-9]#)*=36=31"
@@ -92,10 +88,6 @@ zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
 # Couleur prompt
 autoload -U colors && colors
-
-# git setup
-git config --global user.email "mcanal@student.42.fr"
-git config --global user.name "JeanMax"
 
 NORMAL="%{$reset_color%}"
 
@@ -141,7 +133,7 @@ precmd ()
 
 }
 
-# enable color support of ls and also add handy aliases 
+# enable color support of ls and also add handy aliases
 #if [ -x /usr/bin/dircolors ]; then
 #    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
@@ -166,6 +158,9 @@ alias gpom="git push origin master"
 alias gm="git merge"
 alias gu="git add -u"
 alias gl="git log"
+alias gs="git status"
+alias gf="git fetch"
+alias gd="git diff"
 
 # Definition des alias
 alias lxterminal='lxterminal --geometry=81x45'
@@ -181,10 +176,9 @@ alias la='ls -lA'
 alias lah='ls -lAh'
 alias lh='ls -lh'
 #alias ls='ls -G'
-alias usb='cd /media/mcanal/Lexar/'
 alias del='~/sh_script/trash.sh'
 alias zconf='e ~/.zshrc'
-alias econf='e ~/.emacs'
+alias econf='e ~/.emacs.d/init.el'
 # alias e='sh ~/sh_script/tab_emacs.sh'
 alias e="$EDITOR"
 alias cd='. ~/sh_script/tab_cd.sh'

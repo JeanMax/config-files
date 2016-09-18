@@ -1,45 +1,33 @@
-;;; init-flycheck.el --- init flycheck
+;;; init-kmacro.el --- init kmacro
 ;;; Commentary:
 ;******************************************************************************;
 ;                                                                              ;
 ;                                                         :::      ::::::::    ;
-;    init-flycheck.el                                   :+:      :+:    :+:    ;
+;    init-kmacro.el                                      :+:      :+:    :+:    ;
 ;                                                     +:+ +:+         +:+      ;
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2016/09/17 19:52:03 by mcanal           ###   ########.fr        ;
+;    Updated: 2016/09/17 15:26:26 by mcanal           ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
 ;;; Code:
 
-(use-package flycheck
-  :ensure t
+(use-package kmacro
   :defer t
-  :diminish flycheck-mode
 
-  :init
-  (add-hook 'prog-mode-hook 'global-flycheck-mode)
-  
   :config
-  ;; (setq flycheck-mode-line-prefix "f")
-  (setq flycheck-clang-include-path
-		'("../../../../../../../usr/include/SDL"
-		  "../inc"
-		  "../../inc"
-		  "../libft/inc"
-		  "../../libft/inc")) ; -.-
-  (setq flycheck-clang-warnings
-		'("all"
-		  "extra"
-		  "error"))
-  ;; (setq flycheck-idle-change-delay 2)
-  (setq flycheck-check-syntax-automatically
-  		'(save
-  		  mode-enabled
-  		  new-line)))
 
+  (defun toggle-macro ()
+    "Toggle macro recording."
+    (interactive)
+    (if (null defining-kbd-macro)
+        (kmacro-start-macro nil) (kmacro-end-macro nil)))
 
-(provide 'init-flycheck)
-;;; init-flycheck.el ends here
+  (bind-key* (kbd "<f6>") 'toggle-macro) ; -> elisp-functions.el
+  (bind-key* (kbd "»") 'kmacro-end-and-call-macro) ;Altgr x
+  )
+
+(provide 'init-kmacro)
+;;; init-kmacro.el ends here

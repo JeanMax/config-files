@@ -1,45 +1,33 @@
-;;; init-flycheck.el --- init flycheck
+;;; init-eww-mode.el --- init eww-mode
 ;;; Commentary:
 ;******************************************************************************;
 ;                                                                              ;
 ;                                                         :::      ::::::::    ;
-;    init-flycheck.el                                   :+:      :+:    :+:    ;
+;    init-eww-mode.el                                   :+:      :+:    :+:    ;
 ;                                                     +:+ +:+         +:+      ;
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2016/09/17 19:52:03 by mcanal           ###   ########.fr        ;
+;    Updated: 2016/09/10 15:29:08 by mcanal           ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
 ;;; Code:
 
-(use-package flycheck
-  :ensure t
+(use-package eww-mode
   :defer t
-  :diminish flycheck-mode
+  :defines eww-search-prefix
 
-  :init
-  (add-hook 'prog-mode-hook 'global-flycheck-mode)
-  
   :config
-  ;; (setq flycheck-mode-line-prefix "f")
-  (setq flycheck-clang-include-path
-		'("../../../../../../../usr/include/SDL"
-		  "../inc"
-		  "../../inc"
-		  "../libft/inc"
-		  "../../libft/inc")) ; -.-
-  (setq flycheck-clang-warnings
-		'("all"
-		  "extra"
-		  "error"))
-  ;; (setq flycheck-idle-change-delay 2)
-  (setq flycheck-check-syntax-automatically
-  		'(save
-  		  mode-enabled
-  		  new-line)))
+  (progn
+	(setq eww-search-prefix
+		  "https://www.startpage.com/do/dsearch?cat=web&pl=opensearch&language=english&query=")
+
+	(use-package url
+	  :config
+	  (setq url-configuration-directory  "~/.emacs.d/misc/url/")
+	  (setq url-cookie-file "~/.emacs.d/misc/url/cookies"))))
 
 
-(provide 'init-flycheck)
-;;; init-flycheck.el ends here
+(provide 'init-eww-mode)
+;;; init-eww-mode.el ends here

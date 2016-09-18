@@ -7,9 +7,9 @@
 ;******************************************************************************;
 
 
-
-(require 'string)
-
+(if (version< emacs-version "23")
+    (load "string.el")
+  (require 'string))
 
 (set 'line-std-width 80)
 
@@ -105,7 +105,7 @@ reversed string of the comment start otherwise."
   )
 
 (defun comments-make-left-padded-line (s-text i-offset)
-  "Returns a comments string left padded on line-std-width columns."  
+  "Returns a comments string left padded on line-std-width columns."
   (let* ((pad (comments-compute-left-padding s-text i-offset)))
     (comments-make-padded-line
      (concat (make-string i-offset ? ) s-text)
@@ -115,14 +115,14 @@ reversed string of the comment start otherwise."
   )
 
 (defun comments-make-center-padded-line (s-text)
-  "Returns a comments string center padded on line-std-width columns."  
+  "Returns a comments string center padded on line-std-width columns."
   (let* ((pad (comments-compute-center-padding s-text)))
     (comments-make-padded-line s-text (car pad) (cdr pad))
     )
   )
 
 (defun comments-make-right-padded-line (s-text i-offset)
-  "Returns a comments string right padded on line-std-width columns."  
+  "Returns a comments string right padded on line-std-width columns."
   (let* ((pad (comments-compute-right-padding s-text i-offset)))
     (comments-make-padded-line
      (concat s-text (make-string i-offset ? ))
@@ -133,14 +133,14 @@ reversed string of the comment start otherwise."
 
 (defun comments-make-bar ()
   "Returns as a string a full comments bar of line-std-width."
-  (concat (comments-start-token) 
+  (concat (comments-start-token)
 	  (make-string (- line-std-width (comments-tokens-length)) ?*)
 	  (comments-end-token) "\n")
   )
 
 (defun comments-make-empty-line ()
   "Returns as a string an empty comments line of line-std-width."
-  (concat (comments-start-token) 
+  (concat (comments-start-token)
 	  (make-string (- line-std-width (comments-tokens-length)) ? )
 	  (comments-end-token) "\n")
   )

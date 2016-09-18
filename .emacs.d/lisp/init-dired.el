@@ -1,32 +1,37 @@
-;;; init-highlight-indent-guides.el --- init highlight-indent-guides
+;;; init-dired.el --- init dired
 ;;; Commentary:
 ;******************************************************************************;
 ;                                                                              ;
 ;                                                         :::      ::::::::    ;
-;    init-highlight-indent-guides.el                    :+:      :+:    :+:    ;
+;    init-dired.el                                      :+:      :+:    :+:    ;
 ;                                                     +:+ +:+         +:+      ;
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2016/09/11 18:28:40 by mcanal           ###   ########.fr        ;
+;    Updated: 2016/09/18 13:12:11 by mcanal           ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
 ;;; Code:
 
-(use-package highlight-indent-guides
-  :ensure t
+(use-package dired
   :defer t
 
-  ;; :init
-  ;; (add-hook 'prog-mode-hook 'highlight-indent-guides-mode) ;that thing fuck up the syntax highlighting :/
-
   :config
-  (setq highlight-indent-guides-method 'column)
-  (set-face-attribute 'highlight-indent-guides-character-face t :foreground "color-241"))
+  (set-face-attribute 'dired-directory nil :foreground "#5180b3") ;FIXME
+  (set-face-attribute 'dired-symlink nil :foreground "#6aaf50")
+  (local-set-key (kbd "f") 'dired-find-files))
 
-(when (version< "23" emacs-version)
-  (bind-key* (kbd "̉ħ") 'highlight-indent-guides-mode)) ;Altgr h
 
-(provide 'init-highlight-indent-guides)
-;;; init-highlight-indent-guides.el ends here
+(bind-key* (kbd "C-f") 'find-grep-dired)
+(bind-key* (kbd "M-f") 'find-name-dired)
+
+(defun dired-find-files (&optional arg)
+  "Open each of the marked files, or the file under the point, or when prefix ARG, the next N files."
+  (interactive "P")
+  (let* ((fn-list (dired-get-marked-files nil arg)))
+    (mapc 'find-file fn-list)))
+
+
+(provide 'init-dired)
+;;; init-dired.el ends here

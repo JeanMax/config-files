@@ -8,10 +8,15 @@
 
 
 
-(require 'string)
-(require 'list)
-(require 'comments)
 
+(if (version< emacs-version "23")
+    (progn
+      (load "string.el")
+      (load "list.el")
+      (load "comments.el"))
+  (require 'string)
+  (require 'list)
+  (require 'comments))
 
 
 ;******************************************************************************;
@@ -22,7 +27,7 @@
 ;    By: login____ <mail_______@student.42.fr>      +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: yyyy/mm/dd 15:27:11 by login____         #+#    #+#              ;
-;    Updated: 2016/07/30 14:33:39 by mcanal           ###   ########.fr        ;
+;    Updated: 2016/09/11 18:17:59 by mcanal           ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 

@@ -1,45 +1,28 @@
-;;; init-flycheck.el --- init flycheck
+;;; init-diff.el --- init diff
 ;;; Commentary:
 ;******************************************************************************;
 ;                                                                              ;
 ;                                                         :::      ::::::::    ;
-;    init-flycheck.el                                   :+:      :+:    :+:    ;
+;    init-diff-mode.el                                  :+:      :+:    :+:    ;
 ;                                                     +:+ +:+         +:+      ;
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2016/09/17 19:52:03 by mcanal           ###   ########.fr        ;
+;    Updated: 2016/09/13 21:45:56 by mcanal           ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
 ;;; Code:
 
-(use-package flycheck
-  :ensure t
+(use-package diff-mode
   :defer t
-  :diminish flycheck-mode
-
-  :init
-  (add-hook 'prog-mode-hook 'global-flycheck-mode)
   
   :config
-  ;; (setq flycheck-mode-line-prefix "f")
-  (setq flycheck-clang-include-path
-		'("../../../../../../../usr/include/SDL"
-		  "../inc"
-		  "../../inc"
-		  "../libft/inc"
-		  "../../libft/inc")) ; -.-
-  (setq flycheck-clang-warnings
-		'("all"
-		  "extra"
-		  "error"))
-  ;; (setq flycheck-idle-change-delay 2)
-  (setq flycheck-check-syntax-automatically
-  		'(save
-  		  mode-enabled
-  		  new-line)))
+  (defadvice kill-new (before strip-leading-diff-chars activate)
+    "When copying from a diff buffer, strip the leading -, +, ! characters."
+    (if (eq major-mode 'diff-mode)
+        (ad-set-arg 0 (replace-regexp-in-string "^." "" (ad-get-arg 0))))))
 
 
-(provide 'init-flycheck)
-;;; init-flycheck.el ends here
+(provide 'init-diff-mode)
+;;; init-diff-mode.el ends here

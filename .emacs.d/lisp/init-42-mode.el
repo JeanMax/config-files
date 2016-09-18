@@ -1,28 +1,25 @@
-;;; init-diff.el --- init diff
+;;; init-42-mode.el --- init 42-mode
 ;;; Commentary:
 ;******************************************************************************;
 ;                                                                              ;
 ;                                                         :::      ::::::::    ;
-;    init-diff.el                                  :+:      :+:    :+:    ;
+;    init-42-mode.el                                     :+:      :+:    :+:   ;
 ;                                                     +:+ +:+         +:+      ;
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2016/08/27 18:27:27 by mcanal           ###   ########.fr        ;
+;    Updated: 2016/09/11 21:44:12 by mcanal           ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
 ;;; Code:
 
-(use-package diff-mode
-  :defer t
-  
-  :config
-  (defadvice kill-new (before strip-leading-diff-chars activate)
-    "When copying from a diff buffer, strip the leading -, +, ! characters."
-    (if (eq major-mode 'diff-mode)
-        (ad-set-arg 0 (replace-regexp-in-string "^." "" (ad-get-arg 0))))))
+(use-package 42-mode
+  :load-path
+  "~/.emacs.d/site-lisp/42"
 
+  :init
+  (require 'header))
 
-(provide 'init-diff)
-;;; init-diff.el ends here
+(provide 'init-42-mode)
+;;; init-42-mode.el ends here

@@ -1,45 +1,38 @@
-;;; init-flycheck.el --- init flycheck
+;;; init-diff.el --- init diff
 ;;; Commentary:
 ;******************************************************************************;
 ;                                                                              ;
 ;                                                         :::      ::::::::    ;
-;    init-flycheck.el                                   :+:      :+:    :+:    ;
+;    init-vc-dir.el                                  :+:      :+:    :+:    ;
 ;                                                     +:+ +:+         +:+      ;
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2016/09/17 19:52:03 by mcanal           ###   ########.fr        ;
+;    Updated: 2016/09/13 21:54:13 by mcanal           ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
 ;;; Code:
 
-(use-package flycheck
-  :ensure t
+(use-package vc-dir
   :defer t
-  :diminish flycheck-mode
 
   :init
-  (add-hook 'prog-mode-hook 'global-flycheck-mode)
-  
+  (setq vc-follow-symlinks t)
+  (when *is-a-server*
+    (ignore-errors (vc-dir default-directory)))
+
   :config
-  ;; (setq flycheck-mode-line-prefix "f")
-  (setq flycheck-clang-include-path
-		'("../../../../../../../usr/include/SDL"
-		  "../inc"
-		  "../../inc"
-		  "../libft/inc"
-		  "../../libft/inc")) ; -.-
-  (setq flycheck-clang-warnings
-		'("all"
-		  "extra"
-		  "error"))
-  ;; (setq flycheck-idle-change-delay 2)
-  (setq flycheck-check-syntax-automatically
-  		'(save
-  		  mode-enabled
-  		  new-line)))
+  (local-set-key (kbd "f") 'vc-dir-find-files))
+  
+(bind-key* (kbd "M-v") 'vc-dir)
+  
+(defun vc-dir-find-files (&optional arg)
+  "Open each of the marked files, or the file under the point, or when prefix ARG, the next N files."
+  (interactive "P")
+  (let* ((fn-list (vc-dir-marked-files)))
+    (mapc 'find-file fn-list)))
 
 
-(provide 'init-flycheck)
-;;; init-flycheck.el ends here
+(provide 'init-vc-dir)
+;;; init-vc-dir.el ends here

@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2015/04/26 16:54:03 by mcanal            #+#    #+#              ;
-;    Updated: 2016/08/29 16:14:48 by mcanal           ###   ########.fr        ;
+;    Updated: 2016/09/16 11:46:48 by mcanal           ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -55,12 +55,13 @@
 
     ;; (use-package gnus-notifications
       ;; :defer t))
+    ))
 
-  (defun gnu ()
-    "Launch gnus then gnus-demon (Ok I missed something in the config)..."
-    (interactive)
-    (gnus)
-    (gnus-demon-init))))
+(defun gnu ()
+  "Launch gnus then gnus-demon (Ok I missed something in the config)..."
+  (interactive)
+  (gnus)
+  (gnus-demon-init))
 
 
 (provide 'init-gnus)

@@ -1,45 +1,27 @@
-;;; init-flycheck.el --- init flycheck
+;;; init-rainbow-delimiters.el --- init rainbow-delimiters
 ;;; Commentary:
 ;******************************************************************************;
 ;                                                                              ;
 ;                                                         :::      ::::::::    ;
-;    init-flycheck.el                                   :+:      :+:    :+:    ;
+;    init-rainbow-delimiters.el                         :+:      :+:    :+:    ;
 ;                                                     +:+ +:+         +:+      ;
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2016/09/17 19:52:03 by mcanal           ###   ########.fr        ;
+;    Updated: 2016/09/16 23:22:12 by mcanal           ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
 ;;; Code:
 
-(use-package flycheck
+(use-package rainbow-delimiters
   :ensure t
   :defer t
-  :diminish flycheck-mode
 
   :init
-  (add-hook 'prog-mode-hook 'global-flycheck-mode)
-  
-  :config
-  ;; (setq flycheck-mode-line-prefix "f")
-  (setq flycheck-clang-include-path
-		'("../../../../../../../usr/include/SDL"
-		  "../inc"
-		  "../../inc"
-		  "../libft/inc"
-		  "../../libft/inc")) ; -.-
-  (setq flycheck-clang-warnings
-		'("all"
-		  "extra"
-		  "error"))
-  ;; (setq flycheck-idle-change-delay 2)
-  (setq flycheck-check-syntax-automatically
-  		'(save
-  		  mode-enabled
-  		  new-line)))
+  (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
 
 
-(provide 'init-flycheck)
-;;; init-flycheck.el ends here
+
+(provide 'init-rainbow-delimiters)
+;;; init-rainbow-delimiters.el ends here

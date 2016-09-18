@@ -8,8 +8,10 @@
 
 
 
-(require 'list)
 
+(if (version< emacs-version "23")
+      (load "list.el")
+  (require 'list))
 
 
 (defun string-reverse (s)
