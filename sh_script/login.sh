@@ -24,8 +24,8 @@ function _sync () {
     echo "Are you sure you want to continue (yes/no)?";
     read -p "> " ANSWER;
     case "$ANSWER" in
-	    [Yy]|[Yy][Ee][Ss] ) ;;
-	    * ) exit ;;
+        [Yy]|[Yy][Ee][Ss] ) ;;
+        * ) exit ;;
     esac;
 
     rsync $RSYNC_FLAGS $@

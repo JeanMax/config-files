@@ -6,7 +6,7 @@
 #    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/02/14 04:38:01 by mcanal            #+#    #+#              #
-#    Updated: 2016/08/23 23:44:23 by mcanal           ###   ########.fr        #
+#    Updated: 2016/09/18 15:06:41 by mcanal           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,6 @@ make fclean
 git add -A .
 git status;
 if [ "$2" != "go" ]; then
-	sleep 3
+    sleep 3
 fi
 git commit -m "$1" && git push && git status

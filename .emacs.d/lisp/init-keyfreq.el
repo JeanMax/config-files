@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2016/09/10 13:52:22 by mcanal           ###   ########.fr        ;
+;    Updated: 2016/09/18 15:08:08 by mcanal           ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -22,7 +22,7 @@
 
   :config
   (when *is-a-server*
-	(keyfreq-mode 1))
+    (keyfreq-mode 1))
   (keyfreq-autosave-mode 1)
   (setq keyfreq-file "~/.emacs.d/misc/keyfreq"))
 
