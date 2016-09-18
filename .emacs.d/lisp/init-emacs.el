@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2016/09/18 13:15:09 by mcanal           ###   ########.fr        ;
+;    Updated: 2016/09/18 18:13:47 by mcanal           ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -94,7 +94,6 @@
     (bind-key* (kbd "<M-up>") 'linum-mode)))
 
   ;; search and replace
-  (bind-key* (kbd "<f9>") 'isearch-forward) ;unused
   (bind-key* (kbd "<f10>") 'query-replace)
   ;; (bind-key* (kbd "C-r") 'rgrep)
   (bind-key* (kbd "C-r") 'isearch-backward)
@@ -107,7 +106,7 @@
 
   ;; registers
   (bind-key* (kbd "<f7>") 'point-to-register)
-  (bind-key* (kbd "µ") 'jump-to-register) ;Altgr m
+  (bind-key* (kbd "<f9>") 'jump-to-register) ;Altgr m
   ;; (bind-key* (kbd "µ") 'point-to-register) ;Altgr m
 
   ;; misc

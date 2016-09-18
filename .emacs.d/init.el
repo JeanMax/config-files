@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2015/04/26 16:54:03 by mcanal            #+#    #+#              ;
-;    Updated: 2016/09/18 13:40:59 by mcanal           ###   ########.fr        ;
+;    Updated: 2016/09/18 19:20:07 by mcanal           ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -26,6 +26,7 @@
             (setq gc-cons-threshold initial-gc-cons-threshold)
             (setq file-name-handler-alist initial-file-name-handler-alist)
             (when (< 23 emacs-major-version)
+              (ignore-errors (benchmark-init/activate))
               (byte-recompile-directory "~/.emacs.d/lisp" 0)
               (byte-recompile-directory "~/.emacs.d/site-lisp" 0)
               (message "Init-time: %s" (emacs-init-time)))))
@@ -37,10 +38,6 @@
 ;; detect emacsclient/os
 (defconst *is-a-server* (string-equal "emacsclient" (file-name-nondirectory (getenv "_"))))
 (defconst *is-a-mac* (eq system-type 'darwin))
-
-;; auto-generated customizations
-(setq custom-file "~/.emacs.d/lisp/custom.el")
-(load custom-file)
 
 (add-to-list 'load-path "~/.emacs.d/lisp")
 ;; builtin packages
@@ -69,15 +66,18 @@
 (when (< 23 emacs-major-version)
   ;; packages to download: package.el not builtin till emacs24... just give up
   (require 'init-ido)
+  (require 'init-benchmark-init)
   (require 'init-ace-window)
   (require 'init-rainbow-delimiters)
+  (require 'init-highlight-numbers)
+  (require 'init-highlight-indent-guides)
   (require 'init-keyfreq)
   (require 'init-emms)
   (require 'init-company)
   (require 'init-git-timemachine)
   (require 'init-diff-hl)
-  (require 'init-highlight-indent-guides)
   (require 'init-slime)
+  (require 'init-markdown-mode)
   (require 'init-web-mode)
   (require 'init-php-mode)
   (require 'init-yaml-mode)
@@ -92,6 +92,10 @@
   ;; not builtin till emacs23
     (require 'init-vc-dir)))
 
+
+;; auto-generated customizations
+(setq custom-file "~/.emacs.d/lisp/custom.el")
+(load custom-file)
 
 (provide 'init)
 ;;; init.el ends here

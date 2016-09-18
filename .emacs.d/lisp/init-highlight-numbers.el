@@ -1,28 +1,25 @@
-;;; init-slime.el --- init slime
+;;; init-highlight-numbers.el --- init highlight-numbers
 ;;; Commentary:
 ;******************************************************************************;
 ;                                                                              ;
 ;                                                         :::      ::::::::    ;
-;    init-slime.el                                      :+:      :+:    :+:    ;
+;    init-highlight-numbers.el                          :+:      :+:    :+:    ;
 ;                                                     +:+ +:+         +:+      ;
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2016/09/18 16:19:17 by mcanal           ###   ########.fr        ;
+;    Updated: 2016/09/18 17:33:43 by mcanal           ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
 ;;; Code:
 
-(use-package slime
+(use-package highlight-numbers
   :ensure t
-  :defer t
+  :commands (highlight-numbers-mode)
 
-  :config
-  (setq inferior-lisp-program "/usr/bin/sbcl")
-  (setq slime-contribs '(slime-fancy))
-  (bind-key (kbd "C-c )") 'slime-close-all-parens-in-sexp))
+  :init
+  (add-hook 'prog-mode-hook 'highlight-numbers-mode))
 
-
-(provide 'init-slime)
-;;; init-slime.el ends here
+(provide 'init-highlight-numbers)
+;;; init-highlight-numbers.el ends here

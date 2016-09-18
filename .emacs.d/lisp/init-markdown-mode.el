@@ -1,28 +1,28 @@
-;;; init-slime.el --- init slime
+;;; init-markdown-mode.el --- init markdown-mode
 ;;; Commentary:
 ;******************************************************************************;
 ;                                                                              ;
 ;                                                         :::      ::::::::    ;
-;    init-slime.el                                      :+:      :+:    :+:    ;
+;    init-markdown-mode.el                              :+:      :+:    :+:    ;
 ;                                                     +:+ +:+         +:+      ;
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2016/09/18 16:19:17 by mcanal           ###   ########.fr        ;
+;    Updated: 2016/09/18 16:43:41 by mcanal           ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
 ;;; Code:
 
-(use-package slime
+(use-package markdown-mode
   :ensure t
-  :defer t
+  :commands (markdown-mode gfm-mode)
+  :mode (("README\\.md\\'" . gfm-mode)
+         ("\\.md\\'" . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode))
 
-  :config
-  (setq inferior-lisp-program "/usr/bin/sbcl")
-  (setq slime-contribs '(slime-fancy))
-  (bind-key (kbd "C-c )") 'slime-close-all-parens-in-sexp))
+  :init
+  (setq markdown-command "multimarkdown"))
 
-
-(provide 'init-slime)
-;;; init-slime.el ends here
+(provide 'init-markdown-mode)
+;;; init-markdown-mode.el ends here

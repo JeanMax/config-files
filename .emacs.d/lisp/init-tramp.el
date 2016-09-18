@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2016/09/08 16:46:14 by mcanal           ###   ########.fr        ;
+;    Updated: 2016/09/18 19:51:32 by mcanal           ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -16,9 +16,9 @@
 
 (use-package tramp
   :defer t
-  
+
   :config
-  (setq tramp-default-method "ssh")
+  (setq tramp-default-method "rsync")
   (setq tramp-auto-save-directory "\"/tmp\""))
 
 
