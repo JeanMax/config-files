@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2016/09/17 20:55:12 by mcanal           ###   ########.fr        ;
+;    Updated: 2016/09/25 16:18:16 by mcanal           ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -125,8 +125,8 @@
  (*is-a-mac*
   (bind-key* (kbd "ESC <prior>") 'previous-multiframe-window)
   (bind-key* (kbd "ESC <next>") 'next-multiframe-window)
-  (bind-key* (kbd "<M-insert>") 'find-file-other-window)
-  (bind-key* (kbd "<M-delete>") 'delete-window))
+  ;; (bind-key* (kbd "<M-insert>") 'find-file-other-window) ;TODO
+  (bind-key* (kbd "ESC <deletechar>") 'delete-window))
  (t
   (bind-key* (kbd "<M-prior>") 'previous-multiframe-window)
   (bind-key* (kbd "<M-next>") 'next-multiframe-window)
@@ -135,14 +135,14 @@
 
 
 ;; buffers handling
-(bind-key* (kbd "ĸ") 'kill-buffer) ;Altgr k
-(bind-key* (kbd "þ") 'mode-line-other-buffer) ;Altgr p
+(bind-key* (kbd *altgr-k*) 'kill-buffer)
+(bind-key* (kbd *altgr-p*) 'mode-line-other-buffer)
 (bind-key* (kbd "<f11>") 'save-buffer)
 (bind-key* (kbd "<f12>") 'save-buffers-kill-terminal)
 (bind-key* (kbd "C-x f") 'find-file)
-(bind-key* (kbd "đ") 'find-file) ;Altgr f
+(bind-key* (kbd *altgr-f*) 'find-file)
 (bind-key* (kbd "C-x C-f") 'find-file-other-window)
-(bind-key* (kbd "”") 'switch-to-buffer) ;Altgr b
+(bind-key* (kbd *altgr-b*) 'switch-to-buffer)
 
 
 

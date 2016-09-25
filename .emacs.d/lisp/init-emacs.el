@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2016/09/18 18:13:47 by mcanal           ###   ########.fr        ;
+;    Updated: 2016/09/25 16:17:03 by mcanal           ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -16,6 +16,65 @@
 
 (use-package emacs
   :config
+
+  ;; alias for altgr keys, since they change a lot between keyboards
+  (if *is-a-mac*
+      (progn (defconst *altgr-a* "´")
+             (defconst *altgr-z* "Â")
+             (defconst *altgr-e* "€")
+             (defconst *altgr-r* "®")
+             (defconst *altgr-t* "†")
+             (defconst *altgr-y* "Ú")
+             (defconst *altgr-u* "º")
+             (defconst *altgr-i* "î")
+             (defconst *altgr-o* "œ")
+             (defconst *altgr-p* "π")
+             (defconst *altgr-q* "´")
+             (defconst *altgr-s* "Ò")
+             (defconst *altgr-d* "∂")
+             (defconst *altgr-f* "ƒ")
+             (defconst *altgr-g* "ﬁ")
+             (defconst *altgr-h* "Ì")
+             (defconst *altgr-j* "Ï")
+             (defconst *altgr-k* "È")
+             (defconst *altgr-l* "¬")
+             (defconst *altgr-m* "µ")
+             (defconst *altgr-w* "‹")
+             (defconst *altgr-x* "≈")
+             (defconst *altgr-c* "©")
+             (defconst *altgr-v* "◊")
+             (defconst *altgr-b* "ß")
+             (defconst *altgr-n* "~")
+             (defconst *altgr-$* "¤"))
+
+    (defconst *altgr-a* "æ")
+    (defconst *altgr-z* "«")
+    (defconst *altgr-e* "") ;TODO
+    (defconst *altgr-r* "¶")
+    (defconst *altgr-t* "ŧ")
+    (defconst *altgr-y* "←")
+    (defconst *altgr-u* "↓")
+    (defconst *altgr-i* "→")
+    (defconst *altgr-o* "ø")
+    (defconst *altgr-p* "þ")
+    (defconst *altgr-q* "") ;TODO
+    (defconst *altgr-s* "ß")
+    (defconst *altgr-d* "ð")
+    (defconst *altgr-f* "đ")
+    (defconst *altgr-g* "ŋ")
+    (defconst *altgr-h* "ħ")
+    (defconst *altgr-j* "") ;TODO
+    (defconst *altgr-k* "ĸ")
+    (defconst *altgr-l* "ł")
+    (defconst *altgr-m* "µ")
+    (defconst *altgr-w* "ł")
+    (defconst *altgr-x* "»")
+    (defconst *altgr-c* "¢")
+    (defconst *altgr-v* "“")
+    (defconst *altgr-b* "”")
+    (defconst *altgr-n* "") ;TODO
+    (defconst *altgr-$* "¤"))
+
 
   ;; tell emacs where to read abbrev
   (setq save-abbrevs 'silently)
@@ -102,12 +161,12 @@
 
   ;; completion
   (bind-key (kbd "<backtab>") 'dabbrev-expand)
-  ;; (bind-key* (kbd "đ") 'hippie-expand) ;Altgr f
+  ;; (bind-key* (kbd *altgr-f*) 'hippie-expand)
 
   ;; registers
   (bind-key* (kbd "<f7>") 'point-to-register)
-  (bind-key* (kbd "<f9>") 'jump-to-register) ;Altgr m
-  ;; (bind-key* (kbd "µ") 'point-to-register) ;Altgr m
+  (bind-key* (kbd "<f9>") 'jump-to-register)
+  ;; (bind-key* (kbd *altrg-m*) 'point-to-register)
 
   ;; misc
   (bind-key* (kbd "M-s") 'shell)
@@ -122,15 +181,16 @@
   ;; search in minibuffer history
 
   ;; TODO: list free 'mod+key', keys (f1..12, weird stuffs: ù²¨^)
-  ;; (bind-key* (kbd "“") 'free) ;Altgr v
-  ;; (bind-key* (kbd "«") 'free) ;Altgr z
-  ;; (bind-key* (kbd "←") 'free) ;Altgr y
-  ;; (bind-key* (kbd "↓") 'free) ;Altgr u
-  ;; (bind-key* (kbd "¤") 'free) ;Altgr $
-  ;; (bind-key* (kbd "ß") 'free) ;Altgr s
-  ;; (bind-key* (kbd "ð") 'free) ;Altgr d
-  ;; (bind-key* (kbd "ł") 'free) ;Altgr l/w
-  ;; (bind-key* (kbd "¢") 'auto-complete-mode) ;Altgr c
+  ;; (bind-key* (kbd *altgr-v*) 'free)
+  ;; (bind-key* (kbd *altgr-z*) 'free)
+  ;; (bind-key* (kbd *altgr-y*) 'free)
+  ;; (bind-key* (kbd *altgr-u*) 'free)
+  ;; (bind-key* (kbd *altgr-$*) 'free)
+  ;; (bind-key* (kbd *altgr-s*) 'free)
+  ;; (bind-key* (kbd *altgr-d*) 'free)
+  ;; (bind-key* (kbd *altgr-l*) 'free)
+  ;; (bind-key* (kbd *altgr-w*) 'free)
+  ;; (bind-key* (kbd *altgr-c*) 'auto-complete-mode)
 
 
   ;; mode line customization (bottom bar)

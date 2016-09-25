@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2016/09/11 21:44:43 by mcanal           ###   ########.fr        ;
+;    Updated: 2016/09/25 16:13:31 by mcanal           ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -18,7 +18,7 @@
   :load-path
   "~/.emacs.d/site-lisp/move")
 
-(bind-key* (kbd "→") 'move-mode) ;Altgr i
+(bind-key* (kbd *altgr-i*) 'move-mode)
 
 (bind-key* (kbd "M-i") 'previous-line)
 (bind-key* (kbd "M-j") 'left-char)

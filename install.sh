@@ -7,7 +7,7 @@
 #    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/11 14:03:35 by mcanal            #+#    #+#              #
-#    Updated: 2016/09/18 14:58:57 by mcanal           ###   ########.fr        #
+#    Updated: 2016/09/25 14:39:25 by mcanal           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 set -e
@@ -39,7 +39,7 @@ function link-it () {
 
     back-it "$DST"
     echo -n "[+] link'ed: "
-    ln -sbv "$SRC" "$DST"
+    ln -sv "$SRC" "$DST"
 }
 
 function extract-it () {

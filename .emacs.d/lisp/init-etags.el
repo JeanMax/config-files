@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2016/09/17 20:22:36 by mcanal           ###   ########.fr        ;
+;    Updated: 2016/09/25 16:19:34 by mcanal           ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -39,9 +39,9 @@
   (visit-tags-table "~/.emacs.d/misc/TAGS"))
 
 
-(bind-key* (kbd "ŧ") 'tags-make-n-visit) ;Altgr t -> elisp-functions.el
-(bind-key* (kbd "ŋ") 'xref-find-definitions) ;Altgr g
-(bind-key* (kbd "¶") 'recentf-open-files) ;Altgr r
+(bind-key* (kbd *altgr-t*) 'tags-make-n-visit)
+(bind-key* (kbd *altgr-g*) 'xref-find-definitions)
+(bind-key* (kbd *altgr-r*) 'recentf-open-files)
 
 (provide 'init-etags)
 ;;; init-etags.el ends here

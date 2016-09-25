@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2016/09/17 15:26:26 by mcanal           ###   ########.fr        ;
+;    Updated: 2016/09/25 16:28:44 by mcanal           ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -25,8 +25,8 @@
     (if (null defining-kbd-macro)
         (kmacro-start-macro nil) (kmacro-end-macro nil)))
 
-  (bind-key* (kbd "<f6>") 'toggle-macro) ; -> elisp-functions.el
-  (bind-key* (kbd "»") 'kmacro-end-and-call-macro) ;Altgr x
+  (bind-key* (kbd "<f6>") 'toggle-macro)
+  ;(bind-key* (kbd *altgr-x*) 'kmacro-end-and-call-macro)
   )
 
 (provide 'init-kmacro)

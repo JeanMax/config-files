@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2015/04/26 16:54:03 by mcanal            #+#    #+#              ;
-;    Updated: 2016/09/11 14:13:47 by mcanal           ###   ########.fr        ;
+;    Updated: 2016/09/25 16:18:40 by mcanal           ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -93,7 +93,7 @@
          (10 (eq major-mode 'emacs-lisp-mode)
              font-lock-variable-name-face))))
 
-(bind-key* (kbd "ß") 'ibuffer) ;Altgr s
+(bind-key* (kbd *altgr-s*) 'ibuffer)
 (defalias 'list-buffers 'ibuffer-other-window)
 
 (provide 'init-ibuffer)

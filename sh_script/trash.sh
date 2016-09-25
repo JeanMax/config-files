@@ -7,7 +7,7 @@
 #    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/02/12 20:45:01 by mcanal            #+#    #+#              #
-#    Updated: 2016/09/18 15:06:41 by mcanal           ###   ########.fr        #
+#    Updated: 2016/09/25 14:51:37 by mcanal           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,8 @@ fi
 
 DATE=$(date "+%y-%m-%d_%H-%M-%S")
 for i in "$@"; do
-    dir="$TRASH/$(readlink -f "$i" | sed 's/\//!/g')@$DATE"
+	path="$(cd "$(dirname "$1")"; pwd)/$(basename "$1")"
+    dir="$TRASH/$(echo $path | sed 's/\//!/g')@$DATE"
     mkdir -p "$dir"
     mv -vi "$i" "$dir/${i##*/}"
 done

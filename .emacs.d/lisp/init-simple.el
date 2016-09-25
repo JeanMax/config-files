@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2016/09/17 15:52:42 by mcanal           ###   ########.fr        ;
+;    Updated: 2016/09/25 16:11:52 by mcanal           ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -39,7 +39,7 @@
   (bind-key* (kbd "M--") 'inc) ; 6
   ;; insert \n && \t
   (bind-key* (kbd "C-c RET") 'insert-eol)
-  (bind-key* (kbd "æ") 'tab-to-tab-stop) ;Altgr a
+  (bind-key* (kbd *altgr-a*) 'tab-to-tab-stop)
 
 
   (defun xah-toggle-letter-case ()

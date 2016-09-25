@@ -6,7 +6,7 @@
 #    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/23 17:38:59 by mcanal            #+#    #+#              #
-#    Updated: 2016/09/18 14:32:20 by mcanal           ###   ########.fr        #
+#    Updated: 2016/09/25 15:24:13 by mcanal           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,7 +74,8 @@ zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' 'm:{a-zA-Z}={A-Za-z}' 'r:
 # des couleurs pour la complétion
 zmodload zsh/complist
 setopt extendedglob
-export TAB_COLORS="no=00:fi=00:di=01;34:ln=01;36:\
+
+export LS_COLORS="no=00:fi=00:di=01;34:ln=01;36:\
   pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:\
   or=40;31;01:ex=01;31:tw=40;1;41:ow=40;1;41:*.tar=01;31:*.tgz=01;31:\
   *.arj=01;31:*.taz=01;31:*.lzh=01;31:*.zip=01;31:\
@@ -82,7 +83,7 @@ export TAB_COLORS="no=00:fi=00:di=01;34:ln=01;36:\
   *.jpg=01;35:*.gif=01;35:*.bmp=01;35:*.ppm=01;35:\
   *.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:\
   *.mpg=01;37:*.avi=01;37:*.gl=01;37:*.dl=01;37:"
-zstyle ':completion:*' list-colors ${(s.:.)TAB_COLORS}
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*:*:kill:*:processes' list-colors "=(#b) #([0-9]#)*=36=31"
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
@@ -133,10 +134,19 @@ precmd ()
 
 }
 
+
+if [ $(uname -s) = "Linux" ]; then
+    export LS_COLORS="no=00:fi=00:di=01;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:ex=01;31:tw=40;1;41:ow=40;1;41:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.gz=01;31:*.deb=01;31:*.jpg=01;35:*.gif=01;35:*.bmp=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.mpg=01;37:*.avi=01;37:*.gl=01;37:*.dl=01;37:"
+    alias ls='ls --color=auto'
+else
+    export LSCOLORS="ExGxcxdxBxexexaBaBacad"
+    alias ls='ls -G'
+    export PATH="$HOME/.brew/bin:$PATH"
+fi
+
 # enable color support of ls and also add handy aliases
 #if [ -x /usr/bin/dircolors ]; then
 #    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
     #alias dir='dir --color=auto'
     #alias vdir='vdir --color=auto'
     alias grep='grep --color=auto'
@@ -144,7 +154,6 @@ precmd ()
     alias egrep='egrep --color=auto'
 #fi
 
-export LS_COLORS="no=00:fi=00:di=01;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:ex=01;31:tw=40;1;41:ow=40;1;41:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.gz=01;31:*.deb=01;31:*.jpg=01;35:*.gif=01;35:*.bmp=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.mpg=01;37:*.avi=01;37:*.gl=01;37:*.dl=01;37:"
 
 # Definition des alias de git
 alias gg="sh ~/sh_script/git.sh"
