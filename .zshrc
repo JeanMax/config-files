@@ -156,20 +156,25 @@ fi
 
 
 # Definition des alias de git
-alias gg="sh ~/sh_script/git.sh"
 alias ga="git add -A"
 alias gb="git branch"
 alias gcm="git commit -m"
+alias gce="git commit"
 alias gco="git checkout"
 alias gpl="git pull"
 alias gp="git push"
+alias gpo="git push origin"
 alias gpom="git push origin master"
-alias gm="git merge"
+alias gm="git merge --no-ff"
 alias gu="git add -u"
 alias gl="git log"
 alias gs="git status"
+alias gh="git stash"
 alias gf="git fetch"
 alias gd="git diff"
+alias gdc="git diff --cached"
+alias gtree="git log --oneline --graph --all --decorate"
+alias gr="git reset"
 
 # Definition des alias
 alias lxterminal='lxterminal --geometry=81x45'
@@ -206,6 +211,7 @@ alias con='sudo php app/console'
 alias cs='sudo php-cs-fixer -vvv --level=symfony fix'
 alias sbcl='sbcl --noinform'
 alias cl='sbcl'
+alias now='date "+%y-%m-%d_%H-%M-%S"'
 
 # typo alias
 alias xs='cd'

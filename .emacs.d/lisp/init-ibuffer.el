@@ -27,6 +27,7 @@
            ("Web" (filename . ".*/Web/.*\\.php$")) ;tmp
            ("Views" (filename . ".*\\.twig$")) ;tmp
            ("Tests" (filename . ".*/Tests/.*\\.php$")) ;tmp
+           ("Server" (filename . ":.*:")) ;tmp
            ("C" (filename . ".*\\.c$"))
            ("H" (filename . ".*\\.h$"))
            ("Php" (filename . ".*\\.php$"))

@@ -53,6 +53,10 @@
   (save-buffers-kill-terminal)
   (kill-emacs))
 
+(bind-key* (kbd "C-x ²") 'delete-window)
+(bind-key* (kbd "C-x à") 'delete-window)
+(bind-key* (kbd "C-x &") 'delete-other-windows)
+
 (defun split-below-open-previous-buffer()
   "Split horizontally and get previous buffer."
   (interactive)
@@ -60,6 +64,7 @@
   (other-window 1)
   (mode-line-other-buffer))
 (bind-key* (kbd "C-x 2") 'split-below-open-previous-buffer)
+(bind-key* (kbd "C-x é") 'split-below-open-previous-buffer)
 
 (defun split-right-open-previous-buffer()
   "Split vertically and get previous buffer."
@@ -68,6 +73,7 @@
   (other-window 1)
   (mode-line-other-buffer))
 (bind-key* (kbd "C-x 3") 'split-right-open-previous-buffer)
+(bind-key* (kbd "C-x \"") 'split-right-open-previous-buffer)
 
 (defun split-window-4()
   "Splite window into 4 sub-window and get previous buffers."
@@ -84,6 +90,7 @@
         (split-below-open-previous-buffer)
         (other-window -1))))
 (bind-key* (kbd "C-x 4") 'split-window-4)
+(bind-key* (kbd "C-x '") 'split-window-4)
 
 (defun toggle-window-split ()
   "Toggle vertical/horizontal splitting."
@@ -111,6 +118,7 @@
           (select-window first-win)
           (if this-win-2nd (other-window 1))))))
 (bind-key* (kbd "C-x 5") 'toggle-window-split)
+(bind-key* (kbd "C-x (") 'toggle-window-split)
 
 
 

@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2016/09/25 16:17:03 by mcanal           ###   ########.fr        ;
+;    Updated: 2016/10/02 16:32:34 by mcanal           ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -175,6 +175,36 @@
   (bind-key* (kbd "C-q") 'insert-debug-comment) ; -> elisp-functions.el
 
 
+
+
+  ;; (define-prefix-command '2-map)
+  ;; (global-set-key (kbd "²") '2-map)
+  ;; (global-set-key (kbd "² ²")
+  ;;               '(lambda () (interactive) (insert "²")))
+  ;; (global-set-key (kbd "² &")
+  ;;               '(lambda () (interactive) (insert "&")))
+
+
+  ;; (define-prefix-command 'u-map)
+  ;; (global-set-key (kbd "ù") 'u-map)
+  ;; (global-set-key (kbd "ù ù")
+  ;;                 '(lambda () (interactive) (insert "ù")))
+  ;; (global-set-key (kbd "ù m")
+  ;;                 '(lambda () (interactive) (insert "m")))
+  ;; (global-set-key (kbd "ù *")
+  ;;                 '(lambda () (interactive) (insert "*")))
+  ;; (global-set-key (kbd "ù $")
+  ;;                 '(lambda () (interactive) (insert "$")))
+
+
+  (defun exchange-point-and-mark-no-activate ()
+    "Identical to \\[exchange-point-and-mark] but will not activate the region."
+    (interactive)
+    (exchange-point-and-mark)
+    (deactivate-mark nil))
+  (define-key global-map [remap exchange-point-and-mark]
+    'exchange-point-and-mark-no-activate)
+
   ;; TODO:
   ;; something something transpose? upcase-word? marks?
   ;; e' to eval region if marked
@@ -234,13 +264,18 @@
                              "  ")))
                   ;; current directory (TODO: short-short-short?)
                   (:eval (propertize (extra-shorten-directory default-directory) 'face '(:weight bold)))
-                  "   "
+                  "  "
+                  ;vc branch
+                  (vc-mode vc-mode)
                   ;; actives modes
+                  "  "
                   mode-line-modes))
 
   ;; enable col number
-  (column-number-mode 1))
+  (column-number-mode 1)
 
+  ;; horizontal scroll
+  (put 'scroll-left 'disabled nil))
 
 ;; 'truncate-string-to-width works pretty well too...
 (defun extra-shorten-directory (dir)

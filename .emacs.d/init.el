@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2015/04/26 16:54:03 by mcanal            #+#    #+#              ;
-;    Updated: 2016/09/18 19:20:07 by mcanal           ###   ########.fr        ;
+;    Updated: 2016/10/02 16:31:45 by mcanal           ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -19,18 +19,19 @@
   (error "Emacs version 22 or greater required!"))
 
 ;; tricks to save some startup time + compile config files
-(defconst initial-gc-cons-threshold gc-cons-threshold)
+;; (defconst initial-gc-cons-threshold gc-cons-threshold)
+(setq gc-cons-threshold 50000000)
 (defconst initial-file-name-handler-alist file-name-handler-alist)
 (add-hook 'after-init-hook '
           (lambda()
-            (setq gc-cons-threshold initial-gc-cons-threshold)
+            ;; (setq gc-cons-threshold initial-gc-cons-threshold)
             (setq file-name-handler-alist initial-file-name-handler-alist)
             (when (< 23 emacs-major-version)
               (ignore-errors (benchmark-init/activate))
               (byte-recompile-directory "~/.emacs.d/lisp" 0)
               (byte-recompile-directory "~/.emacs.d/site-lisp" 0)
               (message "Init-time: %s" (emacs-init-time)))))
-(setq gc-cons-threshold 134217728)
+;; (setq gc-cons-threshold 134217728)
 (setq file-name-handler-alist nil)
 (setq load-prefer-newer t)
 ;; (setq debug-on-error t)
@@ -65,8 +66,9 @@
 
 (when (< 23 emacs-major-version)
   ;; packages to download: package.el not builtin till emacs24... just give up
-  (require 'init-ido)
   (require 'init-benchmark-init)
+  (require 'init-ido)
+  (require 'init-projectile)
   (require 'init-ace-window)
   (require 'init-rainbow-delimiters)
   (require 'init-highlight-numbers)
