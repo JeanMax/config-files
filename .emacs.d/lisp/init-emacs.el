@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2016/10/02 16:32:34 by mcanal           ###   ########.fr        ;
+;    Updated: 2017/01/05 14:43:24 by mcanal           ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -16,7 +16,6 @@
 
 (use-package emacs
   :config
-
   ;; alias for altgr keys, since they change a lot between keyboards
   (if *is-a-mac*
       (progn (defconst *altgr-a* "´")
@@ -47,34 +46,65 @@
              (defconst *altgr-n* "~")
              (defconst *altgr-$* "¤"))
 
-    (defconst *altgr-a* "æ")
-    (defconst *altgr-z* "«")
-    (defconst *altgr-e* "") ;TODO
-    (defconst *altgr-r* "¶")
-    (defconst *altgr-t* "ŧ")
-    (defconst *altgr-y* "←")
-    (defconst *altgr-u* "↓")
-    (defconst *altgr-i* "→")
-    (defconst *altgr-o* "ø")
-    (defconst *altgr-p* "þ")
-    (defconst *altgr-q* "") ;TODO
-    (defconst *altgr-s* "ß")
-    (defconst *altgr-d* "ð")
-    (defconst *altgr-f* "đ")
-    (defconst *altgr-g* "ŋ")
-    (defconst *altgr-h* "ħ")
-    (defconst *altgr-j* "") ;TODO
-    (defconst *altgr-k* "ĸ")
-    (defconst *altgr-l* "ł")
-    (defconst *altgr-m* "µ")
-    (defconst *altgr-w* "ł")
-    (defconst *altgr-x* "»")
-    (defconst *altgr-c* "¢")
-    (defconst *altgr-v* "“")
-    (defconst *altgr-b* "”")
-    (defconst *altgr-n* "") ;TODO
-    (defconst *altgr-$* "¤"))
+    ;alternative french?
+    ;; (defconst *altgr-a* "æ")
+    ;; (defconst *altgr-z* "«")
+    ;; (defconst *altgr-e* "€")
+    ;; (defconst *altgr-r* "¶")
+    ;; (defconst *altgr-t* "ŧ")
+    ;; (defconst *altgr-y* "←")
+    ;; (defconst *altgr-u* "↓")
+    ;; (defconst *altgr-i* "→")
+    ;; (defconst *altgr-o* "ø")
+    ;; (defconst *altgr-p* "þ")
+    ;; (defconst *altgr-q* "@")
+    ;; (defconst *altgr-s* "ß")
+    ;; (defconst *altgr-d* "ð")
+    ;; (defconst *altgr-f* "đ")
+    ;; (defconst *altgr-g* "ŋ")
+    ;; (defconst *altgr-h* "ħ")
+    ;; (defconst *altgr-j* "")
+    ;; (defconst *altgr-k* "ĸ")
+    ;; (defconst *altgr-l* "ł")
+    ;; (defconst *altgr-m* "µ")
+    ;; (defconst *altgr-w* "ł")
+    ;; (defconst *altgr-x* "»")
+    ;; (defconst *altgr-c* "¢")
+    ;; (defconst *altgr-v* "“")
+    ;; (defconst *altgr-b* "”")
+    ;; (defconst *altgr-n* "n")
+    ;; (defconst *altgr-$* "¤"))
 
+
+    ;default french
+    (defconst *altgr-a* "â")
+    (defconst *altgr-z* "å")
+    (defconst *altgr-e* "€")
+    (defconst *altgr-r* "ç")
+    (defconst *altgr-t* "þ")
+    (defconst *altgr-y* "ý")
+    (defconst *altgr-u* "û")
+    (defconst *altgr-i* "î")
+    (defconst *altgr-o* "ô")
+    (defconst *altgr-p* "¶")
+    (defconst *altgr-q* "Â")
+    (defconst *altgr-s* "ø")
+    (defconst *altgr-d* "Ê")
+    (defconst *altgr-f* "±")
+    (defconst *altgr-g* "æ")
+    (defconst *altgr-h* "ð")
+    (defconst *altgr-j* "Û")
+    (defconst *altgr-k* "Î")
+    (defconst *altgr-l* "Ô")
+    (defconst *altgr-m* "¹")
+    (defconst *altgr-w* "«")
+    (defconst *altgr-x* "»")
+    (defconst *altgr-c* "©")
+    (defconst *altgr-v* "®")
+    (defconst *altgr-b* "ß")
+    (defconst *altgr-n* "¬")
+    (defconst *altgr-$* "¿"))
+  ;TODO: add a variable to configure this at runtime
 
   ;; tell emacs where to read abbrev
   (setq save-abbrevs 'silently)
@@ -131,7 +161,9 @@
   ;; (bookmark-jump)
   ;; (list-bookmarks)
 
-
+  ;calendar
+  (setq calendar-date-style (quote european))
+  (setq calendar-week-start-day 1)
 
   (defalias 'yes-or-no-p 'y-or-n-p)
 
@@ -174,9 +206,6 @@
   (bind-key* (kbd "M-q") 'comment) ; -> elisp-functions.el
   (bind-key* (kbd "C-q") 'insert-debug-comment) ; -> elisp-functions.el
 
-
-
-
   ;; (define-prefix-command '2-map)
   ;; (global-set-key (kbd "²") '2-map)
   ;; (global-set-key (kbd "² ²")
@@ -184,17 +213,19 @@
   ;; (global-set-key (kbd "² &")
   ;;               '(lambda () (interactive) (insert "&")))
 
+  ; delay before printing prefix key(s) in the messages bar
+  (setq suggest-key-bindings 0)
 
-  ;; (define-prefix-command 'u-map)
-  ;; (global-set-key (kbd "ù") 'u-map)
-  ;; (global-set-key (kbd "ù ù")
-  ;;                 '(lambda () (interactive) (insert "ù")))
-  ;; (global-set-key (kbd "ù m")
-  ;;                 '(lambda () (interactive) (insert "m")))
-  ;; (global-set-key (kbd "ù *")
-  ;;                 '(lambda () (interactive) (insert "*")))
-  ;; (global-set-key (kbd "ù $")
-  ;;                 '(lambda () (interactive) (insert "$")))
+  (define-prefix-command 'u-map)
+  (global-set-key (kbd "ù") 'u-map)
+  (global-set-key (kbd "ù ù")
+                  '(lambda () (interactive) (insert "ù")))
+  (global-set-key (kbd "ù m")
+                  '(lambda () (interactive) (insert "m")))
+  (global-set-key (kbd "ù *")
+                  '(lambda () (interactive) (insert "*")))
+  (global-set-key (kbd "ù $")
+                  '(lambda () (interactive) (insert "$")))
 
 
   (defun exchange-point-and-mark-no-activate ()
@@ -204,6 +235,15 @@
     (deactivate-mark nil))
   (define-key global-map [remap exchange-point-and-mark]
     'exchange-point-and-mark-no-activate)
+
+
+  (require 'ansi-color)
+  (defun endless/colorize-compilation ()
+    "Colorize from `compilation-filter-start' to `point'."
+    (let ((inhibit-read-only t))
+      (ansi-color-apply-on-region
+       compilation-filter-start (point))))
+  (add-hook 'compilation-filter-hook #'endless/colorize-compilation)
 
   ;; TODO:
   ;; something something transpose? upcase-word? marks?
@@ -266,7 +306,7 @@
                   (:eval (propertize (extra-shorten-directory default-directory) 'face '(:weight bold)))
                   "  "
                   ;vc branch
-                  (vc-mode vc-mode)
+                  ;; (vc-mode vc-mode)
                   ;; actives modes
                   "  "
                   mode-line-modes))
@@ -283,6 +323,13 @@
   ;; (shorten-directory
   (replace-regexp-in-string (expand-file-name "~") "~" dir))
 ;; 30))
+
+;; no *scratch* at startup, use the previous buffer
+;; (setq initial-buffer-choice (other-buffer (current-buffer) 1))
+
+;; Don't show *Buffer list* when opening multiple files at the same time.
+(setq inhibit-startup-buffer-menu t)
+
 
 ;; (defun right-padding (str len)
 ;;   "Padd a string STR with space to the right (till total length >= LEN)."
@@ -305,6 +352,12 @@
 ;;     output))
 
 
+;; ansi colors in compilation buffer
+(require 'ansi-color)
+(defun my/ansi-colorize-buffer ()
+  (let ((buffer-read-only nil))
+    (ansi-color-apply-on-region (point-min) (point-max))))
+(add-hook 'compilation-filter-hook 'my/ansi-colorize-buffer)
 
 (provide 'init-emacs)
 ;;; init-emacs.el ends here

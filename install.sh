@@ -7,12 +7,12 @@
 #    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/11 14:03:35 by mcanal            #+#    #+#              #
-#    Updated: 2016/09/25 14:39:25 by mcanal           ###   ########.fr        #
+#    Updated: 2016/10/03 00:36:28 by mcanal           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 set -e
 
-CONFIG_FOLDER=~/config-files
+CONFIG_FOLDER=$(dirname "$(readlink -f "$0")")
 TO_LINK="sh_script
 .zshrc
 .emacs.d

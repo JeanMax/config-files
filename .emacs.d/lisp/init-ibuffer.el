@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2015/04/26 16:54:03 by mcanal            #+#    #+#              ;
-;    Updated: 2016/09/25 16:18:40 by mcanal           ###   ########.fr        ;
+;    Updated: 2017/01/05 14:30:08 by mcanal           ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -22,22 +22,35 @@
         '(("home"
            ("Git" (or (name . "^\*vc-.*\*$")
                       (name . "^timemachine:.*")))
-           ("Base" (filename . ".*/Base.*\\.php$")) ;tmp
-           ("Rest" (filename . ".*/Rest/.*\\.php$")) ;tmp
-           ("Web" (filename . ".*/Web/.*\\.php$")) ;tmp
-           ("Views" (filename . ".*\\.twig$")) ;tmp
-           ("Tests" (filename . ".*/Tests/.*\\.php$")) ;tmp
-           ("Server" (filename . ":.*:")) ;tmp
+           ("Tramp" (filename . ":.*:"))
            ("C" (filename . ".*\\.c$"))
            ("H" (filename . ".*\\.h$"))
+           ("CPP" (filename . ".*\\.cpp$"))
+           ("HPP" (filename . ".*\\.hpp$"))
+           ("Js" (mode . js-mode))
            ("Php" (filename . ".*\\.php$"))
+           ("Views" (or (filename . ".*\\.twig$")
+                        (filename . ".*\\.html$")))
            ("Yaml" (filename . ".*\\.yml$"))
            ("Sh" (filename . ".*\\.sh$"))
+           ("Lisp" (or (filename . ".*\\.lisp$")
+                       (filename . ".*\\.cl$")
+                       (filename . ".*\\.asd$")))
+           ("Slime" (or (name . ".*slime.*$")
+                        (name . "*inferior-lisp*")
+                        (mode . slime-repl-mode)
+                        (mode . sldb-mode)))
            ("Dir" (mode . dired-mode))
            ("eLisp" (filename . ".*\\.el$"))
-           ("Bookmarks" (or (name . "*Bookmark List*")
-                            (name . "*Open Recent*")))
+           ("Config" (or (mode . conf-unix-mode)
+                         (mode . conf-space-mode)))
            ("Compilation" (name . "*compilation*"))
+           ("GDB" (or (mode . gud-mode)
+                      (name . "^\*breakpoints.*")
+                      (name . "^\*locals.*")
+                      (name . "^\*stack.*")
+                      (name . "^\*threads.*")
+                      (name . "^\*input/output.*")))
            ("Mail" (or (mode . message-mode)
                        (mode . bbdb-mode)
                        (mode . mail-mode)
@@ -47,6 +60,8 @@
                        (name . "^\\.bbdb$")
                        (name . "^\\.newsrc-dribble")))
            ("Irc" (mode . erc-mode))
+           ("Bookmarks" (or (name . "*Bookmark List*")
+                            (name . "*Open Recent*")))
            ("*.*" (or (name . "^\*.*\*$")
                       (name . "TAGS"))))))
   (setq ibuffer-expert t)

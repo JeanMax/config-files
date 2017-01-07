@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2016/09/10 14:56:31 by mcanal           ###   ########.fr        ;
+;    Updated: 2016/11/25 21:09:34 by ubuntu           ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -21,13 +21,16 @@
   ("\\.html\\'" . web-mode)
   ("\\.twig\\'" . web-mode)
   ("\\.css\\'" . web-mode)
-  
+
   :config
   ;; (setq indent-tabs-mode nil)
   (setq web-mode-markup-indent-offset 4)
   (setq web-mode-css-indent-offset 4)
   (setq web-mode-code-indent-offset 4)
-  (setq web-mode-indent-style 4))
+  ;; (setq web-mode-indent-style 4)
+
+  (setq web-mode-engines-alist
+      '(("django" . "\\.html\\'"))))
 
 
 

@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2016/09/11 14:25:05 by mcanal           ###   ########.fr        ;
+;    Updated: 2017/01/05 14:30:28 by mcanal           ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -23,25 +23,25 @@
 
   ;;           map)
 
-  (highlight-regexp "\t ")
-  (highlight-regexp " \t")
-  (highlight-regexp "if(")
-  (highlight-regexp "while(")
-  (highlight-regexp "return(")
-  (highlight-regexp "return;")
-  (highlight-regexp "break;")
-  (highlight-regexp "continue;")
-  (highlight-regexp "\n\n\n+")
-  (highlight-lines-matching-regexp ".\\{81\\}" 'hi-red-b)
+  ;; TODO create an highlight shit mode
+  ;; (highlight-regexp "\t ")
+  ;; (highlight-regexp " \t")
+  ;; (highlight-regexp "if(")
+  ;; (highlight-regexp "while(")
+  ;; (highlight-regexp "return(")
+  ;; (highlight-regexp "return;")
+  ;; (highlight-regexp "break;")
+  ;; (highlight-regexp "continue;")
+  ;; (highlight-regexp "\n\n\n+")
+  ;; (highlight-lines-matching-regexp ".\\{81\\}" 'hi-red-b)
   ;; (highlight-regexp "{\n\\(.*\n\\)\\{26,\\}}\n\\(\n\\|\\'\\)" 'hi-red-b)
-  (highlight-regexp "^[^#/].*[^\"]  +")
-  (highlight-regexp "\[([\][[:space:]]")
-  (highlight-regexp "[[:space:]]\[])\]")
+  ;; (highlight-regexp "^[^#/].*[^\"]  +")
+  ;; (highlight-regexp "\[([\][[:space:]]")
+  ;; (highlight-regexp "[[:space:]]\[])\]")
 
   ;; indentation fix (struct/switch)
   (c-set-offset 'case-label '+) ; indentation fix (struct/switch)
-  (setq indent-tabs-mode t)
-  (message "Zboub!"))
+  (setq indent-tabs-mode t))
 
 ;;;###autoload
 (add-hook 'c-mode-hook

@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2016/09/18 13:44:34 by mcanal           ###   ########.fr        ;
+;    Updated: 2017/01/05 14:20:04 by mcanal           ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -38,13 +38,20 @@
                                 (define-key ido-completion-map (kbd "C-s") 'next-matching-history-element)))
 
 
-    ;; (use-package ido-ubiquitous
+    (use-package ido-ubiquitous
+      :ensure t
+      :defer t
+
+      :init
+      (ido-ubiquitous-mode 1))
+
+
+    ;; (use-package flx-ido
     ;;   :ensure t
     ;;   :defer t
 
     ;;   :init
-    ;;   (ido-ubiquitous-mode 1))
-
+    ;;   (flx-ido-mode 1))
 
     (use-package smex
       :ensure t
@@ -88,16 +95,17 @@
     ;;   :bind (("TAB" . indent-or-complete))
 
     ;;   :init
+    ;;   ;;TODO: cf company
+    ;;   (defun indent-or-complete () ;TODO: upgrade it! (cf ~smart-indent or something like that)
+    ;;     (interactive)
+    ;;     (if (looking-at "\\_>")
+    ;;         (completion-at-point)
+    ;;       (if (or (not transient-mark-mode) (region-active-p))
+    ;;           (indent-region (region-beginning) (region-end))
+    ;;         (indent-according-to-mode))))
     ;;   (ido-at-point-mode 1))
 
-    ;;                                       ;TODO: cf company
-    ;; (defun indent-or-complete () ;TODO: upgrade it! (cf ~smart-indent or something like that)
-    ;;   (interactive)
-    ;;   (if (looking-at "\\_>")
-    ;;       (completion-at-point)
-    ;;     (if (or (not transient-mark-mode) (region-active-p))
-    ;;         (indent-region (region-beginning) (region-end))
-    ;;       (indent-according-to-mode))))
+
 
     ))
 

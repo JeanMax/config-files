@@ -6,7 +6,7 @@
 #    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/23 17:38:59 by mcanal            #+#    #+#              #
-#    Updated: 2016/09/25 15:24:13 by mcanal           ###   ########.fr        #
+#    Updated: 2017/01/05 15:00:25 by mcanal           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -186,10 +186,7 @@ alias gcc99='gcc -std=c99 -Wall -Wextra -Werror'
 alias pp='clang++ -Wall -Werror -Wextra -Wpedantic -O2'
 alias l='ls'
 alias ll='ls -l'
-alias la='ls -lA'
-alias lah='ls -lAh'
-alias lh='ls -lh'
-#alias ls='ls -G'
+alias la='ls -lAh'
 alias del='~/sh_script/trash.sh'
 alias zconf='e ~/.zshrc'
 alias econf='e ~/.emacs.d/init.el'
@@ -208,10 +205,15 @@ alias ocaml='rlwrap ocaml'
 alias py='python3'
 alias copy='xsel --clipboard'
 alias con='sudo php app/console'
+alias com='sudo php -n -d extension=curl.so -d extension=gd.so -d extension=intl.so -d extension=json.so -d extension=mcrypt.so -d extension=mysqli.so -d extension=mysql.so -d extension=pdo.so -d extension=readline.so -d extension=pdo_mysql.so /usr/local/bin/composer'
 alias cs='sudo php-cs-fixer -vvv --level=symfony fix'
 alias sbcl='sbcl --noinform'
-alias cl='sbcl'
 alias now='date "+%y-%m-%d_%H-%M-%S"'
+alias cl="rlwrap sbcl"
+alias sql="mysql --prompt=\"$(echo -e '\033[32;01m\\d\033[33;01m@\033[31;01m\\h> \033[0m')\" -uroot -p"
+export PATH="$HOME/.roswell/bin:$PATH"
+alias die='dbus-send --system --print-reply --dest="org.freedesktop.ConsoleKit"  /org/freedesktop/ConsoleKit/Manager org.freedesktop.ConsoleKit.Manager.Stop'
+eval "$(thefuck --alias fok 2> /dev/null)"
 
 # typo alias
 alias xs='cd'
@@ -237,3 +239,20 @@ man()
         LESS_TERMCAP_us=$(printf "\e[1;32m") \
         man "$@"
 }
+
+# locales
+export LANG=en_US.UTF-8
+export LANGUAGE=en_US.UTF-8
+export LC_CTYPE=en_US.UTF-8
+export LC_NUMERIC=fr_FR.UTF-8
+export LC_TIME=fr_FR.UTF-8
+export LC_COLLATE=en_US.UTF-8
+export LC_MONETARY=fr_FR.UTF-8
+export LC_MESSAGES=en_US.UTF-8
+export LC_PAPER=fr_FR.UTF-8
+export LC_NAME=fr_FR.UTF-8
+export LC_ADDRESS=fr_FR.UTF-8
+export LC_TELEPHONE=fr_FR.UTF-8
+export LC_MEASUREMENT=fr_FR.UTF-8
+export LC_IDENTIFICATION=fr_FR.UTF-8
+export LC_ALL=en_US.UTF-8

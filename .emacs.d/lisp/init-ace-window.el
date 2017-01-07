@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2016/09/17 19:20:14 by mcanal           ###   ########.fr        ;
+;    Updated: 2016/12/08 12:39:15 by mcanal           ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -26,7 +26,7 @@
   :defer t
 
   :init
-  (bind-key (kbd "ø") 'ace-window) ;altrg o
+  (bind-key (kbd "ù") 'ace-window)
 
   :config
   (setq aw-dispatch-always t)

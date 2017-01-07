@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2015/04/26 16:54:03 by mcanal            #+#    #+#              ;
-;    Updated: 2016/10/02 16:31:45 by mcanal           ###   ########.fr        ;
+;    Updated: 2017/01/05 14:26:32 by mcanal           ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -37,7 +37,7 @@
 ;; (setq debug-on-error t)
 
 ;; detect emacsclient/os
-(defconst *is-a-server* (string-equal "emacsclient" (file-name-nondirectory (getenv "_"))))
+(defconst *is-a-server* (frame-parameter nil 'client))
 (defconst *is-a-mac* (eq system-type 'darwin))
 
 (add-to-list 'load-path "~/.emacs.d/lisp")
@@ -68,7 +68,7 @@
   ;; packages to download: package.el not builtin till emacs24... just give up
   (require 'init-benchmark-init)
   (require 'init-ido)
-  (require 'init-projectile)
+  ;; (require 'init-projectile)
   (require 'init-ace-window)
   (require 'init-rainbow-delimiters)
   (require 'init-highlight-numbers)

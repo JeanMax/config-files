@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2015/04/26 16:54:03 by mcanal            #+#    #+#              ;
-;    Updated: 2016/09/06 21:31:12 by mcanal           ###   ########.fr        ;
+;    Updated: 2017/01/05 14:24:45 by mcanal           ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -20,7 +20,7 @@
   (when (y-or-n-p "Freenode? ")
     (erc :server "irc.freenode.net" :port 6667 :nick "JeanMax"))
   (when (y-or-n-p "Synirc? ")
-    (erc :server "irc.synirc.net" :port 6667 :nick "Smurf")))
+    (erc :server "irc.synirc.net" :port 6667 :nick "JeanMax")))
 
 
 (use-package erc

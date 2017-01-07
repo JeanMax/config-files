@@ -1,32 +1,28 @@
-;;; custom.el --- init php-mode
+;;; init-js-mode.el --- init js-mode
 ;;; Commentary:
 ;******************************************************************************;
 ;                                                                              ;
 ;                                                         :::      ::::::::    ;
-;    custom.el                                          :+:      :+:    :+:    ;
+;    init-js-mode.el                                    :+:      :+:    :+:    ;
 ;                                                     +:+ +:+         +:+      ;
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2017/01/05 14:42:42 by mcanal           ###   ########.fr        ;
+;    Updated: 2016/12/08 13:19:56 by mcanal           ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
 ;;; Code:
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+(use-package js-mode
+  :defer t
 
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+  :mode
+  ("\\.js\\'" . js-mode)
+  ("\\.json\\'" . js-mode)
+  ("\\.dbl\\'" . js-mode)
+  ("\\.dbj\\'" . js-mode))
 
-(provide 'custom)
-;;; custom.el ends here
+
+(provide 'init-js-mode)
+;;; init-js-mode.el ends here

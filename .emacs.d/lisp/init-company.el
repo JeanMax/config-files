@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2016/09/17 18:16:55 by mcanal           ###   ########.fr        ;
+;    Updated: 2017/01/05 14:27:55 by mcanal           ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -21,8 +21,9 @@
 
   :bind (("TAB" . indent-or-complete))
 
-  :init
-  (add-hook 'after-init-hook 'global-company-mode)
+  ;; :init
+  ;; (add-hook 'after-init-hook 'global-company-mode)
+  ;; (add-hook 'prog-mode-hook 'company-mode)
   ;; (add-hook 'minibuffer-inactive-mode 'company-mode)
 
   :config
@@ -37,8 +38,8 @@
                               company-etags
                               company-gtags)))
     ;; (setq company-echo-delay 0)
-    ;; (setq company-idle-delay nil) ; do not autostart
-    (setq company-idle-delay 0.1)
+    (setq company-idle-delay nil) ; do not autostart
+    ;; (setq company-idle-delay 0.1)
     (setq company-minimum-prefix-length 1) ; 0 to complete '.'
     ;; (setq company-show-numbers t)
 
@@ -51,7 +52,18 @@
     (add-hook 'company-mode-hook 'company-statistics-mode)
 
     :config
-    (setq company-statistics-file "~/.emacs.d/misc/company-statistics-cache.el")))
+    (progn
+      ;; (define-key company-active-map (kbd "RET") nil)
+      ;; (define-key company-active-map (kbd "<down>") nil)
+      ;; (define-key company-active-map (kbd "<up>") nil)
+      (define-key company-active-map (kbd "TAB") 'company-complete-common-or-cycle)
+      (define-key company-active-map (kbd "C-j") 'company-complete-selection)
+      ;; (define-key company-active-map (kbd "<backtab>") 'company-complete-selection)
+      (define-key company-active-map (kbd "<backtab>") 'company-select-previous-or-abort)
+      (define-key company-active-map (kbd "<next>") 'company-select-next-or-abort)
+      (define-key company-active-map (kbd "<prior>") 'company-select-previous-or-abort)
+
+      (setq company-statistics-file "~/.emacs.d/misc/company-statistics-cache.el")))
 
   ;; (defun complete-or-indent ()
   ;;   (interactive)
@@ -59,28 +71,15 @@
   ;;       (company-complete-common)
   ;;     (indent-according-to-mode)))
 
-    ;TODO: cf ido
+                                        ;TODO: cf ido
   (defun indent-or-complete () ;TODO: upgrade it! (cf ~smart-indent or something like that)
     (interactive)
     (if (looking-at "\\_>")
         (company-complete-common)
       (if (or (not transient-mark-mode) (region-active-p))
           (indent-region (region-beginning) (region-end))
-        (indent-according-to-mode)))))
+        (indent-according-to-mode))))))
 
-
-;; TODO
-(add-hook 'company-mode-hook
-          (lambda()
-            ;; (define-key company-active-map (kbd "RET") nil)
-            ;; (define-key company-active-map (kbd "<down>") nil)
-            ;; (define-key company-active-map (kbd "<up>") nil)
-            (define-key company-active-map (kbd "TAB") 'company-complete-common-or-cycle)
-            (define-key company-active-map (kbd "C-j") 'company-complete-selection)
-            ;; (define-key company-active-map (kbd "<backtab>") 'company-complete-selection)
-            (define-key company-active-map (kbd "<backtab>") 'company-select-previous-or-abort)
-            (define-key company-active-map (kbd "<next>") 'company-select-next-or-abort)
-            (define-key company-active-map (kbd "<prior>") 'company-select-previous-or-abort)))
 
 (provide 'init-company)
 ;;; init-company.el ends here

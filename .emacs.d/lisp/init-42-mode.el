@@ -8,11 +8,17 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2016/09/11 21:44:12 by mcanal           ###   ########.fr        ;
+;    Updated: 2016/11/24 22:40:09 by root             ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
 ;;; Code:
+
+(use-package slime
+  :ensure t
+  :defer t
+  )
+
 
 (use-package 42-mode
   :load-path

@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2016/09/18 16:19:17 by mcanal           ###   ########.fr        ;
+;    Updated: 2016/11/30 16:29:42 by root             ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -19,8 +19,11 @@
   :defer t
 
   :config
-  (setq inferior-lisp-program "/usr/bin/sbcl")
+  (load "/home/ubuntu/.roswell/lisp/quicklisp/slime-helper.el") ;TODO: symlink
+  ;; (setq inferior-lisp-program /"usr/bin/sbcl")
+  (setq inferior-lisp-program "ros -Q -l /home/ubuntu/.sbclrc -L sbcl run") ;TODO: symlink
   (setq slime-contribs '(slime-fancy))
+  (setq slime-load-failed-fasl 'never)
   (bind-key (kbd "C-c )") 'slime-close-all-parens-in-sexp))
 
 

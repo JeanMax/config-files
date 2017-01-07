@@ -29,12 +29,12 @@
 !! capslock
 ! keycode 66 = ISO_Level3_Shift NoSymbol ISO_Level3_Shift
 ! keycode 66 = ydiaeresis oslash
-keycode 66 = Control_L NoSymbol Control_L
+keycode 66 = Super_L NoSymbol Super_L
 
 !! winkey (Super)
 ! keycode 133 = Control_L NoSymbol Control_L
-keycode 133 = ISO_Level3_Shift NoSymbol ISO_Level3_Shift
-keycode 134 = Alt_R Meta_R Alt_R Meta_R
+! keycode 133 = ISO_Level3_Shift NoSymbol ISO_Level3_Shift
+! keycode 134 = Alt_R Meta_R Alt_R Meta_R
 
 !! menu key? the weird on the right (fn)
 keycode 135 = ISO_Level3_Shift NoSymbol ISO_Level3_Shift
