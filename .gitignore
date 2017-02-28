@@ -6,3 +6,8 @@ private
 .emacs.d/\#\!*
 .emacs.d/lisp/*elc
 .emacs.d/site-lisp/**/*elc
+.emacs.d/.emacs.desktop
+.emacs.d/.emacs.desktop.lock
+
+.config/gtk-2.0/gtkfilechooser.ini
+.config/gtk-3.0/bookmarks

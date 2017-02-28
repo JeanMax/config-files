@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2016/09/11 19:33:21 by mcanal           ###   ########.fr        ;
+;    Updated: 2017/01/22 23:25:50 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -26,7 +26,7 @@
   (bind-key* (kbd "<A-down>") 'hs-toggle-hiding)
   (bind-key* (kbd "<A-left>") 'hs-hide-level)
   (bind-key* (kbd "<A-right>") 'hs-show-all))
- (*is-a-mac*
+ ((or *is-a-mac* *is-rxvt*)
   (bind-key* (kbd "ESC <down>") 'hs-toggle-hiding)
   (bind-key* (kbd "ESC <left>") 'hs-hide-level)
   (bind-key* (kbd "ESC <right>") 'hs-show-all))

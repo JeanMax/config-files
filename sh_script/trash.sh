@@ -7,14 +7,14 @@
 #    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/02/12 20:45:01 by mcanal            #+#    #+#              #
-#    Updated: 2016/09/25 14:51:37 by mcanal           ###   ########.fr        #
+#    Updated: 2017/01/31 14:47:56 by mc               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 set -e
 
 if [ -z $TRASH ]; then
-    TRASH=$(test $(uname -s) = "Linux" && echo ~/.local/share/Trash/files || echo ~/.Trash)
+    TRASH=$(test $(uname -s) = "Linux" && echo "$HOME/.local/share/Trash/files" || echo "$HOME/.Trash")
 fi
 
 DATE=$(date "+%y-%m-%d_%H-%M-%S")

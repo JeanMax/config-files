@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2016/08/28 16:43:50 by mcanal           ###   ########.fr        ;
+;    Updated: 2017/01/23 20:09:37 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -24,8 +24,9 @@
   :config
   (setq recentf-max-menu-items 42)
   (setq recentf-max-saved-items 42)
-  (when *is-a-server*
-    (ignore-errors (recentf-open-files))))
+  ;; (when *is-a-server*
+  ;; (ignore-errors (recentf-open-files)))
+  )
 
 
 (provide 'init-recentf)

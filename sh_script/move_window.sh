@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+set -ex
 
 SCREEN_DIM=$(xdpyinfo | grep 'dimensions:' | cut -f 7 -d ' ')
 SCREEN_WIDTH=$(echo "$SCREEN_DIM" | cut -f 1 -d 'x')

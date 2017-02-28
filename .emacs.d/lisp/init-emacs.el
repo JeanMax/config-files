@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2017/01/05 14:43:24 by mcanal           ###   ########.fr        ;
+;    Updated: 2017/01/30 15:18:27 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -106,6 +106,27 @@
     (defconst *altgr-$* "¿"))
   ;TODO: add a variable to configure this at runtime
 
+
+  (when *is-rxvt*
+    ;; (define-key function-key-map "\033[1;5A" [(control up)])
+    ;; (define-key function-key-map "\033[1;5B" [(control down)])
+    ;; (define-key function-key-map "\033[1;5D" [(control left)])
+    ;; (define-key function-key-map "\033[1;5C" [(control right)])
+    ;; (define-key function-key-map "\033[1;2A" [(shift up)])
+    ;; (define-key function-key-map "\033[1;2B" [(shift down)])
+    ;; (define-key function-key-map "\033[1;2D" [(shift left)])
+    ;; (define-key function-key-map "\033[1;2C" [(shift right)])
+
+    ;control-del fix
+    (define-key function-key-map "\033[3;5~" [(control delete)])
+
+
+    ;control-shift fix
+    (define-key function-key-map "\033[1;6A" [(control shift up)])
+    (define-key function-key-map "\033[1;6B" [(control shift down)])
+    (define-key function-key-map "\033[1;6D" [(control shift left)])
+    (define-key function-key-map "\033[1;6C" [(control shift right)]))
+
   ;; tell emacs where to read abbrev
   (setq save-abbrevs 'silently)
   (setq abbrev-file-name "~/.emacs.d/misc/abbrev_defs")
@@ -154,8 +175,8 @@
   (setq auto-save-file-name-transforms `((".*" ,"~/.emacs.d/backup" t)))
 
   ;; bookmark
-  (when *is-a-server*
-    (bookmark-bmenu-list))
+  ;; (when *is-a-server*
+    ;; (bookmark-bmenu-list))
   (setq bookmark-file "~/.emacs.d/misc/bookmarks")
   ;; (bookmark-set)
   ;; (bookmark-jump)
@@ -179,7 +200,7 @@
   (cond
    ((version< emacs-version "23")
     (bind-key* (kbd "<A-up>") 'linum-mode))
-   (*is-a-mac*
+   ((or *is-a-mac* *is-rxvt*)
     (bind-key* (kbd "ESC <up>") 'linum-mode))
    (t
     (bind-key* (kbd "<M-up>") 'linum-mode)))
@@ -329,7 +350,6 @@
 
 ;; Don't show *Buffer list* when opening multiple files at the same time.
 (setq inhibit-startup-buffer-menu t)
-
 
 ;; (defun right-padding (str len)
 ;;   "Padd a string STR with space to the right (till total length >= LEN)."

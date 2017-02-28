@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2016/09/25 16:18:16 by mcanal           ###   ########.fr        ;
+;    Updated: 2017/01/30 15:18:45 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -24,7 +24,8 @@
   (when *is-a-server*
     (desktop-save-mode 1)
     (setq desktop-save nil)
-    (setq desktop-path '("~/.emacs.d/misc/")))
+    ;; (setq desktop-path '("~/.emacs.d/misc/")))
+    )
 
   ;; window splitting at launch
   (setq split-height-threshold 40)
@@ -49,7 +50,8 @@
   "Exit server and save desktop."
   (interactive)
   (when (y-or-n-p "Save Desktop? ")
-    (desktop-save "~/.emacs.d/misc"))
+    ;; (desktop-save "~/.emacs.d/misc"))
+    (desktop-save "~/.emacs.d"))
   (save-buffers-kill-terminal)
   (kill-emacs))
 
@@ -130,10 +132,10 @@
   (bind-key* (kbd "<A-next>") 'next-multiframe-window)
   (bind-key* (kbd "<A-insert>") 'find-file-other-window)
   (bind-key* (kbd "<A-delete>") 'delete-window))
- (*is-a-mac*
+ ((or *is-a-mac* *is-rxvt*)
   (bind-key* (kbd "ESC <prior>") 'previous-multiframe-window)
   (bind-key* (kbd "ESC <next>") 'next-multiframe-window)
-  ;; (bind-key* (kbd "<M-insert>") 'find-file-other-window) ;TODO
+  (bind-key* (kbd "ESC <insertchar>") 'find-file-other-window)
   (bind-key* (kbd "ESC <deletechar>") 'delete-window))
  (t
   (bind-key* (kbd "<M-prior>") 'previous-multiframe-window)

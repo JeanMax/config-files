@@ -7,7 +7,7 @@
 #    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/11 14:03:35 by mcanal            #+#    #+#              #
-#    Updated: 2016/10/03 00:36:28 by mcanal           ###   ########.fr        #
+#    Updated: 2017/01/30 15:19:04 by mc               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 set -e
@@ -15,10 +15,22 @@ set -e
 CONFIG_FOLDER=$(dirname "$(readlink -f "$0")")
 TO_LINK="sh_script
 .zshrc
+.bashrc
+.bash_aliases
 .emacs.d
 .Xmodmap
-.xbindkeysrc"
-
+.Xresources
+.xinitrc
+.xbindkeysrc
+.toprc
+.config/conky
+.config/gsimplecal
+.config/gtk-2.0
+.config/gtk-3.0
+.config/i3
+.config/i3blocks
+.config/lxterminal
+.config/rofi"
 
 PRIVATE_FOLDER=private
 TO_LINK_PRIVATE=".ssh
@@ -52,12 +64,15 @@ function extract-it () {
 }
 
 
+mkdir -pv "$HOME/.config"
 for i in $TO_LINK; do
     link-it "$CONFIG_FOLDER/$i" "$HOME/$i"
 done
 back-it "$HOME/.emacs" # :O
 
-extract-it "$CONFIG_FOLDER/$PRIVATE_FOLDER"
-for i in $TO_LINK_PRIVATE; do
-    link-it "$CONFIG_FOLDER/$PRIVATE_FOLDER/$i" "$HOME/$i"
-done
+if [ "$1" != "--no-private" ]; then
+    extract-it "$CONFIG_FOLDER/$PRIVATE_FOLDER"
+    for i in $TO_LINK_PRIVATE; do
+        link-it "$CONFIG_FOLDER/$PRIVATE_FOLDER/$i" "$HOME/$i"
+    done
+fi

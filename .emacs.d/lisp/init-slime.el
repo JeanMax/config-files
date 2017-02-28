@@ -8,21 +8,24 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2016/11/30 16:29:42 by root             ###   ########.fr        ;
+;    Updated: 2017/02/01 12:57:30 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
 ;;; Code:
 
 (use-package slime
-  :ensure t
+  :ensure nil
   :defer t
 
+  :init
+  (load (expand-file-name "~/.roswell/helper.el"))
+
   :config
-  (load "/home/ubuntu/.roswell/lisp/quicklisp/slime-helper.el") ;TODO: symlink
-  ;; (setq inferior-lisp-program /"usr/bin/sbcl")
-  (setq inferior-lisp-program "ros -Q -l /home/ubuntu/.sbclrc -L sbcl run") ;TODO: symlink
+  (slime-setup '(slime-fancy))
   (setq slime-contribs '(slime-fancy))
+  ;; (setq inferior-lisp-program /"usr/bin/sbcl")
+  (setq inferior-lisp-program "ros -Q -l ~/.sbclrc -L sbcl run") ;TODO: symlink
   (setq slime-load-failed-fasl 'never)
   (bind-key (kbd "C-c )") 'slime-close-all-parens-in-sexp))
 

@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2015/04/26 16:54:03 by mcanal            #+#    #+#              ;
-;    Updated: 2016/09/18 16:02:27 by mcanal           ###   ########.fr        ;
+;    Updated: 2017/01/27 11:09:40 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -38,6 +38,14 @@
      gnus-summary-thread-gathering-function 'gnus-gather-threads-by-references
      gnus-thread-sort-functions '(gnus-thread-sort-by-number
                                   (not gnus-thread-sort-by-date)))
+
+    (use-package nnredit
+      :load-path
+      "~/.emacs.d/site-lisp/nnreddit"
+
+      :init
+      (add-to-list 'gnus-secondary-select-methods
+                   '(nnreddit "")))
 
     ;; Demon to fetch email every 2.5 minutes when Emacs has been idle for 20 seconds
     (use-package gnus-demon
