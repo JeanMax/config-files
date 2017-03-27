@@ -7,7 +7,7 @@
 #    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/11 14:03:35 by mcanal            #+#    #+#              #
-#    Updated: 2017/01/30 15:19:04 by mc               ###   ########.fr        #
+#    Updated: 2017/03/26 22:29:48 by mc               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 set -e
@@ -17,6 +17,7 @@ TO_LINK="sh_script
 .zshrc
 .bashrc
 .bash_aliases
+.dircolors
 .emacs.d
 .Xmodmap
 .Xresources

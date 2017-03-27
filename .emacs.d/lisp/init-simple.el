@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2016/09/25 16:11:52 by mcanal           ###   ########.fr        ;
+;    Updated: 2017/03/19 15:32:25 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -40,6 +40,7 @@
   ;; insert \n && \t
   (bind-key* (kbd "C-c RET") 'insert-eol)
   (bind-key* (kbd *altgr-a*) 'tab-to-tab-stop)
+  (bind-key* (kbd *console*) 'tab-to-tab-stop)
 
 
   (defun xah-toggle-letter-case ()

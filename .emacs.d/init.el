@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2015/04/26 16:54:03 by mcanal            #+#    #+#              ;
-;    Updated: 2017/01/30 15:18:14 by mc               ###   ########.fr        ;
+;    Updated: 2017/03/21 14:34:48 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -57,6 +57,7 @@
 (require 'init-diff-mode)
 (require 'init-tramp)
 (require 'init-cc-mode)
+(require 'init-sh-mode)
 (require 'init-erc)
 (require 'init-gnus)
 
@@ -66,13 +67,13 @@
 (require 'init-ample-theme)
 
 (when (< 23 emacs-major-version)
-;;   ;; packages to download: package.el not builtin till emacs24... just give up
+  ;; packages to download: package.el not builtin till emacs24... just give up
   (require 'init-benchmark-init)
   (require 'init-ido)
-  ;; (require 'init-projectile)
+  ;; (require 'init-projectile) ; not a big fan
   (require 'init-ace-window)
-  (require 'init-rainbow-delimiters)
-  (require 'init-highlight-numbers)
+  (require 'init-rainbow-delimiters) ; sometimes buggy, but awesome
+  ;; (require 'init-highlight-numbers) ; buggy
   (require 'init-highlight-indent-guides)
   (require 'init-keyfreq)
   (require 'init-emms)

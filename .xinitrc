@@ -43,20 +43,28 @@ setxkbmap -option terminate:ctrl_alt_bksp
 # LC_ALL is unset since it overwrites everything
 unset LC_ALL
 export LANG=en_US.UTF-8
-export LC_NUMERIC=fr_FR.UTF-8
-export LC_TIME=fr_FR.UTF-8
-export LC_MONETARY=fr_FR.UTF-8
-export LC_PAPER=fr_FR.UTF-8
+export LANGUAGE=en_US.UTF-8
+export LC_ADDRESS=en_US.UTF-8
+export LC_COLLATE=en_US.UTF-8
+export LC_CTYPE=en_US.UTF-8
+export LC_IDENTIFICATION=en_US.UTF-8
 export LC_MEASUREMENT=fr_FR.UTF-8
+export LC_MESSAGES=en_US.UTF-8
+export LC_MONETARY=fr_FR.UTF-8
+export LC_NAME=en_US.UTF-8
+export LC_NUMERIC=fr_FR.UTF-8
+export LC_PAPER=fr_FR.UTF-8
+export LC_TELEPHONE=en_US.UTF-8
+export LC_TIME=fr_FR.UTF-8
 
 # This helps i3...
 export EDITOR="emacsclient -t"
 # export VISUAL="emacsclient -c"
 export TERMINAL="urxvtc"
-# export TERMINAL="lilyterm"
+# export TERMINAL="lxterminal"
 
 # urxvt server
-urxvtd -q -f -o
+test $TERMINAL == "urxvtc" && urxvtd -q -f -o
 
 # Enable core dumps in case something goes wrong
 ulimit -c unlimited

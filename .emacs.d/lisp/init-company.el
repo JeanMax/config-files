@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2017/01/05 14:27:55 by mcanal           ###   ########.fr        ;
+;    Updated: 2017/03/19 15:40:16 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -74,7 +74,7 @@
                                         ;TODO: cf ido
   (defun indent-or-complete () ;TODO: upgrade it! (cf ~smart-indent or something like that)
     (interactive)
-    (if (looking-at "\\_>")
+	(if (and company-mode (looking-at "\\_>"))
         (company-complete-common)
       (if (or (not transient-mark-mode) (region-active-p))
           (indent-region (region-beginning) (region-end))

@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2017/02/01 12:57:30 by mc               ###   ########.fr        ;
+;    Updated: 2017/03/11 16:24:10 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -18,8 +18,8 @@
   :ensure nil
   :defer t
 
-  :init
-  (load (expand-file-name "~/.roswell/helper.el"))
+  ;; :init
+  ;; (load (expand-file-name "~/.roswell/helper.el"))
 
   :config
   (slime-setup '(slime-fancy))

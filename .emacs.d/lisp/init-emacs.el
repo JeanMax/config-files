@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2017/01/30 15:18:27 by mc               ###   ########.fr        ;
+;    Updated: 2017/03/27 06:01:34 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -77,6 +77,7 @@
 
 
     ;default french
+    (defconst *console* "œ")
     (defconst *altgr-a* "â")
     (defconst *altgr-z* "å")
     (defconst *altgr-e* "€")
@@ -139,7 +140,7 @@
 
   ;; indentation
   (setq-default tab-width 4)
-  (setq-default indent-tabs-mode nil) ; set to true later for 42-mode
+  (setq-default indent-tabs-mode t) ; set to true later for 42-mode
   (setq-default tab-stop-list '(4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64 68 72 76 80 84 88 92 96 100 104 108 112 116 120))
   (setq fill-column 80)
 
@@ -148,6 +149,33 @@
 
   ;; splash screen on old versions...
   (setq inhibit-splash-screen t)
+
+  ;; default major mode (used for *scratch*)
+  (setq initial-major-mode 'sh-mode)
+  (setq initial-scratch-message "#!/bin/bash -ex\n\n")
+
+  ;; open previous buffer when starting client (byebye *scratch*)
+  (setq initial-buffer-choice
+  		(lambda()
+  		  ;; (defun loop (l)
+  			;; (cond ((null l)
+  				   (ibuffer) (get-buffer "*Ibuffer*"))
+  		  ;; 		  ((or (string= (buffer-name (car l)) "*Compile-Log*")
+  		  ;; 			   (string= (buffer-name (car l)) "*Messages*")
+  		  ;; 			   (string= (buffer-name (car l)) "*scratch*")
+  		  ;; 			   (string= (buffer-name (car l)) "*Ibuffer*")
+  		  ;; 			   (string= (buffer-name (car l)) " *Minibuf-0*")
+  		  ;; 			   (string= (buffer-name (car l)) " *Minibuf-1*")
+  		  ;; 			   (string= (buffer-name (car l)) " *Echo Area 0*")
+  		  ;; 			   (string= (buffer-name (car l)) " *Echo Area 1*")
+  		  ;; 			   (string= (buffer-name (car l)) " *server*")
+  		  ;; 			   (string= (buffer-name (car l)) " *code-conversion-work*")
+		  ;; 			   (eq (buffer-local-value 'major-mode (car l)) 'dired-mode))
+  		  ;; 		   (loop (cdr l)))
+  		  ;; 		  (t
+  		  ;; 		   (car l))))
+  		  ;; (loop (buffer-list))))
+)
 
   ;; format line number (fringe)
   (setq linum-format "%3d ")
@@ -192,6 +220,10 @@
   (global-set-key (kbd "DEL") 'backward-delete-char)
   (setq-default c-backspace-function 'backward-delete-char)
 
+  (global-set-key (kbd "DEL") 'backward-delete-char)
+  (global-set-key (kbd "C-S-c") 'kill-ring-save)
+  (global-set-key (kbd "C-S-v") 'x-clipboard-yank)
+
   ;; mouse scrolling workaround
   (bind-key* (kbd "<mouse-4>") 'previous-line)
   (bind-key* (kbd "<mouse-5>") 'next-line)
@@ -219,7 +251,7 @@
   ;; registers
   (bind-key* (kbd "<f7>") 'point-to-register)
   (bind-key* (kbd "<f9>") 'jump-to-register)
-  ;; (bind-key* (kbd *altrg-m*) 'point-to-register)
+  ;; (bind-key* (kbd *altgr-m*) 'point-to-register)
 
   ;; misc
   (bind-key* (kbd "M-s") 'shell)
@@ -237,16 +269,16 @@
   ; delay before printing prefix key(s) in the messages bar
   (setq suggest-key-bindings 0)
 
-  (define-prefix-command 'u-map)
-  (global-set-key (kbd "ù") 'u-map)
-  (global-set-key (kbd "ù ù")
-                  '(lambda () (interactive) (insert "ù")))
-  (global-set-key (kbd "ù m")
-                  '(lambda () (interactive) (insert "m")))
-  (global-set-key (kbd "ù *")
-                  '(lambda () (interactive) (insert "*")))
-  (global-set-key (kbd "ù $")
-                  '(lambda () (interactive) (insert "$")))
+  ;; (define-prefix-command 'u-map)
+  ;; (global-set-key (kbd "ù") 'u-map)
+  ;; (global-set-key (kbd "ù ù")
+  ;;                 '(lambda () (interactive) (insert "ù")))
+  ;; (global-set-key (kbd "ù m")
+  ;;                 '(lambda () (interactive) (insert "m")))
+  ;; (global-set-key (kbd "ù *")
+  ;;                 '(lambda () (interactive) (insert "*")))
+  ;; (global-set-key (kbd "ù $")
+  ;;                 '(lambda () (interactive) (insert "$")))
 
 
   (defun exchange-point-and-mark-no-activate ()

@@ -6,7 +6,7 @@
 #    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/23 17:38:59 by mcanal            #+#    #+#              #
-#    Updated: 2017/01/30 15:18:58 by mc               ###   ########.fr        #
+#    Updated: 2017/03/27 03:53:21 by mc               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,12 +15,54 @@
 
 source ~/.bashrc
 
+
+# Definition du prompt
+precmd ()
+{
+	ISGIT=$(git status 2> /dev/null)
+    if [ -n "$ISGIT" ]; then
+        STATUS=$(echo "$ISGIT" | grep "modified:\|:\|new file:\|deleted:")
+        BRANCH=$(git branch | cut -d ' ' -f 2 | tr -d '\n')
+        if [ -n "$STATUS" ]; then
+            COLOR="%{$fg[red]%}"
+        else
+            REMOTE_EXIST=$(git branch -a | grep remotes/origin/$BRANCH)
+            if [ -n "$REMOTE_EXIST" ]; then
+                REMOTE=$(git diff origin/$BRANCH $BRANCH)
+                if [ -n "$REMOTE" ]; then
+                    COLOR="%{$fg[yellow]%}"
+                else
+                    COLOR="%{$fg[green]%}"
+                fi
+            else
+                COLOR="%{$fg[green]%}"
+            fi
+        fi
+        RPROMPT="%{$COLOR%}($BRANCH)%{$reset_color%}"
+    else
+        RPROMPT=""
+	fi
+
+    if [ $? -eq 0 ]; then
+        COLOR="%{$fg[green]%}"
+    else
+        COLOR="%{$fg[red]%}"
+    fi
+
+    RPROMPT="$RPROMPT"
+    PROMPT="%B%{$fg[green]%}%n@%{$fg[yellow]%}%m%{$fg[white]%}:%{$fg[red]%}%~
+%{$COLOR%}>%{$reset_color%}%b "
+}
+
 # Reglage du terminal
 if [[ $TERM = dumb ]]; then
     # disable weird escape sequences
     unsetopt zle
 else
-    echo -ne "\033]0;$USER@$HOST:${PWD/$HOME/~}\007";
+	. ~/sh_script/tab_cd.sh
+	tab_cd "$(test -e ~/.pwd && cat ~/.pwd)"
+	alias cd='tab_cd'
+
     if [[ $TERM != rxvt-256color ]]; then
         TERM=xterm-256color
         # Correction de la touche Delete / ctrl-left / ctrl-right

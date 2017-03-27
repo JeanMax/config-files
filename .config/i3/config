@@ -118,6 +118,8 @@ bindsym $mod+Shift+agrave move container to workspace number 10
 # bindsym $mod+n exec i3-input -F 'exec ~/.config/i3/rename_workspace.sh "%s"' -P 'New name for this workspace: '
 bindsym $mod+n exec ~/.config/i3/rename_workspace.sh
 
+bindsym $mod+t exec pcmanfm
+
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
@@ -219,9 +221,11 @@ bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 set $sound_notif paplay /usr/share/sounds/freedesktop/stereo/audio-volume-change.oga
 # set $sound_notif notify-send 'Volume:' $(/usr/lib/i3blocks/volume)
 
-bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 0 +5% && $sound_notif
-bindsym XF86AudioLowerVolume exec pactl set-sink-volume 0 -5% && $sound_notif
-bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle && $sound_notif
+set $sink "$(pacmd list-sink-inputs | grep 'sink:' | head -n 1 | cut -d' ' -f2)"
+
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume $sink +5%    && $sound_notif
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume $sink -5%    && $sound_notif
+bindsym XF86AudioMute        exec pactl set-sink-mute   $sink toggle && $sound_notif
 
 # bindsym XF86AudioRaiseVolume exec --no-startup-id amixer set Master 5%+ && $sound_notif
 # bindsym XF86AudioLowerVolume exec --no-startup-id amixer set Master 5%- && $sound_notif
@@ -241,8 +245,8 @@ bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 5
 for_window [class="Conky"] floating enable
 
 # windows border (normal|pixel|1pixel|none)
-new_window normal 4
-new_float normal 4
+new_window pixel 4
+new_float pixel 4
 bindsym $mod+b border pixel 4
 bindsym $mod+Shift+b border normal 4
 
@@ -255,3 +259,6 @@ bindsym --release button2 kill
 
 exec --no-startup-id i3-msg 'workspace 2:term; exec i3-sensible-terminal'
 exec --no-startup-id i3-msg 'workspace 1:firefox; exec firefox'
+exec --no-startup-id i3-msg 'workspace 4:files; exec pcmanfm'
+exec --no-startup-id i3-msg 'workspace 3:split; exec i3-sensible-terminal'
+exec --no-startup-id i3-msg 'workspace 3:split; exec i3-sensible-terminal'
