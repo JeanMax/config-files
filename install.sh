@@ -7,7 +7,7 @@
 #    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/11 14:03:35 by mcanal            #+#    #+#              #
-#    Updated: 2017/03/26 22:29:48 by mc               ###   ########.fr        #
+#    Updated: 2017/04/21 14:42:49 by mc               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 set -e
@@ -19,12 +19,14 @@ TO_LINK="sh_script
 .bash_aliases
 .dircolors
 .emacs.d
+.gdbinit
 .Xmodmap
 .Xresources
 .xinitrc
 .xbindkeysrc
 .toprc
 .config/conky
+.config/dconf
 .config/gsimplecal
 .config/gtk-2.0
 .config/gtk-3.0
