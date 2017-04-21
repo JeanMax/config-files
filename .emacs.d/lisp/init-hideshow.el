@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2017/01/22 23:25:50 by mc               ###   ########.fr        ;
+;    Updated: 2017/04/08 16:33:18 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -26,11 +26,12 @@
   (bind-key* (kbd "<A-down>") 'hs-toggle-hiding)
   (bind-key* (kbd "<A-left>") 'hs-hide-level)
   (bind-key* (kbd "<A-right>") 'hs-show-all))
- ((or *is-a-mac* *is-rxvt*)
+ (t
   (bind-key* (kbd "ESC <down>") 'hs-toggle-hiding)
   (bind-key* (kbd "ESC <left>") 'hs-hide-level)
-  (bind-key* (kbd "ESC <right>") 'hs-show-all))
- (t
+  (bind-key* (kbd "ESC <right>") 'hs-show-all)
+
+  ;we keep this for gui-macs
   (bind-key* (kbd "<M-down>") 'hs-toggle-hiding)
   (bind-key* (kbd "<M-left>") 'hs-hide-level)
   (bind-key* (kbd "<M-right>") 'hs-show-all)))

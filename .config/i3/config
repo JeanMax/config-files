@@ -177,9 +177,9 @@ bindsym $mod+r mode "resize"
 # $i3-theme-window
 # class                 border  backgr. text    indicator
 # client.focused          #0088CC #0088CC #ffffff #dddddd
-client.focused_inactive #454545 #454545 #888888 #292d2e
-client.unfocused        #333333 #333333 #888888 #292d2e
-client.urgent           #2f343a #900000 #ffffff #900000
+client.focused_inactive #454545 #454545 #888888 #292d2e #000000
+client.unfocused        #333333 #333333 #888888 #292d2e #000000
+client.urgent           #2f343a #900000 #ffffff #900000 #000000
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
@@ -251,14 +251,15 @@ bindsym $mod+b border pixel 4
 bindsym $mod+Shift+b border normal 4
 
 # The middle button over a titlebar kills the window
-bindsym --release button2 kill
+# bindsym --release button2 kill #bjorked
 
 # hides borders on workspaces with only one window visible
 # hide_edge_borders smart
 
-
-exec --no-startup-id i3-msg 'workspace 2:term; exec i3-sensible-terminal'
 exec --no-startup-id i3-msg 'workspace 1:firefox; exec firefox'
-exec --no-startup-id i3-msg 'workspace 4:files; exec pcmanfm'
-exec --no-startup-id i3-msg 'workspace 3:split; exec i3-sensible-terminal'
-exec --no-startup-id i3-msg 'workspace 3:split; exec i3-sensible-terminal'
+exec --no-startup-id i3-msg 'workspace 3:term;    exec i3-sensible-terminal'
+exec --no-startup-id i3-msg 'workspace 3:term;    exec i3-sensible-terminal'
+exec --no-startup-id i3-msg 'workspace 2:emacs;   exec i3-sensible-terminal'
+# TODO: exec emacs inside that term
+# exec --no-startup-id sleep 3 && i3-msg 'workspace 2:emacs;   exec ~/.config/i3/wait_emacs.sh && i3-sensible-terminal'
+# exec --no-startup-id i3-msg 'workspace 4:files;   exec pcmanfm'

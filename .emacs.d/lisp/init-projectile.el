@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2017/03/11 16:39:46 by mc               ###   ########.fr        ;
+;    Updated: 2017/04/05 14:51:27 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -20,7 +20,8 @@
 
   :config
   (define-key projectile-mode-map (kbd "£") 'projectile-command-map)
-  (projectile-global-mode 1))
+  ;; (projectile-global-mode 1) ; laggy
+  (setq projectile-enable-caching t))
 
 (provide 'init-projectile)
 ;;; init-projectile.el ends here

@@ -6,7 +6,7 @@
 #    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/23 17:38:59 by mcanal            #+#    #+#              #
-#    Updated: 2017/03/27 03:53:21 by mc               ###   ########.fr        #
+#    Updated: 2017/03/27 14:31:20 by mc               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,39 +19,40 @@ source ~/.bashrc
 # Definition du prompt
 precmd ()
 {
+    if [ $? -eq 0 ]; then
+        CMD_COLOR="%{$fg[green]%}"
+    else
+        CMD_COLOR="%{$fg[red]%}"
+    fi
+
 	ISGIT=$(git status 2> /dev/null)
     if [ -n "$ISGIT" ]; then
         STATUS=$(echo "$ISGIT" | grep "modified:\|:\|new file:\|deleted:")
         BRANCH=$(git branch | cut -d ' ' -f 2 | tr -d '\n')
         if [ -n "$STATUS" ]; then
-            COLOR="%{$fg[red]%}"
+            GIT_COLOR="%{$fg[red]%}"
         else
             REMOTE_EXIST=$(git branch -a | grep remotes/origin/$BRANCH)
             if [ -n "$REMOTE_EXIST" ]; then
                 REMOTE=$(git diff origin/$BRANCH $BRANCH)
                 if [ -n "$REMOTE" ]; then
-                    COLOR="%{$fg[yellow]%}"
+                    GIT_COLOR="%{$fg[yellow]%}"
                 else
-                    COLOR="%{$fg[green]%}"
+                    GIT_COLOR="%{$fg[green]%}"
                 fi
             else
-                COLOR="%{$fg[green]%}"
+                GIT_COLOR="%{$fg[green]%}"
             fi
         fi
-        RPROMPT="%{$COLOR%}($BRANCH)%{$reset_color%}"
+        RPROMPT="%{$GIT_COLOR%}($BRANCH)%{$reset_color%}"
     else
         RPROMPT=""
 	fi
 
-    if [ $? -eq 0 ]; then
-        COLOR="%{$fg[green]%}"
-    else
-        COLOR="%{$fg[red]%}"
-    fi
 
     RPROMPT="$RPROMPT"
     PROMPT="%B%{$fg[green]%}%n@%{$fg[yellow]%}%m%{$fg[white]%}:%{$fg[red]%}%~
-%{$COLOR%}>%{$reset_color%}%b "
+%{$CMD_COLOR%}>%{$reset_color%}%b "
 }
 
 # Reglage du terminal
@@ -90,7 +91,7 @@ setopt notify
 # Autocompletion de type menu
 autoload -Uz compinit promptinit && compinit && promptinit
 zstyle ':completion:*' menu select
-# setopt COMPLETE_ALIASES
+setopt COMPLETE_ALIASES
 
 # Use modern completion system
 #autoload -Uz compinit

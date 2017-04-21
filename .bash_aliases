@@ -7,7 +7,7 @@
 #    By: mc </var/spool/mail/mc>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/26 20:50:04 by mc                #+#    #+#              #
-#    Updated: 2017/03/27 09:03:32 by mc               ###   ########.fr        #
+#    Updated: 2017/04/18 13:41:46 by mc               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,16 +21,16 @@ alias c='cd'
 alias ll='ls -lh'
 alias la='ls -lAh'
 alias du='du -h'
+alias df='df -h'
+alias free='free -h'
 alias del='~/sh_script/trash.sh'
 alias zconf='e ~/.zshrc'
 alias bconf='e ~/.bashrc'
 alias econf='e ~/.emacs.d/init.el'
-# alias e='sh ~/sh_script/tab_emacs.sh'
 alias e="$EDITOR"
 alias v="$VISUAL"
 alias t='sh ~/sh_script/rename_tab.sh'
 alias gdb="gdb -quiet"
-alias sql="mysql -u root -p --silent"
 alias se="SUDO_EDITOR=\"emacsclient -t -a emacs\" sudoedit"
 alias sudo='sudo ' # keep aliases after sudo
 alias ocaml='rlwrap ocaml'
@@ -38,11 +38,18 @@ alias py='python3'
 alias copy='xsel --clipboard'
 alias sbcl='sbcl --noinform'
 alias now='date "+%y-%m-%d_%H-%M-%S"'
+alias ext-ip='curl -s http://ipecho.net/plain ; echo;'
 alias cl="rlwrap sbcl"
-alias sql="mysql --prompt=\"$(echo -e '\033[32;01m\\d\033[33;01m@\033[31;01m\\h> \033[0m')\" -uroot -p"
 # alias die='dbus-send --system --print-reply --dest="org.freedesktop.ConsoleKit"  /org/freedesktop/ConsoleKit/Manager org.freedesktop.ConsoleKit.Manager.Stop' #debian only
 alias open='xdg-open'
 eval "$(thefuck --alias fok 2> /dev/null)"
+SQL_ARGS="--prompt=\"$(echo -e '\033[32;01m\\d\033[33;01m@\033[31;01m\\h> \033[0m')\" -uroot -p --silent"
+alias sql="mysql $SQL_ARGS"
+
+function man_emacs() {
+	emacsclient -t --eval "(progn (man \"$1\") (other-window 1) (delete-other-windows))"
+}
+alias man='man_emacs'
 
 # alias .='echo $PWD'
 alias ..='cd ..'
@@ -100,7 +107,9 @@ if [ -x /usr/bin/dircolors ]; then
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
     alias diff='diff --color=auto'
+    alias wdiff='dwdiff -c'
     alias pacsearch='pacsearch -c'
+    alias pactree='pactree -c'
 fi
 
 
@@ -122,59 +131,43 @@ if [ "$TERM" != dumb ] && [ -n "$GRC" ]; then
 
 	alias ll="colourify \ls -lh --color=always"
 	alias la="colourify \ls -lAh --color=always"
-	# alias diff="colourify diff --color=always"
 	alias cat="$GRC -es --colour=on cat"
 	alias configure='colourify ./configure'
-	alias as="colourify as"
-	alias ant="colourify ant"
-	alias blkid="colourify blkid"
-	alias cc="colourify cc"
-	alias cvs="colourify cvs"
-	alias df="colourify df"
-	alias dig="colourify dig"
-	alias dnf="colourify dnf"
-	alias docker="colourify docker"
 	alias du="colourify du -h"
+	alias df="colourify df -h"
+	alias free="colourify free -h"
+	alias sql="colourify mysql $SQL_ARGS"
+	alias cc="cc -fdiagnostics-color=always"
+	alias g++="g++ -fdiagnostics-color=always"
+	alias gcc="gcc -fdiagnostics-color=always"
+	# alias make=$(hash colormake && echo "colormake" || echo "colourify make")
+
+	alias as="colourify as"
+	alias blkid="colourify blkid"
+	alias dig="colourify dig"
 	alias env="colourify env"
-	alias esperanto="colourify esperanto"
-	alias free="colourify free"
-	alias gas="colourify gas"
-	alias g++="colourify g++"
-	alias gcc="colourify gcc"
 	alias getfacl="colourify getfacl"
-	alias gmake="colourify gmake"
 	alias head="colourify head"
 	alias ifconfig="colourify ifconfig"
 	alias iostat="colourify iostat"
 	alias ip="colourify ip"
 	alias iptables="colourify iptables"
-	alias irclog="colourify irclog"
 	alias journalctl="colourify journalctl"
 	alias last="colourify last"
 	alias ld="colourify ld"
-	alias ldap="colourify ldap"
 	alias link="colourify link"
-	alias log="colourify log"
 	alias lsattr="colourify lsattr"
 	alias lsblk="colourify lsblk"
 	alias lsmod="colourify lsmod"
 	alias lspci="colourify lspci"
-	alias make="colourify make"
 	alias mount="colourify mount"
-	alias mtr="colourify mtr"
-	alias mvn="colourify mvn"
 	alias netstat="colourify netstat"
 	alias nmap="colourify nmap"
 	alias php="colourify php"
 	alias ping="colourify ping"
-	alias ping6="colourify ping6"
-	alias proftpd="colourify proftpd"
 	alias ps="colourify ps"
-	alias pv="colourify pv"
 	alias sar="colourify sar"
-	alias semanage="colourify semanage"
 	alias showmount="colourify showmount"
-	alias sql="colourify sql"
 	alias ss="colourify ss"
 	alias stat="colourify stat"
 	alias sysctl="colourify sysctl"
@@ -182,15 +175,35 @@ if [ "$TERM" != dumb ] && [ -n "$GRC" ]; then
 	alias tail="colourify tail"
 	alias tcpdump="colourify tcpdump"
 	alias traceroute="colourify traceroute"
-	alias traceroute6="colourify traceroute6"
 	alias tune2fs="colourify tune2fs"
-	alias ulimit="colourify ulimit"
 	alias uptime="colourify uptime"
 	alias vmstat="colourify vmstat"
 	alias w="colourify w"
-	alias wdiff="colourify wdiff"
 	alias who="colourify who"
-fi
 
+	# alias diff="colourify diff --color=always" #clash with diff colors
+
+	# unused
+	# alias ant="colourify ant"
+	# alias cvs="colourify cvs"
+	# alias docker="colourify docker"
+	# alias esperanto="colourify esperanto"
+	# alias dnf="colourify dnf"
+	# alias gas="colourify gas"
+	# alias gmake="colourify gmake"
+	# alias irclog="colourify irclog"
+	# alias ldap="colourify ldap"
+	# alias log="colourify log"
+	# alias mtr="colourify mtr"
+	# alias mvn="colourify mvn"
+	# alias ping6="colourify ping6"
+	# alias proftpd="colourify proftpd"
+	# alias pv="colourify pv"
+	# alias semanage="colourify semanage"
+	# alias traceroute6="colourify traceroute6"
+	# alias ulimit="colourify ulimit" #björked
+	# alias wdiff="colourify wdiff"
+fi
+unset SQL_ARGS
 
 # added from terminal

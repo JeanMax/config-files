@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2015/04/26 16:54:03 by mcanal            #+#    #+#              ;
-;    Updated: 2017/01/05 14:30:08 by mcanal           ###   ########.fr        ;
+;    Updated: 2017/03/28 14:37:50 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -21,12 +21,21 @@
   (setq ibuffer-saved-filter-groups
         '(("home"
            ("Git" (or (name . "^\*vc-.*\*$")
-                      (name . "^timemachine:.*")))
+                      (name . "^timemachine:.*")
+					  (name . "^\*magit.*")))
            ("Tramp" (filename . ":.*:"))
            ("C" (filename . ".*\\.c$"))
            ("H" (filename . ".*\\.h$"))
            ("CPP" (filename . ".*\\.cpp$"))
            ("HPP" (filename . ".*\\.hpp$"))
+           ("Make" (or (filename . ".*[mM]akefile.*")
+					   (name . "*compilation*")))
+           ("GDB" (or (mode . gud-mode)
+                      (name . "^\*breakpoints.*")
+                      (name . "^\*locals.*")
+                      (name . "^\*stack.*")
+                      (name . "^\*threads.*")
+                      (name . "^\*input/output.*")))
            ("Js" (mode . js-mode))
            ("Php" (filename . ".*\\.php$"))
            ("Views" (or (filename . ".*\\.twig$")
@@ -43,14 +52,8 @@
            ("Dir" (mode . dired-mode))
            ("eLisp" (filename . ".*\\.el$"))
            ("Config" (or (mode . conf-unix-mode)
-                         (mode . conf-space-mode)))
-           ("Compilation" (name . "*compilation*"))
-           ("GDB" (or (mode . gud-mode)
-                      (name . "^\*breakpoints.*")
-                      (name . "^\*locals.*")
-                      (name . "^\*stack.*")
-                      (name . "^\*threads.*")
-                      (name . "^\*input/output.*")))
+                         (mode . conf-space-mode)
+						 (filename . ".*/config-files/.*")))
            ("Mail" (or (mode . message-mode)
                        (mode . bbdb-mode)
                        (mode . mail-mode)
@@ -104,10 +107,17 @@
              font-lock-comment-face)
          (35 (eq major-mode 'dired-mode)
              font-lock-keyword-face)
+		 (14 (string-match ".*\\.cp?p?$" (buffer-name))
+			 font-lock-variable-name-face)
+		 (13 (string-match ".*\\.hp?p?$" (buffer-name))
+			 font-lock-type-face)
          (12 (eq major-mode 'erc-mode)
-             font-lock-type-face)
-         (10 (eq major-mode 'emacs-lisp-mode)
-             font-lock-variable-name-face))))
+             font-lock-constant-face)
+         (11 (or (eq major-mode 'emacs-lisp-mode)
+				 (eq major-mode 'sh-mode)
+				 (string-match ".*[mM]akefile.*" buffer-file-name)
+				 (string-match ".*/config-files/.*" buffer-file-name))
+             font-lock-preprocessor-face))))
 
 (bind-key* (kbd *altgr-s*) 'ibuffer)
 (defalias 'list-buffers 'ibuffer-other-window)

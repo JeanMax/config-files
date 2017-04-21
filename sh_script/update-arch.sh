@@ -13,5 +13,5 @@ for p in $PACKAGES; do
 done
 
 sudo pacman -Rns $(pacman -Qdtq)
-
+sudo pacman-key --refresh-keys
 sudo pacman-optimize

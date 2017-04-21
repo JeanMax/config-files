@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2017/01/05 14:20:04 by mcanal           ###   ########.fr        ;
+;    Updated: 2017/04/05 14:00:13 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -46,12 +46,12 @@
       (ido-ubiquitous-mode 1))
 
 
-    ;; (use-package flx-ido
-    ;;   :ensure t
-    ;;   :defer t
+    (use-package flx-ido
+      :ensure t
+      :defer t
 
-    ;;   :init
-    ;;   (flx-ido-mode 1))
+      :init
+      (flx-ido-mode 1))
 
     (use-package smex
       :ensure t
@@ -79,14 +79,16 @@
         :config
         (set-face-attribute 'ido-grid-mode-match t :weight 'bold) ;TODO: highlight?
         ;; (setq ido-grid-mode-keys nil)
-        ;; (setq
-        ;; ido-grid-mode-max-columns 4
-        ;; ido-grid-mode-max-rows 8
-        ;; ido-grid-mode-prefix-scrolls t
-        ;; ido-grid-mode-scroll-down #'ido-grid-mode-next-row
-        ;; ido-grid-mode-scroll-up #'ido-grid-mode-previous-row
-        ;; ido-grid-mode-order nil
-        ;; ido-grid-mode-start-collapsed t)
+        ;; (setq ido-grid-mode-first-line '(ido-grid-mode-count "   " ido-grid-mode-long-count))
+        (setq
+         ido-grid-mode-max-columns 9
+         ido-grid-mode-max-rows 3
+         ;; ido-grid-mode-prefix-scrolls t
+         ;; ido-grid-mode-scroll-down #'ido-grid-mode-next-row
+         ;; ido-grid-mode-scroll-up #'ido-grid-mode-previous-row
+         ;; ido-grid-mode-order nil
+         ;; ido-grid-mode-start-collapsed t
+         )
         ))
 
 
@@ -123,7 +125,7 @@
      (expand-file-name
       (ido-completing-read
        "Project file: " (tags-table-files) nil t)))))
-(bind-key (kbd "ð") 'ido-find-file-in-tag-files)
+(bind-key (kbd *altgr-o*) 'ido-find-file-in-tag-files)
 
 (provide 'init-ido)
 ;;; init-ido.el ends here

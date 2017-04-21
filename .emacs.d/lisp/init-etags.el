@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2017/03/12 19:50:48 by mc               ###   ########.fr        ;
+;    Updated: 2017/04/05 16:07:49 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -42,6 +42,29 @@
 
 (bind-key* (kbd *altgr-t*) 'tags-make-n-visit)
 (bind-key* (kbd *altgr-g*) 'xref-find-definitions)
+(bind-key* (kbd *altgr-x*) 'xref-find-references)
+;; (bind-key* (kbd *altgr-r*) 'recentf-open-files)
+
+;; need system package "global"
+(use-package ggtags
+  :ensure t
+  :defer t
+
+  :init
+  (use-package gtags
+    :ensure t
+    :defer t)
+  (add-hook 'c-mode-common-hook
+			(lambda ()
+			  (when (derived-mode-p 'c-mode 'c++-mode)
+				(ggtags-mode 1))))
+
+  :config
+  (setq-local hippie-expand-try-functions-list
+			  (cons 'ggtags-try-complete-tag hippie-expand-try-functions-list))
+  (bind-key* (kbd *altgr-g*) 'ggtags-find-tag-dwim)
+  (bind-key* (kbd *altgr-x*) 'ggtags-find-reference))
+
 
 (provide 'init-etags)
 ;;; init-etags.el ends here

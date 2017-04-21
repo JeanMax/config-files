@@ -1,25 +1,32 @@
-;;; init-sh-mode.el --- init sh-mode
+;;; init-magit.el --- init magit
 ;;; Commentary:
 ;******************************************************************************;
 ;                                                                              ;
 ;                                                         :::      ::::::::    ;
-;    init-sh-mode.el                                    :+:      :+:    :+:    ;
+;    init-magit.el                                      :+:      :+:    :+:    ;
 ;                                                     +:+ +:+         +:+      ;
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
-;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2017/03/27 12:21:32 by mc               ###   ########.fr        ;
+;    Created: 2017/03/28 13:35:39 by mc                #+#    #+#              ;
+;    Updated: 2017/03/28 13:38:07 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
 ;;; Code:
 
-(use-package sh-mode
-  :mode
-  ("PKGBUILD\\'" . sh-mode)
-  ("\\.install\\'" . sh-mode)
+(use-package magit
+  :ensure t
+  :defer t
 
-  :defer t)
+  ;; :init
 
-(provide 'init-sh-mode)
-;;; init-sh-mode.el ends here
+  ;; :config
+
+  )
+
+
+
+(bind-key* (kbd *altgr-v*) 'magit-status)
+
+(provide 'init-magit)
+;;; init-magit.el ends here

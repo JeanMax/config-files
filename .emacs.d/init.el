@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2015/04/26 16:54:03 by mcanal            #+#    #+#              ;
-;    Updated: 2017/03/21 14:34:48 by mc               ###   ########.fr        ;
+;    Updated: 2017/04/13 21:42:55 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -18,23 +18,33 @@
 (when (< emacs-major-version 22)
   (error "Emacs version 22 or greater required!"))
 
-;; tricks to save some startup time + compile config files
-;; (defconst initial-gc-cons-threshold gc-cons-threshold)
-(setq gc-cons-threshold 50000000)
+;; tricks to save some startup time
+;; ( https://www.reddit.com/r/emacs/comments/3kqt6e/2_easy_little_known_steps_to_speed_up_emacs_start/
+;; http://bling.github.io/blog/2016/01/18/why-are-you-changing-gc-cons-threshold/ )
+;; (let ((gc-cons-threshold most-positive-fixnum))
+(defconst initial-gc-cons-threshold gc-cons-threshold)
+(setq gc-cons-threshold most-positive-fixnum)
+
+(add-hook 'minibuffer-setup-hook
+		  '(lambda () (setq gc-cons-threshold most-positive-fixnum)))
+(add-hook 'minibuffer-exit-hook
+		  '(lambda () (setq gc-cons-threshold initial-gc-cons-threshold)))
+
+;; compile config files
 (defconst initial-file-name-handler-alist file-name-handler-alist)
-(add-hook 'after-init-hook '
-          (lambda()
-            ;; (setq gc-cons-threshold initial-gc-cons-threshold)
-            (setq file-name-handler-alist initial-file-name-handler-alist)
-            (when (< 23 emacs-major-version)
-              (ignore-errors (benchmark-init/activate))
-              (byte-recompile-directory "~/.emacs.d/lisp" 0)
-              (byte-recompile-directory "~/.emacs.d/site-lisp" 0)
-              (message "Init-time: %s" (emacs-init-time)))))
-;; (setq gc-cons-threshold 134217728)
+(add-hook 'after-init-hook
+		  '(lambda ()
+			 ;; (setq gc-cons-threshold initial-gc-cons-threshold)
+			 (setq file-name-handler-alist initial-file-name-handler-alist)
+			 (when (< 23 emacs-major-version)
+			   (ignore-errors (benchmark-init/activate))
+			   (byte-recompile-directory "~/.emacs.d/lisp" 0)
+			   (byte-recompile-directory "~/.emacs.d/site-lisp" 0)
+			   (message "Init-time: %s" (emacs-init-time)))))
 (setq file-name-handler-alist nil)
 (setq load-prefer-newer t)
 ;; (setq debug-on-error t)
+
 
 ;; detect emacsclient/os
 (defconst *is-a-server* (string-equal "emacsclient" (file-name-nondirectory (getenv "_"))))
@@ -70,7 +80,7 @@
   ;; packages to download: package.el not builtin till emacs24... just give up
   (require 'init-benchmark-init)
   (require 'init-ido)
-  ;; (require 'init-projectile) ; not a big fan
+  (require 'init-projectile)
   (require 'init-ace-window)
   (require 'init-rainbow-delimiters) ; sometimes buggy, but awesome
   ;; (require 'init-highlight-numbers) ; buggy
@@ -78,6 +88,7 @@
   (require 'init-keyfreq)
   (require 'init-emms)
   (require 'init-company)
+  (require 'init-magit)
   (require 'init-git-timemachine)
   (require 'init-diff-hl)
   (require 'init-slime)
@@ -93,8 +104,8 @@
   (require 'init-eww-mode)
 
   (when (< 22 emacs-major-version)
-  ;; not builtin till emacs23
-    (require 'init-vc-dir)))
+	;; not builtin till emacs23
+	(require 'init-vc-dir)))
 
 
 ;; auto-generated customizations

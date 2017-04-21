@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2017/03/27 06:01:34 by mc               ###   ########.fr        ;
+;    Updated: 2017/04/08 17:42:30 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -81,7 +81,7 @@
     (defconst *altgr-a* "â")
     (defconst *altgr-z* "å")
     (defconst *altgr-e* "€")
-    (defconst *altgr-r* "ç")
+    (defconst *altgr-r* "ç") ; I use that :/
     (defconst *altgr-t* "þ")
     (defconst *altgr-y* "ý")
     (defconst *altgr-u* "û")
@@ -147,6 +147,9 @@
   ;; disable top menu bar
   (menu-bar-mode -1)
 
+    ;; disable top menu bar
+  (tool-bar-mode -1)
+
   ;; splash screen on old versions...
   (setq inhibit-splash-screen t)
 
@@ -155,27 +158,27 @@
   (setq initial-scratch-message "#!/bin/bash -ex\n\n")
 
   ;; open previous buffer when starting client (byebye *scratch*)
-  (setq initial-buffer-choice
-  		(lambda()
-  		  ;; (defun loop (l)
-  			;; (cond ((null l)
-  				   (ibuffer) (get-buffer "*Ibuffer*"))
-  		  ;; 		  ((or (string= (buffer-name (car l)) "*Compile-Log*")
-  		  ;; 			   (string= (buffer-name (car l)) "*Messages*")
-  		  ;; 			   (string= (buffer-name (car l)) "*scratch*")
-  		  ;; 			   (string= (buffer-name (car l)) "*Ibuffer*")
-  		  ;; 			   (string= (buffer-name (car l)) " *Minibuf-0*")
-  		  ;; 			   (string= (buffer-name (car l)) " *Minibuf-1*")
-  		  ;; 			   (string= (buffer-name (car l)) " *Echo Area 0*")
-  		  ;; 			   (string= (buffer-name (car l)) " *Echo Area 1*")
-  		  ;; 			   (string= (buffer-name (car l)) " *server*")
-  		  ;; 			   (string= (buffer-name (car l)) " *code-conversion-work*")
-		  ;; 			   (eq (buffer-local-value 'major-mode (car l)) 'dired-mode))
-  		  ;; 		   (loop (cdr l)))
-  		  ;; 		  (t
-  		  ;; 		   (car l))))
-  		  ;; (loop (buffer-list))))
-)
+;;   (setq initial-buffer-choice
+;;   		(lambda()
+;;   		  ;; (defun loop (l)
+;;   			;; (cond ((null l)
+;;   				   (ibuffer) (get-buffer "*Ibuffer*"))
+;;   		  ;; 		  ((or (string= (buffer-name (car l)) "*Compile-Log*")
+;;   		  ;; 			   (string= (buffer-name (car l)) "*Messages*")
+;;   		  ;; 			   (string= (buffer-name (car l)) "*scratch*")
+;;   		  ;; 			   (string= (buffer-name (car l)) "*Ibuffer*")
+;;   		  ;; 			   (string= (buffer-name (car l)) " *Minibuf-0*")
+;;   		  ;; 			   (string= (buffer-name (car l)) " *Minibuf-1*")
+;;   		  ;; 			   (string= (buffer-name (car l)) " *Echo Area 0*")
+;;   		  ;; 			   (string= (buffer-name (car l)) " *Echo Area 1*")
+;;   		  ;; 			   (string= (buffer-name (car l)) " *server*")
+;;   		  ;; 			   (string= (buffer-name (car l)) " *code-conversion-work*")
+;; 		  ;; 			   (eq (buffer-local-value 'major-mode (car l)) 'dired-mode))
+;;   		  ;; 		   (loop (cdr l)))
+;;   		  ;; 		  (t
+;;   		  ;; 		   (car l))))
+;;   		  ;; (loop (buffer-list))))
+;; )
 
   ;; format line number (fringe)
   (setq linum-format "%3d ")
@@ -220,9 +223,10 @@
   (global-set-key (kbd "DEL") 'backward-delete-char)
   (setq-default c-backspace-function 'backward-delete-char)
 
-  (global-set-key (kbd "DEL") 'backward-delete-char)
+  ;; trying to mimic terminal behaviour in gui
   (global-set-key (kbd "C-S-c") 'kill-ring-save)
-  (global-set-key (kbd "C-S-v") 'x-clipboard-yank)
+  (global-set-key (kbd "C-S-V") 'clipboard-yank)
+  (global-set-key (kbd "C-S-t") 'shell)
 
   ;; mouse scrolling workaround
   (bind-key* (kbd "<mouse-4>") 'previous-line)
@@ -232,9 +236,10 @@
   (cond
    ((version< emacs-version "23")
     (bind-key* (kbd "<A-up>") 'linum-mode))
-   ((or *is-a-mac* *is-rxvt*)
-    (bind-key* (kbd "ESC <up>") 'linum-mode))
    (t
+    (bind-key* (kbd "ESC <up>") 'linum-mode)
+
+   ;we keep this for gui-macs
     (bind-key* (kbd "<M-up>") 'linum-mode)))
 
   ;; search and replace
@@ -246,7 +251,7 @@
 
   ;; completion
   (bind-key (kbd "<backtab>") 'dabbrev-expand)
-  ;; (bind-key* (kbd *altgr-f*) 'hippie-expand)
+  (bind-key* (kbd *altgr-h*) 'hippie-expand)
 
   ;; registers
   (bind-key* (kbd "<f7>") 'point-to-register)
@@ -259,26 +264,16 @@
   (bind-key* (kbd "M-q") 'comment) ; -> elisp-functions.el
   (bind-key* (kbd "C-q") 'insert-debug-comment) ; -> elisp-functions.el
 
-  ;; (define-prefix-command '2-map)
-  ;; (global-set-key (kbd "²") '2-map)
-  ;; (global-set-key (kbd "² ²")
-  ;;               '(lambda () (interactive) (insert "²")))
-  ;; (global-set-key (kbd "² &")
-  ;;               '(lambda () (interactive) (insert "&")))
+  ;; gui font (default is actually set in .Xressources)
+  ;; (when (member "CodeNewRoman" (font-family-list))
+    ;; (set-frame-font "CodeNewRoman 13" t nil))
+  (when (member "Symbola" (font-family-list))
+    (set-fontset-font t 'unicode "Symbola" nil 'prepend))
 
-  ; delay before printing prefix key(s) in the messages bar
+  ;; (setq default-frame-alist '((font . "CodeNewRoman-13")))
+
+  ;; delay before printing prefix key(s) in the messages bar
   (setq suggest-key-bindings 0)
-
-  ;; (define-prefix-command 'u-map)
-  ;; (global-set-key (kbd "ù") 'u-map)
-  ;; (global-set-key (kbd "ù ù")
-  ;;                 '(lambda () (interactive) (insert "ù")))
-  ;; (global-set-key (kbd "ù m")
-  ;;                 '(lambda () (interactive) (insert "m")))
-  ;; (global-set-key (kbd "ù *")
-  ;;                 '(lambda () (interactive) (insert "*")))
-  ;; (global-set-key (kbd "ù $")
-  ;;                 '(lambda () (interactive) (insert "$")))
 
 
   (defun exchange-point-and-mark-no-activate ()

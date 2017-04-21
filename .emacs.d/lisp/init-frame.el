@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2017/01/30 15:18:45 by mc               ###   ########.fr        ;
+;    Updated: 2017/04/08 16:32:40 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -132,12 +132,13 @@
   (bind-key* (kbd "<A-next>") 'next-multiframe-window)
   (bind-key* (kbd "<A-insert>") 'find-file-other-window)
   (bind-key* (kbd "<A-delete>") 'delete-window))
- ((or *is-a-mac* *is-rxvt*)
+ (t
   (bind-key* (kbd "ESC <prior>") 'previous-multiframe-window)
   (bind-key* (kbd "ESC <next>") 'next-multiframe-window)
   (bind-key* (kbd "ESC <insertchar>") 'find-file-other-window)
-  (bind-key* (kbd "ESC <deletechar>") 'delete-window))
- (t
+  (bind-key* (kbd "ESC <deletechar>") 'delete-window)
+
+  ;;we keep this too for gui-macs
   (bind-key* (kbd "<M-prior>") 'previous-multiframe-window)
   (bind-key* (kbd "<M-next>") 'next-multiframe-window)
   (bind-key* (kbd "<M-insert>") 'find-file-other-window)

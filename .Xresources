@@ -2,7 +2,7 @@ Xft.antialias: 1
 Xft.dpi: 96
 Xft.hinting: 0
 Xft.hintstyle: hintnone
-Xft.lcdfilter: lcddefault
+Xft.lcdfilter: lcdlight
 Xft.rgba: rgb
 
 
@@ -12,6 +12,10 @@ URxvt.perl-ext-common:  default,matcher,tabbedex,resize-font,eval,-searchable-sc
 URxvt.termName:         rxvt-256color
 URxvt.reverseVideo:     True
 URxvt.font:             xft:CodeNewRoman:size=13
+
+! Emacs.fontBackend: xft
+Emacs.font: Monaco-11
+Emacs.lineSpacing: 0
 
 ! URxvt.letterSpace:      -2
 URxvt.lineSpace:        0

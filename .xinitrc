@@ -1,25 +1,31 @@
 #!/bin/sh
 
+# Here i3 is kept as default
+export WM=${1:-i3}
+# export WM=${1:-sway}
+
 userresources=$HOME/.Xresources
 usermodmap=$HOME/.Xmodmap
 sysresources=/etc/X11/xinit/.Xresources
 sysmodmap=/etc/X11/xinit/.Xmodmap
 
 # merge in defaults and keymaps
+if [ "$WM" != "sway" ]; then #TODO: check for wayland instead
+    if [ -f $sysmodmap ]; then
+        xmodmap $sysmodmap
+    fi
+
+    if [ -f "$usermodmap" ]; then
+        xmodmap "$usermodmap"
+    fi
+fi
+
 if [ -f $sysresources ]; then
     xrdb -merge $sysresources
 fi
 
-if [ -f $sysmodmap ]; then
-    xmodmap $sysmodmap
-fi
-
 if [ -f "$userresources" ]; then
     xrdb -merge "$userresources"
-fi
-
-if [ -f "$usermodmap" ]; then
-    xmodmap "$usermodmap"
 fi
 
 if [ -d /etc/X11/xinit/xinitrc.d ] ; then
@@ -38,6 +44,11 @@ xset -b
 
 # Enable zapping (C-A-<Bksp> kills X)
 setxkbmap -option terminate:ctrl_alt_bksp
+
+export XKB_DEFAULT_LAYOUT=fr,us
+export XKB_DEFAULT_VARIANT=, #nodeadkeys
+export XKB_DEFAULT_OPTIONS=grp:alt_shift_toggle,
+export XKB_DEFAULT_OPTIONS=caps:super
 
 # Enforce correct locales from the beginning:
 # LC_ALL is unset since it overwrites everything
@@ -60,8 +71,8 @@ export LC_TIME=fr_FR.UTF-8
 # This helps i3...
 export EDITOR="emacsclient -t"
 # export VISUAL="emacsclient -c"
-export TERMINAL="urxvtc"
-# export TERMINAL="lxterminal"
+# export TERMINAL="urxvtc"
+export TERMINAL="mate-terminal"
 
 # urxvt server
 test $TERMINAL == "urxvtc" && urxvtd -q -f -o
@@ -71,21 +82,28 @@ ulimit -c unlimited
 
 # Start emacs server (handling bjorked desktop file)
 rm -f ~/.emacs.d/.emacs.desktop.lock
-emacs --daemon --eval '(desktop-read)' > /tmp/emacs-startup.log 2>&1 &
+emacslog=/tmp/emacs-startup.log
+(touch $emacslog; emacs --daemon --eval '(desktop-read)' &> $emacslog  && rm -f $emacslog) &
+unset emacslog
 
-# Background picture
-feh --bg-max ~/Pictures/Wallpapers/xkcd.png &
 
-# Screen locker
-i3lock -t -i ~/Pictures/Wallpapers/xkcd.png && sleep 1
-xautolock -time 60 -locker 'i3lock -t -i ~/Pictures/Wallpapers/xkcd.png && sleep 1' &
+case $WM in
+    i3)
+        # Background picture
+        feh --bg-max ~/Pictures/Wallpapers/xkcd.png &
 
-# Here i3 is kept as default
-session=${1:-i3}
+        # Screen locker
+        i3lock -t -i ~/Pictures/Wallpapers/xkcd.png && sleep 1
+        xautolock -time 60 -locker 'i3lock -t -i ~/Pictures/Wallpapers/xkcd.png && sleep 1' &
 
-case $session in
-    i3                ) exec i3;;
-    sway              ) exec sway;;
-    # No known session, try to run it as command
-    *) exec $1;;
+        exec i3;;
+
+    sway)
+        exec dbus-launch --sh-syntax --exit-with-session sway -d &> /tmp/sway.log
+        # sway -d &> /var/log/sway.log
+
+        ;;
+
+    *) # No known WM, try to run it as command
+        exec $1;;
 esac

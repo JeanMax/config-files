@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2016/09/17 13:44:07 by mcanal           ###   ########.fr        ;
+;    Updated: 2017/03/27 10:34:29 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -25,10 +25,10 @@
   ;; (enable-theme 'ample)
 
   :config
-  (set-face-attribute 'minibuffer-prompt t :foreground "blue")
+  (set-face-attribute 'minibuffer-prompt t :foreground "#528fd1")
   (set-face-attribute 'region t :background "#424242")
   ;; font-lock-string-face && font-lock-variable-name-face are the same...
-  (set-face-attribute 'font-lock-variable-name-face t :foreground "#ebc481")
+  (set-face-attribute 'font-lock-variable-name-face t :foreground "#b0b74b")
   (set-face-attribute 'font-lock-string-face t :foreground "#7d7c61")
   (set-face-attribute 'font-lock-doc-face t :foreground "#bdbc61")
   (set-face-attribute 'highlight t :background "#dF9522")

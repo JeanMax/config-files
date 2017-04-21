@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2017/03/11 17:22:52 by mc               ###   ########.fr        ;
+;    Updated: 2017/04/09 12:52:30 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -37,13 +37,13 @@
         ;;   "/home/mcanal/Shared/motoko/lib/plugins/d2gs_meph"
         ;;   "/home/mcanal/Shared/motoko/lib/plugins/d2gs_dclone"
         ;;   "/home/mcanal/Shared/motoko/lib/plugins/d2gs_record/replay"))
-        ;; '("../../../../../../../usr/include/SDL"
-          ;; "../inc"
-          ;; "../../inc"
-          ;; "../libft/inc"
-        ;; "../../libft/inc")) ; -.-
-        '("/home/mc/quarantedeux/libft/inc"
-          "/home/mc/quarantedeux/corewar/inc"))
+
+        '("/home/mc/quarantedeux/wolf3d/inc"
+		  "/home/mc/quarantedeux/wolf3d/test/inc"
+          "/home/mc/quarantedeux/wolf3d/libft/inc"
+		  "/home/mc/quarantedeux/wolf3d/libft/test/inc"
+		  "/home/mc/quarantedeux/wolf3d/libft/test/minunit"
+          "/home/mc/quarantedeux/wolf3d/SDL/include"))
   (setq flycheck-clang-warnings
         '("all" "extra"))
   ;; (setq flycheck-idle-change-delay 2)
