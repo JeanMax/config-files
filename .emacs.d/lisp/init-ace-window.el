@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2017/04/06 14:14:59 by mc               ###   ########.fr        ;
+;    Updated: 2017/04/21 16:42:17 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -16,7 +16,7 @@
 ;;; Code:
 (use-package ace-window
   :ensure t
-  :defer t
+  ;; :defer t
 
   :init
   (bind-key (kbd "µ") 'ace-window)

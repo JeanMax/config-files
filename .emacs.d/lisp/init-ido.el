@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2017/04/05 14:00:13 by mc               ###   ########.fr        ;
+;    Updated: 2017/04/21 16:47:22 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -40,7 +40,7 @@
 
     (use-package ido-ubiquitous
       :ensure t
-      :defer t
+      ;; :defer t
 
       :init
       (ido-ubiquitous-mode 1))
@@ -48,14 +48,14 @@
 
     (use-package flx-ido
       :ensure t
-      :defer t
+      ;; :defer t
 
       :init
       (flx-ido-mode 1))
 
     (use-package smex
       :ensure t
-      :defer t
+      ;; :defer t
 
       :init
       (smex-initialize)
@@ -71,10 +71,10 @@
     (when (version< "24.4" emacs-version)
       (use-package ido-grid-mode
         :ensure t
-        :defer t
+        ;; :defer t
 
         :init
-        (ido-grid-mode 1)
+        (ido-grid-mode t)
 
         :config
         (set-face-attribute 'ido-grid-mode-match t :weight 'bold) ;TODO: highlight?

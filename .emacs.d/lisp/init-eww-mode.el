@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2016/09/18 15:08:06 by mcanal           ###   ########.fr        ;
+;    Updated: 2017/04/21 16:46:59 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -20,6 +20,7 @@
 
   :config
   (progn
+	(setq eww-bookmarks-directory "~/.emacs.d/misc")
     (setq eww-search-prefix
           "https://www.startpage.com/do/dsearch?cat=web&pl=opensearch&language=english&query=")
 

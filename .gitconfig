@@ -1,0 +1,7 @@
+[user]
+	email = mcanal@student.42.fr
+	name = JeanMax
+[push]
+	default = simple
+[core]
+	excludesfile = ~/.gitignore_global

@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2017/04/05 14:51:27 by mc               ###   ########.fr        ;
+;    Updated: 2017/04/21 16:45:26 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -16,12 +16,23 @@
 
 (use-package projectile
   :ensure t
-  :defer t
+  ;; :defer t
 
   :config
   (define-key projectile-mode-map (kbd "£") 'projectile-command-map)
-  ;; (projectile-global-mode 1) ; laggy
-  (setq projectile-enable-caching t))
+  (projectile-global-mode 1)
+  (setq projectile-enable-caching t) ; laggy?
+  (setq projectile-cache-file "/home/mc/.emacs.d/misc/projectile.cache")
+  (setq projectile-known-projects-file "/home/mc/.emacs.d/misc/projectile-bookmarks.eld")
+  (setq projectile-mode-line
+   (quote
+	(:eval
+	 (if
+		 (file-remote-p default-directory)
+		 " Proj"
+	   (format " Proj[%s]"
+			   (projectile-project-name))))))
+  (setq projectile-switch-project-action (lambda nil (projectile-ibuffer 0))))
 
 (provide 'init-projectile)
 ;;; init-projectile.el ends here

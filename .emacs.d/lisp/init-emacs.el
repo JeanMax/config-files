@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2017/04/08 17:42:30 by mc               ###   ########.fr        ;
+;    Updated: 2017/04/21 16:56:28 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -187,6 +187,22 @@
   (setq read-file-name-completion-ignore-case 't)
   (setq read-buffer-completion-ignore-case 't)
 
+  ;; completion stuffs
+  (setq dabbrev-case-distinction nil)
+  (setq dabbrev-case-fold-search nil)
+  (setq dabbrev-case-replace nil)
+  (setq hippie-expand-dabbrev-skip-space t)
+  (setq hippie-expand-try-functions-list '(try-expand-list
+										   try-expand-line
+										   try-complete-file-name-partially
+										   try-complete-file-name
+										   try-expand-all-abbrevs
+										   try-expand-dabbrev
+										   try-expand-dabbrev-all-buffers
+										   try-expand-dabbrev-from-kill
+										   try-complete-lisp-symbol-partially
+										   try-complete-lisp-symbol))
+
   ;; Increase number of undo
   (setq undo-limit 100000)
 
@@ -275,6 +291,9 @@
   ;; delay before printing prefix key(s) in the messages bar
   (setq suggest-key-bindings 0)
 
+
+  ;; full width man
+  (setq Man-width t)
 
   (defun exchange-point-and-mark-no-activate ()
     "Identical to \\[exchange-point-and-mark] but will not activate the region."

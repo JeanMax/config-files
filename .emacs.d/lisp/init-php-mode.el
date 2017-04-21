@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2016/09/17 19:48:46 by mcanal           ###   ########.fr        ;
+;    Updated: 2017/04/21 16:42:01 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -19,14 +19,14 @@
 
   :mode
   ("\\.php\\'" . php-mode)
-  
+
   :config
   (progn
     (setq indent-tabs-mode nil) ; (cause it inherits c-hook...)
 
     (use-package php-eldoc
       :ensure t
-      :defer t
+      ;; :defer t
 
       :init
       (add-hook 'php-mode-hook 'php-eldoc-enable))))

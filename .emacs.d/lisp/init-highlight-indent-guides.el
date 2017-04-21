@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2016/09/25 16:18:56 by mcanal           ###   ########.fr        ;
+;    Updated: 2017/04/21 16:41:25 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -16,7 +16,7 @@
 
 (use-package highlight-indent-guides
   :ensure t
-  :defer t
+  ;; :defer t
   :commands (highlight-indent-guides-mode)
 
   ;; :init

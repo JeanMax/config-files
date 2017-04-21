@@ -7,7 +7,7 @@
 #    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/11 14:03:35 by mcanal            #+#    #+#              #
-#    Updated: 2017/04/21 14:42:49 by mc               ###   ########.fr        #
+#    Updated: 2017/04/21 17:06:51 by mc               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 set -e
@@ -20,6 +20,8 @@ TO_LINK="sh_script
 .dircolors
 .emacs.d
 .gdbinit
+.gitconfig
+.gitignore_global
 .Xmodmap
 .Xresources
 .xinitrc
@@ -37,8 +39,7 @@ TO_LINK="sh_script
 
 PRIVATE_FOLDER=private
 TO_LINK_PRIVATE=".ssh
-.authinfo
-.gitconfig"
+.authinfo"
 
 
 function back-it () {
