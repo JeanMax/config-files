@@ -7,12 +7,12 @@
 #    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/11 14:03:35 by mcanal            #+#    #+#              #
-#    Updated: 2017/04/21 17:06:51 by mc               ###   ########.fr        #
+#    Updated: 2017/05/10 17:10:11 by mc               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 set -e
 
-CONFIG_FOLDER=$(dirname "$(readlink -f "$0")")
+CONFIG_FOLDER="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 TO_LINK="sh_script
 .zshrc
 .bashrc

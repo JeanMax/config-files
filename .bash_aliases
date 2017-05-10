@@ -7,7 +7,7 @@
 #    By: mc </var/spool/mail/mc>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/26 20:50:04 by mc                #+#    #+#              #
-#    Updated: 2017/04/18 13:41:46 by mc               ###   ########.fr        #
+#    Updated: 2017/05/10 17:11:53 by mc               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -125,13 +125,12 @@ export LESS_TERMCAP_us=$(printf "\e[1;32m")
 
 
 # moar colors
-GRC="$(which grc)"
-if [ "$TERM" != dumb ] && [ -n "$GRC" ]; then
-    alias colourify="$GRC -es --colour=auto"
+if [ "$TERM" != dumb ] && $(hash grc 2>/dev/null); then
+    alias colourify="grc -es --colour=auto"
 
 	alias ll="colourify \ls -lh --color=always"
 	alias la="colourify \ls -lAh --color=always"
-	alias cat="$GRC -es --colour=on cat"
+	alias cat="grc -es --colour=on cat"
 	alias configure='colourify ./configure'
 	alias du="colourify du -h"
 	alias df="colourify df -h"

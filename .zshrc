@@ -6,7 +6,7 @@
 #    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/23 17:38:59 by mcanal            #+#    #+#              #
-#    Updated: 2017/03/27 14:31:20 by mc               ###   ########.fr        #
+#    Updated: 2017/05/10 17:10:49 by mc               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -142,7 +142,9 @@ zstyle ':completion:*:*:kill:*:processes' list-colors "=(#b) #([0-9]#)*=36=31"
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
 # zsh-syntax-highlighting
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+test -e /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh \
+	&& source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # zsh autosuggestion
-# source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+test -e /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh \
+	&& source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh

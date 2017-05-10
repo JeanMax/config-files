@@ -6,7 +6,7 @@
 #    By: mc </var/spool/mail/mc>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/26 20:39:01 by mc                #+#    #+#              #
-#    Updated: 2017/03/27 14:22:47 by mc               ###   ########.fr        #
+#    Updated: 2017/05/10 17:11:12 by mc               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ export NAME="Max Canal"
 export SMTPSERVER="smtp.gmail.com"
 
 #clang debuging stuff
-ASAN_SYMBOLIZER_PATH=$(which llvm-symbolizer)
+ASAN_SYMBOLIZER_PATH=$(which llvm-symbolizer 2>/dev/null)
 export ASAN_SYMBOLIZER_PATH
 
 # Big boys use big history
