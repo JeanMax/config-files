@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2015/04/26 16:54:03 by mcanal            #+#    #+#              ;
-;    Updated: 2017/03/28 14:37:50 by mc               ###   ########.fr        ;
+;    Updated: 2017/07/04 22:19:15 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -42,6 +42,7 @@
                         (filename . ".*\\.html$")))
            ("Yaml" (filename . ".*\\.yml$"))
            ("Sh" (filename . ".*\\.sh$"))
+           ("Python" (filename . ".*\\.py$"))
            ("Lisp" (or (filename . ".*\\.lisp$")
                        (filename . ".*\\.cl$")
                        (filename . ".*\\.asd$")))

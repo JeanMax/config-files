@@ -8,20 +8,26 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2016/12/08 13:19:56 by mcanal           ###   ########.fr        ;
+;    Updated: 2017/06/03 02:10:21 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
 ;;; Code:
 
-(use-package js-mode
-  :defer t
+(use-package js2-mode
+  :ensure t
 
   :mode
-  ("\\.js\\'" . js-mode)
-  ("\\.json\\'" . js-mode)
-  ("\\.dbl\\'" . js-mode)
-  ("\\.dbj\\'" . js-mode))
+  ("\\.js\\'" . js2-mode)
+  ("\\.json\\'" . js2-mode)
+  ("\\.dbl\\'" . js2-mode)
+  ("\\.dbj\\'" . js2-mode)
+
+  :config
+  (setq tab-width 2) ; or any other preferred value
+  (defvaralias 'c-basic-offset 'tab-width)
+  (defvaralias 'cperl-indent-level 'tab-width))
+
 
 
 (provide 'init-js-mode)

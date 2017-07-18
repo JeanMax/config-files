@@ -47,6 +47,13 @@ instance=wlp3s0
 interval=10
 separator=true
 
+# Kraken
+#
+[time]
+command=~/.config/i3blocks/kraken.sh
+interval=3
+
+
 # [wifi]
 # label=☢
 # instance=wlp3s0

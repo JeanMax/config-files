@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2017/04/21 16:17:41 by mc               ###   ########.fr        ;
+;    Updated: 2017/06/25 15:27:32 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -21,6 +21,9 @@
 
   :init
   (add-hook 'prog-mode-hook 'global-flycheck-mode)
+
+  (use-package flycheck-ledger
+    :ensure t)
 
   :config
   ;; (setq flycheck-mode-line-prefix "f")
@@ -39,10 +42,10 @@
         ;;   "/home/mcanal/Shared/motoko/lib/plugins/d2gs_record/replay"))
 
         '("/home/mc/quarantedeux/wolf3d/inc"
-		  "/home/mc/quarantedeux/wolf3d/test/inc"
+          "/home/mc/quarantedeux/wolf3d/test/inc"
           "/home/mc/quarantedeux/wolf3d/libft/inc"
-		  "/home/mc/quarantedeux/wolf3d/libft/test/inc"
-		  "/home/mc/quarantedeux/wolf3d/libft/test/minunit"
+          "/home/mc/quarantedeux/wolf3d/libft/test/inc"
+          "/home/mc/quarantedeux/wolf3d/libft/test/minunit"
           "/home/mc/quarantedeux/wolf3d/SDL/include"))
   (setq flycheck-clang-warnings
         '("all" "extra"))
@@ -52,7 +55,6 @@
         '(save
           mode-enabled
           new-line)))
-
 
 (provide 'init-flycheck)
 ;;; init-flycheck.el ends here

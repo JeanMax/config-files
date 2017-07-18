@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2017/04/05 16:07:49 by mc               ###   ########.fr        ;
+;    Updated: 2017/07/04 22:18:22 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -20,7 +20,7 @@
   :config
   ;; FIXME
   ;; (defvar tags-make-n-visit-history '("--regex='/.*\\(public\\|static\\|abstract\\|protected\\|private\\).*function.*(/' ~/Pliizz/src/**/*.php"))
-  (defvar tags-make-n-visit-history '("~/quarantedeux/corewar/**/*.[ch]"))
+  (defvar tags-make-n-visit-history '("~/babao/src/**/*.py"))
   (eval-after-load "savehist"
     '(add-to-list 'savehist-additional-variables 'tags-make-n-visit-history))
   (savehist-mode 1)
@@ -62,8 +62,9 @@
   :config
   (setq-local hippie-expand-try-functions-list
 			  (cons 'ggtags-try-complete-tag hippie-expand-try-functions-list))
-  (bind-key* (kbd *altgr-g*) 'ggtags-find-tag-dwim)
-  (bind-key* (kbd *altgr-x*) 'ggtags-find-reference))
+  ;; (bind-key* (kbd *altgr-g*) 'ggtags-find-tag-dwim) #TODO
+  ;; (bind-key* (kbd *altgr-x*) 'ggtags-find-reference)
+  )
 
 
 (provide 'init-etags)

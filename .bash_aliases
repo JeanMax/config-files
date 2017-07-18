@@ -7,7 +7,7 @@
 #    By: mc </var/spool/mail/mc>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/26 20:50:04 by mc                #+#    #+#              #
-#    Updated: 2017/05/10 17:11:53 by mc               ###   ########.fr        #
+#    Updated: 2017/07/04 23:57:39 by mc               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -206,3 +206,8 @@ fi
 unset SQL_ARGS
 
 # added from terminal
+alias led='ledger --no-pager --force-color --color -f ~/kraken.ledger --price-db ~/kraken.price-db'
+alias watch='watch -c -t -n 3 '
+alias pyhton='python'
+alias ipyhton='ipython'
+alias pi='ipython --no-confirm-exit --no-banner'

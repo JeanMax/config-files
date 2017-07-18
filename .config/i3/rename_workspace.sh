@@ -2,9 +2,7 @@
 
 set -x
 
-old=$(i3-msg -t get_workspaces \
-          | jq '.[] | select(.focused==true).name' \
-          | cut -d"\"" -f2)
+old=$(i3-msg -t get_workspaces | jq -r '.[] | select(.focused==true).name')
 # olders=$(i3-msg -t get_workspaces \
 #           | jq '.[] | select(.focused==false).name' \
 #           | cut -d"\"" -f2)

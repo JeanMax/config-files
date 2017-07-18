@@ -6,7 +6,7 @@
 #    By: mc </var/spool/mail/mc>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/26 20:39:01 by mc                #+#    #+#              #
-#    Updated: 2017/05/10 17:11:12 by mc               ###   ########.fr        #
+#    Updated: 2017/07/05 00:34:31 by mc               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,9 @@ export ALTERNATE_EDITOR=""
 export EDITOR="emacsclient -t"
 # export VISUAL="emacsclient -c" # it's kinda annoying
 
+# cat if less (eheh) than one page
+# export LESS="-E -F -X $LESS"
+
 
 #mail TODO: move these in another file
 export MAIL="mc.maxcanal@gmail.com"
@@ -57,7 +60,7 @@ else
 	export TRASH="$HOME/.Trash"
 	export PATH="$HOME/.brew/bin:$PATH"
 fi
-export PATH="$HOME/.roswell/bin:$PATH"
+export PATH="$HOME/.roswell/bin:$HOME/.local/bin:$PATH"
 
 # locales
 # export LANG=en_US.UTF-8
@@ -78,6 +81,6 @@ export PATH="$HOME/.roswell/bin:$PATH"
 
 # report about cpu-/system-/user-time of command if running longer than
 # 5 seconds
-REPORTTIME=5
+REPORTTIME=5 #TODO: I think that's a zsh stuff
 
 source ~/.bash_aliases
