@@ -7,7 +7,7 @@
 #    By: mc </var/spool/mail/mc>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/26 20:50:04 by mc                #+#    #+#              #
-#    Updated: 2017/07/04 23:57:39 by mc               ###   ########.fr        #
+#    Updated: 2017/10/08 02:53:21 by mc               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ alias free='free -h'
 alias del='~/sh_script/trash.sh'
 alias zconf='e ~/.zshrc'
 alias bconf='e ~/.bashrc'
+alias aconf='e ~/.bash_aliases'
 alias econf='e ~/.emacs.d/init.el'
 alias e="$EDITOR"
 alias v="$VISUAL"
@@ -59,7 +60,7 @@ alias .....='cd ../../../..'
 # alias /='cd /'
 
 # git aliases
-alias ga="git add -A"
+alias ga="git add -A "
 alias gb="git branch"
 alias gcm="git commit -m"
 alias gce="git commit"
@@ -70,13 +71,13 @@ alias gpo="git push origin"
 alias gpom="git push origin master"
 alias gm="git merge --no-ff"
 alias gu="git add -u"
-alias gl="git log"
 alias gs="git status"
 alias gh="git stash"
 alias gf="git fetch"
 alias gd="git diff"
 alias gdc="git diff --cached"
-alias gtree="git log --oneline --graph --all --decorate"
+alias gl="git log --oneline --graph --decorate --branches --remotes --tags --notes HEAD"
+alias gll="git log"
 alias gr="git reset"
 
 
@@ -139,7 +140,9 @@ if [ "$TERM" != dumb ] && $(hash grc 2>/dev/null); then
 	alias cc="cc -fdiagnostics-color=always"
 	alias g++="g++ -fdiagnostics-color=always"
 	alias gcc="gcc -fdiagnostics-color=always"
-	# alias make=$(hash colormake && echo "colormake" || echo "colourify make")
+
+	# bugged, don't use it
+	# alias make="$(hash colormake 2>/dev/null && echo colormake || echo colourify make)"
 
 	alias as="colourify as"
 	alias blkid="colourify blkid"
@@ -159,6 +162,7 @@ if [ "$TERM" != dumb ] && $(hash grc 2>/dev/null); then
 	alias lsblk="colourify lsblk"
 	alias lsmod="colourify lsmod"
 	alias lspci="colourify lspci"
+	alias lshw="colourify lshw"
 	alias mount="colourify mount"
 	alias netstat="colourify netstat"
 	alias nmap="colourify nmap"

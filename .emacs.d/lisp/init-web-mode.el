@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2016/11/25 21:09:34 by ubuntu           ###   ########.fr        ;
+;    Updated: 2017/08/25 14:59:15 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -21,6 +21,7 @@
   ("\\.html\\'" . web-mode)
   ("\\.twig\\'" . web-mode)
   ("\\.css\\'" . web-mode)
+  ("\\.ejs\\'" . web-mode)
 
   :config
   ;; (setq indent-tabs-mode nil)

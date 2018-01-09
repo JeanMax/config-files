@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2017/03/28 13:35:39 by mc                #+#    #+#              ;
-;    Updated: 2017/06/25 17:33:31 by mc               ###   ########.fr        ;
+;    Updated: 2018/01/09 15:15:57 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -16,7 +16,11 @@
 
 (use-package ledger-mode
   :ensure t
-  :mode ("\\.ledger\\'" . ledger-mode))
+  :mode ("\\.ledger\\'" . ledger-mode)
+
+  :config
+  (set-face-attribute 'ledger-font-xact-highlight-face t :background "brightblack")
+  )
 
 (bind-key (kbd "C-c b") (lambda () (interactive) (insert "₿")))
 

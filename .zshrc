@@ -6,7 +6,7 @@
 #    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/23 17:38:59 by mcanal            #+#    #+#              #
-#    Updated: 2017/05/10 17:10:49 by mc               ###   ########.fr        #
+#    Updated: 2017/10/11 02:28:49 by mc               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -148,3 +148,8 @@ test -e /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.z
 # zsh autosuggestion
 test -e /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh \
 	&& source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# export OPAMEXTERNALSOLVER=$(which packup 2> /dev/null)
+
+# OPAM configuration
+. /home/mc/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true

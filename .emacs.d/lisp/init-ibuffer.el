@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2015/04/26 16:54:03 by mcanal            #+#    #+#              ;
-;    Updated: 2017/07/04 22:19:15 by mc               ###   ########.fr        ;
+;    Updated: 2017/08/25 15:29:16 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -36,13 +36,17 @@
                       (name . "^\*stack.*")
                       (name . "^\*threads.*")
                       (name . "^\*input/output.*")))
-           ("Js" (mode . js-mode))
+           ("Js" (or (mode . js-mode)
+					 (mode . js2-mode)))
+           ("Css" (filename . ".*\\.css$"))
+           ("Html" (mode . web-mode))
            ("Php" (filename . ".*\\.php$"))
            ("Views" (or (filename . ".*\\.twig$")
                         (filename . ".*\\.html$")))
            ("Yaml" (filename . ".*\\.yml$"))
            ("Sh" (filename . ".*\\.sh$"))
-           ("Python" (filename . ".*\\.py$"))
+           ("Python" (or (filename . ".*\\.py$")
+						 (filename . ".*\\.pyx$")))
            ("Lisp" (or (filename . ".*\\.lisp$")
                        (filename . ".*\\.cl$")
                        (filename . ".*\\.asd$")))

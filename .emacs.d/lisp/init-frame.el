@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2017/04/08 16:32:40 by mc               ###   ########.fr        ;
+;    Updated: 2017/07/30 23:40:59 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -50,7 +50,7 @@
   "Exit server and save desktop."
   (interactive)
   (when (y-or-n-p "Save Desktop? ")
-    ;; (desktop-save "~/.emacs.d/misc"))
+	;; (smex-save-to-file)
     (desktop-save "~/.emacs.d"))
   (save-buffers-kill-terminal)
   (kill-emacs))

@@ -49,9 +49,9 @@ separator=true
 
 # Kraken
 #
-[time]
+[kraken]
 command=~/.config/i3blocks/kraken.sh
-interval=3
+interval=5
 
 
 # [wifi]

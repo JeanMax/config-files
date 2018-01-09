@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2016/09/18 13:27:09 by mcanal           ###   ########.fr        ;
+;    Updated: 2017/07/30 23:39:05 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -64,7 +64,7 @@
 
   (require 'package)
   (setq package-enable-at-startup nil)
-  (setq nsm-settings-file "~/.emacs.d/misc/network-security.data")
+  ;; (setq nsm-settings-file "~/.emacs.d/misc/network-security.data")
   (setq package-archives
         '(("marmalade" . "http://marmalade-repo.org/packages/")
           ("melpa" . "http://melpa.org/packages/")

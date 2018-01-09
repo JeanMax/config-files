@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2016/09/13 21:54:13 by mcanal           ###   ########.fr        ;
+;    Updated: 2017/09/10 12:59:44 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -19,14 +19,14 @@
 
   :init
   (setq vc-follow-symlinks t)
-  (when *is-a-server*
-    (ignore-errors (vc-dir default-directory)))
+  ;; (when *is-a-server*
+    ;; (ignore-errors (vc-dir default-directory)))
 
   :config
   (local-set-key (kbd "f") 'vc-dir-find-files))
-  
+
 (bind-key* (kbd "M-v") 'vc-dir)
-  
+
 (defun vc-dir-find-files (&optional arg)
   "Open each of the marked files, or the file under the point, or when prefix ARG, the next N files."
   (interactive "P")

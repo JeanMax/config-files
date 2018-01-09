@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2017/04/21 16:56:28 by mc               ###   ########.fr        ;
+;    Updated: 2018/01/09 15:16:58 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -130,17 +130,17 @@
 
   ;; tell emacs where to read abbrev
   (setq save-abbrevs 'silently)
-  (setq abbrev-file-name "~/.emacs.d/misc/abbrev_defs")
+  ;; (setq abbrev-file-name "~/.emacs.d/misc/abbrev_defs")
 
   ;; eshell
-  (setq eshell-directory-name "~/.emacs.d/misc/eshell")
+  ;; (setq eshell-directory-name "~/.emacs.d/misc/eshell")
 
   ;; encoding
   (set-language-environment "UTF-8")
 
   ;; indentation
   (setq-default tab-width 4)
-  (setq-default indent-tabs-mode t) ; set to true later for 42-mode
+  (setq-default indent-tabs-mode nil) ; set to true later for 42-mode
   (setq-default tab-stop-list '(4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64 68 72 76 80 84 88 92 96 100 104 108 112 116 120))
   (setq fill-column 80)
 
@@ -154,31 +154,17 @@
   (setq inhibit-splash-screen t)
 
   ;; default major mode (used for *scratch*)
-  (setq initial-major-mode 'sh-mode)
-  (setq initial-scratch-message "#!/bin/bash -ex\n\n")
+  (setq initial-major-mode 'tuareg-mode)
+  (setq initial-scratch-message "")
+  ;; (setq initial-scratch-message "#!/bin/bash -ex\n\n")
 
-  ;; open previous buffer when starting client (byebye *scratch*)
-;;   (setq initial-buffer-choice
-;;   		(lambda()
-;;   		  ;; (defun loop (l)
-;;   			;; (cond ((null l)
-;;   				   (ibuffer) (get-buffer "*Ibuffer*"))
-;;   		  ;; 		  ((or (string= (buffer-name (car l)) "*Compile-Log*")
-;;   		  ;; 			   (string= (buffer-name (car l)) "*Messages*")
-;;   		  ;; 			   (string= (buffer-name (car l)) "*scratch*")
-;;   		  ;; 			   (string= (buffer-name (car l)) "*Ibuffer*")
-;;   		  ;; 			   (string= (buffer-name (car l)) " *Minibuf-0*")
-;;   		  ;; 			   (string= (buffer-name (car l)) " *Minibuf-1*")
-;;   		  ;; 			   (string= (buffer-name (car l)) " *Echo Area 0*")
-;;   		  ;; 			   (string= (buffer-name (car l)) " *Echo Area 1*")
-;;   		  ;; 			   (string= (buffer-name (car l)) " *server*")
-;;   		  ;; 			   (string= (buffer-name (car l)) " *code-conversion-work*")
-;; 		  ;; 			   (eq (buffer-local-value 'major-mode (car l)) 'dired-mode))
-;;   		  ;; 		   (loop (cdr l)))
-;;   		  ;; 		  (t
-;;   		  ;; 		   (car l))))
-;;   		  ;; (loop (buffer-list))))
-;; )
+  ;; Don't show *Buffer list* when opening multiple files at the same time.
+  (setq inhibit-startup-buffer-menu t)
+
+  ;; no *scratch* at startup, use the previous buffer
+  (setq initial-buffer-choice
+		'(lambda ()
+		   (switch-to-buffer (other-buffer (current-buffer) t))))
 
   ;; format line number (fringe)
   (setq linum-format "%3d ")
@@ -218,13 +204,13 @@
   (setq delete-old-versions 42) ;never delete or ask stuff about deleting my precious backups!
   (setq kept-new-versions 42)
   (setq version-control t)
-  (setq auto-save-list-file-prefix "~/.emacs.d/misc/auto-save-list/.saves-")
+  (setq auto-save-list-file-prefix "~/.emacs.d/auto-save-list/saves-")
   (setq auto-save-file-name-transforms `((".*" ,"~/.emacs.d/backup" t)))
 
   ;; bookmark
   ;; (when *is-a-server*
     ;; (bookmark-bmenu-list))
-  (setq bookmark-file "~/.emacs.d/misc/bookmarks")
+  ;; (setq bookmark-file "~/.emacs.d/misc/bookmarks")
   ;; (bookmark-set)
   ;; (bookmark-jump)
   ;; (list-bookmarks)
@@ -390,12 +376,6 @@
   ;; (shorten-directory
   (replace-regexp-in-string (expand-file-name "~") "~" dir))
 ;; 30))
-
-;; no *scratch* at startup, use the previous buffer
-;; (setq initial-buffer-choice (other-buffer (current-buffer) 1))
-
-;; Don't show *Buffer list* when opening multiple files at the same time.
-(setq inhibit-startup-buffer-menu t)
 
 ;; (defun right-padding (str len)
 ;;   "Padd a string STR with space to the right (till total length >= LEN)."

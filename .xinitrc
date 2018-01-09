@@ -74,31 +74,43 @@ export EDITOR="emacsclient -t"
 # export TERMINAL="urxvtc"
 export TERMINAL="mate-terminal"
 
+# this helps rofi-themes
+export XDG_DATA_DIRS=/usr/share:/usr/local/share
+
 # urxvt server
 test $TERMINAL == "urxvtc" && urxvtd -q -f -o
 
 # Enable core dumps in case something goes wrong
 ulimit -c unlimited
 
-# Start emacs server (handling bjorked desktop file)
-rm -f ~/.emacs.d/.emacs.desktop.lock
-emacslog=/tmp/emacs-startup.log
-(touch $emacslog; emacs --daemon --eval '(desktop-read)' &> $emacslog  && rm -f $emacslog) &
-unset emacslog
-
-
 case $WM in
     i3)
+        # Lock screen at startup
+        i3lock -t -i ~/Pictures/Wallpapers/xkcd.png &
+
+		# Auto screen lock
+        xautolock -time 60 -locker 'i3lock -t -i ~/Pictures/Wallpapers/xkcd.png && sleep 1 && systemctl suspend -i' &
+
         # Background picture
         feh --bg-max ~/Pictures/Wallpapers/xkcd.png &
 
-        # Screen locker
-        i3lock -t -i ~/Pictures/Wallpapers/xkcd.png && sleep 1
-        xautolock -time 60 -locker 'i3lock -t -i ~/Pictures/Wallpapers/xkcd.png && sleep 1' &
+		# compositor
+		compton -bCG --no-fading-openclose --backend glx --xrender-sync --xrender-sync-fence &
+
+		# numlock at startup
+		numlockx &
 
         exec i3;;
 
     sway)
+        # export GDK_BACKEND=wayland
+        export CLUTTER_BACKEND=wayland
+        export QT_QPA_PLATFORM=wayland-egl
+        export ECORE_EVAS_ENGINE=wayland_egl
+        export ELM_ENGINE=wayland_egl
+        export SDL_VIDEODRIVER=wayland
+        export _JAVA_AWT_WM_NONREPARENTING=1
+
         exec dbus-launch --sh-syntax --exit-with-session sway -d &> /tmp/sway.log
         # sway -d &> /var/log/sway.log
 

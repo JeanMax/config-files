@@ -17,6 +17,9 @@ URxvt.font:             xft:CodeNewRoman:size=13
 Emacs.font: Monaco-11
 Emacs.lineSpacing: 0
 
+! TODO: tab bug in emacs
+! http://www.deskdr.com/dr/solved-emacs-rxvt-unicode-cursor-bug.html
+
 ! URxvt.letterSpace:      -2
 URxvt.lineSpace:        0
 

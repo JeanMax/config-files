@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2017/03/27 08:49:42 by mc               ###   ########.fr        ;
+;    Updated: 2017/08/26 21:54:03 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -20,13 +20,15 @@
   :config
   (defadvice kill-new (before strip-leading-diff-chars activate)
     "When copying from a diff buffer, strip the leading -, +, ! characters."
-    (if (eq major-mode 'diff-mode)
+    (if (or
+		 (eq major-mode 'diff-mode)
+		 (eq major-mode 'magit-revision-mode))
         (ad-set-arg 0 (replace-regexp-in-string "^." "" (ad-get-arg 0))))))
 
 (use-package ediff-mode
   :defer t
 
-  :config
+  :init
   (defun ediff-copy-both-to-C ()
     (interactive)
     (ediff-copy-diff ediff-current-difference nil 'C nil

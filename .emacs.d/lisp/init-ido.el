@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2017/04/21 16:47:22 by mc               ###   ########.fr        ;
+;    Updated: 2018/01/09 15:14:15 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -26,7 +26,15 @@
     (setq ido-enable-dot-prefix t)
     (setq ido-enable-flex-matching nil)
     (setq ido-file-extensions-order nil)
-    (setq ido-save-directory-list-file "~/.emacs.d/misc/ido.last")
+    (setq ido-ignore-files '("\\`CVS/"
+                             "\\`#" "\\`.#"
+                             "\\`\\.\\./"
+                             "\\`\\./"
+                             "__pycache__"))
+    (setq safe-local-variable-values '((py-indent-offset . 4)))
+
+
+    ;; (setq ido-save-directory-list-file "~/.emacs.d/misc/ido.last")
     (set-face-attribute 'ido-first-match t :foreground "#ebc481") ;TODO: highlight?
     (set-face-attribute 'ido-subdir t :foreground "#5180b3")
 
@@ -34,11 +42,13 @@
                                 (define-key ido-completion-map (kbd "TAB") 'ido-complete)
                                 (define-key ido-completion-map (kbd "<C-up>") 'previous-line-or-history-element)
                                 (define-key ido-completion-map (kbd "<C-down>") 'next-line-or-history-element)
+                                ;; (define-key ido-completion-map (kbd "C-l") 'ido-to-end)
                                 (define-key ido-completion-map (kbd "C-r") 'previous-matching-history-element)
-                                (define-key ido-completion-map (kbd "C-s") 'next-matching-history-element)))
+                                (define-key ido-completion-map (kbd "C-s") 'next-matching-history-element)
+								))
 
 
-    (use-package ido-ubiquitous
+    (use-package ido-completing-read+
       :ensure t
       ;; :defer t
 
@@ -58,12 +68,12 @@
       ;; :defer t
 
       :init
+	  ;; (setq smex-save-file "~/.emacs.d/misc/smex-items")
       (smex-initialize)
 
       :config
       (progn
-        (setq smex-save-file "~/.emacs.d/misc/smex-items")
-
+        (setq smex-history-length 25)
         (use-package ido-complete-space-or-hyphen
           :ensure t)))
 

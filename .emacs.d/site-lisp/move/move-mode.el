@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2016/09/18 14:34:10 by mcanal           ###   ########.fr        ;
+;    Updated: 2017/07/20 14:31:29 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -17,7 +17,7 @@
 (define-minor-mode move-mode
   "Easy move!"
   :lighter " \\o/"
-  :global t
+  ;; :global t
   :keymap (let ((map (make-sparse-keymap)))
 
             (define-key map (kbd "i") 'previous-line)
@@ -35,11 +35,12 @@
             (define-key map (kbd "x") 'kill-region)
             (define-key map (kbd "c") 'kill-ring-save)
             (define-key map (kbd "v") 'yank)
+            (define-key map (kbd "V") 'yank-pop)
 
             (define-key map (kbd "g") 'goto-line)
             (define-key map (kbd "z") 'undo)
             (define-key map (kbd "s") 'save-buffer)
-            (define-key map (kbd "r") 'set-mark-command)
+            (define-key map (kbd "SPC") 'set-mark-command)
 
             (define-key map (kbd "b") 'mode-line-other-buffer)
             (define-key map (kbd "y") 'previous-multiframe-window)
@@ -47,6 +48,8 @@
             (define-key map (kbd "d") 'delete-window)
 
             (define-key map (kbd "q") 'move-mode)
+            (define-key map (kbd "w") 'smex)
+
 
             map)
   (message "Zboub!"))

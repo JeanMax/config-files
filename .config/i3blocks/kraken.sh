@@ -11,17 +11,25 @@ while true; do
          https://api.kraken.com/0/public/Ticker
     test "$(jq ".error[0]" < "$tmp")" == "null" \
         && break || true
-    sleep 3
+    sleep 5
 done
 jq '.result.XXBTZEUR' < "$tmp" > "$req"
 
 
-# a="$(jq -r '.a[0]' < "$req" | cut -d. -f1)" # Ask
+a="$(jq -r '.a[0]' < "$req" | cut -d. -f1)" # Ask
 # b="$(jq -r '.b[0]' < "$req" | cut -d. -f1)" # Bin
 c="$(jq -r '.c[0]' < "$req" | cut -d. -f1)" # last (Current?)
 p="$(jq -r '.p[1]' < "$req" | cut -d. -f1)" # average (Pondered?)
 
 rm -f "$req"
+
+# current--price might be total bullshit, if so we'll print ask-price instead
+if [ $(($c - $a)) -gt 7 ] || [ $(($a - $c)) -gt 7 ]; then
+	# echo "zboub: $c"			# DEBUG
+	c=$a
+fi
+# echo "c:$c a:$a diff:$(($c - $a))" # DEBUG
+
 
 # Variation
 if [ $c -gt $p ]; then
@@ -32,12 +40,14 @@ else
     color="#cd5542" # red
 fi
 
-date "+P %Y/%m/%d %H:%M:%S ₿ $c€" > "$tmp"
-mv "$tmp" "$price_file"
-# avoid other scripts reading the file while we are writing in it
-
 # echo "₿ $a / $b ($v)" # full text
 # echo "₿ $a / $b" # short text
 echo "₿ $c ($v)" # full text
 echo "₿ $c" # short text
 echo "$color" # color
+
+
+# we store the current price for other scripts (ledger mostly)
+date "+P %Y-%m-%d %H:%M:%S XXBT $c ZEUR" > "$tmp"
+# avoid other scripts reading the file while we are writing in it
+mv "$tmp" "$price_file"

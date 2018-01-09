@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2017/07/04 22:18:22 by mc               ###   ########.fr        ;
+;    Updated: 2017/08/04 16:00:37 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -20,11 +20,12 @@
   :config
   ;; FIXME
   ;; (defvar tags-make-n-visit-history '("--regex='/.*\\(public\\|static\\|abstract\\|protected\\|private\\).*function.*(/' ~/Pliizz/src/**/*.php"))
-  (defvar tags-make-n-visit-history '("~/babao/src/**/*.py"))
+  (defvar tags-make-n-visit-history '("~/babao/src/babao/**/*.py ~/.local/lib/python*/site-packages/{{krakenex,configparser}*/**/,argparse}*.py"))
   (eval-after-load "savehist"
     '(add-to-list 'savehist-additional-variables 'tags-make-n-visit-history))
   (savehist-mode 1)
-  (setq savehist-file "~/.emacs.d/misc/history"))
+  ;; (setq savehist-file "~/.emacs.d/misc/history")
+  )
 
 
 (defun tags-make-n-visit (file-pattern)
@@ -33,11 +34,11 @@
    (list (read-from-minibuffer
           (concat "tag pattern (default " (nth 0 tags-make-n-visit-history) "): ")
           nil nil nil 'tags-make-n-visit-history)))
-  (shell-command (concat "etags -o ~/.emacs.d/misc/TAGS "
+  (shell-command (concat "etags -o ~/.emacs.d/TAGS "
                          (if (string= "" file-pattern)
                              (nth 0 tags-make-n-visit-history)
                            file-pattern)))
-  (visit-tags-table "~/.emacs.d/misc/TAGS"))
+  (visit-tags-table "~/.emacs.d/TAGS"))
 
 
 (bind-key* (kbd *altgr-t*) 'tags-make-n-visit)

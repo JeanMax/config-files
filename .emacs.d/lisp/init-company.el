@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2017/04/21 16:41:11 by mc               ###   ########.fr        ;
+;    Updated: 2017/08/09 20:37:15 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -63,7 +63,8 @@
       (define-key company-active-map (kbd "<next>") 'company-select-next-or-abort)
       (define-key company-active-map (kbd "<prior>") 'company-select-previous-or-abort)
 
-      (setq company-statistics-file "~/.emacs.d/misc/company-statistics-cache.el")))
+      ;; (setq company-statistics-file "~/.emacs.d/misc/company-statistics-cache.el")
+	  ))
 
   ;; (defun complete-or-indent ()
   ;;   (interactive)

@@ -1,2 +1,2 @@
-#include "/usr/share/rofi/themes//android_notification.theme"
 rofi.modi: window,drun,run
+rofi.theme: /usr/share/rofi/themes//android_notification.rasi

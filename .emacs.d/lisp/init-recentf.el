@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2017/03/21 15:38:57 by mc               ###   ########.fr        ;
+;    Updated: 2017/07/30 23:38:30 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -18,7 +18,7 @@
   :defer t
 
   :config
-  (setq-default recentf-save-file "~/.emacs.d/misc/recentf")
+  ;; (setq-default recentf-save-file "~/.emacs.d/misc/recentf")
   (recentf-mode)
   (setq recentf-max-menu-items 42)
   (setq recentf-max-saved-items 42)

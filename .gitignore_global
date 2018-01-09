@@ -5,3 +5,4 @@ ID
 README.html
 .gdb_history
 peda-session-*
+vgcore.*

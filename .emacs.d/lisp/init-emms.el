@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2016/09/10 23:33:41 by mcanal           ###   ########.fr        ;
+;    Updated: 2017/07/30 23:35:32 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -20,10 +20,10 @@
 
   :init
   (defalias 'radio 'emms-streams)
-  
+
   :config
   (progn
-    (setq emms-directory "~/.emacs.d/misc/emms")
+    ;; (setq emms-directory "~/.emacs.d/misc/emms")
     (emms-standard)
     (emms-default-players)
 

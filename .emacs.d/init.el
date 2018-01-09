@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2015/04/26 16:54:03 by mcanal            #+#    #+#              ;
-;    Updated: 2017/04/13 21:42:55 by mc               ###   ########.fr        ;
+;    Updated: 2017/08/26 21:57:33 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -47,7 +47,11 @@
 
 
 ;; detect emacsclient/os
-(defconst *is-a-server* (string-equal "emacsclient" (file-name-nondirectory (getenv "_"))))
+(defconst *is-a-server*
+  (let ((prev_cmd (getenv "_")))
+	(if (eq nil prev_cmd)
+		nil
+		(string-equal "emacsclient" (file-name-nondirectory prev_cmd)))))
 (defconst *is-a-mac* (eq system-type 'darwin))
 (defconst *is-rxvt* (string-equal "urxvtc" (getenv "TERMINAL")))
 
@@ -68,6 +72,7 @@
 (require 'init-tramp)
 (require 'init-cc-mode)
 (require 'init-sh-mode)
+(require 'init-python-mode)
 (require 'init-erc)
 (require 'init-gnus)
 
@@ -75,6 +80,9 @@
 (require 'init-42-mode)
 (require 'init-move-mode)
 (require 'init-ample-theme)
+
+;; external dep
+(require 'init-mu4e)
 
 (when (< 23 emacs-major-version)
   ;; packages to download: package.el not builtin till emacs24... just give up
@@ -95,7 +103,10 @@
   (require 'init-markdown-mode)
   (require 'init-web-mode)
   (require 'init-php-mode)
+  (require 'init-js-mode)
+  (require 'init-cython-mode)
   (require 'init-yaml-mode)
+  (require 'init-ledger-mode)
   (require 'init-tuareg)
   (require 'init-flycheck) ;TODO: do not compile flycheck temp files :/
 
