@@ -8,12 +8,14 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2017/03/27 12:21:32 by mc               ###   ########.fr        ;
+;    Updated: 2018/01/15 11:15:05 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
 ;;; Code:
 
+;; TODO: sh-mode is in "C-source-code",
+;; so use-package throw a "no such file" (but works...)
 (use-package sh-mode
   :mode
   ("PKGBUILD\\'" . sh-mode)

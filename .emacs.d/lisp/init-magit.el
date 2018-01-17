@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2017/03/28 13:35:39 by mc                #+#    #+#              ;
-;    Updated: 2017/04/21 16:41:44 by mc               ###   ########.fr        ;
+;    Updated: 2018/01/15 10:28:44 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -20,11 +20,8 @@
 
   ;; :init
 
-  ;; :config
-
-  )
-
-
+  :config
+  (set-face-attribute 'magit-diff-file-heading t :foreground "blue" :weight 'bold))
 
 (bind-key* (kbd *altgr-v*) 'magit-status)
 

@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2018/01/09 15:16:58 by mc               ###   ########.fr        ;
+;    Updated: 2018/01/09 15:41:31 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -154,7 +154,7 @@
   (setq inhibit-splash-screen t)
 
   ;; default major mode (used for *scratch*)
-  (setq initial-major-mode 'tuareg-mode)
+  (setq initial-major-mode 'python-mode)
   (setq initial-scratch-message "")
   ;; (setq initial-scratch-message "#!/bin/bash -ex\n\n")
 

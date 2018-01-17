@@ -7,7 +7,7 @@
 #    By: mc </var/spool/mail/mc>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/26 20:50:04 by mc                #+#    #+#              #
-#    Updated: 2017/10/08 02:53:21 by mc               ###   ########.fr        #
+#    Updated: 2018/01/12 14:15:40 by mc               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,7 +76,8 @@ alias gh="git stash"
 alias gf="git fetch"
 alias gd="git diff"
 alias gdc="git diff --cached"
-alias gl="git log --oneline --graph --decorate --branches --remotes --tags --notes HEAD"
+alias gtree="git log --oneline --graph --decorate --branches --remotes --tags --notes"
+alias gl="git log --oneline --graph --decorate"
 alias gll="git log"
 alias gr="git reset"
 

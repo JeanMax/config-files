@@ -1,4 +1,4 @@
-;;; custom.el --- init php-mode
+;;; custom.el --- some room for emacs-generated config
 ;;; Commentary:
 ;******************************************************************************;
 ;                                                                              ;
@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2017/04/21 16:54:37 by mc               ###   ########.fr        ;
+;    Updated: 2018/01/17 13:26:44 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -19,7 +19,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
-)
+ )
 
 
 (custom-set-faces

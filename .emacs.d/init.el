@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2015/04/26 16:54:03 by mcanal            #+#    #+#              ;
-;    Updated: 2017/08/26 21:57:33 by mc               ###   ########.fr        ;
+;    Updated: 2018/01/15 11:01:05 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -81,10 +81,11 @@
 (require 'init-move-mode)
 (require 'init-ample-theme)
 
-;; external dep
-(require 'init-mu4e)
-
 (when (< 23 emacs-major-version)
+  ;; external dep (+ lisp package eh)
+  ;; (require 'init-mu4e)
+  ;; (require 'init-slime)
+
   ;; packages to download: package.el not builtin till emacs24... just give up
   (require 'init-benchmark-init)
   (require 'init-ido)
@@ -99,7 +100,6 @@
   (require 'init-magit)
   (require 'init-git-timemachine)
   (require 'init-diff-hl)
-  (require 'init-slime)
   (require 'init-markdown-mode)
   (require 'init-web-mode)
   (require 'init-php-mode)

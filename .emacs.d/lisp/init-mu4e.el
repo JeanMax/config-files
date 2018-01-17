@@ -8,13 +8,15 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2015/04/26 16:54:03 by mcanal            #+#    #+#              ;
-;    Updated: 2017/06/14 16:34:36 by mc               ###   ########.fr        ;
+;    Updated: 2018/01/11 12:41:48 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
 ;;; Code:
 
 (use-package mu4e
+  ;; :ensure t
+  ;; :defer t
 
   :config
   (setq mu4e-maildir "~/Mail")
