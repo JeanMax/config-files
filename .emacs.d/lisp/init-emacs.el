@@ -8,13 +8,17 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2018/01/09 15:41:31 by mc               ###   ########.fr        ;
+;    Updated: 2018/01/17 13:55:57 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
 ;;; Code:
 
 (use-package emacs
+  :init
+  (use-package diminish
+    :ensure t)
+
   :config
   ;; alias for altgr keys, since they change a lot between keyboards
   (if *is-a-mac*

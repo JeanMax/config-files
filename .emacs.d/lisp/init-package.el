@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2017/07/30 23:39:05 by mc               ###   ########.fr        ;
+;    Updated: 2018/01/17 13:54:55 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -77,7 +77,6 @@
     (package-install 'use-package))
   (eval-when-compile
     (require 'use-package))
-  (require 'diminish)
   (require 'bind-key)
   (when *is-a-server*
     (setq use-package-verbose t)))

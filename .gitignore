@@ -17,7 +17,6 @@ private
 .emacs.d/history
 .emacs.d/ido.last
 .emacs.d/keyfreq
-.emacs.d/network-security.data
 .emacs.d/projectile-bookmarks.eld
 .emacs.d/projectile.cache
 .emacs.d/recentf

@@ -7,7 +7,7 @@
 #    By: mc </var/spool/mail/mc>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/26 20:50:04 by mc                #+#    #+#              #
-#    Updated: 2018/01/12 14:15:40 by mc               ###   ########.fr        #
+#    Updated: 2018/01/17 14:23:51 by mc               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -184,6 +184,7 @@ if [ "$TERM" != dumb ] && $(hash grc 2>/dev/null); then
 	alias vmstat="colourify vmstat"
 	alias w="colourify w"
 	alias who="colourify who"
+    alias lsof="colourify lsof"
 
 	# alias diff="colourify diff --color=always" #clash with diff colors
 
