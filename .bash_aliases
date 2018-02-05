@@ -7,7 +7,7 @@
 #    By: mc </var/spool/mail/mc>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/26 20:50:04 by mc                #+#    #+#              #
-#    Updated: 2018/01/17 14:23:51 by mc               ###   ########.fr        #
+#    Updated: 2018/02/05 12:50:44 by mcanal           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -95,14 +95,9 @@ alias sl='ls'
 
 
 # enable color support
-if [ -x /usr/bin/dircolors ]; then
-	if [ $(uname -s) = "Linux" ]; then
-		test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || export LS_COLORS="no=00:fi=00:di=01;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:ex=01;31:tw=40;1;41:ow=40;1;41:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.gz=01;31:*.deb=01;31:*.jpg=01;35:*.gif=01;35:*.bmp=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.mpg=01;37:*.avi=01;37:*.gl=01;37:*.dl=01;37:"
-		alias ls='ls --color=auto'
-	else
-		export LSCOLORS="ExGxcxdxBxexexaBaBacad"
-		alias ls='ls -G'
-	fi
+if [ $(uname -s) = "Linux" ]; then
+	test -x /usr/bin/dircolors && test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || export LS_COLORS="no=00:fi=00:di=01;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:ex=01;31:tw=40;1;41:ow=40;1;41:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.gz=01;31:*.deb=01;31:*.jpg=01;35:*.gif=01;35:*.bmp=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.mpg=01;37:*.avi=01;37:*.gl=01;37:*.dl=01;37:"
+	alias ls='ls --color=auto'
     alias dir='dir --color=auto'
     alias vdir='vdir --color=auto'
     alias grep='grep --color=auto'
@@ -112,6 +107,9 @@ if [ -x /usr/bin/dircolors ]; then
     alias wdiff='dwdiff -c'
     alias pacsearch='pacsearch -c'
     alias pactree='pactree -c'
+else
+	export LSCOLORS="ExGxcxdxBxexexaBaBacad"
+	alias ls='ls -G'
 fi
 
 
@@ -130,8 +128,13 @@ export LESS_TERMCAP_us=$(printf "\e[1;32m")
 if [ "$TERM" != dumb ] && $(hash grc 2>/dev/null); then
     alias colourify="grc -es --colour=auto"
 
-	alias ll="colourify \ls -lh --color=always"
-	alias la="colourify \ls -lAh --color=always"
+    if [ $(uname -s) = "Linux" ]; then
+	    alias ll="colourify ls -lh --color=always"
+	    alias la="colourify ls -lAh --color=always"
+    else
+        alias ll="ls -lh"
+        alias la="ls -lAh"
+    fi
 	alias cat="grc -es --colour=on cat"
 	alias configure='colourify ./configure'
 	alias du="colourify du -h"
