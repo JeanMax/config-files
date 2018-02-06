@@ -18,24 +18,35 @@ esac;
 set -xe
 
 # mkfs.ext4 -O "^has_journal" $DEVICE #usb without journaling
-mkfs.ext4 $DEVICE
+current_device="$(lsblk -i | grep bootmnt | sed -E 's|.*(sd\w+)\s.*|/dev/\1|')"
+label="$(blkid | grep $current_device | sed -e 's|.*LABEL="(.*)" UUID.*|\1|')"
+mkfs.ext4 -v -O ^64bit -L "$label-$(date "+%Y%m")" "$DEVICE"
+unset label
+unset current_device
+
 mount $DEVICE $TARGET
-cp -axv / $TARGET
-cp -aTv /run/archiso/bootmnt/arch/boot/$(uname -m)/vmlinuz $TARGET/boot/vmlinuz-linux
+
+cp -ax / $TARGET
+cp -aT "/run/archiso/bootmnt/arch/boot/$(uname -m)/vmlinuz" $TARGET/boot/vmlinuz-linux
+
+sed -i 's/Storage=volatile/#Storage=auto/' $TARGET/etc/systemd/journald.conf
+
+rm -rf $TARGET/etc/systemd/system/{choose-mirror.service,pacman-init.service,etc-pacman.d-gnupg.mount,archiso-start.service,multi-user.target.wants/archiso-start.service}
+rm -rf $TARGET/etc/initcpio
+rm -f $TARGET/etc/systemd/scripts/choose-mirror
+rm -f $TARGET/etc/udev/rules.d/81-dhcpcd.rules
+rm -f $TARGET/root/{.automated_script.sh,.zlogin}
+rm -f $TARGET/etc/mkinitcpio-archiso.conf
+
 genfstab -U $TARGET >> $TARGET/etc/fstab
 
 arch-chroot $TARGET mkinitcpio -p linux
 arch-chroot $TARGET os-prober
 arch-chroot $TARGET grub-install --target=i386-pc /dev/sda
 arch-chroot $TARGET grub-mkconfig -o /boot/grub/grub.cfg
-arch-chroot $TARGET sed -i 's/Storage=volatile/#Storage=auto/' /etc/systemd/journald.conf
-arch-chroot $TARGET systemctl disable pacman-init.service choose-mirror.service || true
-arch-chroot $TARGET rm -rf /etc/systemd/system/{choose-mirror.service,pacman-init.service,etc-pacman.d-gnupg.mount} /etc/initcpio
-arch-chroot $TARGET rm -f /etc/systemd/scripts/choose-mirror
-arch-chroot $TARGET rm -f /etc/udev/rules.d/81-dhcpcd.rules
-arch-chroot $TARGET rm -f /root/{.automated_script.sh,.zlogin}
-arch-chroot $TARGET rm -f /etc/mkinitcpio-archiso.conf
 arch-chroot $TARGET pacman-key --init
 arch-chroot $TARGET pacman-key --populate archlinux
+
+# arch-chroot $TARGET systemctl disable pacman-init.service choose-mirror.service || true
 
 echo "NOOT NOOT!"

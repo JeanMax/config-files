@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2016/09/18 16:21:45 by mcanal           ###   ########.fr        ;
+;    Updated: 2018/01/29 16:51:00 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -29,8 +29,8 @@
   (local-set-key (kbd "f") 'dired-find-files))
 
 
-(bind-key* (kbd "C-f") 'find-grep-dired)
-(bind-key* (kbd "M-f") 'find-name-dired)
+(bind-key (kbd "C-f") 'find-grep-dired)
+(bind-key (kbd "M-f") 'find-name-dired)
 
 
 (provide 'init-dired)

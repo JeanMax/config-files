@@ -6,7 +6,7 @@
 #    By: mc </var/spool/mail/mc>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/26 20:39:01 by mc                #+#    #+#              #
-#    Updated: 2017/07/05 00:34:31 by mc               ###   ########.fr        #
+#    Updated: 2018/01/31 13:30:23 by mc               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,8 +48,8 @@ ASAN_SYMBOLIZER_PATH=$(which llvm-symbolizer 2>/dev/null)
 export ASAN_SYMBOLIZER_PATH
 
 # Big boys use big history
-HISTSIZE=2000
-SAVEHIST=1500
+HISTSIZE=20000
+SAVEHIST=15000
 HISTFILE=~/.zsh_history
 
 stty -ixon #forward search with ^s (disable interupt)
@@ -82,5 +82,12 @@ export PATH="$HOME/.roswell/bin:$HOME/.local/bin:$PATH"
 # report about cpu-/system-/user-time of command if running longer than
 # 5 seconds
 REPORTTIME=5 #TODO: I think that's a zsh stuff
+
+MAKEFLAGS="-j$(nproc)"
+export MAKEFLAGS
+
+# force qt to use gtk style
+export GTK2_RC_FILES="$HOME/.config/gtk-2.0/.gtkrc-2.0"
+export QT_STYLE_OVERRIDE=gtk2
 
 source ~/.bash_aliases

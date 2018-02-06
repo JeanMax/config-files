@@ -1,17 +1,15 @@
-Xft.antialias: 1
-Xft.dpi: 96
-Xft.hinting: 0
-Xft.hintstyle: hintnone
-Xft.lcdfilter: lcdlight
-Xft.rgba: rgb
+! TODO: dpi depends on screen resolution
+Xft.dpi: 101
+
+! Xft.antialias: true
+! Xft.hinting: true
+! Xft.hintstyle: hintslight
+! Xft.lcdfilter: lcdldefault
+! Xft.rgba: none
+! Xft.autohint:  false
 
 
-
-URxvt.perl-ext-common:  default,matcher,tabbedex,resize-font,eval,-searchable-scrollback,
-
-URxvt.termName:         rxvt-256color
-URxvt.reverseVideo:     True
-URxvt.font:             xft:CodeNewRoman:size=13
+xpdf.initialZoom: 150
 
 ! Emacs.fontBackend: xft
 Emacs.font: Monaco-11
@@ -20,8 +18,16 @@ Emacs.lineSpacing: 0
 ! TODO: tab bug in emacs
 ! http://www.deskdr.com/dr/solved-emacs-rxvt-unicode-cursor-bug.html
 
-! URxvt.letterSpace:      -2
-URxvt.lineSpace:        0
+URxvt.perl-ext-common:  default,matcher,tabbedex,resize-font,eval,-searchable-scrollback,
+
+URxvt.termName:         rxvt-256color
+URxvt.reverseVideo:     true
+URxvt.font:             xft:CodeNewRoman:size=13
+! URxvt.font:             x:-misc-ubuntu mono-medium-r-normal--0-0-0-0-m-0-iso8859-9
+
+! URxvt.letterSpace:      -1
+! URxvt.lineSpace:        -1
+! URxvt.skipBuiltinGlyphs: true
 
 
 ! URxvt.keysym.C-Up:            \033[1;5A
@@ -61,7 +67,7 @@ URxvt*scrollWithBuffer:  true
 
 URxvt.scrollBar: false
 URxvt.scrollstyle:      plain
-URxvt.scrollBar_right:  True
+URxvt.scrollBar_right:  true
 ! URxvt.scrollBar_floating: true
 
 URxvt.secondaryScreen:  1
@@ -71,23 +77,23 @@ URxvt.secondaryWheel:   1
 URxvt.insecure:   1
 ! Urxvt.pastableTabs: 1
 
-URxvt.saveLines:        32768
+URxvt.saveLines:        65535
 
-URxvt.iso14755: False
-URxvt.iso14755_52: False
+URxvt.iso14755: false
+URxvt.iso14755_52: false
 
 
-URxvt.tabbed.autohide:  yes
-URxvt.tabbed.new-button:  no
-URxvt.tabbed.title: yes
-URxvt.tabbed.tabbar-fg: 0
-URxvt.tabbed.tabbar-bg: 2
-URxvt.tabbed.tab-fg: 0
-URxvt.tabbed.tab-bg: 1
-URxvt.tabbed.title-bg: 3
-URxvt.tabbed.title-fg: 0
+URxvt.tabbedex.autohide:  yes
+URxvt.tabbedex.new-button:  no
+URxvt.tabbedex.title: yes
+URxvt.tabbedex.tabbar-fg: 0
+URxvt.tabbedex.tabbar-bg: 2
+URxvt.tabbedex.tab-fg: 0
+URxvt.tabbedex.tab-bg: 1
+URxvt.tabbedex.title-bg: 3
+URxvt.tabbedex.title-fg: 0
 
-URxvt.tabbed.no-tabbedex-keys: true
+URxvt.tabbedex.no-tabbedex-keys: true
 
 URxvt.keysym.C-S-T: perl:tabbedex:new_tab
 URxvt.keysym.C-S-Y: perl:tabbedex:rename_tab
@@ -103,6 +109,9 @@ URxvt.resize-font.smaller: C-minus
 URxvt.resize-font.bigger: C-plus
 
 URxvt.fading: 5
+
+URxvt.pointerBlank: true
+! URxvt.pointerBlankDelay: 3
 
 
 ! !black   #000000 #333333

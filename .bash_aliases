@@ -2,115 +2,132 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    .shaliases                                         :+:      :+:    :+:    #
+#    .bash_aliases                                      :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: mc </var/spool/mail/mc>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/26 20:50:04 by mc                #+#    #+#              #
-#    Updated: 2018/02/05 12:50:44 by mcanal           ###   ########.fr        #
+#    Updated: 2018/02/06 14:52:34 by mc               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+# functions are way better than aliases actually!  (actually bis: not really?)
+man_emacs() { emacsclient -t --eval "(progn (man \"$1\") (other-window 1) (delete-other-windows))" }
 
-# general aliases
+# misc aliases
+alias l='ls'
+alias ll='ls -lh'
+alias la='ls -lAh'
 alias norm='norminette --CheckForbiddenSourceHeader'
 alias normall='norminette --CheckForbiddenSourceHeader **/*.[ch]'
 alias gccf='gcc -std=c11 -Wall -Wextra -Werror'
-alias l='ls'
-alias c='cd'
-alias ll='ls -lh'
-alias la='ls -lAh'
-alias du='du -h'
-alias df='df -h'
-alias free='free -h'
-alias del='~/sh_script/trash.sh'
+alias now='date "+%y-%m-%d_%H-%M-%S"'
+alias ext-ip='curl -s http://ipecho.net/plain; echo;'
+alias led='ledger --no-pager --force-color --color -f ~/kraken.ledger --price-db ~/kraken.price-db'
+alias pi='ipython --no-confirm-exit --no-banner'
+alias py='python3'
+alias copy='xsel --clipboard'
+alias caml='rlwrap ocaml'
+alias cl='rlwrap sbcl --noinform'
+alias open='xdg-open'
+alias t='sh ~/sh_script/rename_tab.sh'  # TODO: write fun instead
+alias del='~/sh_script/trash.sh'  # TODO: write fun instead
+SQL_ARGS="--prompt=\"$(echo -e '\033[32;01m\\d\033[33;01m@\033[31;01m\\h> \033[0m')\" -uroot -p --silent"
+alias sql="mysql $SQL_ARGS"
+
+
+# emacs stuffs
+alias e="$EDITOR"
+alias v="$VISUAL"
+alias se="SUDO_EDITOR=\"emacsclient -t -a emacs\" sudoedit"
+alias man='man_emacs'
+
+# flash conf edit
 alias zconf='e ~/.zshrc'
 alias bconf='e ~/.bashrc'
 alias aconf='e ~/.bash_aliases'
 alias econf='e ~/.emacs.d/init.el'
-alias e="$EDITOR"
-alias v="$VISUAL"
-alias t='sh ~/sh_script/rename_tab.sh'
-alias gdb="gdb -quiet"
-alias se="SUDO_EDITOR=\"emacsclient -t -a emacs\" sudoedit"
-alias sudo='sudo ' # keep aliases after sudo
-alias ocaml='rlwrap ocaml'
-alias py='python3'
-alias copy='xsel --clipboard'
-alias sbcl='sbcl --noinform'
-alias now='date "+%y-%m-%d_%H-%M-%S"'
-alias ext-ip='curl -s http://ipecho.net/plain ; echo;'
-alias cl="rlwrap sbcl"
-# alias die='dbus-send --system --print-reply --dest="org.freedesktop.ConsoleKit"  /org/freedesktop/ConsoleKit/Manager org.freedesktop.ConsoleKit.Manager.Stop' #debian only
-alias open='xdg-open'
+
+# git aliases
+alias ga='git add -A'
+alias gb='git branch'
+alias gcm='git commit -m'
+alias gce='git commit'
+alias gco='git checkout'
+alias gpl='git pull'
+alias gp='git push'
+alias gpo='git push origin'
+alias gpa='git push --all origin'
+alias gpom='git push origin master'
+alias gm='git merge --no-ff'
+alias gu='git add -u'
+alias gs='git status'
+alias gh='git stash'
+alias gf='git fetch'
+alias gd='git diff'
+alias gdc='git diff --cached'
+alias gtree='git log --oneline --graph --decorate --branches --remotes --tags --notes'
+alias gl='git log --oneline --graph --decorate'
+alias gll='git log'
+alias gr='git reset'
+
+# keep aliases after those
+alias sudo='sudo '
+alias watch='watch -c -t -n 3 '
+
+# these were kinda hard to do write with a function
 eval "$(thefuck --alias fok 2> /dev/null)"
-SQL_ARGS="--prompt=\"$(echo -e '\033[32;01m\\d\033[33;01m@\033[31;01m\\h> \033[0m')\" -uroot -p --silent"
-alias sql="mysql $SQL_ARGS"
-
-function man_emacs() {
-	emacsclient -t --eval "(progn (man \"$1\") (other-window 1) (delete-other-windows))"
-}
-alias man='man_emacs'
-
-# alias .='echo $PWD'
+alias gdb='gdb -quiet'
+alias c='cd'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
-# alias /='cd /'
 
-# git aliases
-alias ga="git add -A "
-alias gb="git branch"
-alias gcm="git commit -m"
-alias gce="git commit"
-alias gco="git checkout"
-alias gpl="git pull"
-alias gp="git push"
-alias gpo="git push origin"
-alias gpom="git push origin master"
-alias gm="git merge --no-ff"
-alias gu="git add -u"
-alias gs="git status"
-alias gh="git stash"
-alias gf="git fetch"
-alias gd="git diff"
-alias gdc="git diff --cached"
-alias gtree="git log --oneline --graph --decorate --branches --remotes --tags --notes"
-alias gl="git log --oneline --graph --decorate"
-alias gll="git log"
-alias gr="git reset"
 
+# yes, I'm human
+alias du='du -h'
+alias df='df -h'
+alias free='free -h'
 
 # typo aliases
 alias xs='cd'
 alias vf='cd'
-alias z='e'
-alias m='ls'
-alias k='ls'
-alias ms='ls'
-alias lq='ls'
-alias ks='ls'
-alias sl='ls'
+alias z=e
+alias m=ls
+alias k=ls
+alias ms=ls
+alias lq=ls
+alias ks=ls
+alias sl=ls
+alias pyhton=python
+alias ipyhton=ipython
+alias unmount=umount
+alias umout=umount
 
 
 # enable color support
-if [ $(uname -s) = "Linux" ]; then
-	test -x /usr/bin/dircolors && test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || export LS_COLORS="no=00:fi=00:di=01;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:ex=01;31:tw=40;1;41:ow=40;1;41:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.gz=01;31:*.deb=01;31:*.jpg=01;35:*.gif=01;35:*.bmp=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.mpg=01;37:*.avi=01;37:*.gl=01;37:*.dl=01;37:"
+if [ "$(uname -s)" = "Linux" ]; then
+	if test -x /usr/bin/dircolors && test -r ~/.dircolors; then
+        eval "$(dircolors -b ~/.dircolors)"
+    else
+        export LS_COLORS="no=00:fi=00:di=01;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:ex=01;31:tw=40;1;41:ow=40;1;41:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.gz=01;31:*.deb=01;31:*.jpg=01;35:*.gif=01;35:*.bmp=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.mpg=01;37:*.avi=01;37:*.gl=01;37:*.dl=01;37:"
+    fi
 	alias ls='ls --color=auto'
-    alias dir='dir --color=auto'
-    alias vdir='vdir --color=auto'
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
-    alias diff='diff --color=auto'
-    alias wdiff='dwdiff -c'
-    alias pacsearch='pacsearch -c'
-    alias pactree='pactree -c'
 else
 	export LSCOLORS="ExGxcxdxBxexexaBaBacad"
 	alias ls='ls -G'
 fi
+
+alias dir='dir --color=auto'
+alias vdir='vdir --color=auto'
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+alias diff='diff --color=auto'
+alias wdiff='dwdiff -c'
+alias pacsearch='pacsearch -c'
+alias pactree='pactree -c'
 
 
 # support colors in less
@@ -214,9 +231,5 @@ if [ "$TERM" != dumb ] && $(hash grc 2>/dev/null); then
 fi
 unset SQL_ARGS
 
+
 # added from terminal
-alias led='ledger --no-pager --force-color --color -f ~/kraken.ledger --price-db ~/kraken.price-db'
-alias watch='watch -c -t -n 3 '
-alias pyhton='python'
-alias ipyhton='ipython'
-alias pi='ipython --no-confirm-exit --no-banner'

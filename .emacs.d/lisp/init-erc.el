@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2015/04/26 16:54:03 by mcanal            #+#    #+#              ;
-;    Updated: 2017/10/31 19:09:36 by mc               ###   ########.fr        ;
+;    Updated: 2018/01/23 12:45:56 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -29,7 +29,7 @@
   :config
   (setq erc-save-buffer-on-part t)
   (setq erc-autojoin-channels-alist
-        '((".*\\.freenode.net" "#emacs" "#trisquel" "#zboub" "#ocaml" "#ocsigen" "#tezos")
+        '((".*\\.freenode.net" "#emacs" "#archlinux" "#trisquel" "#zboub" "#ocaml" "#ocsigen" "#tezos")
           (".*\\.synirc.net" "#d2bs")))
   (setq erc-keywords '("jean" "smurf"))
   (erc-match-mode)

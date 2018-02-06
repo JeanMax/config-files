@@ -77,6 +77,10 @@ export TERMINAL="mate-terminal"
 # this helps rofi-themes
 export XDG_DATA_DIRS=/usr/share:/usr/local/share
 
+# this helps... qt. yep
+export GTK2_RC_FILES="$HOME/.config/gtk-2.0/.gtkrc-2.0"
+export QT_STYLE_OVERRIDE=gtk2
+
 # urxvt server
 test $TERMINAL == "urxvtc" && urxvtd -q -f -o
 
@@ -86,10 +90,10 @@ ulimit -c unlimited
 case $WM in
     i3)
         # Lock screen at startup
-        i3lock -t -i ~/Pictures/Wallpapers/xkcd.png &
+        i3lock -f -t -i ~/Pictures/Wallpapers/xkcd.png &
 
 		# Auto screen lock
-        xautolock -time 60 -locker 'i3lock -t -i ~/Pictures/Wallpapers/xkcd.png && sleep 1 && systemctl suspend -i' &
+        xautolock -detectsleep -cornersize 50 -corners --00 -time 42 -locker 'i3lock -f -t -i ~/Pictures/Wallpapers/xkcd.png && sleep 1 && systemctl suspend -i' &
 
         # Background picture
         feh --bg-max ~/Pictures/Wallpapers/xkcd.png &
