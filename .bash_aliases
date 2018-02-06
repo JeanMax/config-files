@@ -7,12 +7,14 @@
 #    By: mc </var/spool/mail/mc>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/26 20:50:04 by mc                #+#    #+#              #
-#    Updated: 2018/02/06 14:52:34 by mc               ###   ########.fr        #
+#    Updated: 2018/02/06 17:15:48 by root             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # functions are way better than aliases actually!  (actually bis: not really?)
-man_emacs() { emacsclient -t --eval "(progn (man \"$1\") (other-window 1) (delete-other-windows))" }
+man_emacs() {
+    emacsclient -t --eval "(progn (man \"$1\") (other-window 1) (delete-other-windows))"
+}
 
 # misc aliases
 alias l='ls'
@@ -108,15 +110,15 @@ alias umout=umount
 
 # enable color support
 if [ "$(uname -s)" = "Linux" ]; then
-	if test -x /usr/bin/dircolors && test -r ~/.dircolors; then
+    if test -x /usr/bin/dircolors && test -r ~/.dircolors; then
         eval "$(dircolors -b ~/.dircolors)"
     else
         export LS_COLORS="no=00:fi=00:di=01;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:ex=01;31:tw=40;1;41:ow=40;1;41:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.gz=01;31:*.deb=01;31:*.jpg=01;35:*.gif=01;35:*.bmp=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.mpg=01;37:*.avi=01;37:*.gl=01;37:*.dl=01;37:"
     fi
-	alias ls='ls --color=auto'
+    alias ls='ls --color=auto'
 else
-	export LSCOLORS="ExGxcxdxBxexexaBaBacad"
-	alias ls='ls -G'
+    export LSCOLORS="ExGxcxdxBxexexaBaBacad"
+    alias ls='ls -G'
 fi
 
 alias dir='dir --color=auto'
@@ -146,90 +148,87 @@ if [ "$TERM" != dumb ] && $(hash grc 2>/dev/null); then
     alias colourify="grc -es --colour=auto"
 
     if [ $(uname -s) = "Linux" ]; then
-	    alias ll="colourify ls -lh --color=always"
-	    alias la="colourify ls -lAh --color=always"
+        alias ll="colourify ls -lh --color=always"
+        alias la="colourify ls -lAh --color=always"
     else
         alias ll="ls -lh"
         alias la="ls -lAh"
     fi
-	alias cat="grc -es --colour=on cat"
-	alias configure='colourify ./configure'
-	alias du="colourify du -h"
-	alias df="colourify df -h"
-	alias free="colourify free -h"
-	alias sql="colourify mysql $SQL_ARGS"
-	alias cc="cc -fdiagnostics-color=always"
-	alias g++="g++ -fdiagnostics-color=always"
-	alias gcc="gcc -fdiagnostics-color=always"
+    alias cat="grc -es --colour=on cat"
+    alias configure='colourify ./configure'
+    alias du="colourify du -h"
+    alias df="colourify df -h"
+    alias free="colourify free -h"
+    alias sql="colourify mysql $SQL_ARGS"
+    alias cc="cc -fdiagnostics-color=always"
+    alias g++="g++ -fdiagnostics-color=always"
+    alias gcc="gcc -fdiagnostics-color=always"
 
-	# bugged, don't use it
-	# alias make="$(hash colormake 2>/dev/null && echo colormake || echo colourify make)"
+    # bugged, don't use it
+    # alias make="$(hash colormake 2>/dev/null && echo colormake || echo colourify make)"
 
-	alias as="colourify as"
-	alias blkid="colourify blkid"
-	alias dig="colourify dig"
-	alias env="colourify env"
-	alias getfacl="colourify getfacl"
-	alias head="colourify head"
-	alias ifconfig="colourify ifconfig"
-	alias iostat="colourify iostat"
-	alias ip="colourify ip"
-	alias iptables="colourify iptables"
-	alias journalctl="colourify journalctl"
-	alias last="colourify last"
-	alias ld="colourify ld"
-	alias link="colourify link"
-	alias lsattr="colourify lsattr"
-	alias lsblk="colourify lsblk"
-	alias lsmod="colourify lsmod"
-	alias lspci="colourify lspci"
-	alias lshw="colourify lshw"
-	alias mount="colourify mount"
-	alias netstat="colourify netstat"
-	alias nmap="colourify nmap"
-	alias php="colourify php"
-	alias ping="colourify ping"
-	alias ps="colourify ps"
-	alias sar="colourify sar"
-	alias showmount="colourify showmount"
-	alias ss="colourify ss"
-	alias stat="colourify stat"
-	alias sysctl="colourify sysctl"
-	alias systemctl="colourify systemctl"
-	alias tail="colourify tail"
-	alias tcpdump="colourify tcpdump"
-	alias traceroute="colourify traceroute"
-	alias tune2fs="colourify tune2fs"
-	alias uptime="colourify uptime"
-	alias vmstat="colourify vmstat"
-	alias w="colourify w"
-	alias who="colourify who"
+    alias as="colourify as"
+    alias blkid="colourify blkid"
+    alias dig="colourify dig"
+    alias env="colourify env"
+    alias getfacl="colourify getfacl"
+    alias head="colourify head"
+    alias ifconfig="colourify ifconfig"
+    alias iostat="colourify iostat"
+    alias ip="colourify ip"
+    alias iptables="colourify iptables"
+    alias journalctl="colourify journalctl"
+    alias last="colourify last"
+    alias ld="colourify ld"
+    alias link="colourify link"
+    alias lsattr="colourify lsattr"
+    alias lsblk="colourify lsblk"
+    alias lsmod="colourify lsmod"
+    alias lspci="colourify lspci"
+    alias lshw="colourify lshw"
+    alias mount="colourify mount"
+    alias netstat="colourify netstat"
+    alias nmap="colourify nmap"
+    alias php="colourify php"
+    alias ping="colourify ping"
+    alias ps="colourify ps"
+    alias sar="colourify sar"
+    alias showmount="colourify showmount"
+    alias ss="colourify ss"
+    alias stat="colourify stat"
+    alias sysctl="colourify sysctl"
+    alias systemctl="colourify systemctl"
+    alias tail="colourify tail"
+    alias tcpdump="colourify tcpdump"
+    alias traceroute="colourify traceroute"
+    alias tune2fs="colourify tune2fs"
+    alias uptime="colourify uptime"
+    alias vmstat="colourify vmstat"
+    alias w="colourify w"
+    alias who="colourify who"
     alias lsof="colourify lsof"
 
-	# alias diff="colourify diff --color=always" #clash with diff colors
+    # alias diff="colourify diff --color=always" #clash with diff colors
 
-	# unused
-	# alias ant="colourify ant"
-	# alias cvs="colourify cvs"
-	# alias docker="colourify docker"
-	# alias esperanto="colourify esperanto"
-	# alias dnf="colourify dnf"
-	# alias gas="colourify gas"
-	# alias gmake="colourify gmake"
-	# alias irclog="colourify irclog"
-	# alias ldap="colourify ldap"
-	# alias log="colourify log"
-	# alias mtr="colourify mtr"
-	# alias mvn="colourify mvn"
-	# alias ping6="colourify ping6"
-	# alias proftpd="colourify proftpd"
-	# alias pv="colourify pv"
-	# alias semanage="colourify semanage"
-	# alias traceroute6="colourify traceroute6"
-	# alias ulimit="colourify ulimit" #björked
-	# alias wdiff="colourify wdiff"
+    # unused
+    # alias ant="colourify ant"
+    # alias cvs="colourify cvs"
+    # alias docker="colourify docker"
+    # alias esperanto="colourify esperanto"
+    # alias dnf="colourify dnf"
+    # alias gas="colourify gas"
+    # alias gmake="colourify gmake"
+    # alias irclog="colourify irclog"
+    # alias ldap="colourify ldap"
+    # alias log="colourify log"
+    # alias mtr="colourify mtr"
+    # alias mvn="colourify mvn"
+    # alias ping6="colourify ping6"
+    # alias proftpd="colourify proftpd"
+    # alias pv="colourify pv"
+    # alias semanage="colourify semanage"
+    # alias traceroute6="colourify traceroute6"
+    # alias ulimit="colourify ulimit" #bjorked
+    # alias wdiff="colourify wdiff"
 fi
 unset SQL_ARGS
-
-
-# added from terminal

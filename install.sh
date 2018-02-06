@@ -22,6 +22,7 @@ TO_LINK="sh_script
 .gdbinit
 .gitconfig
 .gitignore_global
+.nanorc
 .Xmodmap
 .Xresources
 .xinitrc
