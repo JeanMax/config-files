@@ -21,6 +21,7 @@ private
 .emacs.d/projectile.cache
 .emacs.d/recentf
 .emacs.d/smex-items
+.emacs.d/tramp
 .emacs.d/url/
 .emacs.d/kkcrc
 

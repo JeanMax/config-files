@@ -6,7 +6,7 @@
 #    By: mc </var/spool/mail/mc>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/26 20:39:01 by mc                #+#    #+#              #
-#    Updated: 2018/01/31 13:30:23 by mc               ###   ########.fr        #
+#    Updated: 2018/02/09 11:49:51 by mc               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ export EDITOR="emacsclient -t"
 #mail TODO: move these in another file
 export MAIL="mc.maxcanal@gmail.com"
 export EMAIL="$MAIL"
-export NAME="Max Canal"
+# export NAME="Max Canal"
 export SMTPSERVER="smtp.gmail.com"
 
 #clang debuging stuff

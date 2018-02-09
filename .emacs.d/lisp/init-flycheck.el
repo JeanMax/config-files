@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2017/10/09 19:29:49 by mc               ###   ########.fr        ;
+;    Updated: 2018/02/08 23:38:37 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -27,12 +27,15 @@
 
   :config
   ;; (setq flycheck-mode-line-prefix "f")
+
   (setq flycheck-clang-include-path
-        '("/home/mc/quarantedeux/nibbler/core/inc"
-          "/home/mc/quarantedeux/nibbler/core/inc/argv_parser"
-          "/home/mc/quarantedeux/nibbler/core/inc/game"
-		  "/home/mc/quarantedeux/nibbler/core/test/inc"
-		  "/home/mc/quarantedeux/nibbler/core/test/minunit"))
+        '("/home/mc/quarantedeux/42sh/test/unit/include"
+          "/home/mc/quarantedeux/42sh/test/unit/minunit"
+          "/home/mc/quarantedeux/42sh/include"
+          "/home/mc/quarantedeux/42sh/vendor/libps/include"
+          "/home/mc/quarantedeux/42sh/vendor/librl/include"
+          "/home/mc/quarantedeux/42sh/vendor/libft/include"))
+
   ;; (setq flycheck-clang-language-standard "-std=c++11")
   ;; (setq flycheck-clang-args '("-std=c++11"))
   (setq flycheck-clang-warnings '("all" "extra"))

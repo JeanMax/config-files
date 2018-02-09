@@ -7,7 +7,7 @@
 #    By: mc </var/spool/mail/mc>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/26 20:50:04 by mc                #+#    #+#              #
-#    Updated: 2018/02/06 17:15:48 by root             ###   ########.fr        #
+#    Updated: 2018/02/08 12:04:54 by mc               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,7 @@ alias sql="mysql $SQL_ARGS"
 
 # emacs stuffs
 alias e="$EDITOR"
+alias em='emacs -nw'
 alias v="$VISUAL"
 alias se="SUDO_EDITOR=\"emacsclient -t -a emacs\" sudoedit"
 alias man='man_emacs'

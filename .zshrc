@@ -6,7 +6,7 @@
 #    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/23 17:38:59 by mcanal            #+#    #+#              #
-#    Updated: 2017/10/11 02:28:49 by mc               ###   ########.fr        #
+#    Updated: 2018/02/08 12:39:01 by mc               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -78,6 +78,11 @@ else
         bindkey "\e[3;5~" kill-word
         # bindkey "\e[3^" kill-word
     fi
+
+    # bind alt-z to fg
+    _fg() { fg }
+    zle -N fg _fg
+    bindkey "^[z" fg
 fi
 
 setopt APPEND_HISTORY

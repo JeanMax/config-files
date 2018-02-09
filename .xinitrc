@@ -80,6 +80,12 @@ export XDG_DATA_DIRS=/usr/share:/usr/local/share
 # this helps... qt. yep
 export GTK2_RC_FILES="$HOME/.config/gtk-2.0/.gtkrc-2.0"
 export QT_STYLE_OVERRIDE=gtk2
+if grep -q 'style=' ~/.config/Trolltech.conf; then
+    sed -i 's/style=.*/style=gtk2/' ~/.config/Trolltech.conf
+else
+    echo 'style=gtk2' >> ~/.config/Trolltech.conf
+fi
+
 
 # urxvt server
 test $TERMINAL == "urxvtc" && urxvtd -q -f -o

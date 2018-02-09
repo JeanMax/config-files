@@ -7,7 +7,7 @@
 #    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/11 14:03:35 by mcanal            #+#    #+#              #
-#    Updated: 2017/05/10 17:10:11 by mc               ###   ########.fr        #
+#    Updated: 2018/02/09 11:43:37 by mc               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 set -e
@@ -28,6 +28,7 @@ TO_LINK="sh_script
 .xinitrc
 .xbindkeysrc
 .toprc
+.config/mimeapps.list
 .config/conky
 .config/dconf
 .config/gsimplecal
@@ -36,7 +37,10 @@ TO_LINK="sh_script
 .config/i3
 .config/i3blocks
 .config/lxterminal
-.config/rofi"
+.config/libfm
+.config/pcmanfm
+.config/rofi
+.config/vlc"
 
 PRIVATE_FOLDER=private
 TO_LINK_PRIVATE=".ssh
