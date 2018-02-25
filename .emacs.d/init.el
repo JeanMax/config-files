@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2015/04/26 16:54:03 by mcanal            #+#    #+#              ;
-;    Updated: 2018/01/15 11:01:05 by mc               ###   ########.fr        ;
+;    Updated: 2018/02/25 10:39:08 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -75,6 +75,7 @@
 (require 'init-python-mode)
 (require 'init-erc)
 (require 'init-gnus)
+(require 'init-comint-mode)
 
 ;; site-lisp folder
 (require 'init-42-mode)
@@ -87,7 +88,7 @@
   ;; (require 'init-slime)
 
   ;; packages to download: package.el not builtin till emacs24... just give up
-  (require 'init-benchmark-init)
+  ;; (require 'init-benchmark-init)  ; coment me when done playing around!
   (require 'init-ido)
   (require 'init-projectile)
   (require 'init-ace-window)
@@ -104,7 +105,6 @@
   (require 'init-web-mode)
   (require 'init-php-mode)
   (require 'init-js-mode)
-  (require 'init-cython-mode)
   (require 'init-yaml-mode)
   (require 'init-ledger-mode)
   (require 'init-tuareg)
@@ -114,9 +114,10 @@
   (require 'init-ruby-mode)
   (require 'init-eww-mode)
 
-  (when (< 22 emacs-major-version)
-	;; not builtin till emacs23
-	(require 'init-vc-dir)))
+  ;; (when (< 22 emacs-major-version)
+  ;;   ;; not builtin till emacs23
+  ;;   (require 'init-vc-dir))
+  )
 
 
 ;; auto-generated customizations

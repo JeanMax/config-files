@@ -8,18 +8,20 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2017/10/11 16:25:37 by mc               ###   ########.fr        ;
+;    Updated: 2018/02/18 12:09:02 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
 ;;; Code:
 
 (use-package tuareg
+  :defer t
   :ensure t
 
   :init
   (progn
     (use-package merlin
+      :defer t
       :ensure t
 
       :init
@@ -38,6 +40,7 @@
 
 
     (use-package flycheck-ocaml
+      :defer t
       :ensure t
 
       :init
@@ -51,6 +54,7 @@
       (add-hook 'tuareg-mode-hook #'merlin-mode))
 
     (use-package utop
+      :defer t
       :ensure t
 
       :init

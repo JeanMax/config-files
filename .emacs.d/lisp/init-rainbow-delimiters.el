@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2017/04/21 16:18:08 by mc               ###   ########.fr        ;
+;    Updated: 2018/02/18 12:08:12 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -16,7 +16,7 @@
 
 (use-package rainbow-delimiters
   :ensure t
-  ;; :defer t
+  :defer t
 
   :init
   (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))

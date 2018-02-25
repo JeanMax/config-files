@@ -8,13 +8,14 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2016/09/25 16:13:31 by mcanal           ###   ########.fr        ;
+;    Updated: 2018/02/18 12:07:42 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
 ;;; Code:
 
 (use-package move-mode
+  :defer t
   :load-path
   "~/.emacs.d/site-lisp/move")
 

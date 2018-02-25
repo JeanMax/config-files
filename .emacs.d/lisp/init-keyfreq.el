@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2017/07/30 23:29:12 by mc               ###   ########.fr        ;
+;    Updated: 2018/02/18 12:07:17 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -16,7 +16,7 @@
 
 (use-package keyfreq
   :ensure t
-  ;; :defer t
+  :defer t
   :diminish keyfreq-mode
   :defines *is-a-server*
 

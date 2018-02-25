@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2018/01/17 13:55:57 by mc               ###   ########.fr        ;
+;    Updated: 2018/02/25 10:36:59 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -150,8 +150,6 @@
 
   ;; disable top menu bar
   (menu-bar-mode -1)
-
-    ;; disable top menu bar
   (tool-bar-mode -1)
 
   ;; splash screen on old versions...
@@ -166,9 +164,10 @@
   (setq inhibit-startup-buffer-menu t)
 
   ;; no *scratch* at startup, use the previous buffer
-  (setq initial-buffer-choice
-		'(lambda ()
-		   (switch-to-buffer (other-buffer (current-buffer) t))))
+  (when *is-a-server*
+    (setq initial-buffer-choice
+          '(lambda ()
+             (switch-to-buffer (other-buffer (current-buffer) t)))))
 
   ;; format line number (fringe)
   (setq linum-format "%3d ")

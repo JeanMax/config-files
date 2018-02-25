@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2017/07/30 23:37:17 by mc               ###   ########.fr        ;
+;    Updated: 2018/02/25 10:23:08 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -16,7 +16,7 @@
 
 (use-package projectile
   :ensure t
-  ;; :defer t
+  :defer t
 
   :config
   (define-key projectile-mode-map (kbd "£") 'projectile-command-map)

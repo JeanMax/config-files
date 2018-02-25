@@ -8,13 +8,14 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2017/03/28 13:35:39 by mc                #+#    #+#              ;
-;    Updated: 2018/01/09 15:15:57 by mc               ###   ########.fr        ;
+;    Updated: 2018/02/18 12:07:27 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
 ;;; Code:
 
 (use-package ledger-mode
+  :defer t
   :ensure t
   :mode ("\\.ledger\\'" . ledger-mode)
 

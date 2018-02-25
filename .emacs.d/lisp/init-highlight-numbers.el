@@ -8,13 +8,14 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2016/09/18 17:33:43 by mcanal           ###   ########.fr        ;
+;    Updated: 2018/02/18 12:06:51 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
 ;;; Code:
 
 (use-package highlight-numbers
+  :defer t
   :ensure t
   :commands (highlight-numbers-mode)
 

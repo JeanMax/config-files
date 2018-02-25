@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2015/04/26 16:54:03 by mcanal            #+#    #+#              ;
-;    Updated: 2018/01/11 12:41:48 by mc               ###   ########.fr        ;
+;    Updated: 2018/02/18 12:07:48 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -16,7 +16,7 @@
 
 (use-package mu4e
   ;; :ensure t
-  ;; :defer t
+  :defer t
 
   :config
   (setq mu4e-maildir "~/Mail")
