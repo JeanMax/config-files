@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2018/02/18 12:07:17 by mc               ###   ########.fr        ;
+;    Updated: 2018/03/01 11:18:35 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -16,11 +16,11 @@
 
 (use-package keyfreq
   :ensure t
-  :defer t
+  ;; :defer t
   :diminish keyfreq-mode
   :defines *is-a-server*
 
-  :config
+  :init
   (when *is-a-server*
     (keyfreq-mode 1))
   (keyfreq-autosave-mode 1)

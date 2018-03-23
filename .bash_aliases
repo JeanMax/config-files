@@ -7,7 +7,7 @@
 #    By: mc </var/spool/mail/mc>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/26 20:50:04 by mc                #+#    #+#              #
-#    Updated: 2018/02/25 10:32:29 by mc               ###   ########.fr        #
+#    Updated: 2018/03/18 16:11:03 by mc               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -243,13 +243,15 @@ if [ "$TERM" != dumb ] && $(hash grc 2>/dev/null); then
     alias w="colourify w"
     alias who="colourify who"
     alias lsof="colourify lsof"
+    alias docker="colourify docker"
+    alias docker-machine="colourify docker-machine"
+    alias docker-compose="colourify docker-compose"
 
     # alias diff="colourify diff --color=always" #clash with diff colors
 
     # unused
     # alias ant="colourify ant"
     # alias cvs="colourify cvs"
-    # alias docker="colourify docker"
     # alias esperanto="colourify esperanto"
     # alias dnf="colourify dnf"
     # alias gas="colourify gas"

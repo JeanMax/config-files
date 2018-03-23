@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2017/07/30 23:40:59 by mc               ###   ########.fr        ;
+;    Updated: 2018/03/04 16:21:57 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -19,13 +19,6 @@
   ;; line wrap
   (setq-default fill-column 80)
   (setq-default truncate-partial-width-windows 40)
-
-  ;; restore session (buffers, frames...)
-  (when *is-a-server*
-    (desktop-save-mode 1)
-    (setq desktop-save nil)
-    ;; (setq desktop-path '("~/.emacs.d/misc/")))
-    )
 
   ;; window splitting at launch
   (setq split-height-threshold 40)
@@ -41,19 +34,6 @@
 (bind-key (kbd "M-L") 'enlarge-window-horizontally)
 (bind-key (kbd "M-J") 'shrink-window-horizontally)
 (bind-key (kbd "M-U") 'shrink-window-if-larger-than-buffer)
-
-;; TODO: save windows config in register
-;; window-configuration-to-register -> jump-to-register
-
-
-(defun k-thx-bye ()
-  "Exit server and save desktop."
-  (interactive)
-  (when (y-or-n-p "Save Desktop? ")
-	;; (smex-save-to-file)
-    (desktop-save "~/.emacs.d"))
-  (save-buffers-kill-terminal)
-  (kill-emacs))
 
 (bind-key* (kbd "C-x ²") 'delete-window)
 (bind-key* (kbd "C-x à") 'delete-window)
@@ -128,19 +108,19 @@
 ;; windows handling
 (cond
  ((version< emacs-version "23")
-  (bind-key* (kbd "<A-prior>") 'previous-multiframe-window)
-  (bind-key* (kbd "<A-next>") 'next-multiframe-window)
+  (bind-key* (kbd "<A-prior>") (lambda () (interactive) (other-window -1)))
+  (bind-key* (kbd "<A-next>") 'other-window)
   (bind-key* (kbd "<A-insert>") 'find-file-other-window)
   (bind-key* (kbd "<A-delete>") 'delete-window))
  (t
-  (bind-key* (kbd "ESC <prior>") 'previous-multiframe-window)
-  (bind-key* (kbd "ESC <next>") 'next-multiframe-window)
+  (bind-key* (kbd "ESC <prior>") (lambda () (interactive) (other-window -1)))
+  (bind-key* (kbd "ESC <next>") 'other-window)
   (bind-key* (kbd "ESC <insertchar>") 'find-file-other-window)
   (bind-key* (kbd "ESC <deletechar>") 'delete-window)
 
   ;;we keep this too for gui-macs
-  (bind-key* (kbd "<M-prior>") 'previous-multiframe-window)
-  (bind-key* (kbd "<M-next>") 'next-multiframe-window)
+  (bind-key* (kbd "<M-prior>") (lambda () (interactive) (other-window -1)))
+  (bind-key* (kbd "<M-next>") 'other-window)
   (bind-key* (kbd "<M-insert>") 'find-file-other-window)
   (bind-key* (kbd "<M-delete>") 'delete-window)))
 

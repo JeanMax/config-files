@@ -6,3 +6,7 @@ README.html
 .gdb_history
 peda-session-*
 vgcore.*
+CMakeCache.txt
+CMakeFiles
+cmake_install.cmake
+CTestTestfile.cmake

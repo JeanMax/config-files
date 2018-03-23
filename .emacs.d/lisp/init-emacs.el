@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2018/02/25 10:36:59 by mc               ###   ########.fr        ;
+;    Updated: 2018/03/23 11:29:35 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -144,7 +144,7 @@
 
   ;; indentation
   (setq-default tab-width 4)
-  (setq-default indent-tabs-mode nil) ; set to true later for 42-mode
+  (setq-default indent-tabs-mode t) ; TODO: set to true later for 42-mode
   (setq-default tab-stop-list '(4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64 68 72 76 80 84 88 92 96 100 104 108 112 116 120))
   (setq fill-column 80)
 
@@ -270,8 +270,8 @@
   (bind-key* (kbd "C-q") 'insert-debug-comment) ; -> elisp-functions.el
 
   ;; gui font (default is actually set in .Xressources)
-  ;; (when (member "CodeNewRoman" (font-family-list))
-    ;; (set-frame-font "CodeNewRoman 13" t nil))
+  (when (member "CodeNewRoman" (font-family-list))
+    (set-frame-font "CodeNewRoman 12" t nil))
   (when (member "Symbola" (font-family-list))
     (set-fontset-font t 'unicode "Symbola" nil 'prepend))
 
@@ -406,7 +406,7 @@
 (defun my/ansi-colorize-buffer ()
   (let ((buffer-read-only nil))
     (ansi-color-apply-on-region (point-min) (point-max))))
-(add-hook 'compilation-filter-hook 'my/ansi-colorize-buffer)
+;; (add-hook 'compilation-filter-hook 'my/ansi-colorize-buffer)
 
 (provide 'init-emacs)
 ;;; init-emacs.el ends here
