@@ -6,7 +6,7 @@
 #    By: mc </var/spool/mail/mc>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/26 20:39:01 by mc                #+#    #+#              #
-#    Updated: 2018/02/09 11:49:51 by mc               ###   ########.fr        #
+#    Updated: 2018/03/26 13:29:26 by mc               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,7 +60,11 @@ else
 	export TRASH="$HOME/.Trash"
 	export PATH="$HOME/.brew/bin:$PATH"
 fi
-export PATH="$HOME/.roswell/bin:$HOME/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.roswell/bin:$PATH"
+if hash ruby 2>/dev/null; then
+   export PATH="$HOME/.gem/ruby/$(ruby --version | sed -E 's|ruby ([0-9]+\.[0-9]+\.[0-9]+).*|\1|')/bin:$PATH"
+fi
 
 # locales
 # export LANG=en_US.UTF-8
