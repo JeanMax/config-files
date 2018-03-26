@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2018/03/26 23:55:19 by mcanal           ###   ########.fr        ;
+;    Updated: 2018/03/27 00:01:50 by mcanal           ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -166,7 +166,7 @@ Version 2016-01-08"
     (setq comment-start char)
     (font-lock-add-keywords
      nil
-     `((,(concat comment-start ".+") . font-lock-comment-face)))))
+     `((,(concat comment-start ".+") . font-lock-comment-face))))
 
 (provide 'init-simple)
 ;;; init-simple.el ends here
