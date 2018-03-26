@@ -6,7 +6,7 @@
 #    By: mc </var/spool/mail/mc>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/26 20:39:01 by mc                #+#    #+#              #
-#    Updated: 2018/02/09 11:49:51 by mc               ###   ########.fr        #
+#    Updated: 2018/03/17 19:35:09 by mcanal           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,8 +44,8 @@ export EMAIL="$MAIL"
 export SMTPSERVER="smtp.gmail.com"
 
 #clang debuging stuff
-ASAN_SYMBOLIZER_PATH=$(which llvm-symbolizer 2>/dev/null)
-export ASAN_SYMBOLIZER_PATH
+# ASAN_SYMBOLIZER_PATH=$(which llvm-symbolizer 2>/dev/null)
+# export ASAN_SYMBOLIZER_PATH
 
 # Big boys use big history
 HISTSIZE=20000
@@ -83,8 +83,8 @@ export PATH="$HOME/.roswell/bin:$HOME/.local/bin:$PATH"
 # 5 seconds
 REPORTTIME=5 #TODO: I think that's a zsh stuff
 
-MAKEFLAGS="-j$(nproc)"
-export MAKEFLAGS
+# MAKEFLAGS="-j$(nproc 2>/dev/null)"
+# export MAKEFLAGS
 
 # force qt to use gtk style
 export GTK2_RC_FILES="$HOME/.config/gtk-2.0/.gtkrc-2.0"

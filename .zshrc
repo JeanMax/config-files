@@ -6,7 +6,7 @@
 #    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/23 17:38:59 by mcanal            #+#    #+#              #
-#    Updated: 2018/02/08 12:39:01 by mc               ###   ########.fr        #
+#    Updated: 2018/02/12 11:52:05 by mcanal           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -146,15 +146,18 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*:*:kill:*:processes' list-colors "=(#b) #([0-9]#)*=36=31"
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
-# zsh-syntax-highlighting
-test -e /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh \
-	&& source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# zsh-syntax-highlighting/autosuggestion
 
-# zsh autosuggestion
-test -e /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh \
-	&& source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+for dir in /usr/share/zsh/plugins /Users/mcanal/.brew/share; do
+    for plugin in zsh-syntax-highlighting/zsh-syntax-highlighting.zsh zsh-autosuggestions/zsh-autosuggestions.zsh; do
+        test -e $dir/$plugin && . $dir/$plugin
+    done
+done
 
 # export OPAMEXTERNALSOLVER=$(which packup 2> /dev/null)
 
 # OPAM configuration
 . /home/mc/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+
+# Load Homebrew config script
+source $HOME/.brewconfig.zsh

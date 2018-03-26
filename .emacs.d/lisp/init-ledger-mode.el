@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2017/03/28 13:35:39 by mc                #+#    #+#              ;
-;    Updated: 2018/01/09 15:15:57 by mc               ###   ########.fr        ;
+;    Updated: 2018/02/12 11:40:23 by mcanal           ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -22,7 +22,9 @@
   (set-face-attribute 'ledger-font-xact-highlight-face t :background "brightblack")
   )
 
-(bind-key (kbd "C-c b") (lambda () (interactive) (insert "₿")))
+(bind-key (kbd "C-c b") (lambda ()
+                          (interactive)
+                          (insert "₿")))
 
 ;; from emacs-wiki
 (defun ledger-add-entry (title in amount out) ;TODO: debug

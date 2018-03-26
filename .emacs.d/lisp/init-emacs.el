@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2018/01/17 13:55:57 by mc               ###   ########.fr        ;
+;    Updated: 2018/02/12 11:40:24 by mcanal           ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -22,7 +22,8 @@
   :config
   ;; alias for altgr keys, since they change a lot between keyboards
   (if *is-a-mac*
-      (progn (defconst *altgr-a* "´")
+      (progn (defconst *console* nil)
+             (defconst *altgr-a* "´")
              (defconst *altgr-z* "Â")
              (defconst *altgr-e* "€")
              (defconst *altgr-r* "®")

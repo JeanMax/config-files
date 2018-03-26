@@ -7,7 +7,7 @@
 #    By: mc </var/spool/mail/mc>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/26 20:50:04 by mc                #+#    #+#              #
-#    Updated: 2018/02/08 12:04:54 by mc               ###   ########.fr        #
+#    Updated: 2018/03/19 05:14:42 by mcanal           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,11 +31,13 @@ alias py='python3'
 alias copy='xsel --clipboard'
 alias caml='rlwrap ocaml'
 alias cl='rlwrap sbcl --noinform'
-alias open='xdg-open'
 alias t='sh ~/sh_script/rename_tab.sh'  # TODO: write fun instead
 alias del='~/sh_script/trash.sh'  # TODO: write fun instead
 SQL_ARGS="--prompt=\"$(echo -e '\033[32;01m\\d\033[33;01m@\033[31;01m\\h> \033[0m')\" -uroot -p --silent"
 alias sql="mysql $SQL_ARGS"
+if test "$(uname)" != "Darwin"; then
+    alias open='xdg-open'
+fi
 
 
 # emacs stuffs
@@ -57,7 +59,7 @@ alias gb='git branch'
 alias gcm='git commit -m'
 alias gce='git commit'
 alias gco='git checkout'
-alias gpl='git pull'
+alias gpl='git pull --ff-only'
 alias gp='git push'
 alias gpo='git push origin'
 alias gpa='git push --all origin'
@@ -233,3 +235,6 @@ if [ "$TERM" != dumb ] && $(hash grc 2>/dev/null); then
     # alias wdiff="colourify wdiff"
 fi
 unset SQL_ARGS
+
+
+alias ciao="diskutil unmount force $HOME"
