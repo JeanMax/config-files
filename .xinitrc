@@ -105,7 +105,7 @@ case $WM in
         feh --bg-max ~/Pictures/Wallpapers/xkcd.png &
 
 		# compositor
-		compton -bCG --no-fading-openclose --backend glx --xrender-sync --xrender-sync-fence &
+		# compton -bCG --no-fading-openclose --backend glx --xrender-sync --xrender-sync-fence &
 
 		# numlock at startup
 		numlockx &

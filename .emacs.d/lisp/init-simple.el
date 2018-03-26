@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2017/03/19 15:32:25 by mc               ###   ########.fr        ;
+;    Updated: 2018/03/25 16:12:24 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -93,13 +93,22 @@ Version 2016-01-08"
     (insert "[]")
     (backward-char 1))
 
+  ;; (defun aco()
+  ;;   "ac"
+  ;;   (interactive)
+  ;;   (move-end-of-line 1)
+  ;;   (insert "\n{")
+  ;;   (indent-for-tab-command)
+  ;;   (insert "\n\n}")
+  ;;   (indent-for-tab-command)
+  ;;   (previous-line 1)
+  ;;   (indent-for-tab-command))
+
   (defun aco()
     "ac"
     (interactive)
     (move-end-of-line 1)
-    (insert "\n{")
-    (indent-for-tab-command)
-    (insert "\n\n}")
+    (insert " {\n\n}")
     (indent-for-tab-command)
     (previous-line 1)
     (indent-for-tab-command))

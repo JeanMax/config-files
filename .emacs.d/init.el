@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2015/04/26 16:54:03 by mcanal            #+#    #+#              ;
-;    Updated: 2018/02/25 10:39:08 by mc               ###   ########.fr        ;
+;    Updated: 2018/03/01 11:14:28 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -76,6 +76,7 @@
 (require 'init-erc)
 (require 'init-gnus)
 (require 'init-comint-mode)
+(require 'init-desktop)
 
 ;; site-lisp folder
 (require 'init-42-mode)

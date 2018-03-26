@@ -2,6 +2,7 @@
 
 if pgrep emacs; then  # assuming it's the daemon...
     emacsclient -e '(progn
+                      (kill-matching-buffers "^timemachine:.*")
                       (save-some-buffers)
                       (desktop-save "~/.emacs.d")
                       (kill-emacs))' || exit 42

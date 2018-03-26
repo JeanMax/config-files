@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2018/02/25 10:19:52 by mc               ###   ########.fr        ;
+;    Updated: 2018/03/01 11:22:58 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -50,7 +50,7 @@
 
     (use-package ido-completing-read+
       :ensure t
-      ; :defer t
+      ;; :defer t
 
       :init
       (ido-ubiquitous-mode 1))
@@ -58,14 +58,14 @@
 
     (use-package flx-ido
       :ensure t
-      ; :defer t
+      ;; :defer t
 
       :init
       (flx-ido-mode 1))
 
     (use-package smex
       :ensure t
-      ; :defer t
+      ;; :defer t
 
       :init
 	  ;; (setq smex-save-file "~/.emacs.d/misc/smex-items")
@@ -75,14 +75,14 @@
       (progn
         (setq smex-history-length 25)
         (use-package ido-complete-space-or-hyphen
-          ; :defer t
+          ;; :defer t
           :ensure t)))
 
 
     (when (version< "24.4" emacs-version)
       (use-package ido-grid-mode
         :ensure t
-        ; :defer t
+        :defer t
 
         :init
         (ido-grid-mode t)
