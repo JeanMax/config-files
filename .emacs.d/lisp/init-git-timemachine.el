@@ -8,15 +8,15 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2017/04/21 16:41:21 by mc               ###   ########.fr        ;
+;    Updated: 2018/02/18 12:06:30 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
 ;;; Code:
 
 (use-package git-timemachine
+  :defer t
   :ensure t)
-  ;; :defer t)
 
 
 (provide 'init-git-timemachine)

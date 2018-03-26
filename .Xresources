@@ -18,15 +18,18 @@ Emacs.lineSpacing: 0
 ! TODO: tab bug in emacs
 ! http://www.deskdr.com/dr/solved-emacs-rxvt-unicode-cursor-bug.html
 
-URxvt.perl-ext-common:  default,matcher,tabbedex,resize-font,eval,-searchable-scrollback,
+URxvt.perl-ext-common:  default,matcher,resize-font,eval,-searchable-scrollback,
 
 URxvt.termName:         rxvt-256color
 URxvt.reverseVideo:     true
 URxvt.font:             xft:CodeNewRoman:size=13
+URxvt.boldFont:         xft:CodeNewRoman:size=13
+URxvt.italicFont:       xft:CodeNewRoman:size=13
+URxvt.boldItalicFont:   xft:CodeNewRoman:size=13
 ! URxvt.font:             x:-misc-ubuntu mono-medium-r-normal--0-0-0-0-m-0-iso8859-9
 
 ! URxvt.letterSpace:      -1
-! URxvt.lineSpace:        -1
+URxvt.lineSpace:        0
 ! URxvt.skipBuiltinGlyphs: true
 
 
@@ -75,7 +78,7 @@ URxvt.secondaryScroll:  0
 URxvt.secondaryWheel:   1
 
 URxvt.insecure:   1
-! Urxvt.pastableTabs: 1
+Urxvt.pastableTabs: False
 
 URxvt.saveLines:        65535
 
@@ -110,9 +113,6 @@ URxvt.resize-font.bigger: C-plus
 
 URxvt.fading: 5
 
-URxvt.pointerBlank: true
-! URxvt.pointerBlankDelay: 3
-
 
 ! !black   #000000 #333333
 *color0:  #000000
@@ -139,6 +139,38 @@ URxvt.pointerBlank: true
 *color7:  #bdbdb3
 *color15: #cccccc
 
+! foreground
 URxvt.foreground: #242424
+
+! background
 URxvt.background: #cccccc
+
+! bold
+! URxvt.colorBD:
+
+! italic
+! URxvt.colorIT:
+
+! underlined characters
 URxvt.colorUL: #528fd1
+
+! underlined line
+! URxvt.underlineColor:
+
+! highlight background
+! URxvt.highlightColor: #aaaaaa
+
+! highlight text
+! URxvt.highlightTextColor:
+
+! cursor
+! URxvt.cursorColor: #aaaaaa
+
+! cursor text
+! URxvt.cursorColor2:
+
+URxvt.cursorBlink: False
+URxvt.cursorUnderline: False
+
+URxvt.pointerBlank: true
+! URxvt.pointerBlankDelay: 3

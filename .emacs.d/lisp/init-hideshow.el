@@ -8,14 +8,14 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2017/04/21 16:41:29 by mc               ###   ########.fr        ;
+;    Updated: 2018/02/18 12:06:40 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
 ;;; Code:
 
 (use-package hideshow
-  ;; :defer t
+  :defer t
   :diminish hs-minor-mode
 
   :init

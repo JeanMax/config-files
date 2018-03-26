@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2017/08/09 20:37:15 by mc               ###   ########.fr        ;
+;    Updated: 2018/02/18 11:49:07 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -16,7 +16,7 @@
 
 (use-package company
   :ensure t
-  ;; :defer t
+  :defer t
   :diminish company-mode
 
   :bind (("TAB" . indent-or-complete))

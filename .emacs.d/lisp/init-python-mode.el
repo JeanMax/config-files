@@ -8,24 +8,26 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2017/09/11 14:47:01 by mc               ###   ########.fr        ;
+;    Updated: 2018/02/18 12:05:16 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
 ;;; Code:
 
 (use-package python
+  :defer t
   :mode
   ("\\.py\\'" . python-mode)
 
   :init
-  (setenv "IPY_TEST_SIMPLE_PROMPT" "1")
-  (setenv "PATH" (concat "~/.local/bin:" (getenv "PATH")))
-  ;; (add-hook 'python-mode-hook 'company-mode)
-  (add-hook 'python-mode-hook 'eldoc-mode)
+  (progn
+    (setenv "IPY_TEST_SIMPLE_PROMPT" "1")
+    (setenv "PATH" (concat "~/.local/bin:" (getenv "PATH")))
+    ;; (add-hook 'python-mode-hook 'company-mode)
+    (add-hook 'python-mode-hook 'eldoc-mode)
 
-  (setq python-eldoc-setup-code
-"def __PYDOC_get_help(obj):
+    (setq python-eldoc-setup-code
+          "def __PYDOC_get_help(obj):
     try:
         import inspect
         try:
@@ -59,8 +61,27 @@
     except:
         ret = ''
     return ret")
-  (setq python-shell-interpreter "ipython")
-  (setq python-shell-interpreter-args "-i --pdb --TerminalIPythonApp.interactive_shell_class=rlipython.TerminalInteractiveShell -m babao")
+    (setq python-shell-interpreter "ipython")
+    (setq python-shell-interpreter-args "-i --pdb --TerminalIPythonApp.interactive_shell_class=rlipython.TerminalInteractiveShell -m babao")
+
+    (use-package cython-mode
+      :ensure t
+      :defer t
+      :mode
+      ("\\.pyx\\'" . cython-mode)
+
+      :config
+      ;; free that for dabbrev-expand
+      (define-key python-mode-map (kbd "<backtab>") nil)
+
+      :init
+      (progn
+        (use-package flycheck-cython
+          :defer t
+          :ensure t
+
+          :init
+          (add-hook 'cython-mode-hook 'flycheck-mode)))))
 
   :config
   ;; free that for dabbrev-expand

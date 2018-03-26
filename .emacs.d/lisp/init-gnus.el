@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2015/04/26 16:54:03 by mcanal            #+#    #+#              ;
-;    Updated: 2018/01/15 10:41:50 by mc               ###   ########.fr        ;
+;    Updated: 2018/02/18 12:21:14 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -16,8 +16,22 @@
 
 ;; (account infos in .authinfo)
 (use-package gnus
-  ;; :defer t
+  :defer t
   :commands (gnus)
+
+  :init
+  (defun gnu ()
+    "Launch gnus then gnus-demon (Ok I missed something in the config)..."
+    (interactive)
+    (gnus)
+    (gnus-demon-add-handler '(lambda()
+                               (gnus-demon-scan-news)
+                               ;; (gnus-group-get-new-news)
+                               (message "*Ninja-Mail-Check @%s!*"
+                                        (format-time-string "%T")))
+                            150 20)
+    (gnus-demon-init))
+
 
   :config
   (progn
@@ -53,18 +67,6 @@
       :config
       (eval-when-compile (require 'gnus-demon))
       (setq gnus-demon-timestep 1))))
-
-(defun gnu ()
-  "Launch gnus then gnus-demon (Ok I missed something in the config)..."
-  (interactive)
-  (gnus)
-  (gnus-demon-add-handler '(lambda()
-                             (gnus-demon-scan-news)
-                             ;; (gnus-group-get-new-news)
-                             (message "*Ninja-Mail-Check @%s!*"
-                                      (format-time-string "%T")))
-                          150 20)
-  (gnus-demon-init))
 
 
 (provide 'init-gnus)

@@ -8,14 +8,14 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2018/01/09 15:14:15 by mc               ###   ########.fr        ;
+;    Updated: 2018/03/01 11:22:58 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
 ;;; Code:
 
 (use-package ido
-  :defer t
+  ;; :defer t
 
   :init
   (ido-mode 1)
@@ -75,13 +75,14 @@
       (progn
         (setq smex-history-length 25)
         (use-package ido-complete-space-or-hyphen
+          ;; :defer t
           :ensure t)))
 
 
     (when (version< "24.4" emacs-version)
       (use-package ido-grid-mode
         :ensure t
-        ;; :defer t
+        :defer t
 
         :init
         (ido-grid-mode t)

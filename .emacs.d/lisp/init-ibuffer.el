@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2015/04/26 16:54:03 by mcanal            #+#    #+#              ;
-;    Updated: 2018/01/09 15:42:57 by mc               ###   ########.fr        ;
+;    Updated: 2018/02/15 13:14:33 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -33,6 +33,7 @@
            ("GDB" (or (mode . gud-mode)
                       (name . "^\*breakpoints.*")
                       (name . "^\*locals.*")
+                      (name . "^\*registers.*")
                       (name . "^\*stack.*")
                       (name . "^\*threads.*")
                       (name . "^\*input/output.*")))

@@ -1,35 +1,31 @@
-;;; init-cython-mode.el --- init cython-mode
+;;; init-comint-mode.el --- init comint-mode
 ;;; Commentary:
 ;******************************************************************************;
 ;                                                                              ;
 ;                                                         :::      ::::::::    ;
-;    init-cython-mode.el                                :+:      :+:    :+:    ;
+;    init-comint-mode.el                                :+:      :+:    :+:    ;
 ;                                                     +:+ +:+         +:+      ;
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2017/08/05 04:34:55 by mc               ###   ########.fr        ;
+;    Updated: 2018/02/18 11:41:57 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
 ;;; Code:
 
-(use-package cython-mode
-  :ensure t
-  :mode
-  ("\\.pyx\\'" . cython-mode)
-
-  :config
-  ;; free that for dabbrev-expand
-  (define-key python-mode-map (kbd "<backtab>") nil)
+(use-package comint-mode
+  :defer t
 
   :init
-  (progn
-	(use-package flycheck-cython
-	  :ensure t
+  (setq gdb-many-windows t)
+  (setq gdb-show-threads-by-default t)
 
-	  :init
-	  (add-hook 'cython-mode-hook 'flycheck-mode))))
+  ;; :config
+  (add-hook 'comint-mode-hook
+            '(lambda ()
+               (define-key comint-mode-map (kbd "C-c r") 'comint-history-isearch-backward))))
 
-(provide 'init-cython-mode)
-;;; init-cython-mode.el ends here
+
+(provide 'init-comint-mode)
+;;; init-comint-mode.el ends here

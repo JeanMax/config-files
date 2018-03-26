@@ -7,7 +7,7 @@
 #    By: mc </var/spool/mail/mc>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/26 20:50:04 by mc                #+#    #+#              #
-#    Updated: 2018/03/19 05:14:42 by mcanal           ###   ########.fr        #
+#    Updated: 2018/03/26 23:51:29 by mcanal           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,8 @@ alias caml='rlwrap ocaml'
 alias cl='rlwrap sbcl --noinform'
 alias t='sh ~/sh_script/rename_tab.sh'  # TODO: write fun instead
 alias del='~/sh_script/trash.sh'  # TODO: write fun instead
-SQL_ARGS="--prompt=\"$(echo -e '\033[32;01m\\d\033[33;01m@\033[31;01m\\h> \033[0m')\" -uroot -p --silent"
+# SQL_ARGS="--prompt=\"$(echo -e '\033[32;01m\\d\033[33;01m@\033[31;01m\\h> \033[0m')\" -uroot -p --silent"
+SQL_ARGS="--silent --prompt=\"$(echo -e '\\d@\\h> \033[0m')\" -u genesys -p"
 alias sql="mysql $SQL_ARGS"
 if test "$(uname)" != "Darwin"; then
     alias open='xdg-open'
@@ -42,7 +43,7 @@ fi
 
 # emacs stuffs
 alias e="$EDITOR"
-alias em='emacs -nw'
+alias em='emacs --no-window-system --no-x-resources --no-splash'
 alias v="$VISUAL"
 alias se="SUDO_EDITOR=\"emacsclient -t -a emacs\" sudoedit"
 alias man='man_emacs'
@@ -55,26 +56,60 @@ alias econf='e ~/.emacs.d/init.el'
 
 # git aliases
 alias ga='git add -A'
-alias gb='git branch'
+alias gb='PAGER= git branch'
+alias gbb='git remote show origin'
 alias gcm='git commit -m'
 alias gce='git commit'
 alias gco='git checkout'
 alias gpl='git pull --ff-only'
 alias gp='git push'
 alias gpo='git push origin'
-alias gpa='git push --all origin'
+alias gpa='git push --all origin'  #yolo
 alias gpom='git push origin master'
-alias gm='git merge --no-ff'
-alias gu='git add -u'
+alias gm='git merge --verbose --progress --no-ff'
 alias gs='git status'
 alias gh='git stash'
-alias gf='git fetch'
+alias ghl='PAGER= git stash list --decorate'
+alias ghs='git stash show'
+alias gha='git stash apply'
+alias ghm='git stash push -m'
+alias ghp='git stash pop'
+alias gf="git fetch --verbose --progress --all --prune -j$(nproc 2>/dev/null || echo 1)"
 alias gd='git diff'
 alias gdc='git diff --cached'
 alias gtree='git log --oneline --graph --decorate --branches --remotes --tags --notes'
 alias gl='git log --oneline --graph --decorate'
 alias gll='git log'
 alias gr='git reset'
+
+gpla() {
+    # git-pull_all-my-branches
+
+    remote="$(test $1 && echo $1 || echo origin)"
+    # log_file=/tmp/git-pull_all-my-branches.log
+
+    git fetch --all --prune
+    current_branch=$(git branch | \grep '*' | cut -d' ' -f2)
+    branches=$(git remote show "$remote" | \grep 'out of date' | cut -d' ' -f5)
+
+    if test "$branches"; then
+        # git add -A .
+        # git stash
+
+        # echo "[$(date)]" >> $log_file
+        echo
+
+        for branch in $(echo $branches); do
+            echo "[$branch] "
+            git checkout "$branch"
+            git pull --ff-only
+            echo
+        done # |& tee -a $log_file |& less
+
+        git checkout "$current_branch"
+        # git stash apply # pop?
+    fi
+}
 
 # keep aliases after those
 alias sudo='sudo '
@@ -210,13 +245,15 @@ if [ "$TERM" != dumb ] && $(hash grc 2>/dev/null); then
     alias w="colourify w"
     alias who="colourify who"
     alias lsof="colourify lsof"
+    alias docker="colourify docker"
+    alias docker-machine="colourify docker-machine"
+    alias docker-compose="colourify docker-compose"
 
     # alias diff="colourify diff --color=always" #clash with diff colors
 
     # unused
     # alias ant="colourify ant"
     # alias cvs="colourify cvs"
-    # alias docker="colourify docker"
     # alias esperanto="colourify esperanto"
     # alias dnf="colourify dnf"
     # alias gas="colourify gas"

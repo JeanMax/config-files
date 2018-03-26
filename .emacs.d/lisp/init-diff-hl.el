@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2017/04/21 16:17:19 by mc               ###   ########.fr        ;
+;    Updated: 2018/02/18 11:51:48 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -16,7 +16,7 @@
 
 (use-package diff-hl
   :ensure t
-  ;; :defer t
+  :defer t
 
   :init
   (add-hook 'after-init-hook 'diff-hl-margin-mode)
