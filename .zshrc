@@ -6,7 +6,7 @@
 #    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/23 17:38:59 by mcanal            #+#    #+#              #
-#    Updated: 2018/02/12 11:52:05 by mcanal           ###   ########.fr        #
+#    Updated: 2018/04/21 23:14:28 by mcanal           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,10 +49,11 @@ precmd ()
         RPROMPT=""
 	fi
 
-
     RPROMPT="$RPROMPT"
-    PROMPT="%B%{$fg[green]%}%n@%{$fg[yellow]%}%m%{$fg[white]%}:%{$fg[red]%}%~
-%{$CMD_COLOR%}>%{$reset_color%}%b "
+	PROMPT="%B`printf "$USER@" | lolcat -f -p 1``printf "$HOST" | cut -d. -f1 | lolcat -f -p 1``printf ":${PWD/$HOME/~}" | lolcat -f -p 1`
+%{$CMD_COLOR%}> %{$reset_color%}%b"
+    # PROMPT="%B%{$fg[green]%}%n@%{$fg[yellow]%}%m%{$fg[white]%}:%{$fg[red]%}%~
+# %{$CMD_COLOR%}>%{$reset_color%}%b "
 }
 
 # Reglage du terminal
@@ -147,7 +148,6 @@ zstyle ':completion:*:*:kill:*:processes' list-colors "=(#b) #([0-9]#)*=36=31"
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
 # zsh-syntax-highlighting/autosuggestion
-
 for dir in /usr/share/zsh/plugins /Users/mcanal/.brew/share; do
     for plugin in zsh-syntax-highlighting/zsh-syntax-highlighting.zsh zsh-autosuggestions/zsh-autosuggestions.zsh; do
         test -e $dir/$plugin && . $dir/$plugin
