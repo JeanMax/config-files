@@ -8,13 +8,13 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2017/07/30 23:36:36 by mc               ###   ########.fr        ;
+;    Updated: 2018/06/12 11:33:15 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
 ;;; Code:
 
-(use-package eww-mode
+(use-package eww
   :defer t
   :defines eww-search-prefix
 

@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2015/04/26 16:54:03 by mcanal            #+#    #+#              ;
-;    Updated: 2018/02/15 13:14:33 by mc               ###   ########.fr        ;
+;    Updated: 2018/06/12 11:51:26 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -20,25 +20,25 @@
   :config
   (setq ibuffer-saved-filter-groups
         '(("home"
-           ("Git" (or (name . "^\*vc-.*\*$")
+           ("Git" (or (name . "^\\*vc-.*\\*$")
                       (name . "^timemachine:.*")
-					  (name . "^\*magit.*")))
+    				  (name . "^\\*magit.*")))
            ("Tramp" (filename . ":.*:"))
            ("C" (filename . ".*\\.c$"))
            ("H" (filename . ".*\\.h$"))
            ("CPP" (filename . ".*\\.cpp$"))
            ("HPP" (filename . ".*\\.hpp$"))
            ("Make" (or (filename . ".*[mM]akefile.*")
-					   (name . "*compilation*")))
+    				   (name . "*compilation*")))
            ("GDB" (or (mode . gud-mode)
-                      (name . "^\*breakpoints.*")
-                      (name . "^\*locals.*")
-                      (name . "^\*registers.*")
-                      (name . "^\*stack.*")
-                      (name . "^\*threads.*")
-                      (name . "^\*input/output.*")))
+                      (name . "^\\*breakpoints.*")
+                      (name . "^\\*locals.*")
+                      (name . "^\\*registers.*")
+                      (name . "^\\*stack.*")
+                      (name . "^\\*threads.*")
+                      (name . "^\\*input/output.*")))
            ("Js" (or (mode . js-mode)
-					 (mode . js2-mode)))
+    				 (mode . js2-mode)))
            ("Css" (filename . ".*\\.css$"))
            ("Html" (mode . web-mode))
            ("Php" (filename . ".*\\.php$"))
@@ -47,7 +47,7 @@
            ("Yaml" (filename . ".*\\.yml$"))
            ("Sh" (filename . ".*\\.sh$"))
            ("Python" (or (filename . ".*\\.py$")
-						 (filename . ".*\\.pyx$")))
+    					 (filename . ".*\\.pyx$")))
            ("Ocaml" (mode . tuareg-mode))
            ("Lisp" (or (filename . ".*\\.lisp$")
                        (filename . ".*\\.cl$")
@@ -60,7 +60,7 @@
            ("eLisp" (filename . ".*\\.el$"))
            ("Config" (or (mode . conf-unix-mode)
                          (mode . conf-space-mode)
-						 (filename . ".*/config-files/.*")))
+    					 (filename . ".*/config-files/.*")))
            ("Mail" (or (mode . message-mode)
                        (mode . bbdb-mode)
                        (mode . mail-mode)
@@ -72,7 +72,7 @@
            ("Irc" (mode . erc-mode))
            ("Bookmarks" (or (name . "*Bookmark List*")
                             (name . "*Open Recent*")))
-           ("*.*" (or (name . "^\*.*\*$")
+           ("*.*" (or (name . "^\\*.*\\*$")
                       (name . "TAGS"))))))
   (setq ibuffer-expert t)
   (setq ibuffer-show-empty-filter-groups nil)
@@ -99,6 +99,7 @@
                 " "
                 filename-and-process)))
  (setq ibuffer-default-sorting-mode 'alphabetic)
+
  (setq ibuffer-fontification-alist
        '((10 buffer-read-only
              font-lock-constant-face)
@@ -114,16 +115,16 @@
              font-lock-comment-face)
          (35 (eq major-mode 'dired-mode)
              font-lock-keyword-face)
-		 (14 (string-match ".*\\.cp?p?$" (buffer-name))
-			 font-lock-variable-name-face)
-		 (13 (string-match ".*\\.hp?p?$" (buffer-name))
-			 font-lock-type-face)
+    	 (14 (string-match ".*\\.cp?p?$" (buffer-name))
+    		 font-lock-variable-name-face)
+    	 (13 (string-match ".*\\.hp?p?$" (buffer-name))
+    		 font-lock-type-face)
          (12 (eq major-mode 'erc-mode)
              font-lock-constant-face)
          (11 (or (eq major-mode 'emacs-lisp-mode)
-				 (eq major-mode 'sh-mode)
-				 (string-match ".*[mM]akefile.*" buffer-file-name)
-				 (string-match ".*/config-files/.*" buffer-file-name))
+    			 (eq major-mode 'sh-mode)
+    			 (string-match ".*[mM]akefile.*" (or buffer-file-name ""))
+    			 (string-match ".*/config-files/.*" (or buffer-file-name "")))
              font-lock-preprocessor-face))))
 
 (bind-key* (kbd *altgr-s*) 'ibuffer)

@@ -9,9 +9,9 @@ function get_version() {
 function install_tensorflow() {
     DIR=~/tf
     REPO=https://github.com/tensorflow/tensorflow
-    BRANCH=r1.5
+    BRANCH=r1.9
 
-    # WITH_CUDA=yep  # comment out to disable
+    WITH_CUDA=yep  # comment out to disable
 
     if ! test -e $DIR; then
         mkdir -pv $DIR
@@ -32,7 +32,7 @@ function install_tensorflow() {
         CUDNN_VERSION=$(get_version cudnn)
 
         # https://stackoverflow.com/questions/43113508/math-functions-hpp-not-found-when-using-cuda-with-eigen
-        ln -sfv /usr/local/cuda/include/crt/math_functions.hpp /usr/local/cuda/include/math_functions.hpp
+        # ln -sfv /usr/local/cuda/include/crt/math_functions.hpp /usr/local/cuda/include/math_functions.hpp
 
         # .tf_configure.bazelrc ?
         sed -i "s/CUDA', False/CUDA', True/" configure.py
@@ -40,15 +40,15 @@ function install_tensorflow() {
         sed -i "s/CUDNN_VERSION = .*/CUDNN_VERSION = '$CUDNN_VERSION'/" configure.py
         sed -i "s/CUDA_COMPUTE_CAPABILITIES = .*/CUDA_COMPUTE_CAPABILITIES = '$CUDA_COMPUTE_CAPABILITIES'/" configure.py
 
-        CUDA_FLAG=--config=cuda
+        # CUDA_FLAG=--config=cuda
     fi
     sed -i 's/True,/False,/g' configure.py  # gcp/hdfs/s3 turned off
 
     bazel clean
     ./configure
-    bazel build $CUDA_FLAG --incompatible_load_argument_is_label=false //tensorflow/tools/pip_package:build_pip_package
+    bazel build --config=opt $CUDA_FLAG //tensorflow/tools/pip_package:build_pip_package
     bazel-bin/tensorflow/tools/pip_package/build_pip_package /tmp/tensorflow_pkg
-    sudo pip install /tmp/tensorflow_pkg/tensorflow-1.*.whl
+    pip install --user /tmp/tensorflow_pkg/tensorflow-1.*.whl
 
     cd -
 }

@@ -7,7 +7,7 @@
 #    By: mc </var/spool/mail/mc>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/26 20:50:04 by mc                #+#    #+#              #
-#    Updated: 2018/03/18 16:11:03 by mc               ###   ########.fr        #
+#    Updated: 2018/04/17 21:22:30 by mc               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -79,6 +79,7 @@ alias gtree='git log --oneline --graph --decorate --branches --remotes --tags --
 alias gl='git log --oneline --graph --decorate'
 alias gll='git log'
 alias gr='git reset'
+alias gcl='git clone --recursive'
 
 gpla() {
     # git-pull_all-my-branches

@@ -8,13 +8,13 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2018/02/18 11:41:57 by mc               ###   ########.fr        ;
+;    Updated: 2018/06/12 11:31:54 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
 ;;; Code:
 
-(use-package comint-mode
+(use-package comint
   :defer t
 
   :init
