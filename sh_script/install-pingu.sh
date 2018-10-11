@@ -1,7 +1,7 @@
 #!/bin/bash
 
 TARGET=/mnt
-DEVICE=/dev/sda7
+DEVICE=/dev/sda2
 
 echo -e "-Target: $TARGET"
 du -csh $TARGET
@@ -19,8 +19,8 @@ set -xe
 
 # mkfs.ext4 -O "^has_journal" $DEVICE #usb without journaling
 current_device="$(lsblk -i | grep bootmnt | sed -E 's|.*(sd\w+)\s.*|/dev/\1|')"
-label="$(blkid | grep $current_device | sed -e 's|.*LABEL="(.*)" UUID.*|\1|')"
-mkfs.ext4 -v -O ^64bit -L "$label-$(date "+%Y%m")" "$DEVICE"
+label="$(blkid | grep $current_device | sed -E 's|.*LABEL="(.*)" UUID.*|\1|')"
+mkfs.ext4 -v -O ^64bit -L "PINGU-$(date "+%Y%m")" "$DEVICE"
 unset label
 unset current_device
 

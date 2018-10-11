@@ -14,14 +14,16 @@ if [ "$WM" != "sway" ]; then #TODO: check for wayland instead
     if [ -f $sysmodmap ]; then
         xmodmap $sysmodmap
     fi
-
-    if [ -f "$usermodmap" ]; then
-        xmodmap "$usermodmap"
-    fi
 fi
 
 if [ -f $sysresources ]; then
     xrdb -merge $sysresources
+fi
+
+if [ "$WM" != "sway" ]; then #TODO: check for wayland instead
+    if [ -f "$usermodmap" ]; then
+        xmodmap "$usermodmap"
+    fi
 fi
 
 if [ -f "$userresources" ]; then
@@ -43,7 +45,9 @@ xset s off
 xset -b
 
 # Enable zapping (C-A-<Bksp> kills X)
-setxkbmap -option terminate:ctrl_alt_bksp
+# setxkbmap -option terminate:ctrl_alt_bksp
+# setxkbmap -option caps:super
+# these are moved to /etc/X11/xorg.conf.d/20-evdev-custom.conf
 
 export XKB_DEFAULT_LAYOUT=fr,us
 export XKB_DEFAULT_VARIANT=, #nodeadkeys
@@ -99,16 +103,22 @@ case $WM in
         i3lock -f -t -i ~/Pictures/Wallpapers/xkcd.png &
 
 		# Auto screen lock
-        xautolock -detectsleep -cornersize 50 -corners --00 -time 42 -locker 'i3lock -f -t -i ~/Pictures/Wallpapers/xkcd.png && sleep 1 && systemctl suspend -i' &
+        xautolock -detectsleep -cornersize 50 -corners --00 -time 10 -locker 'xset dpms force off' &
+        xautolock -detectsleep -cornersize 50 -corners --00 -time 42 -locker 'systemctl suspend -i' &
+		# caffeine &
+		bash -x "$(command -v lightson+)" --delay 3 --audio 1 --mplayer 1 --vlc 1 --totem 0 --firefox-flash 1 --chromium-flash 1 --webkit-flash 1 --html5 1 --steam 0 --minitube 0 --minload 2 > /tmp/lightson.log 2>&1 &
 
         # Background picture
         feh --bg-max ~/Pictures/Wallpapers/xkcd.png &
+
+		# synaptic daemon to block touchpad while typing
+		# syndaemon -i 0.5 -t -K -R -d &
 
 		# compositor
 		# compton -bCG --no-fading-openclose --backend glx --xrender-sync --xrender-sync-fence &
 
 		# numlock at startup
-		numlockx &
+# 		numlockx &
 
         exec i3;;
 

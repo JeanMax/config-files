@@ -38,6 +38,7 @@ mount "$DEVICE" $MNT_DEVICE
 
 cp -a $MNT_ISO/* $MNT_DEVICE
 
+dd bs=440 count=1 conv=notrunc if=/usr/lib/syslinux/bios/mbr.bin of=$(echo "$DEVICE" | sed -E 's|(/dev/.+)([0-9]+)|\1|')
 cp /usr/lib/syslinux/bios/*.c32 $MNT_DEVICE/arch/boot/syslinux
 extlinux --install $MNT_DEVICE/arch/boot/syslinux
 

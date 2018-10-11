@@ -2,7 +2,7 @@
 
 req=/tmp/kraken.req
 tmp=/tmp/kraken.tmp
-price_file=~/kraken.price-db
+price_file=~/.kraken.price-db
 
 while true; do
     curl -sS -X POST -o "$tmp" \

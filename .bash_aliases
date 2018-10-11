@@ -7,7 +7,7 @@
 #    By: mc </var/spool/mail/mc>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/26 20:50:04 by mc                #+#    #+#              #
-#    Updated: 2018/04/17 21:22:30 by mc               ###   ########.fr        #
+#    Updated: 2018/10/10 15:36:00 by mc               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,8 @@ alias del='~/sh_script/trash.sh'  # TODO: write fun instead
 # SQL_ARGS="--prompt=\"$(echo -e '\033[32;01m\\d\033[33;01m@\033[31;01m\\h> \033[0m')\" -uroot -p --silent"
 SQL_ARGS="--silent --prompt=\"$(echo -e '\\d@\\h> \033[0m')\" -u genesys -p"
 alias sql="mysql $SQL_ARGS"
+alias emount="~/sh_script/crypt.sh mount"
+alias eumount="~/sh_script/crypt.sh umount"
 
 
 # emacs stuffs
@@ -45,11 +47,12 @@ alias em='emacs --no-window-system --no-x-resources --no-splash'
 alias v="$VISUAL"
 alias se="SUDO_EDITOR=\"emacsclient -t -a emacs\" sudoedit"
 alias man='man_emacs'
+alias mail='em --eval "(gnu)"'
 
 # flash conf edit
 alias zconf='e ~/.zshrc'
 alias bconf='e ~/.bashrc'
-alias aconf='e ~/.bash_aliases'
+alias aconf='e ~/.bash_aliases && . ~/.bash_aliases'
 alias econf='e ~/.emacs.d/init.el'
 
 # git aliases
@@ -167,6 +170,7 @@ alias diff='diff --color=auto'
 alias wdiff='dwdiff -c'
 alias pacsearch='pacsearch -c'
 alias pactree='pactree -c'
+alias bb='bb-wrapper --aur --build-dir /tmp/bb-build'
 
 
 # support colors in less
