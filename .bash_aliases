@@ -7,7 +7,7 @@
 #    By: mc </var/spool/mail/mc>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/26 20:50:04 by mc                #+#    #+#              #
-#    Updated: 2018/10/10 15:36:00 by mc               ###   ########.fr        #
+#    Updated: 2019/02/25 15:15:00 by mc               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,7 @@ alias em='emacs --no-window-system --no-x-resources --no-splash'
 alias v="$VISUAL"
 alias se="SUDO_EDITOR=\"emacsclient -t -a emacs\" sudoedit"
 alias man='man_emacs'
-alias mail='em --eval "(gnu)"'
+alias mail='em --eval "(progn (sleep-for 0.1) (gnu))"'
 
 # flash conf edit
 alias zconf='e ~/.zshrc'
@@ -195,7 +195,7 @@ if [ "$TERM" != dumb ] && $(hash grc 2>/dev/null); then
         alias ll="ls -lh"
         alias la="ls -lAh"
     fi
-    alias cat="grc -es --colour=on cat"
+    # alias cat="grc -es --colour=on cat"
     alias configure='colourify ./configure'
     alias du="colourify du -h"
     alias df="colourify df -h"

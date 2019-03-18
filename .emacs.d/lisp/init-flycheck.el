@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2018/03/23 11:28:46 by mc               ###   ########.fr        ;
+;    Updated: 2019/03/13 18:13:47 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -22,20 +22,31 @@
   :init
   (add-hook 'prog-mode-hook 'global-flycheck-mode)
 
+  (setq flycheck-grammalecte-enabled-modes
+		'(mail-mode message-mode))
+  ;; (flycheck-grammalecte-download-grammalecte) ;once
+  (use-package flycheck-grammalecte
+    ;; :defer t
+    :ensure t
+	:init
+	(setq flycheck-grammalecte-report-esp nil)
+	(setq flycheck-grammalecte-report-nbsp nil))
+
   (use-package flycheck-ledger
     :defer t
     :ensure t)
+
 
   :config
   ;; (setq flycheck-mode-line-prefix "f")
 
   (setq flycheck-clang-include-path
-        '("/home/mc/quarantedeux/corewar/test/include"
-          "/home/mc/quarantedeux/corewar/test/minunit"
-          "/home/mc/quarantedeux/corewar/include"
-          "/home/mc/quarantedeux/corewar/include/asm"
-          "/home/mc/quarantedeux/corewar/libft/include/libft"
-          "/home/mc/quarantedeux/corewar/libft/include"))
+        '("/home/mc/tempow/include"))
+
+  ;; (setq flycheck-clang-include-path
+  ;;       '("/tmp/p/includes"
+  ;;         "/tmp/p/lib/libft/includes"
+  ;; 		  "/tmp/p/lib/option/includes"))
 
 
   ;; (setq flycheck-clang-language-standard "-std=c++11")

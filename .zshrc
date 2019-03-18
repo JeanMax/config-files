@@ -6,7 +6,7 @@
 #    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/23 17:38:59 by mcanal            #+#    #+#              #
-#    Updated: 2018/02/08 12:39:01 by mc               ###   ########.fr        #
+#    Updated: 2019/01/09 14:33:42 by mc               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,9 @@
 
 source ~/.bashrc
 
+# report about cpu-/system-/user-time of command if running longer than
+# 5 seconds
+REPORTTIME=5
 
 # Definition du prompt
 precmd ()
@@ -158,3 +161,6 @@ test -e /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh \
 
 # OPAM configuration
 . /home/mc/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+
+
+fortune | cowsay -n | lolcat -v 1 -h 0.2

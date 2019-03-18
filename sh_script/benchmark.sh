@@ -33,7 +33,7 @@ if test -e "$TMP_FILE"; then
     exit 42
 fi
 
-for f in test_write test_read # test_cache
+for f in test_write test_read test_cache
 do
     echo "+ $f"
     sync

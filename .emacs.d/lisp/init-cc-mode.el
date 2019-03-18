@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2018/02/28 18:49:11 by mc               ###   ########.fr        ;
+;    Updated: 2019/03/13 15:41:24 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -37,7 +37,7 @@
 (bind-key* (kbd "C-c C-g") 'headcomment)
 (bind-key* (kbd "M-è") 'main) ; 7
 (bind-key* (kbd "M-;") 'semi-c)
-(bind-key* (kbd "C-i") 'indent-buffer)
+;; (bind-key* (kbd "C-i") 'indent-buffer)
 ;; (bind-key* (kbd "C-c M-c") 'stuff)
 
 (defun hpp-template(class)
@@ -157,7 +157,8 @@
 (defun main ()
   "Insert a C main."
   (interactive)
-  (insert "int\t\tmain(int ac, char **av, char **env)\n{\n\t\n\treturn (EXIT_SUCCESS);\n}\n")
+  ;; (insert "int\t\tmain(int ac, char **av, char **env)\n{\n\t\n\treturn (EXIT_SUCCESS);\n}\n")
+  (insert "int\t\tmain(int ac, char **av)\n{\n\t\n\treturn 0;\n}\n")
   (previous-line 3)
   (forward-char 1))
 
