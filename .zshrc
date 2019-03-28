@@ -6,7 +6,7 @@
 #    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/23 17:38:59 by mcanal            #+#    #+#              #
-#    Updated: 2019/01/09 14:33:42 by mc               ###   ########.fr        #
+#    Updated: 2019/03/19 09:29:40 by unchartech_5     ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -154,8 +154,9 @@ test -e /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.z
 	&& source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # zsh autosuggestion
-test -e /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh \
-	&& source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+test -e ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh \
+	&& source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+
 
 # export OPAMEXTERNALSOLVER=$(which packup 2> /dev/null)
 
@@ -163,4 +164,4 @@ test -e /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh \
 . /home/mc/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
 
 
-fortune | cowsay -n | lolcat -v 1 -h 0.2
+# fortune | cowsay -n | lolcat -v 1 -h 0.2

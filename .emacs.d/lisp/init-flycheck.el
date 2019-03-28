@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2019/03/13 18:13:47 by mc               ###   ########.fr        ;
+;    Updated: 2019/03/20 19:04:34 by unchartech_5     ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -40,16 +40,15 @@
   :config
   ;; (setq flycheck-mode-line-prefix "f")
 
-  (setq flycheck-clang-include-path
-        '("/home/mc/tempow/include"))
+  (setq flycheck-clang-include-path '(
+									  "/home/unchartech_5/data-bloomberg/inc/"
+									  "/home/unchartech_5/data-bloomberg/inc/blpapi"
+									  "/home/unchartech_5/data-bloomberg/inc/utils"
+									  "/usr/include/postgresql/"
+									  ))
 
-  ;; (setq flycheck-clang-include-path
-  ;;       '("/tmp/p/includes"
-  ;;         "/tmp/p/lib/libft/includes"
-  ;; 		  "/tmp/p/lib/option/includes"))
 
-
-  ;; (setq flycheck-clang-language-standard "-std=c++11")
+  (setq flycheck-clang-language-standard "-std=c++17")
   ;; (setq flycheck-clang-args '("-std=c++11"))
   (setq flycheck-clang-warnings '("all" "extra" "-D LINUX"))
   ;; (setq flycheck-idle-change-delay 2)

@@ -1,5 +1,10 @@
 ! TODO: dpi depends on screen resolution
-Xft.dpi: 101
+Xft.dpi: 96
+
+Xft.antialias:  true
+Xft.hinting:    true
+Xft.rgba:       rgb
+Xft.hintstyle:  hintslight
 
 ! Xft.antialias: true
 ! Xft.hinting: true

@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2019/03/15 11:29:02 by mc               ###   ########.fr        ;
+;    Updated: 2019/03/20 18:30:37 by unchartech_5     ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -24,7 +24,7 @@
 	("^From:" "^Newsgroups:" "^Subject:" "^Date:" "^Followup-To:" "^Reply-To:" "^Organization:" "^Summary:" "^Keywords:" "^To:" "^[BGF]?Cc:" "^Posted-To:" "^Mail-Copies-To:" "^Mail-Followup-To:" "^Apparently-To:" "^Gnus-Warning:" "^Resent-From:" "^X-Sent:" "^X-AnteSpam-Report:")))
  '(package-selected-packages
    (quote
-	(json-mode inf-ruby yaml-mode web-mode utop use-package tuareg smex rainbow-delimiters projectile php-mode php-eldoc markdown-mode magit ledger-mode keyfreq js2-mode ido-grid-mode ido-completing-read+ ido-complete-space-or-hyphen highlight-numbers highlight-indent-guides gtags git-timemachine ggtags flycheck-ocaml flycheck-ledger flycheck-cython flx-ido emms diminish diff-hl cython-mode company-statistics benchmark-init ace-window))))
+	(json-mode yaml-mode web-mode utop use-package tuareg smex rainbow-delimiters projectile php-mode php-eldoc markdown-mode magit ledger-mode keyfreq js2-mode inf-ruby ido-grid-mode ido-completing-read+ ido-complete-space-or-hyphen highlight-numbers highlight-indent-guides gtags git-timemachine ggtags flycheck-ocaml flycheck-ledger flycheck-grammalecte flycheck-cython flx-ido emms diminish diff-hl cython-mode company-statistics benchmark-init bbdb ace-window))))
 
 
 (custom-set-faces
