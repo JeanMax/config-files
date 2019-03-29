@@ -36,24 +36,18 @@
 				(define-key gnus-group-mode-map (kbd "s") 'email-search)
 				(define-key gnus-group-mode-map (kbd "g") 'email-check)))
 
-	;; (dolist (mail '("mc.maxcanal@gmail.com"
-	;; 				"yodator_9@hotmail.com"
-	;; 				"mcanal@student.42.fr"
-	;; 				"max@rmrf.fr"
-	;; 				"mr@rmrf.fr"
-	;; 				"mc@rmrf.fr"))
-	;;   (progn
-	;; 	(message mail)					;DEBUG
-	;; 	(add-to-list 'gnus-posting-styles ((header "to" mail) (address mail)))
-	;; 	(add-to-list 'gnus-posting-styles ((header "cc" mail) (address mail)))))
+	(setq gnus-posting-styles
+		  '(((header "to" "mc.maxcanal@gmail.com") (address "mc.maxcanal@gmail.com"))
+			((header "cc" "mc.maxcanal@gmail.com") (address "mc.maxcanal@gmail.com"))
 
+			((header "to" "yodator_9@hotmail.com") (address "yodator_9@hotmail.com"))
+			((header "cc" "yodator_9@hotmail.com") (address "yodator_9@hotmail.com"))
 
-	  ;; (setq gnus-posting-styles
-	  ;; 		'(((header "to" "mc.maxcanal@gmail.com")
-	  ;; 		   (address "mc.maxcanal@gmail.com"))
-	  ;; 		  ((header "cc" "mc.maxcanal@gmail.com")
-	  ;; 		   (address "mc.maxcanal@gmail.com"))
-	  ;; 		  ))
+			((header "to" "max.canal@unchartech.com") (address "max.canal@unchartech.com"))
+			((header "cc" "max.canal@unchartech.com") (address "max.canal@unchartech.com"))
+
+			((header "to" "m.canal@pleiade-am.com") (address "m.canal@pleiade-am.com"))
+			((header "cc" "m.canal@pleiade-am.com") (address "m.canal@pleiade-am.com"))))
 
 	(setq message-citation-line-function 'message-insert-formatted-citation-line
 		  message-citation-line-format "Le %a%e %b %Y à %H:%M, %f a écrit:\n"
@@ -145,6 +139,31 @@
   (message-goto-body)
   (insert "Bonjour,\n\n\n\nCordialement,\n\nMax Canal\n")
   (forward-line -5))
+
+(defun email-cr ()
+  "Insert classic mail body."
+  (interactive)
+  (message-goto-to)
+  (insert "uncharteam@unchartech.com")
+  (replace-string "mc.maxcanal@gmail.com" "max.canal@")
+  (message-goto-subject)
+  (insert "Projet TODO - " (format-time-string "%d/%m/%Y"))
+  (message-goto-body)
+  (insert "<#part type=text/html>\n"
+		  "<h1>Stock:</h1>\n"
+		  "<ul>\n"
+		  "  <li>a</li>\n"
+		  "  <li>b</li>\n"
+		  "  <li>c</li>\n"
+		  "</ul>\n"
+		  "<h1>Float:</h1>\n"
+		  "<ul>\n"
+		  "  <li>a</li>\n"
+		  "  <li>b</li>\n"
+		  "  <li>c</li>\n"
+		  "</ul>\n"
+		  "<#/part>")
+  (message-goto-subject))
 
 (defun email-link (url text)
   "Insert a link (URL + TEXT) in a mail."

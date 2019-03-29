@@ -163,4 +163,4 @@ test -e /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh \
 . /home/mc/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
 
 
-fortune | cowsay -n | lolcat -v 1 -h 0.2
+# fortune | cowsay -n | lolcat -v 1 -h 0.2

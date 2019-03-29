@@ -40,12 +40,20 @@ markup=none
 # signal=10
 
 
+# Mail
+#
+[mail]
+command=~/.config/i3blocks/mail.sh
+interval=5
+
+
 # Date Time
 #
 [time]
 # command=date '+%H:%M  %a %e %b'
 command=~/.config/i3blocks/date.sh
 interval=15
+
 
 
 # Network interface monitoring
@@ -61,9 +69,9 @@ command=~/.config/i3blocks/iface.sh
 
 # Kraken
 #
-[kraken]
-command=~/.config/i3blocks/kraken.sh
-interval=5
+# [kraken]
+# command=~/.config/i3blocks/kraken.sh
+# interval=5
 
 
 # [wifi]

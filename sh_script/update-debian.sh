@@ -1,7 +1,6 @@
-#!/bin/bash
-set -xe
+#!/bin/bash -xe
 
-apt-get update
-apt-get dist-upgrade --show-progress
-apt-get autoremove --show-progress
-apt-get autoclean
+apt update
+apt dist-upgrade --show-progress
+apt autoremove --show-progress
+apt autoclean
