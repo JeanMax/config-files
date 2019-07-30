@@ -6,7 +6,7 @@
 
 COOKIE=/tmp/.yay.cookie
 yes no | yay |& tee "$COOKIE"
-grep -Eq 'core/linux|linux-headers|systemd' "$COOKIE" \
+grep -Eq 'linux-[0-9]|linux-headers|systemd' "$COOKIE" \
     && NEED_REBOOT=t
 rm -f "$COOKIE"
 
@@ -15,8 +15,11 @@ if ! test "$FORCE" && test "$NEED_REBOOT"; then
 	exit 42
 fi
 
-yay \
+yay -Su --cleanafter \
     && yay -c \
     && sudo pacman -Scc --noconfirm \
     && (test "$NEED_REBOOT" \
             && sudo systemctl reboot)
+
+
+# && sudo rm -rf /usr/share/{doc,info,man}/* \
