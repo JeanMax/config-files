@@ -1,6 +1,22 @@
 #!/bin/bash -x
 
-yaourt --noconfirm --aur -Syu
-# bb-wrapper --build-dir /tmp/bb-build --aur -Syu
-pacman -Qdt && sudo pacman -Rns $(pacman -Qdtq)
-# sudo pacman-key --refresh-keys
+(test "$1" == "-f" || test "$1" == "--force") \
+        && FORCE=t
+
+
+COOKIE=/tmp/.yay.cookie
+yes no | yay |& tee "$COOKIE"
+grep -Eq 'core/linux|linux-headers|systemd' "$COOKIE" \
+    && NEED_REBOOT=t
+rm -f "$COOKIE"
+
+if ! test "$FORCE" && test "$NEED_REBOOT"; then
+	echo 'Reboot might be needed, use -f/--force if you want to proceed anyway.'
+	exit 42
+fi
+
+yay \
+    && yay -c \
+    && sudo pacman -Scc --noconfirm \
+    && (test "$NEED_REBOOT" \
+            && sudo systemctl reboot)
