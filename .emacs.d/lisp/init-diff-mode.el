@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2017/08/26 21:54:03 by mc               ###   ########.fr        ;
+;    Updated: 2018/06/12 11:29:37 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -25,7 +25,7 @@
 		 (eq major-mode 'magit-revision-mode))
         (ad-set-arg 0 (replace-regexp-in-string "^." "" (ad-get-arg 0))))))
 
-(use-package ediff-mode
+(use-package ediff
   :defer t
 
   :init

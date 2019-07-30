@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2017/03/28 13:35:39 by mc                #+#    #+#              ;
-;    Updated: 2018/03/23 11:30:41 by mc               ###   ########.fr        ;
+;    Updated: 2019/03/19 09:15:55 by unchartech_5     ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -18,11 +18,9 @@
   :ensure t
   :defer t
 
-  :init
-  (when *is-a-server*
-    (magit-status))
-
   :config
+  ;; (when *is-a-server*
+  ;;   (magit-status))
   (setq magit-merge-arguments '("--no-ff"))
   (setq magit-fetch-arguments '("--prune"))
   (setq magit-log-arguments '("--graph" "--color" "--decorate" "-n256"))

@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2018/03/23 11:29:35 by mc               ###   ########.fr        ;
+;    Updated: 2019/03/15 15:26:39 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -144,7 +144,7 @@
 
   ;; indentation
   (setq-default tab-width 4)
-  (setq-default indent-tabs-mode t) ; TODO: set to true later for 42-mode
+  (setq-default indent-tabs-mode nil) ; TODO: set to true later for 42-mode
   (setq-default tab-stop-list '(4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64 68 72 76 80 84 88 92 96 100 104 108 112 116 120))
   (setq fill-column 80)
 
@@ -241,9 +241,12 @@
   (cond
    ((version< emacs-version "23")
     (bind-key* (kbd "<A-up>") 'linum-mode))
+   ((version< "25" emacs-version)
+    (bind-key* (kbd "<A-up>") 'display-line-numbers-mode)
+   ;we keep this for gui-macs
+    (bind-key* (kbd "<M-up>") 'display-line-numbers-mode))
    (t
     (bind-key* (kbd "ESC <up>") 'linum-mode)
-
    ;we keep this for gui-macs
     (bind-key* (kbd "<M-up>") 'linum-mode)))
 
@@ -353,8 +356,9 @@
                                (propertize (format "%s" .warning) 'face '(:foreground "black" :background "#df9522" :weight bold)))
                               (t
                                "")))))
-                  ;; mail notifications (FIXME: require Inbox open?)
-                  (:eval (let ((got-mail (and (boundp 'gnus-newsgroup-unreads) gnus-newsgroup-unreads)))
+                  (:eval (let ((got-mail (and (boundp 'gnus-newsgroup-unreads)
+											  (string-match ".*\\([0-9]+\\).*: \\[Gmail\\]/Tous.*"
+															(with-current-buffer "*Group*" (buffer-string))))))
                            (if got-mail
                                (propertize " M " 'face '(:foreground "black" :background "#dF9522" :weight bold))
                              "  ")))

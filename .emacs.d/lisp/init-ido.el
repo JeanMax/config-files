@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2018/03/01 11:22:58 by mc               ###   ########.fr        ;
+;    Updated: 2018/12/03 14:49:57 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -75,16 +75,17 @@
       (progn
         (setq smex-history-length 25)
         (use-package ido-complete-space-or-hyphen
-          ;; :defer t
-          :ensure t)))
+          :ensure t
+		  :defer t
+		  :init
+		  (ido-complete-space-or-hyphen-mode))))
 
 
     (when (version< "24.4" emacs-version)
       (use-package ido-grid-mode
         :ensure t
         :defer t
-
-        :init
+		:init
         (ido-grid-mode t)
 
         :config
@@ -94,6 +95,7 @@
         (setq
          ido-grid-mode-max-columns 9
          ido-grid-mode-max-rows 3
+         ido-grid-mode-min-rows 3
          ;; ido-grid-mode-prefix-scrolls t
          ;; ido-grid-mode-scroll-down #'ido-grid-mode-next-row
          ;; ido-grid-mode-scroll-up #'ido-grid-mode-previous-row

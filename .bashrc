@@ -6,7 +6,7 @@
 #    By: mc </var/spool/mail/mc>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/26 20:39:01 by mc                #+#    #+#              #
-#    Updated: 2018/03/26 13:29:26 by mc               ###   ########.fr        #
+#    Updated: 2018/11/16 00:03:38 by mc               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -83,10 +83,6 @@ fi
 # export LC_IDENTIFICATION=fr_FR.UTF-8
 # export LC_ALL=en_US.UTF-8
 
-# report about cpu-/system-/user-time of command if running longer than
-# 5 seconds
-REPORTTIME=5 #TODO: I think that's a zsh stuff
-
 MAKEFLAGS="-j$(nproc)"
 export MAKEFLAGS
 
@@ -95,3 +91,8 @@ export GTK2_RC_FILES="$HOME/.config/gtk-2.0/.gtkrc-2.0"
 export QT_STYLE_OVERRIDE=gtk2
 
 source ~/.bash_aliases
+
+export MKLROOT=/home/mc/theano/mklml_lnx_2017.0.2.20170110
+export LD_LIBRARY_PATH=/home/mc/theano/mklml_lnx_2017.0.2.20170110/lib:$LD_LIBRARY_PATH
+export LIBRARY_PATH=/home/mc/theano/mklml_lnx_2017.0.2.20170110/lib:$LIBRARY_PATH
+export CPATH=/home/mc/theano/mklml_lnx_2017.0.2.20170110/include:$CPATH

@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2015/04/26 16:54:03 by mcanal            #+#    #+#              ;
-;    Updated: 2018/03/01 11:14:28 by mc               ###   ########.fr        ;
+;    Updated: 2019/03/13 16:02:04 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -114,6 +114,7 @@
   ;; not builtin till emacs24
   (require 'init-ruby-mode)
   (require 'init-eww-mode)
+  (require 'init-ispell)
 
   ;; (when (< 22 emacs-major-version)
   ;;   ;; not builtin till emacs23
@@ -127,3 +128,4 @@
 
 (provide 'init)
 ;;; init.el ends here
+(put 'upcase-region 'disabled nil)

@@ -129,11 +129,13 @@ bindsym $mod+Shift+r restart
 # bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Blabla' -b 'Shutdown' 'systemctl poweroff -i' -b 'Reboot' 'systemctl reboot' -b 'Logout' 'DISPLAY=:0 gnome-session-quit --logout --no-prompt' -b 'Lock' 'i3lock && sleep 1'"
 
 
-set $Locker i3lock -f -t -i ~/Pictures/Wallpapers/xkcd.png && sleep 1
+set $Locker true
+# i3lock -f -t -i ~/Pictures/Wallpapers/xkcd.png && sleep 1
 set $Killer ~/.config/i3/graceful_exit.sh
 
-set $mode_system System (l) lock, (e) logout, (r) reboot, (s) shutdown, (h) hibernate
+set $mode_system System (o) blackout, (l) lock, (e) logout, (r) reboot, (s) shutdown, (h) hibernate
 mode "$mode_system" {
+    bindsym b exec --no-startup-id xset dpms force off, mode "default"
     bindsym l exec --no-startup-id $Locker && systemctl suspend -i, mode "default"
     bindsym h exec --no-startup-id $Locker && systemctl hibernate -i, mode "default"
     bindsym e exec --no-startup-id $Killer && i3-msg exit, mode "default"
@@ -230,8 +232,8 @@ bindsym XF86AudioLowerVolume exec $lower $volume && $sound_notif
 bindsym XF86AudioMicMute exec --no-startup-id amixer -q sset Capture toggle
 
 # screen brightness controls
-bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 1
-bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 1
+bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 1 -time 0
+bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 1 -time 0
 
 # for_window [window_role="pop-up"] floating enable
 # for_window [window_role="bubble"] floating enable
@@ -272,7 +274,10 @@ workspace "1:firefox" output $screen1
 workspace "2:emacs" output $screen1
 workspace "3:term" output $screen1
 
+exec --no-startup-id 'xmodmap ~/.Xmodmap'
+
 exec --no-startup-id i3-msg 'workspace 1:firefox; exec firefox'
 exec --no-startup-id i3-msg 'workspace 2:emacs;   exec emacs-term'
 exec --no-startup-id i3-msg 'workspace 3:term;    exec i3-sensible-terminal'
 exec --no-startup-id i3-msg 'workspace 3:term;    exec i3-sensible-terminal'
+exec --no-startup-id i3-msg 'workspace 4:mail;    exec emacs-mail'

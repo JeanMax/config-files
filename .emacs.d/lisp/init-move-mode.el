@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2018/02/18 12:07:42 by mc               ###   ########.fr        ;
+;    Updated: 2019/03/12 23:44:39 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -34,7 +34,7 @@
 (bind-key* (kbd "<home>") 'backward-page)
 (bind-key* (kbd "<end>") 'forward-page)
 
-(bind-key* (kbd "M-g") 'goto-line)
+;; (bind-key* (kbd "M-g") 'goto-line)
 
 
 (defun normdown()

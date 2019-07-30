@@ -7,7 +7,7 @@
 #    By: mc </var/spool/mail/mc>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/26 20:50:04 by mc                #+#    #+#              #
-#    Updated: 2018/03/18 16:11:03 by mc               ###   ########.fr        #
+#    Updated: 2019/02/25 15:15:00 by mc               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,8 @@ alias del='~/sh_script/trash.sh'  # TODO: write fun instead
 # SQL_ARGS="--prompt=\"$(echo -e '\033[32;01m\\d\033[33;01m@\033[31;01m\\h> \033[0m')\" -uroot -p --silent"
 SQL_ARGS="--silent --prompt=\"$(echo -e '\\d@\\h> \033[0m')\" -u genesys -p"
 alias sql="mysql $SQL_ARGS"
+alias emount="~/sh_script/crypt.sh mount"
+alias eumount="~/sh_script/crypt.sh umount"
 
 
 # emacs stuffs
@@ -45,11 +47,12 @@ alias em='emacs --no-window-system --no-x-resources --no-splash'
 alias v="$VISUAL"
 alias se="SUDO_EDITOR=\"emacsclient -t -a emacs\" sudoedit"
 alias man='man_emacs'
+alias mail='em --eval "(progn (sleep-for 0.1) (gnu))"'
 
 # flash conf edit
 alias zconf='e ~/.zshrc'
 alias bconf='e ~/.bashrc'
-alias aconf='e ~/.bash_aliases'
+alias aconf='e ~/.bash_aliases && . ~/.bash_aliases'
 alias econf='e ~/.emacs.d/init.el'
 
 # git aliases
@@ -79,6 +82,7 @@ alias gtree='git log --oneline --graph --decorate --branches --remotes --tags --
 alias gl='git log --oneline --graph --decorate'
 alias gll='git log'
 alias gr='git reset'
+alias gcl='git clone --recursive'
 
 gpla() {
     # git-pull_all-my-branches
@@ -166,6 +170,7 @@ alias diff='diff --color=auto'
 alias wdiff='dwdiff -c'
 alias pacsearch='pacsearch -c'
 alias pactree='pactree -c'
+alias bb='bb-wrapper --aur --build-dir /tmp/bb-build'
 
 
 # support colors in less
@@ -190,7 +195,7 @@ if [ "$TERM" != dumb ] && $(hash grc 2>/dev/null); then
         alias ll="ls -lh"
         alias la="ls -lAh"
     fi
-    alias cat="grc -es --colour=on cat"
+    # alias cat="grc -es --colour=on cat"
     alias configure='colourify ./configure'
     alias du="colourify du -h"
     alias df="colourify df -h"
