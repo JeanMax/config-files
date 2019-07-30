@@ -6,7 +6,7 @@
 #    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/23 17:38:59 by mcanal            #+#    #+#              #
-#    Updated: 2019/01/09 14:33:42 by mc               ###   ########.fr        #
+#    Updated: 2019/05/04 00:25:12 by mc               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,33 +28,61 @@ precmd ()
         CMD_COLOR="%{$fg[red]%}"
     fi
 
-	ISGIT=$(git status 2> /dev/null)
-    if [ -n "$ISGIT" ]; then
-        STATUS=$(echo "$ISGIT" | grep "modified:\|:\|new file:\|deleted:")
-        BRANCH=$(git branch | cut -d ' ' -f 2 | tr -d '\n')
-        if [ -n "$STATUS" ]; then
-            GIT_COLOR="%{$fg[red]%}"
-        else
-            REMOTE_EXIST=$(git branch -a | grep remotes/origin/$BRANCH)
-            if [ -n "$REMOTE_EXIST" ]; then
-                REMOTE=$(git diff origin/$BRANCH $BRANCH)
-                if [ -n "$REMOTE" ]; then
-                    GIT_COLOR="%{$fg[yellow]%}"
-                else
-                    GIT_COLOR="%{$fg[green]%}"
-                fi
-            else
+	GIT_STATUS=$(git status 2> /dev/null)
+	if [ -n "$GIT_STATUS" ]; then
+		BRANCH=$(echo $GIT_STATUS | head -n1 | grep -Eo '[^ ]+$')
+        if echo "$GIT_STATUS" | grep -q 'working tree clean'; then
+			if echo "$GIT_STATUS" | grep -q 'branch is ahead'; then
+                GIT_COLOR="%{$fg[yellow]%}"
+			else
                 GIT_COLOR="%{$fg[green]%}"
-            fi
-        fi
+			fi
+		else
+			GIT_COLOR="%{$fg[red]%}"
+		fi
         RPROMPT="%{$GIT_COLOR%}($BRANCH)%{$reset_color%}"
     else
         RPROMPT=""
 	fi
 
+	# ISGIT=$(git status 2> /dev/null)
+    # if [ -n "$ISGIT" ]; then
+    #     STATUS=$(echo "$ISGIT" | grep "modified:\|:\|new file:\|deleted:")
+    #     BRANCH=$(git branch | cut -d ' ' -f 2 | tr -d '\n')
+    #     if [ -n "$STATUS" ]; then
+    #         GIT_COLOR="%{$fg[red]%}"
+    #     else
+    #         REMOTE_EXIST=$(git branch -a | grep remotes/origin/$BRANCH)
+    #         if [ -n "$REMOTE_EXIST" ]; then
+    #             REMOTE=$(git diff origin/$BRANCH $BRANCH)
+    #             if [ -n "$REMOTE" ]; then
+    #                 GIT_COLOR="%{$fg[yellow]%}"
+    #             else
+    #                 GIT_COLOR="%{$fg[green]%}"
+    #             fi
+    #         else
+    #             GIT_COLOR="%{$fg[green]%}"
+    #         fi
+    #     fi
+    #     RPROMPT="%{$GIT_COLOR%}($BRANCH)%{$reset_color%}"
+    # else
+    #     RPROMPT=""
+	# fi
 
-    RPROMPT="$RPROMPT"
-    PROMPT="%B%{$fg[green]%}%n@%{$fg[yellow]%}%m%{$fg[white]%}:%{$fg[red]%}%~
+	if test $PIPENV_ACTIVE; then
+		if test $RPROMPT; then
+			RPROMPT=" $RPROMPT"
+		fi
+		PIPENV_NAME=$(echo $VIRTUAL_ENV | sed -E 's|.*/(.*)-.*|\1|')
+		RPROMPT="%{$fg[blue]%}[$PIPENV_NAME]%{$reset_color%}$RPROMPT"
+	fi
+
+
+	if [[ $TERM = dumb ]]; then
+		DUMB_PROMPT="$RPROMPT"
+	fi
+
+    PROMPT="%B%{$fg[green]%}%n@%{$fg[yellow]%}%m%{$fg[white]%}:%{$fg[red]%}%~        $DUMB_PROMPT
 %{$CMD_COLOR%}>%{$reset_color%}%b "
 }
 
