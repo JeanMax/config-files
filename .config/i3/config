@@ -118,7 +118,7 @@ bindsym $mod+Shift+agrave move container to workspace number 0
 # bindsym $mod+n exec i3-input -F 'exec ~/.config/i3/rename_workspace.sh "%s"' -P 'New name for this workspace: '
 bindsym $mod+n exec ~/.config/i3/rename_workspace.sh
 
-bindsym $mod+t exec nautilus
+bindsym $mod+t exec pcmanfm
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -129,7 +129,8 @@ bindsym $mod+Shift+r restart
 # bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Blabla' -b 'Shutdown' 'systemctl poweroff -i' -b 'Reboot' 'systemctl reboot' -b 'Logout' 'DISPLAY=:0 gnome-session-quit --logout --no-prompt' -b 'Lock' 'i3lock && sleep 1'"
 
 
-set $Locker i3lock -f -t -i ~/Pictures/Wallpapers/xkcd.png && sleep 1
+set $Locker true
+# i3lock -f -t -i ~/Pictures/Wallpapers/xkcd.png && sleep 1
 set $Killer ~/.config/i3/graceful_exit.sh
 
 set $mode_system System (o) blackout, (l) lock, (e) logout, (r) reboot, (s) shutdown, (h) hibernate
@@ -242,7 +243,6 @@ bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 1 -time 0
 # for_window [window_type="dialog"] floating enable
 # for_window [window_type="menu"] floating enable
 for_window [class="Conky"] floating enable
-for_window [class="Gsimplecal"] floating enable
 
 # windows border (normal|pixel|1pixel|none)
 new_window pixel 4
@@ -266,15 +266,15 @@ bindsym $mod+Shift+g exec setxkbmap fr-latin9
 # assuming there are 2 screens max
 # set $screen1 "exec xrandr | grep primary | cut -d' ' -f1"
 # set $screen2 "exec xrandr | grep ' connected' | grep -v primary | cut -d' ' -f1"
-set $screen1 DP-2
-set $screen2 HDMI-1
+set $screen1 DVI-I-1
+set $screen2 VGA-0
 
 workspace "0:left" output $screen2
 workspace "1:firefox" output $screen1
 workspace "2:emacs" output $screen1
 workspace "3:term" output $screen1
 
-exec --no-startup-id '/home/unchartech_5/init.sh'
+exec --no-startup-id 'xmodmap ~/.Xmodmap'
 
 exec --no-startup-id i3-msg 'workspace 1:firefox; exec firefox'
 exec --no-startup-id i3-msg 'workspace 2:emacs;   exec emacs-term'

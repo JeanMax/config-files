@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2019/03/21 10:37:30 by unchartech_5     ###   ########.fr        ;
+;    Updated: 2019/03/15 15:26:39 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -51,33 +51,33 @@
              (defconst *altgr-$* "¤"))
 
     ;alternative french?
-	  ;; (progn (defconst *altgr-a* "æ")
-	  ;; 		 (defconst *altgr-z* "«")
-	  ;; 		 (defconst *altgr-e* "€")
-	  ;; 		 (defconst *altgr-r* "¶")
-	  ;; 		 (defconst *altgr-t* "ŧ")
-	  ;; 		 (defconst *altgr-y* "←")
-	  ;; 		 (defconst *altgr-u* "↓")
-	  ;; 		 (defconst *altgr-i* "→")
-	  ;; 		 (defconst *altgr-o* "ø")
-	  ;; 		 (defconst *altgr-p* "þ")
-	  ;; 		 (defconst *altgr-q* "@")
-	  ;; 		 (defconst *altgr-s* "ß")
-	  ;; 		 (defconst *altgr-d* "ð")
-	  ;; 		 (defconst *altgr-f* "đ")
-	  ;; 		 (defconst *altgr-g* "ŋ")
-	  ;; 		 (defconst *altgr-h* "ħ")
-	  ;; 		 (defconst *altgr-j* "")
-	  ;; 		 (defconst *altgr-k* "ĸ")
-	  ;; 		 (defconst *altgr-l* "ł")
-	  ;; 		 (defconst *altgr-m* "µ")
-	  ;; 		 (defconst *altgr-w* "ł")
-	  ;; 		 (defconst *altgr-x* "»")
-	  ;; 		 (defconst *altgr-c* "¢")
-	  ;; 		 (defconst *altgr-v* "“")
-	  ;; 		 (defconst *altgr-b* "”")
-	  ;; 		 (defconst *altgr-n* "n")
-	  ;; 		 (defconst *altgr-$* "¤"))
+    ;; (defconst *altgr-a* "æ")
+    ;; (defconst *altgr-z* "«")
+    ;; (defconst *altgr-e* "€")
+    ;; (defconst *altgr-r* "¶")
+    ;; (defconst *altgr-t* "ŧ")
+    ;; (defconst *altgr-y* "←")
+    ;; (defconst *altgr-u* "↓")
+    ;; (defconst *altgr-i* "→")
+    ;; (defconst *altgr-o* "ø")
+    ;; (defconst *altgr-p* "þ")
+    ;; (defconst *altgr-q* "@")
+    ;; (defconst *altgr-s* "ß")
+    ;; (defconst *altgr-d* "ð")
+    ;; (defconst *altgr-f* "đ")
+    ;; (defconst *altgr-g* "ŋ")
+    ;; (defconst *altgr-h* "ħ")
+    ;; (defconst *altgr-j* "")
+    ;; (defconst *altgr-k* "ĸ")
+    ;; (defconst *altgr-l* "ł")
+    ;; (defconst *altgr-m* "µ")
+    ;; (defconst *altgr-w* "ł")
+    ;; (defconst *altgr-x* "»")
+    ;; (defconst *altgr-c* "¢")
+    ;; (defconst *altgr-v* "“")
+    ;; (defconst *altgr-b* "”")
+    ;; (defconst *altgr-n* "n")
+    ;; (defconst *altgr-$* "¤"))
 
 
     ;default french
@@ -241,9 +241,12 @@
   (cond
    ((version< emacs-version "23")
     (bind-key* (kbd "<A-up>") 'linum-mode))
+   ((version< "25" emacs-version)
+    (bind-key* (kbd "<A-up>") 'display-line-numbers-mode)
+   ;we keep this for gui-macs
+    (bind-key* (kbd "<M-up>") 'display-line-numbers-mode))
    (t
     (bind-key* (kbd "ESC <up>") 'linum-mode)
-
    ;we keep this for gui-macs
     (bind-key* (kbd "<M-up>") 'linum-mode)))
 
