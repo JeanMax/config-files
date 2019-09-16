@@ -1,6 +1,10 @@
 #!/bin/bash
 
-URL="https://www.todo.com"
+if test $1; then
+    URL="$1"
+else
+    URL="https://www.theitaliankitchen.com.bd/"
+fi
 ATTACK_DELAY_SEC=5
 
 
