@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2015/04/26 16:54:03 by mcanal            #+#    #+#              ;
-;    Updated: 2019/03/13 16:02:04 by mc               ###   ########.fr        ;
+;    Updated: 2019/05/06 10:38:52 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -129,3 +129,4 @@
 (provide 'init)
 ;;; init.el ends here
 (put 'upcase-region 'disabled nil)
+(put 'downcase-region 'disabled nil)

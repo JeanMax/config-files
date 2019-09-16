@@ -6,7 +6,7 @@
 #    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/23 17:38:59 by mcanal            #+#    #+#              #
-#    Updated: 2019/05/04 00:25:12 by mc               ###   ########.fr        #
+#    Updated: 2019/09/16 14:00:08 by mc               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -192,3 +192,7 @@ test -e /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh \
 
 
 # fortune | cowsay -n | lolcat -v 1 -h 0.2
+
+
+# add completion on aliases
+unsetopt complete_aliases
