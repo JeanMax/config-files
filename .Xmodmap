@@ -37,11 +37,14 @@
 ! keycode 134 = Alt_R Meta_R Alt_R Meta_R
 
 !! menu key? the weird on the right (fn)
-! keycode 135 = ISO_Level3_Shift NoSymbol ISO_Level3_Shift
-keycode 135 = Super_R NoSymbol Super_R
+keycode 135 = ISO_Level3_Shift NoSymbol ISO_Level3_Shift
+! keycode 135 = Super_R NoSymbol Super_R
 
 !! Shift_R
 ! keycode 62 = Delete NoSymbol Delete
+
+!! Console
+keycode 49 = greater less less
 
 
 ! clear Shift

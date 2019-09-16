@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2019/06/01 01:26:36 by mc               ###   ########.fr        ;
+;    Updated: 2019/07/31 18:06:12 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -63,8 +63,8 @@
     return ret")
     (setq python-shell-interpreter "ipython")
     ;; (setq python-shell-interpreter-args "-i --pdb --TerminalIPythonApp.interactive_shell_class=rlipython.TerminalInteractiveShell -m babao")
-    ;; (setq python-shell-interpreter-args "-i --pdb --TerminalIPythonApp.interactive_shell_class=rlipython.TerminalInteractiveShell")
-    (setq python-shell-interpreter-args "-i --pdb --TerminalIPythonApp.interactive_shell_class=rlipython.TerminalInteractiveShell manage.py shell")  ;;debugsql
+    (setq python-shell-interpreter-args "-i --pdb --TerminalIPythonApp.interactive_shell_class=rlipython.TerminalInteractiveShell")
+    ;; (setq python-shell-interpreter-args "-i --pdb --TerminalIPythonApp.interactive_shell_class=rlipython.TerminalInteractiveShell manage.py shell")  ;;debugsql
     (use-package cython-mode
       :ensure t
       :defer t

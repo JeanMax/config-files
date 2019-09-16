@@ -103,10 +103,18 @@ case $WM in
         i3lock -f -t -i ~/Pictures/Wallpapers/xkcd.png &
 
 		# Auto screen lock
-        xautolock -detectsleep -cornersize 50 -corners --00 -time 10 -locker 'xset dpms force off' &
-        xautolock -detectsleep -cornersize 50 -corners --00 -time 42 -locker 'systemctl suspend -i' &
+        # xautolock -detectsleep -cornersize 50 -corners --00 -time 10 -locker 'xset dpms force off' &
+        # xautolock -detectsleep -cornersize 50 -corners --00 -time 42 -locker 'systemctl suspend -i' &
 		# caffeine &
 		bash -x "$(command -v lightson+)" --delay 3 --audio 1 --mplayer 1 --vlc 1 --totem 0 --firefox-flash 1 --chromium-flash 1 --webkit-flash 1 --html5 1 --steam 0 --minitube 0 --minload 2 > /tmp/lightson.log 2>&1 &
+
+        screen1=$(xrandr | grep primary | cut -d' ' -f1)
+        screen2=$(xrandr | grep ' connected' | grep -v primary | cut -d' ' -f1)
+        test "$screen2" \
+            && xrandr --output $screen2 --mode 1920x1080 \
+                      --output $screen1 --mode 1920x1080 --left-of $screen2
+
+        pgrep redshift || redshift &
 
         # Background picture
         feh --bg-max ~/Pictures/Wallpapers/xkcd.png &
@@ -115,10 +123,10 @@ case $WM in
 		# syndaemon -i 0.5 -t -K -R -d &
 
 		# compositor
-		# compton -bCG --no-fading-openclose --backend glx --xrender-sync --xrender-sync-fence &
+        pgrep compton || compton --experimental-backends &
 
 		# numlock at startup
-# 		numlockx &
+		numlockx &
 
         exec i3;;
 
