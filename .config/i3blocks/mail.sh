@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash
 
 MAIL_COUNT_FILE="$HOME/.mail-count"
 MAIL_COUNT=$(< "$MAIL_COUNT_FILE")

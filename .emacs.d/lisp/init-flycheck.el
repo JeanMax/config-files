@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2019/03/20 19:04:34 by unchartech_5     ###   ########.fr        ;
+;    Updated: 2019/09/16 12:07:56 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -39,24 +39,61 @@
 
   :config
   ;; (setq flycheck-mode-line-prefix "f")
-
   (setq flycheck-clang-include-path
-        '("/home/mc/tempow/include"))
+        '(
+		  "/home/mc/data-bloomberg/bloomberg/bloomberg-utils/inc"
+		  "/home/mc/data-bloomberg/bloomberg/datafeed-intraday/inc"
+		  "/home/mc/data-bloomberg/bloomberg/datafeed-reference/inc"
+		  "/home/mc/data-bloomberg/intraday-dumper/inc"
+		  "/home/mc/data-bloomberg/utils/inc"
+		  "/home/mc/data-bloomberg/utils/inc/nats"
+		  "/home/mc/data-bloomberg/utils/inc/json"
+		  "/home/mc/data-bloomberg/extern/inc/"
+		  "/home/mc/data-bloomberg/extern/inc/blpapi"
+		  ))
 
   ;; (setq flycheck-clang-include-path
-  ;;       '("/tmp/p/includes"
-  ;;         "/tmp/p/lib/libft/includes"
-  ;; 		  "/tmp/p/lib/option/includes"))
+  ;;       '(
+  ;; 		  "/home/mc/data-bloomberg/bloomberg/bloomberg-utils/inc"
+  ;; 		  "/home/mc/data-bloomberg/bloomberg/datafeed-intraday/inc"
+  ;; 		  "/home/mc/data-bloomberg/bloomberg/datafeed-reference/inc"
+  ;; 		  "/home/mc/data-bloomberg/extern/inc/blpapi"
+  ;; 		  "/home/mc/data-bloomberg/extern/inc/json"
+  ;; 		  "/home/mc/data-bloomberg/extern/inc/nats"
+  ;; 		  "/home/mc/data-bloomberg/extern/inc/nats/adapters"
+  ;; 		  "/home/mc/data-bloomberg/extern/inc/nats/include"
+  ;; 		  "/home/mc/data-bloomberg/extern/inc/nats/stan"
+  ;; 		  "/home/mc/data-bloomberg/extern/inc/pqxx"
+  ;; 		  "/home/mc/data-bloomberg/extern/inc/pqxx/internal"
+  ;; 		  "/home/mc/data-bloomberg/extern/inc/pqxx/internal/gates"
+  ;; 		  "/home/mc/data-bloomberg/intraday-dumper/inc"
+  ;; 		  "/home/mc/data-bloomberg/utils/inc"
+  ;; 		  "/home/mc/data-bloomberg/utils/inc/nats"
+  ;; 		  ))
 
 
-  (setq flycheck-clang-language-standard "-std=c++17")
+
+  ;; (setq flycheck-clang-language-standard "-std=c++11")
   ;; (setq flycheck-clang-args '("-std=c++11"))
-  (setq flycheck-clang-warnings '("all" "extra" "-D LINUX"))
+  (setq flycheck-clang-warnings '("all" "extra"))
+  (setq flycheck-clang-definitions '("__linux__" "LINUX" "NDEBUG"))
   ;; (setq flycheck-idle-change-delay 2)
   (setq flycheck-check-syntax-automatically
         '(save
           mode-enabled
           new-line)))
+
+(defun update-include-path ()
+  "Update flycheck clang include path."
+  (interactive)
+  (let ((includes (shell-command-to-string
+                   (concat " find "
+                           default-directory
+                           ;; " /usr/include "
+                           " -regex '.*\\.\\(h\\|hpp\\)' "
+                           " | xargs dirname | sort | uniq "))))
+    (message includes)
+    (setq flycheck-clang-include-path (split-string includes "\n"))))
 
 (provide 'init-flycheck)
 ;;; init-flycheck.el ends here

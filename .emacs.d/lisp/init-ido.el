@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2018/12/03 14:49:57 by mc               ###   ########.fr        ;
+;    Updated: 2019/04/08 09:23:46 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -22,6 +22,7 @@
 
   :config
   (progn
+
     (ido-everywhere 1)
     (setq ido-enable-dot-prefix t)
     (setq ido-enable-flex-matching nil)
@@ -45,84 +46,88 @@
                                 ;; (define-key ido-completion-map (kbd "C-l") 'ido-to-end)
                                 (define-key ido-completion-map (kbd "C-r") 'previous-matching-history-element)
                                 (define-key ido-completion-map (kbd "C-s") 'next-matching-history-element)
-								))
+								))))
 
 
-    (use-package ido-completing-read+
-      :ensure t
-      ;; :defer t
+(use-package ido-completing-read+
+  :ensure t
+  :after (ido)
+  ;; :defer t
 
-      :init
-      (ido-ubiquitous-mode 1))
-
-
-    (use-package flx-ido
-      :ensure t
-      ;; :defer t
-
-      :init
-      (flx-ido-mode 1))
-
-    (use-package smex
-      :ensure t
-      ;; :defer t
-
-      :init
-	  ;; (setq smex-save-file "~/.emacs.d/misc/smex-items")
-      (smex-initialize)
-
-      :config
-      (progn
-        (setq smex-history-length 25)
-        (use-package ido-complete-space-or-hyphen
-          :ensure t
-		  :defer t
-		  :init
-		  (ido-complete-space-or-hyphen-mode))))
+  :init
+  (ido-ubiquitous-mode 1))
 
 
-    (when (version< "24.4" emacs-version)
-      (use-package ido-grid-mode
-        :ensure t
-        :defer t
-		:init
-        (ido-grid-mode t)
+(use-package flx-ido
+  :ensure t
+  :after (ido)
+  ;; :defer t
 
-        :config
-        (set-face-attribute 'ido-grid-mode-match t :weight 'bold) ;TODO: highlight?
-        ;; (setq ido-grid-mode-keys nil)
-        ;; (setq ido-grid-mode-first-line '(ido-grid-mode-count "   " ido-grid-mode-long-count))
-        (setq
-         ido-grid-mode-max-columns 9
-         ido-grid-mode-max-rows 3
-         ido-grid-mode-min-rows 3
-         ;; ido-grid-mode-prefix-scrolls t
-         ;; ido-grid-mode-scroll-down #'ido-grid-mode-next-row
-         ;; ido-grid-mode-scroll-up #'ido-grid-mode-previous-row
-         ;; ido-grid-mode-order nil
-         ;; ido-grid-mode-start-collapsed t
-         )
-        ))
+  :init
+  (flx-ido-mode 1))
 
+(use-package smex
+  :after (ido)
+  :ensure t
+  ;; :defer t
 
-    ;; (use-package ido-at-point
-    ;;   :ensure t
-    ;;   :bind (("TAB" . indent-or-complete))
+  :init
+  ;; (setq smex-save-file "~/.emacs.d/misc/smex-items")
+  (smex-initialize)
 
-    ;;   :init
-    ;;   ;;TODO: cf company
-    ;;   (defun indent-or-complete () ;TODO: upgrade it! (cf ~smart-indent or something like that)
-    ;;     (interactive)
-    ;;     (if (looking-at "\\_>")
-    ;;         (completion-at-point)
-    ;;       (if (or (not transient-mark-mode) (region-active-p))
-    ;;           (indent-region (region-beginning) (region-end))
-    ;;         (indent-according-to-mode))))
-    ;;   (ido-at-point-mode 1))
+  :config
+  (setq smex-history-length 25))
+
+(use-package ido-complete-space-or-hyphen
+  :load-path "~/.emacs.d/site-lisp/ido-complete-space-or-hyphen"
+  :after (ido)
+  ;; :defer t
+  :config
+  (ido-complete-space-or-hyphen-mode 1))
 
 
+(use-package ido-grid-mode
+  :if (version< "24.4" emacs-version)
+  :after (ido)
+  :ensure t
+  ;; :defer t
+  :init
+  (ido-grid-mode t)
 
-    ))
+  :config
+  (set-face-attribute 'ido-grid-mode-match t :weight 'bold) ;TODO: highlight?
+  ;; (setq ido-grid-mode-keys nil)
+  ;; (setq ido-grid-mode-first-line '(ido-grid-mode-count "   " ido-grid-mode-long-count))
+  (setq
+   ido-grid-mode-max-columns 9
+   ido-grid-mode-max-rows 3
+   ido-grid-mode-min-rows 3
+   ;; ido-grid-mode-prefix-scrolls t
+   ;; ido-grid-mode-scroll-down #'ido-grid-mode-next-row
+   ;; ido-grid-mode-scroll-up #'ido-grid-mode-previous-row
+   ;; ido-grid-mode-order nil
+   ;; ido-grid-mode-start-collapsed t
+   ))
+
+
+;; (use-package ido-at-point
+;;   :ensure t
+;;   :bind (("TAB" . indent-or-complete))
+
+;;   :init
+;;   ;;TODO: cf company
+;;   (defun indent-or-complete () ;TODO: upgrade it! (cf ~smart-indent or something like that)
+;;     (interactive)
+;;     (if (looking-at "\\_>")
+;;         (completion-at-point)
+;;       (if (or (not transient-mark-mode) (region-active-p))
+;;           (indent-region (region-beginning) (region-end))
+;;         (indent-according-to-mode))))
+;;   (ido-at-point-mode 1))
+
+
+
+
 
 (bind-key (kbd "M-x") 'smex)
 (bind-key (kbd "M-X") 'smex-major-mode-commands)
