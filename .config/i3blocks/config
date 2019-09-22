@@ -47,6 +47,13 @@ command=~/.config/i3blocks/mail.sh
 interval=5
 
 
+# Redshift
+#
+[redshift]
+command=~/.config/i3blocks/redshift.sh |& tee /tmp/toto
+interval=10
+
+
 # Date Time
 #
 [time]
@@ -93,6 +100,8 @@ command=~/.config/i3blocks/iface.sh
 label=⚡
 #instance=1
 interval=30
+command=/usr/lib/i3blocks/battery/battery
+
 
 # Volume indicator
 #
@@ -105,7 +114,7 @@ instance=Master
 #instance=PCM
 interval=1
 signal=1
-# command=/usr/lib/i3blocks/volume 5 pulse
+command=/usr/lib/i3blocks/volume/volume 5 pulse
 
 
 # Disk usage
@@ -152,8 +161,12 @@ command=~/.config/i3blocks/temperature.pl
 # # see the script for details.
 # [cpu_usage]
 # label=CPU
-# interval=10
+# interval=3
 # min_width=CPU: 100.00%
+# command=/usr/lib/i3blocks/cpu_usage/cpu_usage
+# #T_WARN=50
+# #T_CRIT=80
+# #DECIMALS=2
 # #separator=false
 
 # [load_average]

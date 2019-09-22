@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2019/03/13 15:41:24 by mc               ###   ########.fr        ;
+;    Updated: 2019/05/07 11:29:56 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -158,7 +158,7 @@
   "Insert a C main."
   (interactive)
   ;; (insert "int\t\tmain(int ac, char **av, char **env)\n{\n\t\n\treturn (EXIT_SUCCESS);\n}\n")
-  (insert "int\t\tmain(int ac, char **av)\n{\n\t\n\treturn 0;\n}\n")
+  (insert "int\t\tmain(int, char **)\n{\n\t\n\treturn 0;\n}\n")
   (previous-line 3)
   (forward-char 1))
 

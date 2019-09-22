@@ -7,7 +7,7 @@
 #    By: mc </var/spool/mail/mc>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/26 20:50:04 by mc                #+#    #+#              #
-#    Updated: 2019/02/25 15:15:00 by mc               ###   ########.fr        #
+#    Updated: 2019/05/14 09:56:00 by mc               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,6 +72,7 @@ alias gs='git status'
 alias gh='git stash'
 alias ghl='PAGER= git stash list --decorate'
 alias ghs='git stash show'
+alias ghd='git stash show -p'
 alias gha='git stash apply'
 alias ghm='git stash push -m'
 alias ghp='git stash pop'

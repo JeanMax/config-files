@@ -8,15 +8,15 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2017/03/11 16:24:10 by mc               ###   ########.fr        ;
+;    Updated: 2019/08/16 10:17:41 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
 ;;; Code:
 
 (use-package slime
-  :ensure nil
-  :defer t
+  :ensure t
+  ;; :defer t
 
   ;; :init
   ;; (load (expand-file-name "~/.roswell/helper.el"))

@@ -1,4 +1,5 @@
 (
+ (:id "sha1:9a8d933912ca502091deeb23eb2516ff551e1e78" :fingerprint "sha1:2e:e5:93:35:55:26:2b:88:f0:fb:2a:88:b6:6e:cd:80:b8:d6:b9:9d")
  (:id "sha1:706608f9b7fcfdea563351d49047f296d74a5a76" :fingerprint "sha1:5f:0e:54:c6:77:12:6b:67:09:99:0d:00:32:9d:e0:b8:5d:6e:3c:02")
  (:id "sha1:85457c729378cc93c732b6a3941c8e4f9c2e60f3" :fingerprint "sha1:ab:a6:d7:6a:b3:d3:63:fa:19:0d:65:41:60:23:6e:ef:d3:2a:46:dc" :host "marmalade-repo.org:443" :conditions (:expired :unknown-ca :invalid))
 )

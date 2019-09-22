@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2015/04/26 16:54:03 by mcanal            #+#    #+#              ;
-;    Updated: 2019/03/15 15:51:25 by mc               ###   ########.fr        ;
+;    Updated: 2019/06/04 14:24:32 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -49,7 +49,19 @@
 			((header "to" "m.canal@pleiade-am.com") (address "m.canal@pleiade-am.com"))
 			((header "cc" "m.canal@pleiade-am.com") (address "m.canal@pleiade-am.com"))))
 
-	(setq message-citation-line-function 'message-insert-formatted-citation-line
+    (setq gnus-select-method '(nnimap "gmail"
+									  (nnimap-address "imap.gmail.com")
+									  (nnimap-server-port "imaps")
+									  (nnimap-authinfo-file "~/.authinfo")
+									  (nnimap-stream ssl)))
+
+    ;; (setq gnus-select-method '(nnmaildir ""
+    ;;                                      (directory "/home/mc/Mail/gmail")
+    ;;                                      (get-new-mail nil)))
+
+    (setq gnus-message-archive-method nil)
+
+    (setq message-citation-line-function 'message-insert-formatted-citation-line
 		  message-citation-line-format "Le %a%e %b %Y à %H:%M, %f a écrit:\n"
 		  gnus-save-newsrc-file nil
 		  gnus-use-dribble-file nil
@@ -57,14 +69,9 @@
 		  gnus-use-full-window nil
 		  gnus-article-skip-boring t
 		  send-mail-function 'smtpmail-send-it
-		  smtpmail-smtp-service 587
 		  user-mail-address "mc.maxcanal@gmail.com"
 		  user-full-name "Max Canal"
-		  gnus-select-method '(nnimap "gmail"
-									  (nnimap-address "imap.gmail.com")
-									  (nnimap-server-port "imaps")
-									  (nnimap-authinfo-file "~/.authinfo")
-									  (nnimap-stream ssl))
+		  smtpmail-smtp-service 587
 		  gnus-summary-line-format "%U%R%z %(%&user-date;  %-21,21f  %B%s%)\n"
 		  gnus-user-date-format-alist '((t . "%Y-%m-%d %H:%M"))
 		  gnus-summary-thread-gathering-function 'gnus-gather-threads-by-references
@@ -78,6 +85,10 @@
     ;;   :init
     ;;   (add-to-list 'gnus-secondary-select-methods
     ;;                '(nnreddit "")))
+    (require 'nnreddit "~/.emacs.d/site-lisp/nnreddit/nnreddit.el")
+    (add-to-list 'gnus-secondary-select-methods
+                 '(nnreddit ""))
+
 
     ;; Demon to fetch email every 2.5 minutes when Emacs has been idle for 20 seconds
     (use-package gnus-demon
@@ -110,7 +121,7 @@
   "Log new mails count in a file."
   (let ((mail-count-file "~/.mail-count")
 		(buf-str (with-current-buffer "*Group*" (buffer-string))))
-	(if (string-match ".*\\([1-9][0-9]*\\).*: \\[Gmail\\]/Tous.*" buf-str)
+	(if (string-match "[^0-9]*\\([1-9][0-9]*\\).*: .*Tous.*" buf-str)
 		(write-region (match-string 1 buf-str) nil mail-count-file)
 	  (write-region "" nil mail-count-file))))
 
@@ -124,12 +135,13 @@
 	  (gnus-demon-scan-news)
 	  (log-mail-count)
 	  (message "*Ninja-Mail-Check @%s!*" (format-time-string "%T")))
-   150 20)
+   30 5)
   (gnus-demon-init))
 
 (defun email-check ()
   "Check new mails and log mail count."
   (interactive)
+  ;; (call-process-shell-command "mbsync -a &" nil 0)
   (gnus-group-get-new-news)
   (log-mail-count))
 
