@@ -76,9 +76,9 @@ command=~/.config/i3blocks/iface.sh
 
 # Kraken
 #
-# [kraken]
-# command=~/.config/i3blocks/kraken.sh
-# interval=5
+[kraken]
+command=~/.config/i3blocks/kraken.sh
+interval=5
 
 
 # [wifi]
@@ -114,7 +114,7 @@ instance=Master
 #instance=PCM
 interval=1
 signal=1
-command=/usr/lib/i3blocks/volume/volume 5 pulse
+command=/usr/lib/i3blocks/volume/volume 1000 pulse
 
 
 # Disk usage
