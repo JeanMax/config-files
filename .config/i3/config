@@ -274,6 +274,8 @@ workspace "3:term" output $screen1
 workspace "4:mail" output $screen1
 
 workspace "5:firefox" output $screen2
+workspace "6:emacs" output $screen2
+workspace "7:term" output $screen2
 
 exec --no-startup-id i3lock -f -t -i ~/Pictures/Wallpapers/xkcd.png
 exec --no-startup-id 'xmodmap ~/.Xmodmap'
