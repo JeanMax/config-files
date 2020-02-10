@@ -97,10 +97,9 @@ test $TERMINAL == "urxvtc" && urxvtd -q -f -o
 # Enable core dumps in case something goes wrong
 ulimit -c unlimited
 
+set -x
 case $WM in
     i3)
-        # Lock screen at startup
-        i3lock -f -t -i ~/Pictures/Wallpapers/xkcd.png &
 
 		# Auto screen lock
         # xautolock -detectsleep -cornersize 50 -corners --00 -time 10 -locker 'xset dpms force off' &
@@ -113,8 +112,8 @@ case $WM in
         if test "$screen2"; then
             screen1_name=$(echo "$screen1" | cut -d' ' -f1)
             screen2_name=$(echo "$screen2" | cut -d' ' -f1)
-            screen1_resolution=$(echo "$screen1" | sed -E 's/ *([0-9]+x[0-9]+).*/\1/')
-            screen2_resolution=$(echo "$screen2" | sed -E 's/ *([0-9]+x[0-9]+).*/\1/')
+            screen1_resolution=$(echo "$screen1" | sed -E 's/.* ([0-9]+x[0-9]+).*/\1/')
+            screen2_resolution=$(echo "$screen2" | sed -E 's/.* ([0-9]+x[0-9]+).*/\1/')
             xrandr --output "$screen2_name" --mode "$screen1_resolution" \
                    --output "$screen1_name" --mode "$screen2_resolution" \
                                             --left-of "$screen2_name"
@@ -134,6 +133,9 @@ case $WM in
 		# numlock at startup
 		numlockx &
 
+        # Lock screen at startup
+        # (while ! pgrep -x i3; do sleep 0.2; done; i3lock -f -t -i ~/Pictures/Wallpapers/xkcd.png) &
+
         exec i3;;
 
     sway)
@@ -152,4 +154,4 @@ case $WM in
 
     *) # No known WM, try to run it as command
         exec $1;;
-esac
+esac | tee /tmp/.xinit.log 2>&1
