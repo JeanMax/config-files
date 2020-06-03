@@ -97,10 +97,9 @@ test $TERMINAL == "urxvtc" && urxvtd -q -f -o
 # Enable core dumps in case something goes wrong
 ulimit -c unlimited
 
+set -x
 case $WM in
     i3)
-        # Lock screen at startup
-        i3lock -f -t -i ~/Pictures/Wallpapers/xkcd.png &
 
 		# Auto screen lock
         xautolock -detectsleep -cornersize 50 -corners --00 -time 10 -locker 'xset dpms force off' &
@@ -108,11 +107,17 @@ case $WM in
 		# caffeine &
 		bash -x "$(command -v lightson+)" --delay 3 --audio 1 --mplayer 1 --vlc 1 --totem 0 --firefox-flash 1 --chromium-flash 1 --webkit-flash 1 --html5 1 --steam 0 --minitube 0 --minload 2 > /tmp/lightson.log 2>&1 &
 
-        screen1=$(xrandr | grep primary | cut -d' ' -f1)
-        screen2=$(xrandr | grep ' connected' | grep -v primary | cut -d' ' -f1)
-        test "$screen2" \
-            && xrandr --output $screen2 --mode 1920x1080 \
-                      --output $screen1 --mode 1920x1080 --left-of $screen2
+        screen1=$(xrandr | grep primary)
+        screen2=$(xrandr | grep ' connected' | grep -v primary)
+        if test "$screen2"; then
+            screen1_name=$(echo "$screen1" | cut -d' ' -f1)
+            screen2_name=$(echo "$screen2" | cut -d' ' -f1)
+            screen1_resolution=$(echo "$screen1" | sed -E 's/.* ([0-9]+x[0-9]+).*/\1/')
+            screen2_resolution=$(echo "$screen2" | sed -E 's/.* ([0-9]+x[0-9]+).*/\1/')
+            xrandr --output "$screen2_name" --mode "$screen1_resolution" \
+                   --output "$screen1_name" --mode "$screen2_resolution" \
+                                            --left-of "$screen2_name"
+        fi
 
         pgrep redshift || redshift &
 
@@ -127,6 +132,9 @@ case $WM in
 
 		# numlock at startup
 		numlockx &
+
+        # Lock screen at startup
+        # (while ! pgrep -x i3; do sleep 0.2; done; i3lock -f -t -i ~/Pictures/Wallpapers/xkcd.png) &
 
         exec i3;;
 	    # Use 25 MiB of RAM for debug logs
@@ -149,4 +157,4 @@ case $WM in
     *) # No known WM, try to run it as command
 		echo $WM > /tmp/wm.log
         exec $1;;
-esac
+esac | tee /tmp/.xinit.log 2>&1

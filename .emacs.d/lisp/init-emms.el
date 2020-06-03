@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2017/07/30 23:35:32 by mc               ###   ########.fr        ;
+;    Updated: 2019/10/18 10:45:43 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -30,9 +30,10 @@
     (use-package emms-streams
       :defer t
 
-      :config
+      :init
       (setq emms-stream-default-action "play")
-      (dolist (radio '(("FIP" "http://direct.fipradio.fr/live/fip-midfi.mp3" 1 url)
+      (dolist (radio '(("One HipHop" "http://listen.one.hiphop/live" 1 url)
+                       ("FIP" "http://direct.fipradio.fr/live/fip-midfi.mp3" 1 url)
                        ("RadioJazz - Manouche" "http://jazz-wr02.ice.infomaniak.ch/jazz-wr02-128.mp3" 1 url)
                        ("RadioJazz - Blues" "http://jazzblues.ice.infomaniak.ch/jazzblues-high.mp3" 1 url)
                        ("RadioJazz - Groove" "http://jazz-wr08.ice.infomaniak.ch/jazz-wr08-128.mp3" 1 url)

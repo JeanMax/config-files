@@ -7,7 +7,7 @@
 #    By: mc </var/spool/mail/mc>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/26 20:50:04 by mc                #+#    #+#              #
-#    Updated: 2020/03/20 16:33:18 by mc               ###   ########.fr        #
+#    Updated: 2020/06/03 13:03:19 by mc               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,11 @@ sizeof() {
     find "${1:-$PWD}" -maxdepth 1 -print0 \
         | du -ah -d1 --files0-from - \
         | sort -h
+}
+
+prev() {
+    fd --print0 $@ \
+        | fzf --read0 --preview '{bat --color=always {} || tree -C {}} 2>/dev/null | head -500'
 }
 
 vm() {
@@ -149,7 +154,7 @@ $branches" | sort | uniq)
 alias sudo='sudo '
 alias watch='watch -c -t -n 3 '
 
-# these were kinda hard to do write with a function
+# these were kinda hard to write with a function
 eval "$(thefuck --alias fok 2> /dev/null)"
 alias gdb='gdb -quiet'
 alias c='cd'

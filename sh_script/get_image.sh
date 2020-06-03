@@ -3,7 +3,7 @@ set -ex
 
 IMG=~/Pictures/Wallpapers/xkcd.png
 FALLBACK_IMG=~/Pictures/serious_lee.jpeg
-REQ=/tmp/delme.html
+REQ=$(mktemp)
 
 curl -s https://xkcd.com > $REQ
 rm -f $IMG
@@ -26,9 +26,12 @@ if echo "$TEMP_IMG" | grep -q gif ; then
     rm -f /tmp/xkcd-*.png
 fi
 
-convert -resize 1200X800 "$TEMP_IMG" -background White -font Code-New-Roman -pointsize 16 -fill Black label:"\n-$TITLE:\n$SUBTITLE\n\n" -gravity Center -append $IMG
+# TODO: if there are multiple screens, this might not be the right resolution
+RESOLUTION=$(xrandr | grep '*' | head -n1 | sed -E 's/.* ([0-9]+x[0-9]+).*/\1/')
+
+convert -depth 8 -resize "$RESOLUTION" "$TEMP_IMG" -background White -font Code-New-Roman -pointsize 16 -fill Black label:"\n-$TITLE:\n$SUBTITLE\n\n" -gravity Center -append "png:$IMG"
 
 export DISPLAY=:0.0
 feh -V --bg-max $IMG || feh -V --bg-max $FALLBACK_IMG
 
-# rm -f $REQ "$TEMP_IMG"
+rm -f $REQ "$TEMP_IMG"
