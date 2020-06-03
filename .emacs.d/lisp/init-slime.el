@@ -7,7 +7,8 @@
 ;                                                     +:+ +:+         +:+      ;
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
-;    Created: 2016/08/24 18:42:21 by mcanal           ###   ########.fr        ;
+;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
+;    Updated: 2020/06/03 12:30:10 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -17,14 +18,15 @@
   :ensure t
   ;; :defer t
 
-  ;; :init
-  ;; (load (expand-file-name "~/.roswell/helper.el"))
+  :init
+  (load (expand-file-name "~/.roswell/helper.el"))
 
   :config
   (slime-setup '(slime-fancy))
   (setq slime-contribs '(slime-fancy))
   ;; (setq inferior-lisp-program /"usr/bin/sbcl")
-  (setq inferior-lisp-program "ros -Q -l ~/.sbclrc -L sbcl run") ;TODO: symlink
+  ;; (setq inferior-lisp-program "ros -Q run")
+  (setq inferior-lisp-program "ros -Q -l ~/.sbclrc -L sbcl-bin run") ;TODO: symlink
   (setq slime-load-failed-fasl 'never)
   (define-key slime-repl-mode-map (kbd "C-c r")
     'slime-repl-previous-matching-input)

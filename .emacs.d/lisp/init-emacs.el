@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2019/03/15 15:26:39 by mc               ###   ########.fr        ;
+;    Updated: 2019/09/29 14:43:15 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -144,8 +144,8 @@
 
   ;; indentation
   (setq-default tab-width 4)
-  (setq-default indent-tabs-mode nil) ; TODO: set to true later for 42-mode
-  (setq-default tab-stop-list '(4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64 68 72 76 80 84 88 92 96 100 104 108 112 116 120))
+  (setq-default indent-tabs-mode nil) ; TODO: set to t later for 42-mode
+  (setq-default tab-stop-list (number-sequence 4 200 4))
   (setq fill-column 80)
 
   ;; disable top menu bar
