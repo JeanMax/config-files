@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2015/04/26 16:54:03 by mcanal            #+#    #+#              ;
-;    Updated: 2019/06/04 14:24:32 by mc               ###   ########.fr        ;
+;    Updated: 2020/04/11 19:05:13 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -85,9 +85,10 @@
     ;;   :init
     ;;   (add-to-list 'gnus-secondary-select-methods
     ;;                '(nnreddit "")))
-    (require 'nnreddit "~/.emacs.d/site-lisp/nnreddit/nnreddit.el")
-    (add-to-list 'gnus-secondary-select-methods
-                 '(nnreddit ""))
+
+    ;; (require 'nnreddit "~/.emacs.d/site-lisp/nnreddit/nnreddit.el")
+    ;; (add-to-list 'gnus-secondary-select-methods
+    ;;              '(nnreddit ""))
 
 
     ;; Demon to fetch email every 2.5 minutes when Emacs has been idle for 20 seconds

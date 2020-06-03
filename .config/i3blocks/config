@@ -40,11 +40,15 @@ markup=none
 # signal=10
 
 
-# Mail
+# Temperature
 #
-[mail]
-command=~/.config/i3blocks/mail.sh
-interval=5
+# Support multiple chips, though lm-sensors.
+# The script may be called with -w and -c switches to specify thresholds,
+# see the script for details.
+[temperature]
+# label=TEMP
+interval=10
+command=~/.config/i3blocks/temperature.pl
 
 
 # Redshift
@@ -74,11 +78,17 @@ interval=10
 separator=true
 command=~/.config/i3blocks/iface.sh
 
+# Mail count
+#
+[mail]
+command=~/.config/i3blocks/mail.sh
+interval=10
+
 # Kraken
 #
-# [kraken]
-# command=~/.config/i3blocks/kraken.sh
-# interval=5
+[kraken]
+command=~/.config/i3blocks/kraken.sh
+interval=5
 
 
 # [wifi]
@@ -114,7 +124,7 @@ instance=Master
 #instance=PCM
 interval=1
 signal=1
-command=/usr/lib/i3blocks/volume/volume 5 pulse
+command=/usr/lib/i3blocks/volume/volume 3000 pulse
 
 
 # Disk usage
@@ -127,17 +137,6 @@ command=/usr/lib/i3blocks/volume/volume 5 pulse
 #instance=/mnt/data
 interval=30
 command=~/.config/i3blocks/disk.sh
-
-
-# Temperature
-#
-# Support multiple chips, though lm-sensors.
-# The script may be called with -w and -c switches to specify thresholds,
-# see the script for details.
-[temperature]
-# label=TEMP
-interval=10
-command=~/.config/i3blocks/temperature.pl
 
 
 # # Memory usage

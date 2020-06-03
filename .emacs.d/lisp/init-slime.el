@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2019/08/16 10:17:41 by mc               ###   ########.fr        ;
+;    Updated: 2020/01/28 22:54:20 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -18,14 +18,15 @@
   :ensure t
   ;; :defer t
 
-  ;; :init
-  ;; (load (expand-file-name "~/.roswell/helper.el"))
+  :init
+  (load (expand-file-name "~/.roswell/helper.el"))
 
   :config
   (slime-setup '(slime-fancy))
   (setq slime-contribs '(slime-fancy))
   ;; (setq inferior-lisp-program /"usr/bin/sbcl")
-  (setq inferior-lisp-program "ros -Q -l ~/.sbclrc -L sbcl run") ;TODO: symlink
+  ;; (setq inferior-lisp-program "ros -Q run")
+  (setq inferior-lisp-program "ros -Q -l ~/.sbclrc -L sbcl-bin run") ;TODO: symlink
   (setq slime-load-failed-fasl 'never)
   (bind-key (kbd "C-c )") 'slime-close-all-parens-in-sexp))
 

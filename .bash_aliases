@@ -7,7 +7,7 @@
 #    By: mc </var/spool/mail/mc>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/26 20:50:04 by mc                #+#    #+#              #
-#    Updated: 2019/05/14 09:56:00 by mc               ###   ########.fr        #
+#    Updated: 2020/03/20 16:33:18 by mc               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,19 @@
 man_emacs() {
     emacsclient -t --eval "(progn (man \"$1\") (other-window 1) (delete-other-windows))"
 }
+
+sizeof() {
+    find "${1:-$PWD}" -maxdepth 1 -print0 \
+        | du -ah -d1 --files0-from - \
+        | sort -h
+}
+
+vm() {
+    target=${1:-arch}
+    sudo systemd-nspawn --boot --ephemeral --directory "/var/lib/machines/$target"
+}
+
+
 
 # misc aliases
 alias l='ls'
@@ -39,6 +52,8 @@ SQL_ARGS="--silent --prompt=\"$(echo -e '\\d@\\h> \033[0m')\" -u genesys -p"
 alias sql="mysql $SQL_ARGS"
 alias emount="~/sh_script/crypt.sh mount"
 alias eumount="~/sh_script/crypt.sh umount"
+alias sz="sizeof"
+alias lsblk="lsblk -o NAME,LABEL,SIZE,FSAVAIL,FSUSE%,MOUNTPOINT,UUID"
 
 
 # emacs stuffs
@@ -63,6 +78,8 @@ alias gcm='git commit -m'
 alias gce='git commit'
 alias gco='git checkout'
 alias gpl='git pull --ff-only'
+alias gplo='git pull --ff-only origin'
+alias gplom='git pull --ff-only origin master'
 alias gp='git push'
 alias gpo='git push origin'
 alias gpa='git push --all origin'  #yolo
@@ -88,26 +105,40 @@ alias gcl='git clone --recursive'
 gpla() {
     # git-pull_all-my-branches
 
-    remote="$(test $1 && echo $1 || echo origin)"
-    # log_file=/tmp/git-pull_all-my-branches.log
+    remote="$(test $1 && echo $1 || git remote show)"
+    remote_show="$(git remote show "$remote")"
 
-    git fetch --all --prune
-    current_branch=$(git branch | \grep '*' | cut -d' ' -f2)
-    branches=$(git remote show "$remote" | \grep 'out of date' | cut -d' ' -f5)
+    branches=$(echo "$remote_show" | grep 'out of date' | cut -d' ' -f5)
+
+    local_branches=$(echo "$remote_show" \
+                         | grep -B 1000 'Local branches' \
+                         | tail -n +6 \
+                         | head -n -1 \
+                         | cut -d' ' -f5)
+    push_branches=$(echo "$remote_show" \
+                        | grep -A 1000 'Local refs' \
+                        | tail -n +2 \
+                        | cut -d' ' -f5)
+    diff=$(diff <(echo "$local_branches") <(echo "$push_branches"))
+    if test "$diff"; then
+        diff_branches=$(echo "$diff" | grep -E '^<' | cut -d' ' -f2)
+        branches=$(echo "$diff_branches
+$branches" | sort | uniq)
+    fi
 
     if test "$branches"; then
+		current_branch=$(git branch | grep '*' | cut -d' ' -f2)
         # git add -A .
         # git stash
 
-        # echo "[$(date)]" >> $log_file
+		git fetch --all --prune
         echo
-
         for branch in $(echo $branches); do
             echo "[$branch] "
             git checkout "$branch"
-            git pull --ff-only
+			git merge --ff-only "$remote/$branch"
             echo
-        done # |& tee -a $log_file |& less
+        done
 
         git checkout "$current_branch"
         # git stash apply # pop?
@@ -224,7 +255,7 @@ if [ "$TERM" != dumb ] && $(hash grc 2>/dev/null); then
     alias ld="colourify ld"
     alias link="colourify link"
     alias lsattr="colourify lsattr"
-    alias lsblk="colourify lsblk"
+    alias lsblk="colourify lsblk -o NAME,LABEL,SIZE,FSAVAIL,FSUSE%,MOUNTPOINT,UUID"
     alias lsmod="colourify lsmod"
     alias lspci="colourify lspci"
     alias lshw="colourify lshw"
@@ -252,6 +283,11 @@ if [ "$TERM" != dumb ] && $(hash grc 2>/dev/null); then
     alias docker="colourify docker"
     alias docker-machine="colourify docker-machine"
     alias docker-compose="colourify docker-compose"
+
+    colored_sizeof() {
+        sizeof "$1" | grcat /usr/share/grc/conf.du
+    }
+    alias sizeof="colored_sizeof"
 
     # alias diff="colourify diff --color=always" #clash with diff colors
 

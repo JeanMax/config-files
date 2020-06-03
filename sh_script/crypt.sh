@@ -1,12 +1,15 @@
 #!/bin/bash -e
 
 ID="crypt"
-DEFAULT_DEVICE=/dev/sdb2
+DEFAULT_UUID=50b17450-bf23-4ae6-be1a-29b3b944f57b
 
 
 if [ "$1" = mount ]; then
 	if [ -z "$3" ]; then
-		DEVICE=$DEFAULT_DEVICE
+
+		DEVICE=/dev/$(lsblk -io NAME,UUID \
+                     | grep $DEFAULT_UUID \
+                     | sed -E 's/\|-([^ ]+).*/\1/')
 		TARGET="$2"
 	else
 		DEVICE="$2"

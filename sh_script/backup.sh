@@ -7,10 +7,10 @@ export BORG_REPO=/backup
 borg break-lock $BORG_REPO # hacky
 
 WIN_DEV=/dev/sda1
-WIN_DIR=/mnt/win7
+WIN_DIR=/tmp/mnt/win7
 
 BACKUP_DEV=/dev/sdb3
-BACKUP_DIR=/mnt/backup
+BACKUP_DIR=/tmp/mnt/backup
 BACKUP_UUID="7d969b47-855d-404e-869f-455acd9a5822"
 
 # some helpers and error handling:
@@ -33,18 +33,32 @@ PRUNE_OPTS="--list                          \
 
 
 info "Starting linux backup"
-borg create $BORG_OPTS              \
-    --exclude '/home/*/.cache/*'    \
-    --exclude '/home/*/Pictures/*'  \
-    --exclude '/home/*/Videos/*'    \
-    --exclude '/home/*/Music/*'     \
-    --exclude '/var/cache/*'        \
-    --exclude '/var/tmp/*'          \
-    --exclude '/var/log/*'          \
-    ::'linux-{now}'                 \
-    /etc                            \
-    /home                           \
-    /root                           \
+borg create $BORG_OPTS               \
+    --exclude '/home/*/.cache/*'     \
+    --exclude '/home/*/.ccache/*'    \
+    --exclude '/home/*/.local/*'     \
+    --exclude '/home/*/.bitmonero/*' \
+    --exclude '/home/*/.wine/*'      \
+    --exclude '/home/*/valx/*'       \
+    --exclude '/home/*/Pictures/*'   \
+    --exclude '/home/*/Videos/*'     \
+    --exclude '/home/*/Music/*'      \
+    --exclude '/home/*/Downloads/*'  \
+    --exclude '/home/*/Desktop/*'    \
+    --exclude '/home/*/Shared/*'     \
+    --exclude '/root/.cache/*'       \
+    --exclude '/root/.local/*'       \
+    --exclude '/root/arch/out/*'     \
+    --exclude '/root/arch/work/*'    \
+    --exclude '/var/cache/*'         \
+    --exclude '/var/tmp/*'           \
+    --exclude '/var/log/*'           \
+    --exclude '/var/lib/docker/*'    \
+    --exclude '/var/lib/dhcpcd/*'    \
+    ::'linux-{now}'                  \
+    /etc                             \
+    /home                            \
+    /root                            \
     /var
 
 info "Pruning linux repository"
@@ -56,9 +70,10 @@ if ! mount | grep -q $WIN_DEV; then
 	mkdir -pv $WIN_DIR
 	mount -v $WIN_DEV $WIN_DIR
 
-	borg create $BORG_OPTS                      \
-		 --exclude $WIN_DIR/Users'/*/AppData/*' \
-		 ::'win-{now}'                          \
+	borg create $BORG_OPTS                        \
+		 --exclude $WIN_DIR/Users'/*/AppData/*'   \
+		 --exclude $WIN_DIR/Users'/*/Downloads/*' \
+		 ::'win-{now}'                            \
 		 $WIN_DIR/Users
 
 	umount -v $WIN_DIR

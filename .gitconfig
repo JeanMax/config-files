@@ -2,3 +2,6 @@
 	default = simple
 [core]
 	excludesfile = ~/.gitignore_global
+[user]
+	email = mc@rmrf.fr
+	name = JeanMax

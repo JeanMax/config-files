@@ -7,7 +7,7 @@ usage() {
     this_script="$1"
     error="$2"
     test "$error" && echo
-    cat << EOF $out_fd 2>&1
+    cat << EOF 2>&1
 Usage:
   $this_script [OPTION]...
 
@@ -61,6 +61,7 @@ arg_parse() {
 
 arg_parse $@
 
+yay -Pw
 yes no | yay |& tee "$COOKIE"
 grep -Eq 'linux-[0-9]|linux-headers|systemd' "$COOKIE" \
     && NEED_REBOOT=t

@@ -6,7 +6,7 @@
 #    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/23 17:38:59 by mcanal            #+#    #+#              #
-#    Updated: 2019/09/16 14:00:08 by mc               ###   ########.fr        #
+#    Updated: 2019/11/26 23:26:10 by mc               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,11 +69,14 @@ precmd ()
     #     RPROMPT=""
 	# fi
 
-	if test $PIPENV_ACTIVE; then
+	if test $VIRTUAL_ENV; then
 		if test $RPROMPT; then
 			RPROMPT=" $RPROMPT"
 		fi
 		PIPENV_NAME=$(echo $VIRTUAL_ENV | sed -E 's|.*/(.*)-.*|\1|')
+        if test $PIPENV_NAME = $VIRTUAL_ENV; then
+            PIPENV_NAME="$(basename "$(dirname $VIRTUAL_ENV)")"
+        fi
 		RPROMPT="%{$fg[blue]%}[$PIPENV_NAME]%{$reset_color%}$RPROMPT"
 	fi
 

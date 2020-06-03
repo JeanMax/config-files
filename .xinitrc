@@ -103,7 +103,7 @@ case $WM in
         i3lock -f -t -i ~/Pictures/Wallpapers/xkcd.png &
 
 		# Auto screen lock
-        # xautolock -detectsleep -cornersize 50 -corners --00 -time 10 -locker 'xset dpms force off' &
+        xautolock -detectsleep -cornersize 50 -corners --00 -time 10 -locker 'xset dpms force off' &
         # xautolock -detectsleep -cornersize 50 -corners --00 -time 42 -locker 'systemctl suspend -i' &
 		# caffeine &
 		bash -x "$(command -v lightson+)" --delay 3 --audio 1 --mplayer 1 --vlc 1 --totem 0 --firefox-flash 1 --chromium-flash 1 --webkit-flash 1 --html5 1 --steam 0 --minitube 0 --minload 2 > /tmp/lightson.log 2>&1 &
@@ -129,6 +129,8 @@ case $WM in
 		numlockx &
 
         exec i3;;
+	    # Use 25 MiB of RAM for debug logs
+	    # exec i3 --shmlog-size=26214400;;
 
     sway)
         # export GDK_BACKEND=wayland
@@ -145,5 +147,6 @@ case $WM in
         ;;
 
     *) # No known WM, try to run it as command
+		echo $WM > /tmp/wm.log
         exec $1;;
 esac

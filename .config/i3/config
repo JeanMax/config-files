@@ -117,6 +117,7 @@ bindsym $mod+Shift+agrave move container to workspace number 0
 # bindsym $mod+n exec i3-input -F 'rename workspace to "%s"' -P 'New name for this workspace: '
 # bindsym $mod+n exec i3-input -F 'exec ~/.config/i3/rename_workspace.sh "%s"' -P 'New name for this workspace: '
 bindsym $mod+n exec ~/.config/i3/rename_workspace.sh
+bindsym $mod+Shift+p exec ~/.config/i3/killer.sh
 
 bindsym $mod+t exec pcmanfm
 
@@ -273,13 +274,14 @@ workspace "0:left" output $screen2
 workspace "1:firefox" output $screen1
 workspace "2:emacs" output $screen1
 workspace "3:term" output $screen1
+workspace "4:mail" output $screen1
 
 exec --no-startup-id 'xmodmap ~/.Xmodmap'
 
-exec --no-startup-id i3-msg 'workspace 0:left; exec firefox'
+exec --no-startup-id i3-msg 'workspace 1:firefox; exec firefox'
 
 # exec --no-startup-id i3-msg 'workspace 1:firefox; exec firefox'
 exec --no-startup-id i3-msg 'workspace 2:emacs;   exec emacs-term'
 exec --no-startup-id i3-msg 'workspace 3:term;    exec i3-sensible-terminal'
 exec --no-startup-id i3-msg 'workspace 3:term;    exec i3-sensible-terminal'
-exec --no-startup-id i3-msg 'workspace 4:mail;    exec emacs-mail'
+exec --no-startup-id i3-msg 'workspace 4:mail;    exec sleep 2 && emacs-mail'

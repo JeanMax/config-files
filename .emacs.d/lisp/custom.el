@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2019/09/16 14:04:28 by mc               ###   ########.fr        ;
+;    Updated: 2020/04/08 10:59:41 by mc               ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -21,10 +21,14 @@
  ;; If there is more than one, they won't work right.
  '(erc-log-write-after-insert t)
  '(erc-log-write-after-send t)
+ '(flycheck-clang-language-standard "c++17")
  '(gnus-visible-headers
    (quote
     ("^From:" "^Newsgroups:" "^Subject:" "^Date:" "^Followup-To:" "^Reply-To:" "^Organization:" "^Summary:" "^Keywords:" "^To:" "^[BGF]?Cc:" "^Posted-To:" "^Mail-Copies-To:" "^Mail-Followup-To:" "^Apparently-To:" "^Gnus-Warning:" "^Resent-From:" "^X-Sent:" "^X-AnteSpam-Report:")))
- '(flycheck-clang-language-standard "c++17"))
+ '(js-indent-level 4)
+ '(package-selected-packages
+   (quote
+    (rjsx-mode slime csv-mode jsx-mode dockerfile-mode autodisass-llvm-bitcode sass-mode json-mode inf-ruby yaml-mode web-mode utop use-package tuareg smex rainbow-delimiters projectile php-mode php-eldoc markdown-mode magit ledger-mode keyfreq js2-mode ido-grid-mode ido-completing-read+ ido-complete-space-or-hyphen highlight-numbers highlight-indent-guides gtags git-timemachine ggtags flycheck-ocaml flycheck-ledger flycheck-cython flx-ido emms diminish diff-hl cython-mode company-statistics benchmark-init ace-window))))
 
 
 (custom-set-faces

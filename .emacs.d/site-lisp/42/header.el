@@ -27,7 +27,7 @@
 ;    By: login____ <mail_______@student.42.fr>      +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: yyyy/mm/dd 15:27:11 by login____         #+#    #+#              ;
-;    Updated: 2016/09/11 18:17:59 by mcanal           ###   ########.fr        ;
+;                                                     ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -58,14 +58,16 @@
 (set 'info-std-width 41)
 
 
-(set 'ft-1 "        :::      ::::::::")
-(set 'ft-2 "      :+:      :+:    :+:")
-(set 'ft-3 "    +:+ +:+         +:+  ")
-(set 'ft-4 "  +#+  +:+       +#+     ")
-(set 'ft-5 "+#+#+#+#+#+   +#+        ")
-(set 'ft-6 "     #+#    #+#          ")
-(set 'ft-7 "    ###   ########.fr    ")
-(set 'ft-std-width 25)
+(set 'ft-1 "  _.._..,_,_ ")
+(set 'ft-2 " (          )")
+(set 'ft-3 "  ]~,'-.-~~[ ")
+(set 'ft-4 ".=])' (;  ([ ")
+(set 'ft-5 "| ]  :: '  [ ")
+(set 'ft-6 "| ]:)   '  [ ")
+(set 'ft-7 "'=]): .)  ([ ")
+(set 'ft-8 "  |:: '   :| ")
+(set 'ft-9 "   ~~----~~  ")
+(set 'ft-std-width 13)
 
 
 
@@ -187,9 +189,21 @@
   "Line 7 of the header"
   (let* ((left-margin (header-make-left-margin))
 		 (right-margin (header-make-right-margin))
-		 (central-gap (header-make-central-gap left-margin
+		 (license "")
+		 (central-gap (header-make-central-gap (concat left-margin license)
+											   (concat ft-6 right-margin))))
+	(insert (concat left-margin license central-gap ft-6 right-margin))
+	)
+  )
+
+(defun header-insert-line-07-bis ()
+  "Line 7 of the header"
+  (let* ((left-margin (header-make-left-margin))
+		 (right-margin (header-make-right-margin))
+		 (license "  \"THE BEER-WARE LICENSE\" (Revision 42):")
+		 (central-gap (header-make-central-gap (concat left-margin license)
 											   (concat ft-5 right-margin))))
-	(insert (concat left-margin central-gap ft-5 right-margin))
+	(insert (concat left-margin license central-gap ft-5 right-margin))
 	)
   )
 
@@ -197,21 +211,32 @@
   "Line 8 of the header"
   (let* ((left-margin (header-make-left-margin))
 		 (right-margin (header-make-right-margin))
-		 (created (header-make-creation-date))
-		 (central-gap (header-make-central-gap (concat left-margin created)
-											   (concat ft-6 right-margin))))
-	(insert (concat left-margin created central-gap ft-6 right-margin))
+		 (license "As long as you retain this notice you can do whatever")
+		 (central-gap (header-make-central-gap (concat left-margin license)
+											   (concat ft-7 right-margin))))
+	(insert (concat left-margin license central-gap ft-7 right-margin))
 	)
   )
 
 (defun header-insert-line-09 ()
   "Line 9 of the header"
-  (let* ((left-margin (header-make-left-margin))
+ (let* ((left-margin (header-make-left-margin))
 		 (right-margin (header-make-right-margin))
-		 (updated (header-make-update-date))
-		 (central-gap (header-make-central-gap (concat left-margin updated)
-											   (concat ft-7 right-margin))))
-	(insert (concat left-margin updated central-gap ft-7 right-margin))
+		 (license "you want with this stuff. If we meet some day, and you")
+		 (central-gap (header-make-central-gap (concat left-margin license)
+											   (concat ft-8 right-margin))))
+	(insert (concat left-margin license central-gap ft-8 right-margin))
+	)
+  )
+
+(defun header-insert-line-09-bis ()
+  "Line 9 of the header"
+ (let* ((left-margin (header-make-left-margin))
+		 (right-margin (header-make-right-margin))
+		 (license "think this is worth it, you can buy me a beer in return.")
+		 (central-gap (header-make-central-gap (concat left-margin license)
+											   (concat ft-9 right-margin))))
+	(insert (concat left-margin license central-gap ft-9 right-margin))
 	)
   )
 
@@ -237,14 +262,16 @@
   (save-excursion
 	(goto-char (point-min))
 	(header-insert-line-01)
-	(header-insert-line-02)
+	;; (header-insert-line-02)
 	(header-insert-line-03) (newline)
 	(header-insert-line-04) (newline)
 	(header-insert-line-05) (newline)
 	(header-insert-line-06) (newline)
 	(header-insert-line-07) (newline)
+	(header-insert-line-07-bis) (newline)
 	(header-insert-line-08) (newline)
 	(header-insert-line-09) (newline)
+	(header-insert-line-09-bis) (newline)
 	(header-insert-line-10)
 	(header-insert-line-11)
 	)
@@ -263,7 +290,7 @@
                 (delete-region
                  (progn (beginning-of-line) (point))
                  (progn (end-of-line) (point)))
-				(header-insert-line-09)
+    			(header-insert-line-09)
                 (message "Header up to date."))))))
   nil)
 

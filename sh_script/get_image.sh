@@ -1,13 +1,16 @@
 #!/bin/bash
 set -ex
 
-DIR=~/Pictures/Wallpapers
-IMG=xkcd.png
+IMG=~/Pictures/Wallpapers/xkcd.png
+FALLBACK_IMG=~/Pictures/serious_lee.jpeg
 REQ=/tmp/delme.html
 
-curl -s -X GET https://www.xkcd.com > $REQ
-rm -f $DIR/$IMG
-wget -q $(egrep -o "https://imgs\.xkcd\.com/.*\.png" $REQ) -O $DIR/$IMG
+curl -s https://xkcd.com > $REQ
+rm -f $IMG
+IMG_URL=$(grep -Eo "https://imgs\.xkcd\.com/.*\.(png|gif)" $REQ \
+              | grep -v "_2x.")
+TEMP_IMG="/tmp/$(basename "$IMG_URL")"
+wget -q "$IMG_URL" -O "$TEMP_IMG"
 
 
 TITLE=$(grep -o 'ctitle">.*<' $REQ | sed -E 's|.*>(.*)<|\1|')
@@ -17,11 +20,15 @@ if hash pandoc 2>/dev/null; then
     SUBTITLE=$(echo "$SUBTITLE" | pandoc -t markdown)
 fi
 
-convert -resize 1200X800 $DIR/$IMG -background White -font Code-New-Roman -pointsize 16 -fill Black label:"\n-$TITLE:\n$SUBTITLE\n\n" -gravity Center -append $DIR/$IMG
+if echo "$TEMP_IMG" | grep -q gif ; then
+    ffmpeg -i "$TEMP_IMG" /tmp/xkcd-%07d.png
+    mv /tmp/xkcd-0000001.png "$TEMP_IMG"
+    rm -f /tmp/xkcd-*.png
+fi
 
-# gsettings set org.gnome.desktop.screensaver picture-uri "file:///home/mc/Pictures/Wallpapers/xkcd.png"
-# gsettings set org.gnome.desktop.background picture-uri "file:///home/mc/Pictures/Wallpapers/xkcd.png"
-DISPLAY=:0.0 feh -V --bg-max ~/Pictures/Wallpapers/xkcd.png
+convert -resize 1200X800 "$TEMP_IMG" -background White -font Code-New-Roman -pointsize 16 -fill Black label:"\n-$TITLE:\n$SUBTITLE\n\n" -gravity Center -append $IMG
 
-# echo "$SUBTITLE" #debug
-rm -f $REQ
+export DISPLAY=:0.0
+feh -V --bg-max $IMG || feh -V --bg-max $FALLBACK_IMG
+
+# rm -f $REQ "$TEMP_IMG"
