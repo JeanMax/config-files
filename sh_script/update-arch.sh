@@ -71,11 +71,15 @@ if ! test "$FORCE" && test "$NEED_REBOOT"; then
 	exit 42
 fi
 
-yay \
-    && yay -c \
-    && (test "$CLEAN" \
-            && sudo pacman -Scc --noconfirm \
-            && sudo find /usr/share/{doc,info,man} /usr/lib/python*/test \
-                    -mindepth 2 -delete) \
-    && (test "$NEED_REBOOT" && test "$REBOOT" \
-            && sudo systemctl reboot)
+yay && yay -c
+if test "$CLEAN"; then
+    sudo pacman -Scc --noconfirm
+    sudo find /usr/share/{doc,info,man} \
+         /usr/lib/python*/test \
+         -mindepth 2 \
+         -delete
+fi
+if test "$NEED_REBOOT"; then
+    echo 'Reboot might be needed'
+    test "$REBOOT" && sudo systemctl reboot
+fi

@@ -7,8 +7,7 @@
 ;                                                     +:+ +:+         +:+      ;
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
-;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2019/08/16 10:17:41 by mc               ###   ########.fr        ;
+;    Created: 2016/08/24 18:42:21 by mcanal           ###   ########.fr        ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -27,6 +26,10 @@
   ;; (setq inferior-lisp-program /"usr/bin/sbcl")
   (setq inferior-lisp-program "ros -Q -l ~/.sbclrc -L sbcl run") ;TODO: symlink
   (setq slime-load-failed-fasl 'never)
+  (define-key slime-repl-mode-map (kbd "C-c r")
+    'slime-repl-previous-matching-input)
+  (define-key slime-repl-mode-map (kbd "TAB")
+    'slime-complete-symbol)
   (bind-key (kbd "C-c )") 'slime-close-all-parens-in-sexp))
 
 

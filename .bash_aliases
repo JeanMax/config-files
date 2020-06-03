@@ -7,13 +7,17 @@
 #    By: mc </var/spool/mail/mc>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/26 20:50:04 by mc                #+#    #+#              #
-#    Updated: 2019/05/14 09:56:00 by mc               ###   ########.fr        #
+#    Updated: 2019/11/12 10:23:23 by mc               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # functions are way better than aliases actually!  (actually bis: not really?)
 man_emacs() {
     emacsclient -t --eval "(progn (man \"$1\") (other-window 1) (delete-other-windows))"
+}
+
+prev() {
+    fd --print0 $@ | fzf --read0 --preview '{bat --color=always {} || tree -C {}} 2>/dev/null | head -500'
 }
 
 # misc aliases
@@ -118,7 +122,7 @@ gpla() {
 alias sudo='sudo '
 alias watch='watch -c -t -n 3 '
 
-# these were kinda hard to do write with a function
+# these were kinda hard to write with a function
 eval "$(thefuck --alias fok 2> /dev/null)"
 alias gdb='gdb -quiet'
 alias c='cd'

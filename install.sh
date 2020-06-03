@@ -7,7 +7,7 @@
 #    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/11 14:03:35 by mcanal            #+#    #+#              #
-#    Updated: 2018/02/09 11:43:37 by mc               ###   ########.fr        #
+#    Updated: 2019/09/23 09:59:24 by mc               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 set -e
@@ -40,7 +40,9 @@ TO_LINK="sh_script
 .config/libfm
 .config/pcmanfm
 .config/rofi
-.config/vlc"
+.config/vlc
+.config/compton.conf
+.config/redshift.conf"
 
 PRIVATE_FOLDER=private
 TO_LINK_PRIVATE=".ssh

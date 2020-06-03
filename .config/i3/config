@@ -129,8 +129,7 @@ bindsym $mod+Shift+r restart
 # bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Blabla' -b 'Shutdown' 'systemctl poweroff -i' -b 'Reboot' 'systemctl reboot' -b 'Logout' 'DISPLAY=:0 gnome-session-quit --logout --no-prompt' -b 'Lock' 'i3lock && sleep 1'"
 
 
-set $Locker true
-# i3lock -f -t -i ~/Pictures/Wallpapers/xkcd.png && sleep 1
+set $Locker i3lock -f -t -i ~/Pictures/Wallpapers/xkcd.png && sleep 1
 set $Killer ~/.config/i3/graceful_exit.sh
 
 set $mode_system System (o) blackout, (l) lock, (e) logout, (r) reboot, (s) shutdown, (h) hibernate
@@ -269,17 +268,26 @@ bindsym $mod+Shift+g exec setxkbmap fr-latin9
 set $screen1 eDP1
 set $screen2 HDMI2
 
-workspace "0:left" output $screen2
 workspace "1:firefox" output $screen1
 workspace "2:emacs" output $screen1
 workspace "3:term" output $screen1
+workspace "4:mail" output $screen1
 
+workspace "5:firefox" output $screen2
+workspace "6:emacs" output $screen2
+workspace "7:term" output $screen2
+
+exec --no-startup-id i3lock -f -t -i ~/Pictures/Wallpapers/xkcd.png
 exec --no-startup-id 'xmodmap ~/.Xmodmap'
 
-exec --no-startup-id i3-msg 'workspace 0:left; exec firefox'
 
 # exec --no-startup-id i3-msg 'workspace 1:firefox; exec firefox'
-exec --no-startup-id i3-msg 'workspace 2:emacs;   exec emacs-term'
-exec --no-startup-id i3-msg 'workspace 3:term;    exec i3-sensible-terminal'
-exec --no-startup-id i3-msg 'workspace 3:term;    exec i3-sensible-terminal'
+# exec --no-startup-id i3-msg 'workspace 2:emacs;   exec emacs-term'
+# exec --no-startup-id i3-msg 'workspace 3:term;    exec i3-sensible-terminal'
+# exec --no-startup-id i3-msg 'workspace 3:term;    exec i3-sensible-terminal'
 exec --no-startup-id i3-msg 'workspace 4:mail;    exec emacs-mail'
+
+exec --no-startup-id i3-msg 'workspace 5:firefox; exec firefox'
+exec --no-startup-id i3-msg 'workspace 6:emacs;   exec emacs-term'
+exec --no-startup-id i3-msg 'workspace 7:term;    exec i3-sensible-terminal'
+exec --no-startup-id i3-msg 'workspace 7:term;    exec i3-sensible-terminal'
