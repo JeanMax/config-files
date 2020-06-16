@@ -34,7 +34,7 @@ sed -i 's/Storage=volatile/#Storage=auto/' $TARGET/etc/systemd/journald.conf
 rm -rf $TARGET/etc/systemd/system/{choose-mirror.service,pacman-init.service,etc-pacman.d-gnupg.mount,archiso-start.service,multi-user.target.wants/archiso-start.service}
 rm -rf $TARGET/etc/initcpio
 rm -f $TARGET/etc/systemd/scripts/choose-mirror
-rm -f $TARGET/etc/udev/rules.d/81-dhcpcd.rules
+# rm -f $TARGET/etc/udev/rules.d/81-dhcpcd.rules
 rm -f $TARGET/root/{.automated_script.sh,.zlogin}
 rm -f $TARGET/etc/mkinitcpio-archiso.conf
 

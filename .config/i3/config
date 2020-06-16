@@ -135,7 +135,7 @@ set $Killer ~/.config/i3/graceful_exit.sh
 
 set $mode_system System (o) blackout, (l) lock, (e) logout, (r) reboot, (s) shutdown, (h) hibernate
 mode "$mode_system" {
-    bindsym b exec --no-startup-id xset dpms force off, mode "default"
+    bindsym o exec --no-startup-id xset dpms force off, mode "default"
     bindsym l exec --no-startup-id $Locker && systemctl suspend -i, mode "default"
     bindsym h exec --no-startup-id $Locker && systemctl hibernate -i, mode "default"
     bindsym e exec --no-startup-id $Killer && i3-msg exit, mode "default"
@@ -278,7 +278,7 @@ workspace "5:firefox" output $screen2
 workspace "6:emacs" output $screen2
 workspace "7:term" output $screen2
 
-exec --no-startup-id i3lock -f -t -i ~/Pictures/Wallpapers/xkcd.png
+# exec --no-startup-id i3lock -f -t -i /home/mc/Pictures/Wallpapers/xkcd.png
 exec --no-startup-id 'xmodmap ~/.Xmodmap'
 
 exec --no-startup-id i3-msg 'workspace 1:firefox; exec firefox'

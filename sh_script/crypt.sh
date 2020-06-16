@@ -9,7 +9,7 @@ if [ "$1" = mount ]; then
 
 		DEVICE=/dev/$(lsblk -io NAME,UUID \
                      | grep $DEFAULT_UUID \
-                     | sed -E 's/\|-([^ ]+).*/\1/')
+                     | sed -E 's/.-([^ ]+).*/\1/')
 		TARGET="$2"
 	else
 		DEVICE="$2"

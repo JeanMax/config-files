@@ -29,7 +29,7 @@ fi
 # TODO: if there are multiple screens, this might not be the right resolution
 RESOLUTION=$(xrandr | grep '*' | head -n1 | sed -E 's/.* ([0-9]+x[0-9]+).*/\1/')
 
-convert -depth 8 -resize "$RESOLUTION" "$TEMP_IMG" -background White -font Code-New-Roman -pointsize 16 -fill Black label:"\n-$TITLE:\n$SUBTITLE\n\n" -gravity Center -append "png:$IMG"
+convert -depth 8 $(test "$RESOLUTION" && echo -resize "$RESOLUTION") "$TEMP_IMG" -background White -font Code-New-Roman -pointsize 16 -fill Black label:"\n-$TITLE:\n$SUBTITLE\n\n" -gravity Center -append "png:$IMG"
 
 export DISPLAY=:0.0
 feh -V --bg-max $IMG || feh -V --bg-max $FALLBACK_IMG
