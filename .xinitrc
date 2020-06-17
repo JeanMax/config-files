@@ -123,7 +123,7 @@ case $WM in
         pgrep redshift || redshift &
 
         # Background picture
-        feh --bg-max ~/Pictures/Wallpapers/xkcd.png &
+        # feh -V --bg-max ~/Pictures/Wallpapers/xkcd.png &
 
 		# synaptic daemon to block touchpad while typing
 		# syndaemon -i 0.5 -t -K -R -d &
