@@ -24,7 +24,7 @@ sizeof() {
 
 prev() {
     fd --print0 $@ \
-        | fzf --read0 --preview '{bat --color=always {} || tree -C {}} 2>/dev/null | head -500'
+        | fzf --read0 --preview '{batcat --color=always {} || tree -C {}} 2>/dev/null | head -500'
 }
 
 vm() {
@@ -97,15 +97,19 @@ alias ghs='git stash show'
 alias ghd='git stash show -p'
 alias gha='git stash apply'
 alias ghm='git stash push -m'
+alias ghpm='git stash push -p -m'
 alias ghp='git stash pop'
 alias gf="git fetch --verbose --progress --all --prune -j$(nproc 2>/dev/null || echo 1)"
 alias gd='git diff'
 alias gdc='git diff --cached'
+alias gds='PAGER= git diff --stat'
 alias gtree='git log --oneline --graph --decorate --branches --remotes --tags --notes'
 alias gl='git log --oneline --graph --decorate'
 alias gll='git log'
 alias gr='git reset'
 alias gcl='git clone --recursive'
+alias git-parent='for i in master qualif release; do git merge-base --is-ancestor HEAD $i && echo $i; done'
+alias git-fix='git commit --amend --reuse-message=HEAD'
 
 gpla() {
     # git-pull_all-my-branches

@@ -181,12 +181,12 @@ zstyle ':completion:*:*:kill:*:processes' list-colors "=(#b) #([0-9]#)*=36=31"
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
 # zsh-syntax-highlighting
-test -e /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh \
-	&& source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+test -e /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh \
+	&& source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # zsh autosuggestion
-test -e /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh \
-	&& source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+test -e /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh \
+	&& source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # fzf
 test -e /usr/share/fzf/completion.zsh \

@@ -37,5 +37,32 @@
   (bind-key* (kbd "<M-right>") 'hs-show-all)))
 
 
+
+(use-package origami
+  :defer t
+  :ensure t
+
+  :init
+  (add-hook 'yaml-mode-hook 'origami-mode))
+
+(cond
+ ((version< emacs-version "23")
+  (bind-key* (kbd "<A-down>") 'origami-toggle-node)
+  (bind-key* (kbd "<A-left>") 'origami-show-only-node)
+  (bind-key* (kbd "<A-right>") 'origami-toggle-all-nodes))
+ (t
+  (bind-key* (kbd "ESC <down>") 'origami-toggle-node)
+  (bind-key* (kbd "ESC <left>") 'origami-show-only-node)
+  (bind-key* (kbd "ESC <right>") 'origami-toggle-all-nodes)
+
+  ;we keep this for gui-macs
+  (bind-key* (kbd "<M-down>") 'origami-toggle-node)
+  (bind-key* (kbd "<M-left>") 'origami-show-only-node)
+  (bind-key* (kbd "<M-right>") 'origami-toggle-all-nodes)))
+
+
+
+
+
 (provide 'init-hideshow)
 ;;; init-hideshow.el ends here

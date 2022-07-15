@@ -130,7 +130,8 @@ bindsym $mod+Shift+r restart
 # bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Blabla' -b 'Shutdown' 'systemctl poweroff -i' -b 'Reboot' 'systemctl reboot' -b 'Logout' 'DISPLAY=:0 gnome-session-quit --logout --no-prompt' -b 'Lock' 'i3lock && sleep 1'"
 
 
-set $Locker i3lock -f -t -i ~/Pictures/Wallpapers/xkcd.png && sleep 1
+# set $Locker i3lock -f -t -i ~/Pictures/Wallpapers/xkcd.png && sleep 1
+set $Locker dbus-send --type=method_call --dest=org.gnome.ScreenSaver /org/gnome/ScreenSaver org.gnome.ScreenSaver.Lock
 set $Killer ~/.config/i3/graceful_exit.sh
 
 set $mode_system System (o) blackout, (l) lock, (e) logout, (r) reboot, (s) shutdown, (h) hibernate

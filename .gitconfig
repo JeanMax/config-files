@@ -2,6 +2,23 @@
 	default = simple
 [core]
 	excludesfile = ~/.gitignore_global
+# [user]
+# 	email = mc@rmrf.fr
+# 	name = JeanMax
+
+# Basic git config
+[fetch]
+    prune = on
+[merge]
+    ff = off
+[pull]
+    rebase = merges
+
+# Prepare pre-commit tool
+# pre-commit install
 [user]
-	email = mc@rmrf.fr
-	name = JeanMax
+	email = mcanal@onestock-retail.com
+	name = Max Canal
+[grep]
+	lineNumber = true
+	extendRegexp = true
