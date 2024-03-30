@@ -81,34 +81,34 @@
 
 
     ;default french
-    (defconst *console* "œ")
-    (defconst *altgr-a* "â")
-    (defconst *altgr-z* "å")
+    (defconst *console* "²")
+    (defconst *altgr-a* "æ")
+    (defconst *altgr-z* "â")
     (defconst *altgr-e* "€")
-    (defconst *altgr-r* "ç") ; I use that :/
+    (defconst *altgr-r* "ê") ; I use that :/
     (defconst *altgr-t* "þ")
-    (defconst *altgr-y* "ý")
+    (defconst *altgr-y* "ÿ")
     (defconst *altgr-u* "û")
     (defconst *altgr-i* "î")
-    (defconst *altgr-o* "ô")
-    (defconst *altgr-p* "¶")
-    (defconst *altgr-q* "Â")
-    (defconst *altgr-s* "ø")
-    (defconst *altgr-d* "Ê")
-    (defconst *altgr-f* "±")
-    (defconst *altgr-g* "æ")
+    (defconst *altgr-o* "œ")
+    (defconst *altgr-p* "ô")
+    (defconst *altgr-q* "ä")
+    (defconst *altgr-s* "ß")
+    (defconst *altgr-d* "ë")
+    (defconst *altgr-f* "‘")
+    (defconst *altgr-g* "’")
     (defconst *altgr-h* "ð")
-    (defconst *altgr-j* "Û")
-    (defconst *altgr-k* "Î")
-    (defconst *altgr-l* "Ô")
-    (defconst *altgr-m* "¹")
+    (defconst *altgr-j* "ü")
+    (defconst *altgr-k* "ï")
+    (defconst *altgr-l* "ŀ")
+    (defconst *altgr-m* "ö")
     (defconst *altgr-w* "«")
     (defconst *altgr-x* "»")
     (defconst *altgr-c* "©")
-    (defconst *altgr-v* "®")
-    (defconst *altgr-b* "ß")
+    (defconst *altgr-v* " ")
+    (defconst *altgr-b* "↓")
     (defconst *altgr-n* "¬")
-    (defconst *altgr-$* "¿"))
+    (defconst *altgr-$* "ø"))
   ;TODO: add a variable to configure this at runtime
 
 
@@ -407,10 +407,11 @@
 
 ;; ansi colors in compilation buffer
 (require 'ansi-color)
-(defun my/ansi-colorize-buffer ()
-  (let ((buffer-read-only nil))
+
+(defun display-ansi-colors ()
+  (interactive)
+  (let ((inhibit-read-only t))
     (ansi-color-apply-on-region (point-min) (point-max))))
-;; (add-hook 'compilation-filter-hook 'my/ansi-colorize-buffer)
 
 (provide 'init-emacs)
 ;;; init-emacs.el ends here

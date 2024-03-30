@@ -41,7 +41,7 @@
 
   ;; indentation fix (struct/switch)
   (c-set-offset 'case-label '+) ; indentation fix (struct/switch)
-  (setq indent-tabs-mode t))
+  (setq indent-tabs-mode nil))
 
 ;;;###autoload
 (add-hook 'c-mode-hook

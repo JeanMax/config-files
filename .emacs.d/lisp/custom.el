@@ -19,16 +19,38 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(csv-separators '(";" "\11"))
+ '(emms-player-list '(emms-player-vlc emms-player-vlc-playlist))
  '(erc-log-write-after-insert t)
  '(erc-log-write-after-send t)
  '(flycheck-clang-language-standard "c++17")
+ '(flycheck-flake8-maximum-line-length 120)
  '(gnus-visible-headers
-   (quote
-    ("^From:" "^Newsgroups:" "^Subject:" "^Date:" "^Followup-To:" "^Reply-To:" "^Organization:" "^Summary:" "^Keywords:" "^To:" "^[BGF]?Cc:" "^Posted-To:" "^Mail-Copies-To:" "^Mail-Followup-To:" "^Apparently-To:" "^Gnus-Warning:" "^Resent-From:" "^X-Sent:" "^X-AnteSpam-Report:")))
+   '("^From:" "^Newsgroups:" "^Subject:" "^Date:" "^Followup-To:" "^Reply-To:" "^Organization:" "^Summary:" "^Keywords:" "^To:" "^[BGF]?Cc:" "^Posted-To:" "^Mail-Copies-To:" "^Mail-Followup-To:" "^Apparently-To:" "^Gnus-Warning:" "^Resent-From:" "^X-Sent:" "^X-AnteSpam-Report:"))
+ '(indent-guide-char "⋮")
+ '(indent-guide-recursive t)
+ '(indent-tabs-mode nil)
+ '(jedi:complete-on-dot t)
  '(js-indent-level 4)
+ '(logview-additional-submodes
+   '(("custom"
+      (format . "[TIMESTAMP] MESSAGE")
+      (levels . "SLF4J")
+      (timestamp "pouetime")
+      (aliases))))
+ '(logview-additional-timestamp-formats
+   '(("pouetime"
+      (java-pattern . "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"))))
+ '(lsp-auto-guess-root t)
+ '(lsp-pylsp-plugins-flake8-enabled nil)
+ '(lsp-pylsp-plugins-mccabe-enabled nil)
+ '(lsp-pylsp-plugins-pycodestyle-enabled nil)
+ '(lsp-pylsp-plugins-ruff-enabled t)
+ '(lua-indent-level 4)
+ '(magit-diff-refine-hunk t)
+ '(magit-diff-refine-ignore-whitespace nil)
  '(package-selected-packages
-   (quote
-    (rjsx-mode slime csv-mode jsx-mode dockerfile-mode autodisass-llvm-bitcode sass-mode json-mode inf-ruby yaml-mode web-mode utop use-package tuareg smex rainbow-delimiters projectile php-mode php-eldoc markdown-mode magit ledger-mode keyfreq js2-mode ido-grid-mode ido-completing-read+ ido-complete-space-or-hyphen highlight-numbers highlight-indent-guides gtags git-timemachine ggtags flycheck-ocaml flycheck-ledger flycheck-cython flx-ido emms diminish diff-hl cython-mode company-statistics benchmark-init ace-window))))
+   '(lsp-ui yasnippet which-key code-review logview xterm-color ansible eglot haskell-mode protobuf-mode jenkinsfile-mode dockerfile-mode docker csharp-mode luarocks lua-mode dotnet csv-mode go-mode dumb-jump inf-ruby highlight-numbers benchmark-init flycheck-ledger flycheck-grammalecte utop flycheck-ocaml merlin tuareg ledger-mode yaml-mode rjsx-mode json-mode js2-mode php-eldoc php-mode web-mode markdown-mode diff-hl git-timemachine magit company-statistics company emms keyfreq highlight-indent-guides rainbow-delimiters ace-window projectile ido-grid-mode smex flx-ido ido-completing-read+ slime bbdb flycheck-cython cython-mode gtags ggtags diminish use-package)))
 
 
 (custom-set-faces

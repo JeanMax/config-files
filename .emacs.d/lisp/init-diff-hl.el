@@ -31,7 +31,7 @@
   (setq diff-hl-highlight-function nil)
   (set-face-attribute 'diff-hl-insert t :background "green" :foreground "white")
   (set-face-attribute 'diff-hl-delete t :background "red" :foreground "white")
-  (set-face-attribute 'diff-hl-change t :background "color-130" :foreground "white"))
+  (set-face-attribute 'diff-hl-change t :background "dark-orange" :foreground "white"))
 
 (bind-key* (kbd "C-c C-d") 'diff-hl-mode)
 

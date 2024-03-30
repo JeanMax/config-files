@@ -63,7 +63,7 @@
     return ret")
     (setq python-shell-interpreter "ipython")
     ;; (setq python-shell-interpreter-args "-i --pdb --TerminalIPythonApp.interactive_shell_class=rlipython.TerminalInteractiveShell -m babao")
-    (setq python-shell-interpreter-args "-i --pdb --TerminalIPythonApp.interactive_shell_class=rlipython.TerminalInteractiveShell")
+    (setq python-shell-interpreter-args "-i --pdb --matplotlib --pprint --TerminalIPythonApp.interactive_shell_class=rlipython.TerminalInteractiveShell")
     ;; (setq python-shell-interpreter-args "-i --pdb --TerminalIPythonApp.interactive_shell_class=rlipython.TerminalInteractiveShell manage.py shell")  ;;debugsql
     (use-package cython-mode
       :ensure t
@@ -89,7 +89,8 @@
   (define-key python-mode-map (kbd "<backtab>") nil)
   (define-key python-mode-map (kbd "C-c f") 'insert-python-def)
 
-  (define-key inferior-python-mode-map (kbd "C-c r") 'comint-history-isearch-backward))
+  (define-key inferior-python-mode-map (kbd "C-c r") 'comint-history-isearch-backward)
+  (define-key inferior-python-mode-map (kbd "C-c l") 'comint-clear-buffer))
 
 ;; (defun ipython()
 ;;   (interactive)

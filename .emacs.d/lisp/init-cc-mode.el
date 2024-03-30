@@ -23,6 +23,7 @@
   :config
   (setq-default c-basic-offset 4)
   (setq-default c-default-style "linux")
+  (setq indent-tabs-mode nil)
 
   (add-hook 'c++-mode-hook
             (lambda ()

@@ -24,6 +24,16 @@ private
 .emacs.d/tramp
 .emacs.d/url/
 .emacs.d/kkcrc
+.emacs.d/.cache/
+.emacs.d/eln-cache/
+.emacs.d/*.sqlite
+.emacs.d/ac-comphist.dat
+.emacs.d/code-review-error.log
+.emacs.d/logview-cache.extmap
+.emacs.d/places
+.emacs.d/tree-sitter/
+.emacs.d/.lsp-session-v1
+.emacs.d/projects
 
 .config/gtk-2.0/gtkfilechooser.ini
 .config/gtk-3.0/bookmarks

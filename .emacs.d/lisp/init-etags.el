@@ -34,11 +34,13 @@
    (list (read-from-minibuffer
           (concat "tag pattern (default " (nth 0 tags-make-n-visit-history) "): ")
           nil nil nil 'tags-make-n-visit-history)))
-  (shell-command (concat "etags -o ~/.emacs.d/TAGS "
+  (shell-command (concat "etags -o ~/config-files/.emacs.d/TAGS "
                          (if (string= "" file-pattern)
                              (nth 0 tags-make-n-visit-history)
                            file-pattern)))
-  (visit-tags-table "~/.emacs.d/TAGS"))
+  (visit-tags-table "~/config-files/.emacs.d/TAGS"))
+
+  ;; (setq tags-table-list '("/home/mcanal/.emacs.d/TAGS"))))
 
 
 (bind-key* (kbd *altgr-t*) 'tags-make-n-visit)

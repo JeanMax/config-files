@@ -18,27 +18,26 @@
   :ensure t
   :defer t
 
-  :init
-  (defalias 'radio 'emms-streams)
 
   :config
-  (progn
-    ;; (setq emms-directory "~/.emacs.d/misc/emms")
-    (emms-standard)
-    (emms-default-players)
+  ;; (setq emms-directory "~/.emacs.d/misc/emms")
+  (require 'emms-setup)
+  (emms-all)
+  (emms-default-players)
+  (setq emms-source-file-default-directory "~/Music/")
+  (require 'emms-info-mp3info)
+  (add-to-list 'emms-info-functions 'emms-info-mp3info))
 
-    (use-package emms-streams
-      :defer t
 
-      :init
-      (setq emms-stream-default-action "play")
-      (dolist (radio '(("One HipHop" "http://listen.one.hiphop/live" 1 url)
-                       ("FIP" "http://direct.fipradio.fr/live/fip-midfi.mp3" 1 url)
-                       ("RadioJazz - Manouche" "http://jazz-wr02.ice.infomaniak.ch/jazz-wr02-128.mp3" 1 url)
-                       ("RadioJazz - Blues" "http://jazzblues.ice.infomaniak.ch/jazzblues-high.mp3" 1 url)
-                       ("RadioJazz - Groove" "http://jazz-wr08.ice.infomaniak.ch/jazz-wr08-128.mp3" 1 url)
-                       ("RadioJazz - Funk" "http://jazz-wr06.ice.infomaniak.ch/jazz-wr06-128.mp3" 1 url)))
-        (add-to-list 'emms-stream-default-list radio)))))
+(defalias 'radio 'emms-streams)
+;; the radio list is located at ~/.emacs.d/emms/streams.emms
+;; don't forget to save it!
+
+(use-package emms-streams
+  ;; :defer t
+
+  :config
+  (setq emms-stream-default-action "play"))
 
 
 (provide 'init-emms)

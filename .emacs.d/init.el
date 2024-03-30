@@ -22,18 +22,26 @@
 ;; ( https://www.reddit.com/r/emacs/comments/3kqt6e/2_easy_little_known_steps_to_speed_up_emacs_start/
 ;; http://bling.github.io/blog/2016/01/18/why-are-you-changing-gc-cons-threshold/ )
 ;; (let ((gc-cons-threshold most-positive-fixnum))
-(defconst initial-gc-cons-threshold gc-cons-threshold)
-(setq gc-cons-threshold most-positive-fixnum)
 
-(add-hook 'minibuffer-setup-hook
-		  '(lambda () (setq gc-cons-threshold most-positive-fixnum)))
-(add-hook 'minibuffer-exit-hook
-		  '(lambda () (setq gc-cons-threshold initial-gc-cons-threshold)))
+;; (defconst initial-gc-cons-threshold gc-cons-threshold)
+;; (setq gc-cons-threshold most-positive-fixnum)
+
+;; (add-hook 'minibuffer-setup-hook
+;; 		  #'(lambda () (setq gc-cons-threshold most-positive-fixnum)))
+;; (add-hook 'minibuffer-exit-hook
+;; 		  #'(lambda () (setq gc-cons-threshold initial-gc-cons-threshold)))
+
+(setq gc-cons-threshold 100000000)
+
+(setq read-process-output-max 100000000)
+
+(setq read-process-output-max (* 1024 1024)) ;; 1mb
+
 
 ;; compile config files
 (defconst initial-file-name-handler-alist file-name-handler-alist)
 (add-hook 'after-init-hook
-		  '(lambda ()
+		  #'(lambda ()
 			 ;; (setq gc-cons-threshold initial-gc-cons-threshold)
 			 (setq file-name-handler-alist initial-file-name-handler-alist)
 			 (when (< 23 emacs-major-version)
@@ -79,7 +87,7 @@
 (require 'init-desktop)
 
 ;; site-lisp folder
-(require 'init-42-mode)
+;; (require 'init-42-mode)
 (require 'init-move-mode)
 (require 'init-ample-theme)
 
@@ -114,13 +122,18 @@
   ;; not builtin till emacs24
   (require 'init-ruby-mode)
   (require 'init-eww-mode)
-  (require 'init-ispell)
+  (require 'init-ispell)  ; TODO: remove
+  ;; (require 'init-lsp-mode)
 
   ;; (when (< 22 emacs-major-version)
   ;;   ;; not builtin till emacs23
   ;;   (require 'init-vc-dir))
   )
 
+(with-eval-after-load 'eglot
+   (add-to-list 'eglot-server-programs
+                '(python-ts-mode . ("ruff-lsp"))))
+(add-hook 'python-mode-hook #'eglot-ensure)
 
 ;; auto-generated customizations
 (setq custom-file "~/.emacs.d/lisp/custom.el")

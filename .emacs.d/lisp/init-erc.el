@@ -17,10 +17,10 @@
 (defun ercs ()
   "Connect to some IRC."
   (interactive)
-  (when (y-or-n-p "Freenode? ")
-    (erc :server "irc.freenode.net" :port 6667 :nick "JeanMax" :password "password"))
+  (when (y-or-n-p "Libera? ")
+    (erc-tls :server "irc.libera.chat" :port 6697 :nick "JeanMax" :password "password"))
   (when (y-or-n-p "Synirc? ")
-    (erc :server "irc.synirc.net" :port 6667 :nick "JeanMax")))
+    (erc-tls :server "irc.synirc.net" :port 6697 :nick "JeanMax")))
 
 
 (use-package erc
@@ -29,7 +29,7 @@
   :config
   (setq erc-save-buffer-on-part t)
   (setq erc-autojoin-channels-alist
-        '((".*\\.freenode.net" "#emacs" "#archlinux" "#trisquel" "#zboub" "#ocaml" "#ocsigen" "#tezos")
+        '((".*\\.libera.chat" "#emacs" "#archlinux" "#trisquel" "#zboub")
           (".*\\.synirc.net" "#d2bs")))
   (setq erc-keywords '("jean" "smurf"))
   (erc-match-mode)
