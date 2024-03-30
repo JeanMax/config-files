@@ -92,6 +92,9 @@
   (define-key inferior-python-mode-map (kbd "C-c r") 'comint-history-isearch-backward)
   (define-key inferior-python-mode-map (kbd "C-c l") 'comint-clear-buffer))
 
+;; (setq major-mode-remap-alist
+;;       '((python-mode . python-ts-mode)))
+
 ;; (defun ipython()
 ;;   (interactive)
 ;;   (ansi-term "~/babao/babao" "Python"))

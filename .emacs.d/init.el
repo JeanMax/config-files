@@ -93,7 +93,6 @@
 
 (when (< 23 emacs-major-version)
   ;; external dep (+ lisp package eh)
-  ;; (require 'init-mu4e)
   (require 'init-slime)
 
   ;; packages to download: package.el not builtin till emacs24... just give up
@@ -102,7 +101,6 @@
   (require 'init-projectile)
   (require 'init-ace-window)
   (require 'init-rainbow-delimiters) ; sometimes buggy, but awesome
-  ;; (require 'init-highlight-numbers) ; buggy
   (require 'init-highlight-indent-guides)
   (require 'init-keyfreq)
   (require 'init-emms)
@@ -122,7 +120,6 @@
   ;; not builtin till emacs24
   (require 'init-ruby-mode)
   (require 'init-eww-mode)
-  (require 'init-ispell)  ; TODO: remove
   ;; (require 'init-lsp-mode)
 
   ;; (when (< 22 emacs-major-version)
@@ -130,10 +127,10 @@
   ;;   (require 'init-vc-dir))
   )
 
-(with-eval-after-load 'eglot
-   (add-to-list 'eglot-server-programs
-                '(python-ts-mode . ("ruff-lsp"))))
-(add-hook 'python-mode-hook #'eglot-ensure)
+;; (with-eval-after-load 'eglot
+;;    (add-to-list 'eglot-server-programs
+;;                 '(python-ts-mode . ("ruff-lsp"))))
+;; (add-hook 'python-mode-hook #'eglot-ensure)
 
 ;; auto-generated customizations
 (setq custom-file "~/.emacs.d/lisp/custom.el")

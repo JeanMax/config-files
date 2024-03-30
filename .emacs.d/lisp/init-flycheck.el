@@ -22,16 +22,6 @@
   :init
   (add-hook 'prog-mode-hook 'global-flycheck-mode)
 
-  (setq flycheck-grammalecte-enabled-modes
-		'(mail-mode message-mode))
-  ;; (flycheck-grammalecte-download-grammalecte) ;once
-  (use-package flycheck-grammalecte
-    ;; :defer t
-    :ensure t
-	:init
-	(setq flycheck-grammalecte-report-esp nil)
-	(setq flycheck-grammalecte-report-nbsp nil))
-
   (use-package flycheck-ledger
     :defer t
     :ensure t)

@@ -22,7 +22,8 @@
   (set-face-attribute 'dired-symlink nil :foreground "#6aaf50")
 
   (defun dired-find-files (&optional arg)
-    "Open each of the marked files, or the file under the point, or when prefix ARG, the next N files."
+    "Open each of the marked files, or the file under the point,
+or when prefix ARG, the next Nfiles."
     (interactive "P")
     (let* ((fn-list (dired-get-marked-files nil arg)))
       (mapc 'find-file fn-list)))

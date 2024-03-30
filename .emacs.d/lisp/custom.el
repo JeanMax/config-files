@@ -42,15 +42,15 @@
    '(("pouetime"
       (java-pattern . "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"))))
  '(lsp-auto-guess-root t)
- '(lsp-pylsp-plugins-flake8-enabled nil)
- '(lsp-pylsp-plugins-mccabe-enabled nil)
- '(lsp-pylsp-plugins-pycodestyle-enabled nil)
- '(lsp-pylsp-plugins-ruff-enabled t)
+ ;; '(lsp-pylsp-plugins-flake8-enabled nil)
+ ;; '(lsp-pylsp-plugins-mccabe-enabled nil)
+ ;; '(lsp-pylsp-plugins-pycodestyle-enabled nil)
+ ;; '(lsp-pylsp-plugins-ruff-enabled t)
  '(lua-indent-level 4)
  '(magit-diff-refine-hunk t)
  '(magit-diff-refine-ignore-whitespace nil)
  '(package-selected-packages
-   '(lsp-ui yasnippet which-key code-review logview xterm-color ansible eglot haskell-mode protobuf-mode jenkinsfile-mode dockerfile-mode docker csharp-mode luarocks lua-mode dotnet csv-mode go-mode dumb-jump inf-ruby highlight-numbers benchmark-init flycheck-ledger flycheck-grammalecte utop flycheck-ocaml merlin tuareg ledger-mode yaml-mode rjsx-mode json-mode js2-mode php-eldoc php-mode web-mode markdown-mode diff-hl git-timemachine magit company-statistics company emms keyfreq highlight-indent-guides rainbow-delimiters ace-window projectile ido-grid-mode smex flx-ido ido-completing-read+ slime bbdb flycheck-cython cython-mode gtags ggtags diminish use-package)))
+   '(lsp-mode lsp-ui yasnippet which-key code-review logview xterm-color ansible eglot haskell-mode protobuf-mode jenkinsfile-mode dockerfile-mode docker csharp-mode luarocks lua-mode dotnet csv-mode go-mode dumb-jump inf-ruby highlight-numbers benchmark-init flycheck-ledger flycheck-grammalecte utop flycheck-ocaml merlin tuareg ledger-mode yaml-mode rjsx-mode json-mode js2-mode php-eldoc php-mode web-mode markdown-mode diff-hl git-timemachine magit company-statistics company emms keyfreq highlight-indent-guides rainbow-delimiters ace-window projectile ido-grid-mode smex flx-ido ido-completing-read+ slime bbdb flycheck-cython cython-mode gtags ggtags diminish use-package)))
 
 
 (custom-set-faces

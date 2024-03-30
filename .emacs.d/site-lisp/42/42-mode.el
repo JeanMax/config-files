@@ -45,7 +45,7 @@
 
 ;;;###autoload
 (add-hook 'c-mode-hook
-          '(lambda ()
+          #'(lambda ()
              (when (string-match "\\.[ch]\\'" (buffer-name))
                (42-mode))))
 

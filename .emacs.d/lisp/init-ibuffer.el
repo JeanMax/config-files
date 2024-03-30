@@ -77,7 +77,7 @@
   (setq ibuffer-expert t)
   (setq ibuffer-show-empty-filter-groups nil)
   (add-hook 'ibuffer-mode-hook
-            '(lambda ()
+            #'(lambda ()
                (ibuffer-auto-mode 1)
                (ibuffer-switch-to-saved-filter-groups "home")))
   ;; Use human readable Size column instead of original one

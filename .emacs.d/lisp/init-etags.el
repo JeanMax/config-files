@@ -54,9 +54,9 @@
   :defer t
 
   :init
-  (use-package gtags
-    :ensure t
-    :defer t)
+  ;; (use-package gtags
+  ;;   :ensure t
+  ;;   :defer t)
   (add-hook 'c-mode-common-hook
 			(lambda ()
 			  (when (derived-mode-p 'c-mode 'c++-mode)

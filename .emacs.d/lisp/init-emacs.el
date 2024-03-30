@@ -156,7 +156,7 @@
   (setq inhibit-splash-screen t)
 
   ;; default major mode (used for *scratch*)
-  (setq initial-major-mode 'python-mode)
+  (setq initial-major-mode 'text-mode)
   (setq initial-scratch-message "")
   ;; (setq initial-scratch-message "#!/bin/bash -ex\n\n")
 

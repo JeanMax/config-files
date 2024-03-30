@@ -16,12 +16,6 @@
 
 (use-package ample-theme
   :ensure t
-  ;; :load-path "~/.emacs.d/site-lisp/ample-theme"
-
-  ;; :init
-    ;; (clone-package "ample-theme" "https://github.com/jordonbiondo/ample-theme"))
-
-
   :init
   (load-theme 'ample t t) ; ample{,flat,light}
   (enable-theme 'ample)

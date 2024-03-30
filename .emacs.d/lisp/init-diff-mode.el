@@ -37,7 +37,7 @@
                       (ediff-get-region-contents ediff-current-difference 'B ediff-control-buffer))))
 
   (add-hook 'ediff-keymap-setup-hook
-            '(lambda ()
+            #'(lambda ()
                (define-key ediff-mode-map (kbd "c") 'ediff-copy-both-to-C))))
 
 
