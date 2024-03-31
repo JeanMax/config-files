@@ -61,10 +61,10 @@
     except:
         ret = ''
     return ret")
-    (setq python-shell-interpreter "ipython")
-    ;; (setq python-shell-interpreter-args "-i --pdb --TerminalIPythonApp.interactive_shell_class=rlipython.TerminalInteractiveShell -m babao")
-    (setq python-shell-interpreter-args "-i --pdb --matplotlib --pprint --TerminalIPythonApp.interactive_shell_class=rlipython.TerminalInteractiveShell")
-    ;; (setq python-shell-interpreter-args "-i --pdb --TerminalIPythonApp.interactive_shell_class=rlipython.TerminalInteractiveShell manage.py shell")  ;;debugsql
+
+    (setq python-shell-interpreter "ipython"
+          python-shell-interpreter-args "--pdb -i --simple-prompt --InteractiveShell.display_page=True")
+
     (use-package cython-mode
       :ensure t
       :defer t

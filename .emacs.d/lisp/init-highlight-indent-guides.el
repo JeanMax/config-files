@@ -17,6 +17,7 @@
 (use-package highlight-indent-guides
   :ensure t
   :defer t
+  :diminish t
   :commands (highlight-indent-guides-mode)
 
   :init

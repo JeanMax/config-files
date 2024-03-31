@@ -122,7 +122,7 @@
   ;; not builtin till emacs24
   (require 'init-ruby-mode)
   (require 'init-eww-mode)
-  ;; (require 'init-lsp-mode)
+  (require 'init-lsp-mode)
 
   ;; (when (< 22 emacs-major-version)
   ;;   ;; not builtin till emacs23
