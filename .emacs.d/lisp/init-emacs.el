@@ -167,6 +167,10 @@
     (define-key function-key-map "\033[1;6D" [(control shift left)])
     (define-key function-key-map "\033[1;6C" [(control shift right)]))
 
+  ;; Ignore case when completing file/buffer names
+  (setq read-file-name-completion-ignore-case 't)
+  (setq read-buffer-completion-ignore-case 't)
+
   ;; tell emacs where to read abbrev
   (setq save-abbrevs 'silently)
   ;; (setq abbrev-file-name "~/.emacs.d/misc/abbrev_defs")
@@ -209,26 +213,6 @@
 
   ;; format line number (fringe)
   (setq linum-format "%3d ")
-
-  ;; Ignore case when completing file/buffer names
-  (setq read-file-name-completion-ignore-case 't)
-  (setq read-buffer-completion-ignore-case 't)
-
-  ;; completion stuffs
-  (setq dabbrev-case-distinction nil)
-  (setq dabbrev-case-fold-search nil)
-  (setq dabbrev-case-replace nil)
-  (setq hippie-expand-dabbrev-skip-space t)
-  (setq hippie-expand-try-functions-list '(try-expand-list
-										   try-expand-line
-										   try-complete-file-name-partially
-										   try-complete-file-name
-										   try-expand-all-abbrevs
-										   try-expand-dabbrev
-										   try-expand-dabbrev-all-buffers
-										   try-expand-dabbrev-from-kill
-										   try-complete-lisp-symbol-partially
-										   try-complete-lisp-symbol))
 
   ;; Increase number of undo
   (setq undo-limit 100000)

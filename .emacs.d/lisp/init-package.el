@@ -66,9 +66,9 @@
   (setq package-enable-at-startup nil)
   ;; (setq nsm-settings-file "~/.emacs.d/misc/network-security.data")
   (setq package-archives
-        '(
-          ("melpa" . "http://melpa.org/packages/")
-          ("gnu" . "http://elpa.gnu.org/packages/")))
+        '(("melpa" . "http://melpa.org/packages/")
+          ("gnu" . "http://elpa.gnu.org/packages/")
+          ("nongnu" . "https://elpa.nongnu.org/nongnu/")))
   (package-initialize)
 
   ;; Bootstrap `use-package'
