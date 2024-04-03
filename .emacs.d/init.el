@@ -115,6 +115,8 @@
   (require 'init-yaml-mode)
   (require 'init-ledger-mode)
   (require 'init-tuareg)
+  (require 'init-nerd-icons)
+  (require 'init-treemacs)
   (require 'init-flycheck) ;TODO: do not compile flycheck temp files :/
 
   ;; not builtin till emacs24

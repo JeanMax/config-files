@@ -37,7 +37,7 @@
 
     ;; (setq ido-save-directory-list-file "~/.emacs.d/misc/ido.last")
     (set-face-attribute 'ido-first-match t :foreground "#ebc481") ;TODO: highlight?
-    (set-face-attribute 'ido-subdir t :foreground "#5180b3")
+    (set-face-attribute 'ido-subdir t :foreground ample/blue)
 
     (add-hook 'ido-setup-hook (lambda ()
                                 (define-key ido-completion-map (kbd "TAB") 'ido-complete)

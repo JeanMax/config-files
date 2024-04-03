@@ -25,6 +25,7 @@
   (emms-all)
   (emms-default-players)
   (setq emms-source-file-default-directory "~/Music/")
+  (setq emms-player-list '(emms-player-vlc emms-player-vlc-playlist))
   (require 'emms-info-mp3info)
   (add-to-list 'emms-info-functions 'emms-info-mp3info))
 

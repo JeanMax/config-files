@@ -18,8 +18,8 @@
   :defer t
 
   :config
-  (set-face-attribute 'dired-directory nil :foreground "#5180b3")
-  (set-face-attribute 'dired-symlink nil :foreground "#6aaf50")
+  (set-face-attribute 'dired-directory nil :foreground ample/blue)
+  (set-face-attribute 'dired-symlink nil :foreground ample/green)
 
   (defun dired-find-files (&optional arg)
     "Open each of the marked files, or the file under the point,

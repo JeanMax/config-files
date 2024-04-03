@@ -1,8 +1,7 @@
-#!/bin/zsh -x
+#!/bin/sh -x
 
-pkill emacs -9 && sleep 1
-rm ~/.emacs.d/.emacs.desktop.lock
-rm -v ~/.emacs.d/lisp/*.elc
-mate-terminal -x zsh -i -c "emacsclient -t "$@"; zsh"
-
-$SHELL
+mate-terminal --class EmacsTerm -x zsh -i -c "
+  pkill emacs -9 && sleep 0.5
+  rm -vf ~/.emacs.d/lisp/*.elc ~/.emacs.d/.emacs.desktop.lock
+  emacsclient -t "$@"
+  zsh"

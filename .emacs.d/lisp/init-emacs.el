@@ -20,6 +20,41 @@
     :ensure t)
 
   :config
+  (defconst ample/green "#6aaf50")
+  (defconst ample/dark-green "#057f40")
+  (defconst ample/blue "#5180b3")
+  (defconst ample/blue-bg "#102843")
+  (defconst ample/light-blue "#528fd1")
+  (defconst ample/lighter-blue "#68a5e9")
+  (defconst ample/orange "#dF9522")
+  (defconst ample/tan "#bdbc61")
+  (defconst ample/dark-tan "#7d7c61")
+  (defconst ample/yellow "#baba36")
+  (defconst ample/bright-yellow "#fffe0a")
+  (defconst ample/purple "#ab75c3")
+  (defconst ample/light-gray "#858585")
+  (defconst ample/gray "#757575")
+  (defconst ample/dark-gray "#656565")
+  (defconst ample/darker-gray "#454545")
+  (defconst ample/darkest-gray "#252525")
+  (defconst ample/brown "#987654")
+  (defconst ample/red "#cd5542")
+  (defconst ample/dark-red "#9d2512")
+
+  (defconst ample/cursor "#f57e00")
+  (defconst ample/fringe "#1f1f1f")
+  (defconst ample/region "#303030")
+
+  (defconst ample/rb0 "#81b0e3")
+  (defconst ample/rb1 "#a5a5a5")
+  (defconst ample/rb2 "#6190c3")
+  (defconst ample/rb3 "#959595")
+  (defconst ample/rb4 "#4170a3")
+  (defconst ample/rb5 "#757575")
+
+  (defconst ample/bg "gray13")
+  (defconst ample/fg "#bdbdb3")
+
   ;; alias for altgr keys, since they change a lot between keyboards
   (if *is-a-mac*
       (progn (defconst *altgr-a* "´")
@@ -144,7 +179,10 @@
 
   ;; indentation
   (setq-default tab-width 4)
+  (setq js-indent-level 4)
+  (setq lua-indent-level 4)
   (setq-default indent-tabs-mode nil) ; TODO: set to t later for 42-mode
+  (setq indent-tabs-mode nil)
   (setq-default tab-stop-list (number-sequence 4 200 4))
   (setq fill-column 80)
 

@@ -13,7 +13,6 @@
 ;******************************************************************************;
 
 ;;; Code:
-
 (use-package ample-theme
   :ensure t
   :init
@@ -21,16 +20,16 @@
   (enable-theme 'ample)
 
   :config
-  (set-face-attribute 'minibuffer-prompt t :foreground "#528fd1")
+  (set-face-attribute 'minibuffer-prompt t :foreground ample/light-blue)
   (set-face-attribute 'region t :background "#424242")
   ;; font-lock-string-face && font-lock-variable-name-face are the same...
-  (set-face-attribute 'default t :foreground "#bdbdb3" :background "gray13")
+  (set-face-attribute 'default t :foreground ample/fg :background "gray13")
   (set-face-attribute 'font-lock-variable-name-face t :foreground "#b8b74b")
-  (set-face-attribute 'font-lock-string-face t :foreground "#7d7c61")
-  (set-face-attribute 'font-lock-doc-face t :foreground "#bdbc61")
-  (set-face-attribute 'highlight t :background "#dF9522")
-  (set-face-attribute 'lazy-highlight t :foreground "#dF9522" :weight 'bold)
-  (set-face-attribute 'match t :foreground "#dF9522"))
+  (set-face-attribute 'font-lock-string-face t :foreground ample/dark-tan)
+  (set-face-attribute 'font-lock-doc-face t :foreground ample/tan)
+  (set-face-attribute 'highlight t :background ample/orange)
+  (set-face-attribute 'lazy-highlight t :foreground ample/orange :weight 'bold)
+  (set-face-attribute 'match t :foreground ample/orange))
 
 
 (provide 'init-ample-theme)
