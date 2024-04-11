@@ -17,30 +17,35 @@
   :ensure t
   :defer t
   :bind (("TAB" . indent-or-complete))
-  :custom
-  (corfu-cycle t)                ;; Enable cycling for `corfu-next/previous'
-  ;; (corfu-separator ?\s)          ;; Orderless field separator
-  ;; (corfu-quit-at-boundary nil)   ;; Never quit at completion boundary
-  ;; (corfu-quit-no-match nil)      ;; Never quit, even if there is no match
-  ;; (corfu-preview-current nil)    ;; Disable current candidate preview
-  ;; (corfu-preselect 'prompt)      ;; Preselect the prompt
-  ;; (corfu-on-exact-match nil)     ;; Configure handling of exact matches
-  ;; (corfu-scroll-margin 5)        ;; Use scroll margin
- (corfu-preview-current nil)
+  :config
+  ;; (setq corfu-auto t)
+  (setq corfu-cycle t)                ;; Enable cycling for `corfu-next/previous'
+  ;; (setq corfu-separator ?\s)          ;; Orderless field separator
+  ;; (setq corfu-quit-at-boundary nil)   ;; Never quit at completion boundary
+  ;; (setq corfu-quit-no-match nil)      ;; Never quit, even if there is no match
+  ;; (setq corfu-preview-current nil)    ;; Disable current candidate preview
+  ;; (setq corfu-preselect 'prompt)      ;; Preselect the prompt
+  ;; (setq corfu-on-exact-match nil)     ;; Configure handling of exact matches
+  ;; (setq corfu-scroll-margin 5)        ;; Use scroll margin
+  (setq corfu-preview-current nil)
 
   :bind
   (:map corfu-map
         ;; ("RET" . nil)
+        ("C-d" . corfu-info-documentation)
+        ("C-l" . corfu-info-location)
         ("TAB" . corfu-next)
         ([tab] . corfu-next)
         ("S-TAB" . corfu-previous)
         ([backtab] . corfu-previous))
 
-  ;; :hook ((prog-mode . corfu-mode)
-  ;;        (shell-mode . corfu-mode)
-  ;;        (eshell-mode . corfu-mode))
-  :init
-  (global-corfu-mode))
+  :hook ((prog-mode . corfu-mode)
+         (shell-mode . corfu-mode)
+         (eshell-mode . corfu-mode))
+
+  ;; :init
+  ;; (global-corfu-mode)
+  )
 
 
 (use-package cape
@@ -70,8 +75,8 @@
 
 (use-package nerd-icons-corfu
   :ensure t
-  ;; :after (corfu)
-  :init
+  :after (corfu)
+  :config
   (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter))
 
 
@@ -87,20 +92,20 @@
 ;;   :after (corfu)
 ;;   :init (corfu-doc-terminal-mode +1))
 
-
-(use-package corfu-candidate-overlay
-  :ensure t
-  :after corfu
-  :config
-  ;; enable corfu-candidate-overlay mode globally
-  ;; this relies on having corfu-auto set to nil
-  (corfu-candidate-overlay-mode +1)
-  ;; bind Ctrl + TAB to trigger the completion popup of corfu
-  ;; (global-set-key (kbd "C-<tab>") 'completion-at-point)
-  ;; bind Ctrl + Shift + Tab to trigger completion of the first candidate
-  ;; (keybing <iso-lefttab> may not work for your keyboard model)
-  ;; (global-set-key (kbd "C-<iso-lefttab>") 'corfu-candidate-overlay-complete-at-point)
-  )
+;; this is nice but a bit intrusive
+;; (use-package corfu-candidate-overlay
+;;   :ensure t
+;;   :after corfu
+;;   :config
+;;   ;; enable corfu-candidate-overlay mode globally
+;;   ;; this relies on having corfu-auto set to nil
+;;   (corfu-candidate-overlay-mode +1)
+;;   ;; bind Ctrl + TAB to trigger the completion popup of corfu
+;;   ;; (global-set-key (kbd "C-<tab>") 'completion-at-point)
+;;   ;; bind Ctrl + Shift + Tab to trigger completion of the first candidate
+;;   ;; (keybing <iso-lefttab> may not work for your keyboard model)
+;;   ;; (global-set-key (kbd "C-<iso-lefttab>") 'corfu-candidate-overlay-complete-at-point)
+;;   )
 
 
 

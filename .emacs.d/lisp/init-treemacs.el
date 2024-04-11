@@ -15,20 +15,21 @@
 ;;; Code:
 (use-package treemacs
   :ensure t
-  :defer t
-  :config
-  (set-face-attribute 'treemacs-directory-face t :inherit dired-directory)
-  (set-face-attribute 'treemacs-git-conflict-face t :foreground ample/dark-red)
-  (set-face-attribute 'treemacs-git-modified-face t :foreground ample/orange))
+  :no-require t
+  ;; :defer t
+  :commands (treemacs lsp-treemacs-errors-list)
 
-(bind-key* (kbd "<f1>") 'treemacs)
+  :custom-face
+  (treemacs-directory-face ((t (:inherit dired-directory)))) ; ample/blue
+  (treemacs-git-conflict-face ((t (:foreground "#9d2512")))) ; ample/dark-red
+  (treemacs-git-modified-face ((t (:foreground "#dF9522")))) ; ample/orange
 
-(use-package treemacs-projectile
-  :after (treemacs projectile)
-  :ensure t)
+  :init
+  (bind-key* (kbd "<f1>") 'treemacs))
+
 
 (use-package treemacs-magit
-  :after (treemacs magit)
+  :after treemacs
   :ensure t)
 
 (provide 'init-treemacs)

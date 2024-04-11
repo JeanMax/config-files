@@ -17,11 +17,11 @@
 (use-package highlight-indent-guides
   :ensure t
   :defer t
-  :diminish t
+  :diminish highlight-indent-guides-mode
   :commands (highlight-indent-guides-mode)
 
-  :init
-  (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
+  ;; :init
+  ;; (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
 
   :config
   (progn

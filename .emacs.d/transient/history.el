@@ -12,6 +12,7 @@
  (magit-dispatch nil)
  (magit-ediff nil)
  (magit-log
+  (("--" "Makefile"))
   ("-n256" "--graph" "--decorate")
   ("-n256" "--graph" "--color" "--decorate")
   ("-n256"))

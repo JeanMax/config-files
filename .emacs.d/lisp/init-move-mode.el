@@ -31,8 +31,6 @@
 (bind-key* (kbd "M-p") 'normup)
 (bind-key* (kbd "M-_") 'move-beginning-of-line) ; 8
 (bind-key* (kbd "M-ç") 'move-end-of-line) ; 9
-(bind-key* (kbd "<home>") 'backward-page)
-(bind-key* (kbd "<end>") 'forward-page)
 
 ;; (bind-key* (kbd "M-g") 'goto-line)
 

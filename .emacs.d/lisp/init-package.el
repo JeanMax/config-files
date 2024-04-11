@@ -69,6 +69,7 @@
         '(("melpa" . "http://melpa.org/packages/")
           ("gnu" . "http://elpa.gnu.org/packages/")
           ("nongnu" . "https://elpa.nongnu.org/nongnu/")))
+  (setq package-native-compile t)
   (package-initialize)
 
   ;; Bootstrap `use-package'
@@ -80,6 +81,8 @@
   (require 'bind-key)
   (when *is-a-server*
     (setq use-package-verbose t)))
+
+
 
 ;; (defun clone-package (package git)
 ;;   "Ugly hack to clone PACKAGE from GIT url when package.el is missing."

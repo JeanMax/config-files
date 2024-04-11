@@ -30,6 +30,7 @@ or when prefix ARG, the next Nfiles."
   (local-set-key (kbd "f") 'dired-find-files))
 
 
+;; TODO: rebind / remove these: find room for consult search (maybe remove M-s shell?)
 (bind-key (kbd "C-f") 'find-grep-dired)
 (bind-key (kbd "M-f") 'find-name-dired)
 

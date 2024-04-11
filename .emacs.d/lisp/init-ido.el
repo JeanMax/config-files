@@ -36,6 +36,7 @@
 
 
     ;; (setq ido-save-directory-list-file "~/.emacs.d/misc/ido.last")
+    ;; #ebc481 is some kind shiny yellow
     (set-face-attribute 'ido-first-match t :foreground "#ebc481") ;TODO: highlight?
     (set-face-attribute 'ido-subdir t :foreground ample/blue)
 

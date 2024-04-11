@@ -127,7 +127,7 @@
     			 (string-match ".*/config-files/.*" (or buffer-file-name "")))
              font-lock-preprocessor-face))))
 
-(bind-key* (kbd *altgr-s*) 'ibuffer)
+;; (bind-key* (kbd *altgr-s*) 'ibuffer)
 (defalias 'list-buffers 'ibuffer-other-window)
 
 (provide 'init-ibuffer)

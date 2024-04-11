@@ -1,4 +1,5 @@
 ;;; init.el --- init emacs
+;;; -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;******************************************************************************;
 ;                                                                              ;
@@ -37,6 +38,7 @@
 
 (setq read-process-output-max (* 1024 1024)) ;; 1mb
 
+(setq lexical-binding t)
 
 ;; compile config files
 (defconst initial-file-name-handler-alist file-name-handler-alist)
@@ -46,12 +48,23 @@
 			 (setq file-name-handler-alist initial-file-name-handler-alist)
 			 (when (< 23 emacs-major-version)
 			   (ignore-errors (benchmark-init/activate))
-			   (byte-recompile-directory "~/.emacs.d/lisp" 0)
-			   (byte-recompile-directory "~/.emacs.d/site-lisp" 0)
+               (recompile-config)
 			   (message "Init-time: %s" (emacs-init-time)))))
 (setq file-name-handler-alist nil)
 (setq load-prefer-newer t)
 ;; (setq debug-on-error t)
+
+(defun recompile-config ()
+  "Recompile elisp config: `lisp/*.el', `site-lisp/*/*.el'.
+
+   We do not touch init.el, since it would load all the other Lisp
+   config-files and eventually crash with some undefined ref.
+   Idem for lisp/custom.el, we'll let Emacs manage it."
+  (interactive)
+  (dolist (config-file
+           (nconc (file-expand-wildcards "~/.emacs.d/lisp/init-*.el")
+                  (file-expand-wildcards "~/.emacs.d/site-lisp/*/[!flycheck]*.el")))
+    (byte-recompile-file config-file nil 0)))
 
 
 ;; detect emacsclient/os
@@ -59,9 +72,10 @@
   (let ((prev_cmd (getenv "_")))
 	(if (eq nil prev_cmd)
 		nil
-		(string-equal "emacsclient" (file-name-nondirectory prev_cmd)))))
+	  (string-equal "emacsclient" (file-name-nondirectory prev_cmd)))))
 (defconst *is-a-mac* (eq system-type 'darwin))
 (defconst *is-rxvt* (string-equal "urxvtc" (getenv "TERMINAL")))
+
 
 (add-to-list 'load-path "~/.emacs.d/lisp")
 ;; builtin packages
@@ -88,7 +102,7 @@
 
 ;; site-lisp folder
 ;; (require 'init-42-mode)
-(require 'init-move-mode)
+;; (require 'init-move-mode)
 (require 'init-ample-theme)
 
 (when (< 23 emacs-major-version)
@@ -97,8 +111,8 @@
 
   ;; packages to download: package.el not builtin till emacs24... just give up
   ;; (require 'init-benchmark-init)  ; coment me when done playing around!
-  (require 'init-ido)
-  (require 'init-projectile)
+  ;; (require 'init-ido)
+  (require 'init-vertico)
   (require 'init-ace-window)
   (require 'init-rainbow-delimiters) ; sometimes buggy, but awesome
   (require 'init-highlight-indent-guides)
@@ -116,24 +130,23 @@
   (require 'init-yaml-mode)
   (require 'init-ledger-mode)
   (require 'init-tuareg)
-  (require 'init-nerd-icons)
+  (unless (or (string= "dumb" (getenv "TERM"))
+              (string= "linux" (getenv "TERM"))) ;; tty
+    (require 'init-nerd-icons))
   (require 'init-treemacs)
-  (require 'init-flycheck) ;TODO: do not compile flycheck temp files :/
+  (require 'init-flycheck)
+  (require 'init-lsp-mode)
+  (require 'init-mistty)
 
   ;; not builtin till emacs24
+  (require 'init-project)
   (require 'init-ruby-mode)
   (require 'init-eww-mode)
-  (require 'init-lsp-mode)
 
   ;; (when (< 22 emacs-major-version)
   ;;   ;; not builtin till emacs23
   ;;   (require 'init-vc-dir))
   )
-
-;; (with-eval-after-load 'eglot
-;;    (add-to-list 'eglot-server-programs
-;;                 '(python-ts-mode . ("ruff-lsp"))))
-;; (add-hook 'python-mode-hook #'eglot-ensure)
 
 ;; auto-generated customizations
 (setq custom-file "~/.emacs.d/lisp/custom.el")
@@ -141,5 +154,3 @@
 
 (provide 'init)
 ;;; init.el ends here
-(put 'upcase-region 'disabled nil)
-(put 'downcase-region 'disabled nil)

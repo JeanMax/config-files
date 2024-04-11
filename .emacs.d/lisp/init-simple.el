@@ -22,6 +22,9 @@
   ;; selecting region with shift
   (transient-mark-mode t)
 
+  (bind-key* (kbd "<home>") 'backward-page)
+  (bind-key* (kbd "<end>") 'forward-page)
+
   ;; copy / cut / paste / smurf
   (bind-key* (kbd "<f2>") 'kill-region)
   (bind-key* (kbd "<f3>") 'kill-ring-save)
@@ -45,7 +48,11 @@
   (defun copy-killring-to-clipboard()
     "Copy killring to clipboard!"
     (interactive)
-    (shell-command (concat "xsel -ib << EOF \n" (car kill-ring))) ;;TODO: don't itnerpret sh :/
+    (let ((temp-file "/tmp/.clipboard"))
+      (with-temp-file temp-file (yank))
+      (shell-command (format
+                      "xsel --clipboard --input < %s && rm -f %s"
+                      temp-file temp-file)))
     (message "Kill-ring copied to clipboard!"))
 
   (defun par()

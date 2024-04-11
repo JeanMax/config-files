@@ -13,7 +13,6 @@
 ;******************************************************************************;
 
 ;;; Code:
-
 (use-package python
   :defer t
   :mode
@@ -21,9 +20,9 @@
 
   :init
   (progn
+    (setenv "FORCE_COLOR" "t")
     (setenv "IPY_TEST_SIMPLE_PROMPT" "1")
     (setenv "PATH" (concat "~/.local/bin:" (getenv "PATH")))
-    ;; (add-hook 'python-mode-hook 'company-mode)
     (add-hook 'python-mode-hook 'eldoc-mode)
 
     (setq python-eldoc-setup-code
@@ -106,6 +105,13 @@
   (indent-according-to-mode)
   (insert "\"\"\"TODO\"\"\"\n\n")
   (indent-according-to-mode))
+
+
+
+(use-package eldoc
+  :defer t
+  :diminish eldoc-mode)
+
 
 (provide 'init-python-mode)
 ;;; init-python-mode.el ends here

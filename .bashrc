@@ -96,3 +96,8 @@ export MKLROOT=/home/mc/theano/mklml_lnx_2017.0.2.20170110
 export LD_LIBRARY_PATH=/home/mc/theano/mklml_lnx_2017.0.2.20170110/lib:$LD_LIBRARY_PATH
 export LIBRARY_PATH=/home/mc/theano/mklml_lnx_2017.0.2.20170110/lib:$LIBRARY_PATH
 export CPATH=/home/mc/theano/mklml_lnx_2017.0.2.20170110/include:$CPATH
+export LSP_USE_PLISTS=true
+
+if [ "$TERM" != "eterm-color" ]; then
+    PS1='\e]7;file://$HOSTNAME$PWD\e\\\\'$PS1
+fi

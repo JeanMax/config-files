@@ -19,7 +19,7 @@
   (use-package diminish
     :ensure t)
 
-  :config
+  ;; :config
   (defconst ample/green "#6aaf50")
   (defconst ample/dark-green "#057f40")
   (defconst ample/blue "#5180b3")
@@ -115,7 +115,7 @@
     ;; (defconst *altgr-$* "¤"))
 
 
-    ;default french
+    ;setxkbmap -layout fr -variant oss -option caps:super
     (defconst *console* "²")
     (defconst *altgr-a* "æ")
     (defconst *altgr-z* "â")
@@ -185,7 +185,7 @@
   (setq-default tab-width 4)
   (setq js-indent-level 4)
   (setq lua-indent-level 4)
-  (setq-default indent-tabs-mode nil) ; TODO: set to t later for 42-mode
+  (setq-default indent-tabs-mode nil)
   (setq indent-tabs-mode nil)
   (setq-default tab-stop-list (number-sequence 4 200 4))
   (setq fill-column 80)
@@ -232,14 +232,6 @@
   (setq auto-save-list-file-prefix "~/.emacs.d/auto-save-list/saves-")
   (setq auto-save-file-name-transforms `((".*" ,"~/.emacs.d/backup" t)))
 
-  ;; bookmark
-  ;; (when *is-a-server*
-    ;; (bookmark-bmenu-list))
-  ;; (setq bookmark-file "~/.emacs.d/misc/bookmarks")
-  ;; (bookmark-set)
-  ;; (bookmark-jump)
-  ;; (list-bookmarks)
-
   ;calendar
   (setq calendar-date-style (quote european))
   (setq calendar-week-start-day 1)
@@ -283,16 +275,21 @@
   (bind-key (kbd "<backtab>") 'dabbrev-expand)
   (bind-key* (kbd *altgr-h*) 'hippie-expand)
 
-  ;; registers
+  ;; registers ;; TODO: bugged on jump (actually it works, but completion throws an error)
+  ;; we'll use the consult versions
   (bind-key* (kbd "<f7>") 'point-to-register)
   (bind-key* (kbd "<f9>") 'jump-to-register)
   ;; (bind-key* (kbd *altgr-m*) 'point-to-register)
 
   ;; misc
-  (bind-key* (kbd "M-s") 'shell)
+  ;; (bind-key* (kbd "M-s") 'shell)
+  ;; (define-key sh-mode-map (kbd "C-c C-r") 'sh-send-line-or-region-and-step)
+  ;; (define-key bash-ts-mode-map (kbd "C-c C-r") 'sh-send-line-or-region-and-step)
+  ;; might want to check 'eval-in-repl' package
+
   (bind-key* (kbd "M-c") 'compile)
   (bind-key* (kbd "M-q") 'comment) ; -> elisp-functions.el
-  (bind-key* (kbd "C-q") 'insert-debug-comment) ; -> elisp-functions.el
+  (bind-key (kbd "C-q") 'insert-debug-comment) ; -> elisp-functions.el
 
   ;; gui font (default is actually set in .Xressources)
   (when (member "CodeNewRoman" (font-family-list))
@@ -332,16 +329,14 @@
   ;; search in minibuffer history
 
   ;; TODO: list free 'mod+key', keys (f1..12, weird stuffs: ù²¨^)
-  ;; (bind-key* (kbd *altgr-v*) 'free)
   ;; (bind-key* (kbd *altgr-z*) 'free)
   ;; (bind-key* (kbd *altgr-y*) 'free)
   ;; (bind-key* (kbd *altgr-u*) 'free)
-  ;; (bind-key* (kbd *altgr-$*) 'free)
-  ;; (bind-key* (kbd *altgr-s*) 'free)
+  ;; (bind-key* (kbd *altgr-s*) 'ibuffer-mode)
   ;; (bind-key* (kbd *altgr-d*) 'free)
   ;; (bind-key* (kbd *altgr-l*) 'free)
   ;; (bind-key* (kbd *altgr-w*) 'free)
-  ;; (bind-key* (kbd *altgr-c*) 'auto-complete-mode)
+  ;; (bind-key* (kbd *altgr-c*) 'free)
 
 
   ;; mode line customization (bottom bar)
@@ -378,26 +373,23 @@
                                (propertize (format "%s" .warning) 'face '(:foreground "black" :background "#df9522" :weight bold)))
                               (t
                                "")))))
-                  (:eval (let ((got-mail (and (boundp 'gnus-newsgroup-unreads)
-											  (string-match ".*\\([0-9]+\\).*: \\[Gmail\\]/Tous.*"
-															(with-current-buffer "*Group*" (buffer-string))))))
-                           (if got-mail
-                               (propertize " M " 'face '(:foreground "black" :background "#dF9522" :weight bold))
-                             "  ")))
-                  ;; current directory (TODO: short-short-short?)
+                  "  "
                   (:eval (propertize (extra-shorten-directory default-directory) 'face '(:weight bold)))
                   "  "
+                  (:eval (when (project-current)
+                             (concat "[" (project-name (project-current)) "]  ")))
                   ;vc branch
                   ;; (vc-mode vc-mode)
                   ;; actives modes
-                  "  "
                   mode-line-modes))
 
   ;; enable col number
   (column-number-mode 1)
 
   ;; horizontal scroll
-  (put 'scroll-left 'disabled nil))
+  (put 'scroll-left 'disabled nil)
+  (put 'upcase-region 'disabled nil)
+  (put 'downcase-region 'disabled nil))
 
 ;; 'truncate-string-to-width works pretty well too...
 (defun extra-shorten-directory (dir)
@@ -425,6 +417,17 @@
 ;;     (when path
 ;;       (setq output (concat ".../" output)))
 ;;     output))
+
+
+
+(use-package bookmark
+  :bind-keymap ("ø" . bookmark-map) ; *altgr-$*
+  ;; :bind (
+  ;; (bookmark-set)
+  ;; (bookmark-jump)
+  :init
+  (when *is-a-server*
+    (bookmark-bmenu-list)))
 
 
 ;; ansi colors in compilation buffer

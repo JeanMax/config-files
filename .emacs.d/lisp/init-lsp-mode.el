@@ -20,36 +20,38 @@
 (use-package lsp-mode
   :ensure t
   :defer t
+  :commands lsp
 
   :init
   (setq lsp-use-plists t)
   (setq lsp-keymap-prefix "C-c l")
 
-  :hook ((python-mode . lsp)
-         ;; (lua-mode . lsp)
-         ;; (yaml-mode . lsp)
-         ;; (json-mode . lsp)
-         ;; (sh-mode . lsp)
+  :hook (
+         ;; (python-mode . lsp)
          ;; (c-mode . lsp)
+         ;; (c++-mode . lsp)
          ;; (dockerfile-mode . lsp)
-         ;; (groovy-mode . lsp)
+         ;; ;; (lua-mode . lsp)
+         ;; ;; (yaml-mode . lsp)
+         ;; ;; (json-mode . lsp)
+         ;; ;; (sh-mode . lsp)
+         ;; ;; (groovy-mode . lsp)
          (lsp-mode . lsp-enable-which-key-integration))
 
   :config
-  (progn
+  (setq lsp-auto-guess-root t)
+  (setq lsp-pylsp-plugins-flake8-enabled nil)
+  (setq lsp-pylsp-plugins-mccabe-enabled nil)
+  (setq lsp-pylsp-plugins-pycodestyle-enabled nil)
+  (setq lsp-pylsp-plugins-pydocstyle-enabled nil)
+  (setq lsp-pylsp-plugins-ruff-enabled t)
+  (setq lsp-pylsp-plugins-mypy-enabled t)
+  (setq lsp-enable-symbol-highlighting nil)
+  (setq lsp-keep-workspace-alive nil)
+  (setq lsp-headerline-breadcrumb-enable nil))
 
-    (setq lsp-auto-guess-root t)
-    (setq lsp-pylsp-plugins-flake8-enabled nil)
-    (setq lsp-pylsp-plugins-mccabe-enabled nil)
-    (setq lsp-pylsp-plugins-pycodestyle-enabled nil)
-    (setq lsp-pylsp-plugins-ruff-enabled t)
+;; (require 'lsp-ido)
 
-
-    (require 'lsp-ido)
-
-    (setq lsp-headerline-breadcrumb-enable nil))
-
-  :commands lsp)
 
 (use-package lsp-ui
   :ensure t
@@ -61,6 +63,10 @@
   ;; (setq lsp-ui-doc-border (face-foreground 'default))
   ;; (setq lsp-ui-sideline-show-code-actions t)
   ;; (setq lsp-ui-sideline-delay 0.05)
+  )
+
+(use-package lsp-lens
+  :diminish lsp-lens-mode
   )
 
 (use-package lsp-treemacs
@@ -76,8 +82,8 @@
 ;; optional if you want which-key integration
 (use-package which-key
   :ensure t
-  :defer t
-  :diminish t
+  ;; :defer t
+  :diminish which-key-mode
   :config
   (progn
     (which-key-mode)

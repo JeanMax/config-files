@@ -23,13 +23,20 @@
   (set-face-attribute 'minibuffer-prompt t :foreground ample/light-blue)
   (set-face-attribute 'region t :background "#424242")
   ;; font-lock-string-face && font-lock-variable-name-face are the same...
-  (set-face-attribute 'default t :foreground ample/fg :background "gray13")
+  ;; (set-face-attribute 'default t :foreground ample/fg :background "gray13")
+  (set-face-attribute 'default t :foreground ample/fg :background nil)
   (set-face-attribute 'font-lock-variable-name-face t :foreground "#b8b74b")
   (set-face-attribute 'font-lock-string-face t :foreground ample/dark-tan)
   (set-face-attribute 'font-lock-doc-face t :foreground ample/tan)
-  (set-face-attribute 'highlight t :background ample/orange)
+  (set-face-attribute 'highlight t :background ample/darker-gray)
   (set-face-attribute 'lazy-highlight t :foreground ample/orange :weight 'bold)
   (set-face-attribute 'match t :foreground ample/orange))
+
+
+(use-package hl-line
+  :config
+  (set-face-attribute 'hl-line t :extend t :background ample/darker-gray)
+  )
 
 
 (provide 'init-ample-theme)

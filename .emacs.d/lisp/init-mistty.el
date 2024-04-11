@@ -1,9 +1,9 @@
-;;; init-nerd-icons.el --- init nerd-icons
+;;; init-mistty.el --- init mistty
 ;;; Commentary:
 ;******************************************************************************;
 ;                                                                              ;
 ;                                                         :::      ::::::::    ;
-;    init-nerd-icons.el                                   :+:      :+:    :+:  ;
+;    init-mistty.el                                       :+:      :+:    :+:  ;
 ;                                                     +:+ +:+         +:+      ;
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
@@ -13,36 +13,27 @@
 ;******************************************************************************;
 
 ;;; Code:
-(use-package nerd-icons
+(use-package mistty
   :ensure t
-  :custom
-  (nerd-icons-font-family "Symbols Nerd Font Mono"))
-
-(use-package treemacs-nerd-icons
-  :after (nerd-icons treemacs)
-  :ensure t
+  :defer t
+  :init
+  (bind-key* (kbd *altgr-s*) 'mistty)
   :config
-  (treemacs-load-theme "nerd-icons"))
+  (keymap-set mistty-prompt-map "C-c C-r" 'mistty-send-ctrl-r)
+  (keymap-set mistty-prompt-map "C-c C-s" 'mistty-send-ctrl-s)
+  (keymap-set mistty-prompt-map "C-c C-f" 'mistty-sudo)
+  (keymap-set mistty-prompt-map "C-c C-b" 'mistty-create-buffer-with-output))
 
-(use-package nerd-icons-ibuffer
-  :after (nerd-icons ibuffer)
-  :ensure t
-  :hook (ibuffer-mode . nerd-icons-ibuffer-mode))
+(defun mistty-send-ctrl-r ()
+  "Send Ctrl-r to the terminal."
+  (interactive)
+  (mistty-send-key 1 (kbd "C-r")))
 
-(use-package nerd-icons-completion
-  :after (nerd-icons ibuffer) ;; marginalia
-  :ensure t
-  :config
-  (nerd-icons-completion-mode)
-  (add-hook 'marginalia-mode-hook #'nerd-icons-completion-marginalia-setup)
-  )
-
-(use-package nerd-icons-dired
-  :after (nerd-icons dired)
-  :ensure t
-  :hook
-  (dired-mode . nerd-icons-dired-mode))
+(defun mistty-send-ctrl-s ()
+  "Send Ctrl-s to the terminal."
+  (interactive)
+  (mistty-send-key 1 (kbd "C-s")))
 
 
-(provide 'init-nerd-icons)
-;;; init-nerd-icons.el ends here
+(provide 'init-mistty)
+;;; init-mistty.el ends here

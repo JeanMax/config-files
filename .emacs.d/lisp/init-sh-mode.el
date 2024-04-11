@@ -14,13 +14,19 @@
 
 ;;; Code:
 
-;; TODO: sh-mode is in "C-source-code",
+;; sh-mode is in "C-source-code",
 ;; so use-package throw a "no such file" (but works...)
 (use-package sh-script
   :defer t
   :mode
   ("PKGBUILD\\'" . sh-mode)
   ("\\.install\\'" . sh-mode))
+
+
+(use-package makefile-mode
+  :mode
+  ("Makefile\\.*" . makefile-mode)
+  (".*\\.mk" . makefile-mode))
 
 (provide 'init-sh-mode)
 ;;; init-sh-mode.el ends here

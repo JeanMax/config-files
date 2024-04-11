@@ -1,0 +1,10 @@
+CompileFlags:
+  Add: -Wno-unknown-warning-option
+  Add: -ferror-limit=10000
+  Remove: [-m*, -f*]
+
+Diagnostics:
+  UnusedIncludes: Strict
+
+  ClangTidy:
+    Remove: modernize-macro-to-enum
