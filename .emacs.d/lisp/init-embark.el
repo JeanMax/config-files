@@ -35,7 +35,7 @@
   ;; (setq eldoc-documentation-strategy #'eldoc-documentation-compose-eagerly)
 
   :config
-  ;; TODO: broken
+  (require 'altgr)
   (bind-key* (kbd *altgr-c*) 'embark-act)
   (bind-key* (kbd *altgr-z*) 'embark-dwim)
 

@@ -43,6 +43,7 @@
   ;; (setq tags-table-list '("/home/mcanal/.emacs.d/TAGS"))))
 
 
+(require 'altgr)
 (bind-key* (kbd *altgr-t*) 'tags-make-n-visit)
 (bind-key* (kbd *altgr-g*) 'xref-find-definitions)
 (bind-key* (kbd *altgr-x*) 'xref-find-references)

@@ -28,7 +28,7 @@
           (project-find-regexp "Find regexp" nil)
           (project-find-dir "Find directory" nil)
           (magit-project-status "Magit" 109)
-          (mistty-in-project "Shell" nil)
+          (mistty-in-project "Shell" nil) ;;TODO: key not showing
           (project-compile "Compile" nil)
           (project-kill-buffers "Kill" nil))))
 

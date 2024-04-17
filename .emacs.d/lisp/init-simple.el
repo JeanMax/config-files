@@ -42,6 +42,7 @@
   (bind-key* (kbd "M--") 'inc) ; 6
   ;; insert \n && \t
   (bind-key* (kbd "C-c RET") 'insert-eol)
+  (require 'altgr)
   (bind-key* (kbd *altgr-a*) 'tab-to-tab-stop)
   (bind-key* (kbd *console*) 'tab-to-tab-stop)
 

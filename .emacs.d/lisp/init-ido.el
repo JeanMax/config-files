@@ -144,7 +144,7 @@
      (expand-file-name
       (ido-completing-read
        "Project file: " (tags-table-files) nil t)))))
-(bind-key (kbd *altgr-o*) 'ido-find-file-in-tag-files)
+;; (bind-key (kbd *altgr-o*) 'ido-find-file-in-tag-files)
 
 (provide 'init-ido)
 ;;; init-ido.el ends here

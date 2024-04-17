@@ -17,6 +17,7 @@
   :ensure t
   :defer t
   :init
+  (require 'altgr)
   (bind-key* (kbd *altgr-s*) 'mistty)
   :config
   (keymap-set mistty-prompt-map "C-c C-r" 'mistty-send-ctrl-r)

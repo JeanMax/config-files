@@ -19,6 +19,7 @@
   :load-path
   "~/.emacs.d/site-lisp/move")
 
+(require 'altgr)
 (bind-key* (kbd *altgr-i*) 'move-mode)
 
 (bind-key* (kbd "M-i") 'previous-line)

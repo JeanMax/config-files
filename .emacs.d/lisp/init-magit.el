@@ -31,6 +31,7 @@
   (set-face-attribute 'magit-section-highlight t :background ample/region)
   (set-face-attribute 'magit-diff-file-heading t :foreground ample/blue :weight 'bold))
 
+(require 'altgr)
 (bind-key* (kbd *altgr-v*) 'magit-status)
 
 (provide 'init-magit)

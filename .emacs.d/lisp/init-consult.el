@@ -131,7 +131,9 @@
 
 (bind-key* (kbd "<f7>") 'consult-register-store)
 (bind-key* (kbd "<f9>") 'consult-register-load)
-(keymap-set bookmark-map "ø" 'consult-bookmark) ; *altgr-$*
+(require 'altgr)
+(keymap-set bookmark-map *altgr-$* 'consult-bookmark)
+(bind-key* (kbd *altgr-$*) 'bookmark-map)
 (bind-key* (kbd *altgr-b*) 'consult-buffer)
 
 

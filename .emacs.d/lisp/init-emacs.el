@@ -20,6 +20,8 @@
     :ensure t)
 
   ;; :config
+  (require 'altgr)
+
   (defconst ample/green "#6aaf50")
   (defconst ample/dark-green "#057f40")
   (defconst ample/blue "#5180b3")
@@ -55,117 +57,6 @@
   (defconst ample/bg "gray13")
   (defconst ample/fg "#bdbdb3")
 
-  ;; alias for altgr keys, since they change a lot between keyboards
-  (if *is-a-mac*
-      (progn (defconst *altgr-a* "´")
-             (defconst *altgr-z* "Â")
-             (defconst *altgr-e* "€")
-             (defconst *altgr-r* "®")
-             (defconst *altgr-t* "†")
-             (defconst *altgr-y* "Ú")
-             (defconst *altgr-u* "º")
-             (defconst *altgr-i* "î")
-             (defconst *altgr-o* "œ")
-             (defconst *altgr-p* "π")
-             (defconst *altgr-q* "´")
-             (defconst *altgr-s* "Ò")
-             (defconst *altgr-d* "∂")
-             (defconst *altgr-f* "ƒ")
-             (defconst *altgr-g* "ﬁ")
-             (defconst *altgr-h* "Ì")
-             (defconst *altgr-j* "Ï")
-             (defconst *altgr-k* "È")
-             (defconst *altgr-l* "¬")
-             (defconst *altgr-m* "µ")
-             (defconst *altgr-w* "‹")
-             (defconst *altgr-x* "≈")
-             (defconst *altgr-c* "©")
-             (defconst *altgr-v* "◊")
-             (defconst *altgr-b* "ß")
-             (defconst *altgr-n* "~")
-             (defconst *altgr-$* "¤"))
-
-    ;alternative french?
-    ;; (defconst *altgr-a* "æ")
-    ;; (defconst *altgr-z* "«")
-    ;; (defconst *altgr-e* "€")
-    ;; (defconst *altgr-r* "¶")
-    ;; (defconst *altgr-t* "ŧ")
-    ;; (defconst *altgr-y* "←")
-    ;; (defconst *altgr-u* "↓")
-    ;; (defconst *altgr-i* "→")
-    ;; (defconst *altgr-o* "ø")
-    ;; (defconst *altgr-p* "þ")
-    ;; (defconst *altgr-q* "@")
-    ;; (defconst *altgr-s* "ß")
-    ;; (defconst *altgr-d* "ð")
-    ;; (defconst *altgr-f* "đ")
-    ;; (defconst *altgr-g* "ŋ")
-    ;; (defconst *altgr-h* "ħ")
-    ;; (defconst *altgr-j* "")
-    ;; (defconst *altgr-k* "ĸ")
-    ;; (defconst *altgr-l* "ł")
-    ;; (defconst *altgr-m* "µ")
-    ;; (defconst *altgr-w* "ł")
-    ;; (defconst *altgr-x* "»")
-    ;; (defconst *altgr-c* "¢")
-    ;; (defconst *altgr-v* "“")
-    ;; (defconst *altgr-b* "”")
-    ;; (defconst *altgr-n* "n")
-    ;; (defconst *altgr-$* "¤"))
-
-
-    ;setxkbmap -layout fr -variant oss -option caps:super
-    (defconst *console* "²")
-    (defconst *altgr-a* "æ")
-    (defconst *altgr-z* "â")
-    (defconst *altgr-e* "€")
-    (defconst *altgr-r* "ê") ; I use that :/
-    (defconst *altgr-t* "þ")
-    (defconst *altgr-y* "ÿ")
-    (defconst *altgr-u* "û")
-    (defconst *altgr-i* "î")
-    (defconst *altgr-o* "œ")
-    (defconst *altgr-p* "ô")
-    (defconst *altgr-q* "ä")
-    (defconst *altgr-s* "ß")
-    (defconst *altgr-d* "ë")
-    (defconst *altgr-f* "‘")
-    (defconst *altgr-g* "’")
-    (defconst *altgr-h* "ð")
-    (defconst *altgr-j* "ü")
-    (defconst *altgr-k* "ï")
-    (defconst *altgr-l* "ŀ")
-    (defconst *altgr-m* "ö")
-    (defconst *altgr-w* "«")
-    (defconst *altgr-x* "»")
-    (defconst *altgr-c* "©")
-    (defconst *altgr-v* " ")
-    (defconst *altgr-b* "↓")
-    (defconst *altgr-n* "¬")
-    (defconst *altgr-$* "ø"))
-  ;TODO: add a variable to configure this at runtime
-
-
-  (when *is-rxvt*
-    ;; (define-key function-key-map "\033[1;5A" [(control up)])
-    ;; (define-key function-key-map "\033[1;5B" [(control down)])
-    ;; (define-key function-key-map "\033[1;5D" [(control left)])
-    ;; (define-key function-key-map "\033[1;5C" [(control right)])
-    ;; (define-key function-key-map "\033[1;2A" [(shift up)])
-    ;; (define-key function-key-map "\033[1;2B" [(shift down)])
-    ;; (define-key function-key-map "\033[1;2D" [(shift left)])
-    ;; (define-key function-key-map "\033[1;2C" [(shift right)])
-
-    ;control-del fix
-    (define-key function-key-map "\033[3;5~" [(control delete)])
-
-
-    ;control-shift fix
-    (define-key function-key-map "\033[1;6A" [(control shift up)])
-    (define-key function-key-map "\033[1;6B" [(control shift down)])
-    (define-key function-key-map "\033[1;6D" [(control shift left)])
-    (define-key function-key-map "\033[1;6C" [(control shift right)]))
 
   ;; Ignore case when completing file/buffer names
   (setq read-file-name-completion-ignore-case 't)
@@ -206,6 +97,7 @@
   (setq inhibit-startup-buffer-menu t)
 
   ;; no *scratch* at startup, use the previous buffer
+  (require 'altgr)
   (when *is-a-server*
     (setq initial-buffer-choice
           '(lambda ()
@@ -418,16 +310,6 @@
 ;;       (setq output (concat ".../" output)))
 ;;     output))
 
-
-
-(use-package bookmark
-  :bind-keymap ("ø" . bookmark-map) ; *altgr-$*
-  ;; :bind (
-  ;; (bookmark-set)
-  ;; (bookmark-jump)
-  :init
-  (when *is-a-server*
-    (bookmark-bmenu-list)))
 
 
 ;; ansi colors in compilation buffer

@@ -121,6 +121,7 @@
 
 
 ;; buffers handling
+(require 'altgr)
 (bind-key* (kbd *altgr-k*) 'kill-buffer)
 (bind-key* (kbd *altgr-p*) 'mode-line-other-buffer)
 (bind-key* (kbd "<f11>") 'save-buffer)

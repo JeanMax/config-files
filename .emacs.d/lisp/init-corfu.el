@@ -16,7 +16,7 @@
 (use-package corfu
   :ensure t
   :defer t
-  :bind (("TAB" . indent-or-complete))
+  ;; :bind (("TAB" . indent-or-complete))
   :config
   ;; (setq corfu-auto t)
   (setq corfu-cycle t)                ;; Enable cycling for `corfu-next/previous'

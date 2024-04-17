@@ -63,21 +63,13 @@
   (interactive)
   (dolist (config-file
            (nconc (file-expand-wildcards "~/.emacs.d/lisp/init-*.el")
+                  (file-expand-wildcards "~/.emacs.d/lisp/lib/[!flycheck]*.el")
                   (file-expand-wildcards "~/.emacs.d/site-lisp/*/[!flycheck]*.el")))
     (byte-recompile-file config-file nil 0)))
 
 
-;; detect emacsclient/os
-(defconst *is-a-server*
-  (let ((prev_cmd (getenv "_")))
-	(if (eq nil prev_cmd)
-		nil
-	  (string-equal "emacsclient" (file-name-nondirectory prev_cmd)))))
-(defconst *is-a-mac* (eq system-type 'darwin))
-(defconst *is-rxvt* (string-equal "urxvtc" (getenv "TERMINAL")))
-
-
 (add-to-list 'load-path "~/.emacs.d/lisp")
+(add-to-list 'load-path "~/.emacs.d/lisp/lib")
 ;; builtin packages
 (require 'init-package) ; need to be 1st
 (require 'init-emacs) ;   "    "  "  2nd
@@ -113,6 +105,7 @@
   ;; (require 'init-benchmark-init)  ; coment me when done playing around!
   ;; (require 'init-ido)
   (require 'init-vertico)
+  (require 'init-orderless)
   (require 'init-marginalia)
   (require 'init-embark)
   (require 'init-consult)

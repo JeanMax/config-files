@@ -79,6 +79,7 @@
   (eval-when-compile
     (require 'use-package))
   (require 'bind-key)
+  (require 'altgr)
   (when *is-a-server*
     (setq use-package-verbose t)))
 
