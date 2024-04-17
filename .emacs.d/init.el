@@ -113,6 +113,9 @@
   ;; (require 'init-benchmark-init)  ; coment me when done playing around!
   ;; (require 'init-ido)
   (require 'init-vertico)
+  (require 'init-marginalia)
+  (require 'init-embark)
+  (require 'init-consult)
   (require 'init-ace-window)
   (require 'init-rainbow-delimiters) ; sometimes buggy, but awesome
   (require 'init-highlight-indent-guides)
