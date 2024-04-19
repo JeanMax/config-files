@@ -9,8 +9,6 @@
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
-set $mod Mod4
-
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below. ISO 10646 = Unicode
 font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
@@ -20,11 +18,43 @@ font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 # chose a FreeType font, such as:
 # font pango:DejaVu Sans Mono 10
 
+
+# for_window [all] title_window_icon on
+for_window [all] title_window_icon padding 5px
+# title_align center
+
+# hides borders on workspaces with only one window visible
+# hide_edge_borders smart
+# for_window [window_role="pop-up"] floating enable
+# for_window [window_role="bubble"] floating enable
+# for_window [window_role="task_dialog"] floating enable
+# for_window [window_role="Preferences"] floating enable
+# for_window [window_role="Open Files"] floating enable
+# for_window [window_type="dialog"] floating enable
+# for_window [window_type="menu"] floating enable
+for_window [class="Conky"] floating enable
+
+# windows border (normal|pixel|1pixel|none)
+new_window pixel 4
+new_float pixel 4
+# for_window [all] border normal 4
+
+
+
+
+
+
+
+
+set $mod Mod4
+
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
+# set $term   ~/config-files/sh_script/launch_alacritty.sh
+# bindsym $mod+Return exec $term
 
 # kill focused window
 bindsym $mod+w kill
@@ -69,6 +99,8 @@ bindsym $mod+h split h
 
 # split in vertical orientation
 bindsym $mod+v split v
+
+# bindsym $mod+t split toggle
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen
@@ -135,7 +167,7 @@ set $Killer ~/.config/i3/graceful_exit.sh
 
 set $mode_system System (o) blackout, (l) lock, (e) logout, (r) reboot, (s) shutdown, (h) hibernate
 mode "$mode_system" {
-    bindsym o exec --no-startup-id xset dpms force off, mode "default"
+    bindsym o exec --no-startup-id $Locker && xset dpms force off, mode "default"
     bindsym l exec --no-startup-id $Locker && systemctl suspend -i, mode "default"
     bindsym h exec --no-startup-id $Locker && systemctl hibernate -i, mode "default"
     bindsym e exec --no-startup-id $Killer && i3-msg exit, mode "default"
@@ -203,8 +235,12 @@ bar {
 }
 font pango:Cantarell Bold 10
 
+# whole screen(s)
 bindsym Print exec "scrot -e 'mv $f ~/Pictures'"
+# focused windown
 bindsym $mod+Print exec "scrot -ue 'mv $f ~/Pictures'"
+# selection
+bindsym $mod+Shift+Print exec "sleep 0.2 && scrot -f -s -e 'mv $f ~/Pictures'"
 
 
 bindsym $mod+o workspace next
@@ -223,7 +259,7 @@ bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 set $mute        BLOCK_BUTTON=3
 set $raise       BLOCK_BUTTON=4
 set $lower       BLOCK_BUTTON=5
-set $volume      /usr/lib/i3blocks/volume
+set $volume      /home/mcanal/.config/i3blocks/volume.sh
 set $sound_notif paplay /usr/share/sounds/freedesktop/stereo/audio-volume-change.oga
 
 bindsym XF86AudioMute        exec $mute  $volume && $sound_notif
@@ -232,58 +268,77 @@ bindsym XF86AudioLowerVolume exec $lower $volume && $sound_notif
 bindsym XF86AudioMicMute exec --no-startup-id amixer -q sset Capture toggle
 
 # screen brightness controls
-bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 1 -time 0
-bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 1 -time 0
+bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set 5%+
+bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 5%-
 
-# for_window [window_role="pop-up"] floating enable
-# for_window [window_role="bubble"] floating enable
-# for_window [window_role="task_dialog"] floating enable
-# for_window [window_role="Preferences"] floating enable
-# for_window [window_role="Open Files"] floating enable
-# for_window [window_type="dialog"] floating enable
-# for_window [window_type="menu"] floating enable
-for_window [class="Conky"] floating enable
 
-# windows border (normal|pixel|1pixel|none)
-new_window pixel 4
-new_float pixel 4
-bindsym $mod+b border pixel 4
+bindsym $mod+b       border pixel 4
 bindsym $mod+Shift+b border normal 4
 
 # The middle button over a titlebar kills the window
-# bindsym --release button2 kill #bjorked
-
-# hides borders on workspaces with only one window visible
-# hide_edge_borders smart
+bindsym --release button2 kill
 
 # bindsym $mod+g exec emacs-term
-bindsym $mod+g exec setxkbmap us
-bindsym $mod+Shift+g exec setxkbmap fr-latin9
+bindsym $mod+g exec setxkbmap us -option caps:super
+bindsym $mod+Shift+g exec setxkbmap -layout fr -variant oss -option caps:super
 
 # emacs-term == /usr/bin/mate-terminal -x sh -c "TERM=xterm-256color emacsclient -t ; zsh"
 # rm -f ~/.emacs.d/.emacs.desktop.lock
 
+
+
+
+
+
+
+
+exec --no-startup-id xrandr --setprovideroutputsource modesetting NVIDIA-0
+exec --no-startup-id xrandr --auto
+
+exec --no-startup-id setxkbmap -option caps:super
+exec --no-startup-id redshift # pgrep redshift ||
+exec --no-startup-id NOP=t sh ~/config-files/.xinitrc
+# TODO: stop using that xinit script, move all command launching in here
+# then find a way to handle env var the smart way: not here...
+# https://faq.i3wm.org/question/18/how-do-xsession-xinitrc-and-i3config-play-together.1.html
+# so you're left with: .profile, .xsession, .xinitrc
+
+# exec --no-startup-id "compfy --corner-radius 0 --vsync --xrender-sync-fence --unredir-if-possible --animation-for-open-window auto --animation-for-unmap-window auto --animation-dampening 12"
+
+
 # assuming there are 2 screens max
 # set $screen1 "exec xrandr | grep primary | cut -d' ' -f1"
 # set $screen2 "exec xrandr | grep ' connected' | grep -v primary | cut -d' ' -f1"
-set $screen1 eDP1
-set $screen2 HDMI2
+set $screen2 eDP-1
+set $screen1 HDMI-1
+
 
 workspace "1:firefox" output $screen1
 workspace "2:emacs" output $screen1
-workspace "3:term" output $screen1
-workspace "4:mail" output $screen1
+workspace "3:term" output $screen2
+# workspace "4:mail" output $screen2
+# workspace "5:firefox" output $screen2
 
-workspace "5:firefox" output $screen2
-workspace "6:emacs" output $screen2
-workspace "7:term" output $screen2
+assign [instance="EmacsTerm"] 2:emacs
 
-exec --no-startup-id feh -V --bg-max ~/Pictures/Wallpapers/xkcd.png
-# exec --no-startup-id i3lock -f -t -i ~/Pictures/Wallpapers/xkcd.png
-# exec --no-startup-id xmodmap ~/.Xmodmap
 
 exec --no-startup-id i3-msg 'workspace 1:firefox; exec firefox'
-exec --no-startup-id i3-msg 'workspace 2:emacs;   exec emacs-term'
+
+exec --no-startup-id i3-msg 'workspace 2:emacs;   exec ~/sh_script/launch_emac.sh'
+
 exec --no-startup-id i3-msg 'workspace 3:term;    exec i3-sensible-terminal'
 exec --no-startup-id i3-msg 'workspace 3:term;    exec i3-sensible-terminal'
-exec --no-startup-id i3-msg 'workspace 4:mail;    exec sleep 2 && emacs-mail'
+
+
+
+
+# exec  i3-msg 'workspace 4:mail;    exec sleep 2 && emacs-mail'
+
+
+# exec  i3-msg 'workspace 7:term;    exec $term'
+# exec  i3-msg 'workspace 7:term;    exec $term'
+
+
+
+# exec  i3lock -f -t -i ~/Pictures/Wallpapers/xkcd.png
+# exec  xmodmap ~/.Xmodmap

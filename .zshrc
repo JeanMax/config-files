@@ -20,10 +20,13 @@ source ~/.bashrc
 REPORTTIME=5
 
 # Definition du prompt
+if false; then #hash starship 2>/dev/null; then
+    eval "$(starship init zsh)"
+else
 precmd ()
 {
     if [ $? -eq 0 ]; then
-        CMD_COLOR="%{$fg[green]%}"
+        CMD_COLOR="%{$fg[blue]%}"
     else
         CMD_COLOR="%{$fg[red]%}"
     fi
@@ -85,9 +88,10 @@ precmd ()
 		DUMB_PROMPT="$RPROMPT"
 	fi
 
-    PROMPT="%B%{$fg[green]%}%n@%{$fg[yellow]%}%m%{$fg[white]%}:%{$fg[red]%}%~        $DUMB_PROMPT
+    PROMPT="%B%{$fg[blue]%}%n@%{$fg[yellow]%}%m%{$fg[white]%}:%{$fg[red]%}%~        $DUMB_PROMPT
 %{$CMD_COLOR%}>%{$reset_color%}%b "
 }
+fi # starship
 
 # Reglage du terminal
 if [[ $TERM = dumb ]]; then
@@ -98,20 +102,12 @@ else
 	tab_cd "$(test -e ~/.pwd && cat ~/.pwd)"
 	alias cd='tab_cd'
 
-    if [[ $TERM != rxvt-256color ]]; then
-        TERM=xterm-256color
-        # Correction de la touche Delete / ctrl-left / ctrl-right
-        bindkey "\e[3~"   delete-char
-        bindkey "\e[1;5D" backward-word
-        bindkey "\e[1;5C" forward-word
-        bindkey "\e[3;5~" kill-word
-    else
-        bindkey "\e[3~"   delete-char
-        bindkey "^[Od" backward-word
-        bindkey "^[Oc" forward-word
-        bindkey "\e[3;5~" kill-word
-        # bindkey "\e[3^" kill-word
-    fi
+    # TERM=xterm-256color
+    # Correction de la touche Delete / ctrl-left / ctrl-right
+    bindkey "\e[3~"   delete-char
+    bindkey "\e[1;5D" backward-word
+    bindkey "\e[1;5C" forward-word
+    bindkey "\e[3;5~" kill-word
 
     # bind alt-z to fg
     _fg() { fg }
@@ -128,8 +124,12 @@ setopt HIST_EXPIRE_DUPS_FIRST
 setopt notify
 
 # Autocompletion de type menu
-autoload -Uz compinit promptinit && compinit && promptinit
+fpath=(~/.zsh_fpath $fpath)
+export FPATH=~/.zsh_fpath:$FPATH
+
 zstyle ':completion:*' menu select
+zstyle ':completion:*:*:make:*' tag-order 'targets'
+autoload -Uz compinit promptinit && compinit && promptinit
 setopt COMPLETE_ALIASES
 
 # Use modern completion system
@@ -181,12 +181,12 @@ zstyle ':completion:*:*:kill:*:processes' list-colors "=(#b) #([0-9]#)*=36=31"
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
 # zsh-syntax-highlighting
-test -e /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh \
-	&& source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+test -e /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh \
+	&& source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # zsh autosuggestion
-test -e /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh \
-	&& source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+test -e /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh \
+	&& source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # fzf
 test -e /usr/share/fzf/completion.zsh \
@@ -199,7 +199,13 @@ test -e /usr/share/fzf/completion.zsh \
 #   fd --type d --hidden --follow --exclude ".git" . "$1"
 # }
 
+
+
+# hash mcfly 2>/dev/null && eval "$(mcfly init zsh)"
+
+
 # TODO: get familiar with these funny tools: bat fd fzf rg
+# https://remysharp.com/2018/08/23/cli-improved
 
 # export OPAMEXTERNALSOLVER=$(which packup 2> /dev/null)
 
@@ -211,4 +217,8 @@ test -e /usr/share/fzf/completion.zsh \
 
 
 # add completion on aliases
-unsetopt complete_aliases
+setopt complete_aliases
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"

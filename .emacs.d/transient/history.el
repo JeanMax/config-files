@@ -1,4 +1,5 @@
-((docker nil)
+((dirvish-dispatch nil)
+ (docker nil)
  (docker-image-ls nil)
  (git-timemachine-help nil)
  (magit-blame
@@ -12,8 +13,8 @@
  (magit-dispatch nil)
  (magit-ediff nil)
  (magit-log
-  (("--" "Makefile"))
   ("-n256" "--graph" "--decorate")
+  (("--" "Makefile"))
   ("-n256" "--graph" "--color" "--decorate")
   ("-n256"))
  (magit-margin-settings nil)

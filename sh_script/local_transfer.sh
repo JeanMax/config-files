@@ -13,7 +13,7 @@ EOF
 }
 
 recv() {
-    nc -vlp "$PORT" | tar -xv"$COMPRESS"
+    nc -vl "$PORT" | tar -xv"$COMPRESS"
 }
 
 send() {

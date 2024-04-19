@@ -44,6 +44,9 @@ xset s off
 # Disable bell
 xset -b
 
+# set keyboard speed (delay, repeat speed)
+xset r rate 400 40
+
 # Enable zapping (C-A-<Bksp> kills X)
 # setxkbmap -option terminate:ctrl_alt_bksp
 # setxkbmap -option caps:super
@@ -75,8 +78,8 @@ export LC_TIME=fr_FR.UTF-8
 # This helps i3...
 export EDITOR="emacsclient -t"
 # export VISUAL="emacsclient -c"
-# export TERMINAL="urxvtc"
 export TERMINAL="mate-terminal"
+# export TERMINAL="alacritty"
 
 # this helps rofi-themes
 export XDG_DATA_DIRS=/usr/share:/usr/local/share
@@ -91,9 +94,6 @@ else
 fi
 
 
-# urxvt server
-test $TERMINAL == "urxvtc" && urxvtd -q -f -o
-
 # Enable core dumps in case something goes wrong
 ulimit -c unlimited
 
@@ -102,45 +102,70 @@ case $WM in
     i3)
 
 		# Auto screen lock
-        xautolock -detectsleep -cornersize 50 -corners --00 -time 10 -locker 'xset dpms force off' &
+        # xautolock -detectsleep -cornersize 50 -corners --00 -time 3 -locker 'xset dpms force off' &
+        xautolock -detectsleep -cornersize 50 -corners --00 -time 5 -locker 'i3lock -f -t -i /home/mcanal/Pictures/Wallpapers/xkcd.png && sleep 1 && xset dpms force off' &
         # xautolock -detectsleep -cornersize 50 -corners --00 -time 42 -locker 'systemctl suspend -i' &
 		# caffeine &
-		bash -x "$(command -v lightson+)" --delay 3 --audio 1 --mplayer 1 --vlc 1 --totem 0 --firefox-flash 1 --chromium-flash 1 --webkit-flash 1 --html5 1 --steam 0 --minitube 0 --minload 2 > /tmp/lightson.log 2>&1 &
+		#bash -x "$(command -v lightson+)" --delay 3 --audio 1 --mplayer 1 --vlc 1 --totem 0 --firefox-flash 1 --chromium-flash 1 --webkit-flash 1 --html5 1 --steam 0 --minitube 0 --minload 2 > /tmp/lightson.log 2>&1 &
         # lightson+cmd on &
 
-        screen1=$(xrandr | grep primary)
-        screen2=$(xrandr | grep ' connected' | grep -v primary)
-        if test "$screen2"; then
-            screen1_name=$(echo "$screen1" | cut -d' ' -f1)
-            screen2_name=$(echo "$screen2" | cut -d' ' -f1)
-            screen1_resolution=$(echo "$screen1" | sed -E 's/.* ([0-9]+x[0-9]+).*/\1/')
-            screen2_resolution=$(echo "$screen2" | sed -E 's/.* ([0-9]+x[0-9]+).*/\1/')
-            xrandr --output "$screen2_name" --mode "$screen1_resolution" \
-                   --output "$screen1_name" --mode "$screen2_resolution" \
-                                            --left-of "$screen2_name"
+        # screens=$(xrandr | grep ' connected')
+        # screen1=$(echo "$screens" | grep 'eDP')
+        # screen2=$(echo "$screens" | grep -v 'eDP')
+        # if test "$screen2"; then
+        #     screen1_name=$(echo "$screen1" | cut -d' ' -f1)
+        #     screen2_name=$(echo "$screen2" | cut -d' ' -f1)
+        #     screen1_resolution=$(echo "$screen1" | sed -E 's/.* ([0-9]+x[0-9]+).*/\1/')
+        #     screen2_resolution=$(echo "$screen2" | sed -E 's/.* ([0-9]+x[0-9]+).*/\1/')
+        #     xrandr --output "$screen1_name" --mode "$screen1_resolution" \
+        #                                     --pos 2560x360 \
+        #            --output "$screen2_name" --mode "$screen2_resolution" \
+        #                                     --left-of "$screen1_name"
+        # fi
+
+        # just use arandr...
+        if hwinfo --monitor --short | grep -q "LG FULL HD"; then
+            # home setup
+            xrandr --output eDP-1 --primary --mode 1920x1080 --pos 0x1080 --rotate normal \
+                   --output HDMI-1 --mode 1920x1080 --pos 0x0 --rotate normal \
+                   --output DP-1 --off --output DP-2 --off --output DP-3 --off --output DP-4 --off
+        else
+            xrandr --output eDP-1 --primary --mode 1920x1080 --pos 2560x360 --rotate normal \
+                   --output HDMI-1 --mode 2560x1440 --pos 0x0 --rotate normal \
+                   --output DP-1 --off --output DP-2 --off --output DP-3 --off --output DP-4 --off
         fi
 
-        pgrep redshift || redshift &
+
+        # TODO: you need a udev hook on unplug for this
+         powertop --auto-tune
+
+        # pgrep redshift || redshift &
 
         # Background picture
-        # feh -V --bg-max ~/Pictures/Wallpapers/xkcd.png &
+        feh -V --bg-max ~/Pictures/Wallpapers/xkcd.png &
 
 		# synaptic daemon to block touchpad while typing
 		# syndaemon -i 0.5 -t -K -R -d &
 
 		# compositor
-        pgrep picom || picom -CG --backend xrender --xrender-sync-fence --unredir-if-possible --experimental-backends --vsync &
+        pgrep compfy || {
+            sleep 3 # wait for firefox to start
+            compfy --corner-radius 0 --vsync --xrender-sync-fence --unredir-if-possible --animation-for-open-window auto --animation-for-unmap-window auto --animation-dampening 12
+        } &
 
 		# numlock at startup
 		numlockx &
 
         # Lock screen at startup
-        i3lock -f -t -i ~/Pictures/Wallpapers/xkcd.png
 
-        exec i3;;
+        if ! test "$NOP"; then
+            i3lock -f -t -i ~/Pictures/Wallpapers/xkcd.png
+            exec i3
+        fi
+
 	    # Use 25 MiB of RAM for debug logs
 	    # exec i3 --shmlog-size=26214400;;
-
+        ;;
     sway)
         # export GDK_BACKEND=wayland
         export CLUTTER_BACKEND=wayland
@@ -158,4 +183,4 @@ case $WM in
     *) # No known WM, try to run it as command
 		echo $WM > /tmp/wm.log
         exec $1;;
-esac | tee /tmp/.xinit.log 2>&1
+esac | tee ~/log/xinit.log 2>&1

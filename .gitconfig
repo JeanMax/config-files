@@ -1,7 +1,24 @@
 [push]
 	default = simple
+	autoSetupRemote = true
 [core]
 	excludesfile = ~/.gitignore_global
+[fetch]
+    prune = on
+[merge]
+    ff = off
+[pull]
+    rebase = merges
+[grep]
+	lineNumber = true
+	extendRegexp = true
+
 [user]
-	email = mc@rmrf.fr
-	name = JeanMax
+	email = max.canal@easymile.com
+	name = Max Canal
+[gitlab "gitlab.easymile.com/api"]
+	user = max.canal
+[gitlab "gitlab.com/api"]
+	user = max.canal
+[color]
+	ui = auto
