@@ -32,7 +32,6 @@
          (minibuffer-setup . vertico-repeat-save)) ; Make sure vertico state is saved
   :init
   (vertico-mode)
-  (set-face-attribute 'vertico-current t :extend t :background ample/darker-gray)
 
   ;; Show more candidates
   ;; (setq vertico-count 20)
@@ -50,7 +49,6 @@
   (if (= vertico--total 1)
       (vertico-insert)
     (vertico-next)))
-
 
 
 

@@ -23,7 +23,7 @@
   ("\\.install\\'" . sh-mode))
 
 
-(use-package makefile-mode
+(use-package make-mode
   :mode
   ("Makefile\\.*" . makefile-mode)
   (".*\\.mk" . makefile-mode))

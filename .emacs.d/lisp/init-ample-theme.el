@@ -20,23 +20,72 @@
   (enable-theme 'ample)
 
   :config
-  (set-face-attribute 'minibuffer-prompt t :foreground ample/light-blue)
-  (set-face-attribute 'region t :background "#424242")
-  ;; font-lock-string-face && font-lock-variable-name-face are the same...
-  ;; (set-face-attribute 'default t :foreground ample/fg :background "gray13")
-  (set-face-attribute 'default t :foreground ample/fg :background nil)
-  (set-face-attribute 'font-lock-variable-name-face t :foreground "#b8b74b")
-  (set-face-attribute 'font-lock-string-face t :foreground ample/dark-tan)
-  (set-face-attribute 'font-lock-doc-face t :foreground ample/tan)
-  (set-face-attribute 'highlight t :background ample/darker-gray)
-  (set-face-attribute 'lazy-highlight t :foreground ample/orange :weight 'bold)
-  (set-face-attribute 'match t :foreground ample/orange))
+  (require 'palette)
+  (unpackaged/customize-theme-faces
+   'ample
+
+   ;; from set-face syntax to custom-set-face:
+   ;; (set-face-attribute '\([a-z-]+\) \(t\|nil\) \(.*\)) → '(\1 ((nil (\3)))))
+
+   ;; --- builtin: ---
+
+   ;; standard font lock
+   '(minibuffer-prompt ((nil (:foreground "ample/light-blue"))))
+   '(region ((nil (:background "ample/darker-gray"))))
+   ;; font-lock-string-face && font-lock-variable-name-face are the same...
+   ;; '(default ((nil (:foreground "ample/fg" :background "gray13"))))
+   '(default ((nil (:foreground "ample/fg" :background unspecified))))
+   '(font-lock-variable-name-face ((nil (:foreground "ample/another-tan"))))
+   '(font-lock-string-face ((nil (:foreground "ample/dark-tan"))))
+   '(font-lock-doc-face ((nil (:foreground "ample/tan"))))
+   '(highlight ((nil (:background "ample/darker-gray"))))
+   '(lazy-highlight ((nil (:foreground "ample/orange" :weight bold))))
+   '(match ((nil (:foreground "ample/orange"))))
+
+   ;; dired-mode
+   '(dired-directory ((nil (:foreground "ample/blue"))))
+   '(dired-symlink ((nil (:foreground "ample/green"))))
+
+   ;; hl-line-mode
+   '(hl-line ((nil (:extend nil :background "ample/darker-gray"))))
+
+   ;; erc
+   '(erc-input-face ((nil (:foreground "ample/red"))))
+   '(erc-notice-face ((nil (:foreground "ample/rb5"))))
+   '(erc-keyword-face ((nil (:background "ample/green"))))
+
+    ;; ido
+   '(ido-first-match ((nil (:foreground "ample/salmon"))))
+   '(ido-subdir ((nil (:foreground "ample/blue"))))
 
 
-(use-package hl-line
-  :config
-  (set-face-attribute 'hl-line t :extend t :background ample/darker-gray)
-  )
+   ;; --- not builtin: ---
+
+   ;; ido-grid-mode
+   '(ido-grid-mode-match ((nil (:weight bold))))
+
+   ; magit
+   '(magit-section-highlight ((nil (:background "ample/region"))))
+   '(magit-diff-file-heading ((nil (:foreground "ample/blue" :weight bold))))
+
+   ;; diff-hl-mode
+   '(diff-hl-change ((nil (:background "ample/darker-gray" :foreground "ample/orange" :weight bold))))
+   '(diff-hl-delete ((nil (:background "ample/darker-gray" :foreground "ample/red" :weight bold))))
+   '(diff-hl-insert ((nil (:background "ample/darker-gray" :foreground "ample/green" :weight bold))))
+
+   ;; treemacs
+   '(treemacs-directory-face ((nil (:inherit 'dired-directory)))) ; ample/blue
+   '(treemacs-git-conflict-face ((nil (:foreground "ample/dark-red"))))
+   '(treemacs-git-modified-face ((nil (:foreground "ample/orange"))))
+
+   ;; vertico
+   '(vertico-current ((nil (:extend t :background "ample/darker-gray"))))
+
+   ;; ledger-mode
+   '(ledger-font-xact-highlight-face ((nil (:background "brightblack"))))
+
+   ))
+
 
 
 (provide 'init-ample-theme)

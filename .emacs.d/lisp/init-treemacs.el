@@ -13,16 +13,12 @@
 ;******************************************************************************;
 
 ;;; Code:
+
 (use-package treemacs
   :ensure t
   :no-require t
   ;; :defer t
   :commands (treemacs lsp-treemacs-errors-list)
-
-  :custom-face
-  (treemacs-directory-face ((t (:inherit dired-directory)))) ; ample/blue
-  (treemacs-git-conflict-face ((t (:foreground "#9d2512")))) ; ample/dark-red
-  (treemacs-git-modified-face ((t (:foreground "#dF9522")))) ; ample/orange
 
   :init
   (bind-key* (kbd "<f1>") 'treemacs))

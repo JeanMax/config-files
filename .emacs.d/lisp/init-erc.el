@@ -47,11 +47,7 @@
                                   "324" "329" "332" "333" "353" "477"))
   ;; (setq erc-hide-list '("JOIN" "PART" "QUIT" "NICK")) ;hide them (not related to tracking)
   (setq erc-log-write-after-insert t)
-  (setq erc-log-write-after-send t)
-
-  (set-face-attribute 'erc-input-face nil :foreground ample/red)
-  (set-face-attribute 'erc-notice-face nil :foreground ample/rb5)
-  (set-face-attribute 'erc-keyword-face nil :background ample/green))
+  (setq erc-log-write-after-send t))
 
 
 (provide 'init-erc)

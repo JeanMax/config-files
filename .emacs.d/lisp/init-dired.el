@@ -18,16 +18,15 @@
   :defer t
 
   :config
-  (set-face-attribute 'dired-directory nil :foreground ample/blue)
-  (set-face-attribute 'dired-symlink nil :foreground ample/green)
-
-  (defun dired-find-files (&optional arg)
-    "Open each of the marked files, or the file under the point,
-or when prefix ARG, the next Nfiles."
-    (interactive "P")
-    (let* ((fn-list (dired-get-marked-files nil arg)))
-      (mapc 'find-file fn-list)))
   (local-set-key (kbd "f") 'dired-find-files))
+
+
+(defun dired-find-files (&optional arg)
+  "Open each of the marked files, or the file under the point;
+or when prefix ARG, the next Nfiles."
+  (interactive "P")
+  (let* ((fn-list (dired-get-marked-files nil arg)))
+    (mapc 'find-file fn-list)))
 
 
 ;; TODO: rebind / remove these: find room for consult search (maybe remove M-s shell?)

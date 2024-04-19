@@ -25,11 +25,7 @@
   (setq magit-fetch-arguments '("--prune"))
   (setq magit-log-arguments '("--graph" "--color" "--decorate" "-n256"))
   (setq magit-diff-refine-hunk t)
-  (setq magit-diff-refine-ignore-whitespace nil)
-
-
-  (set-face-attribute 'magit-section-highlight t :background ample/region)
-  (set-face-attribute 'magit-diff-file-heading t :foreground ample/blue :weight 'bold))
+  (setq magit-diff-refine-ignore-whitespace nil))
 
 (require 'altgr)
 (bind-key* (kbd *altgr-v*) 'magit-status)

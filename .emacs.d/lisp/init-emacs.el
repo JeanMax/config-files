@@ -20,43 +20,6 @@
     :ensure t)
 
   ;; :config
-  (require 'altgr)
-
-  (defconst ample/green "#6aaf50")
-  (defconst ample/dark-green "#057f40")
-  (defconst ample/blue "#5180b3")
-  (defconst ample/blue-bg "#102843")
-  (defconst ample/light-blue "#528fd1")
-  (defconst ample/lighter-blue "#68a5e9")
-  (defconst ample/orange "#dF9522")
-  (defconst ample/tan "#bdbc61")
-  (defconst ample/dark-tan "#7d7c61")
-  (defconst ample/yellow "#baba36")
-  (defconst ample/bright-yellow "#fffe0a")
-  (defconst ample/purple "#ab75c3")
-  (defconst ample/light-gray "#858585")
-  (defconst ample/gray "#757575")
-  (defconst ample/dark-gray "#656565")
-  (defconst ample/darker-gray "#454545")
-  (defconst ample/darkest-gray "#252525")
-  (defconst ample/brown "#987654")
-  (defconst ample/red "#cd5542")
-  (defconst ample/dark-red "#9d2512")
-
-  (defconst ample/cursor "#f57e00")
-  (defconst ample/fringe "#1f1f1f")
-  (defconst ample/region "#303030")
-
-  (defconst ample/rb0 "#81b0e3")
-  (defconst ample/rb1 "#a5a5a5")
-  (defconst ample/rb2 "#6190c3")
-  (defconst ample/rb3 "#959595")
-  (defconst ample/rb4 "#4170a3")
-  (defconst ample/rb5 "#757575")
-
-  (defconst ample/bg "gray13")
-  (defconst ample/fg "#bdbdb3")
-
 
   ;; Ignore case when completing file/buffer names
   (setq read-file-name-completion-ignore-case 't)
@@ -186,8 +149,8 @@
   ;; gui font (default is actually set in .Xressources)
   (when (member "CodeNewRoman" (font-family-list))
     (set-frame-font "CodeNewRoman 12" t nil))
-  (when (member "Symbola" (font-family-list))
-    (set-fontset-font t 'unicode "Symbola" nil 'prepend))
+  ;; (when (member "Symbola" (font-family-list))
+  ;;   (set-font t 'unicode "Symbola" nil 'prepend))
 
   ;; (setq default-frame-alist '((font . "CodeNewRoman-13")))
 
@@ -220,35 +183,26 @@
   ;; e' to eval region if marked
   ;; search in minibuffer history
 
-  ;; TODO: list free 'mod+key', keys (f1..12, weird stuffs: ù²¨^)
-  ;; (bind-key* (kbd *altgr-z*) 'free)
-  ;; (bind-key* (kbd *altgr-y*) 'free)
-  ;; (bind-key* (kbd *altgr-u*) 'free)
-  ;; (bind-key* (kbd *altgr-s*) 'ibuffer-mode)
-  ;; (bind-key* (kbd *altgr-d*) 'free)
-  ;; (bind-key* (kbd *altgr-l*) 'free)
-  ;; (bind-key* (kbd *altgr-w*) 'free)
-  ;; (bind-key* (kbd *altgr-c*) 'free)
-
 
   ;; mode line customization (bottom bar)
+  (require 'palette)
   (setq-default mode-line-format
-                '(
+                `(
                   ;; full-memory error (never seen that...)
                   "%e"
                   ;; buffer-name + color readonly/modified
                   (:eval (propertize " %b " 'face
                                      (cond ((eql buffer-read-only t) ;TODO: what if it's read-only And mofified? (do we even care?!)
-                                            '(:foreground "black" :background "#5180b3" :weight bold))
+                                            '(:foreground "black" :background "ample/light-blue" :weight bold))
                                            ((buffer-modified-p)
-                                            '(:foreground "black" :background "#df9522" :weight bold))
+                                            '(:foreground "black" :background "ample/orange" :weight bold))
                                            (t
-                                            '(:foreground "black"  :background "#6aaf50" :weight bold)))))
+                                            '(:foreground "black"  :background "ample/green" :weight bold)))))
                   ;; line/col number
                   (:propertize "%4l:")
                   (:eval (propertize (format "%-3s" (format-mode-line "%c")) 'face
                                      (when (> (current-column) 80)
-                                       '(:background "#cd5542"))))
+                                       '(:background "ample/red"))))
                   ;; are we on emacsclient?
                   (:eval (propertize (if (frame-parameter nil 'client) "@" "")))
                   ;; percent of buffer
@@ -258,11 +212,11 @@
                            (let-alist (flycheck-count-errors flycheck-current-errors)
                              (cond
                               ((and .error .warning)
-                               (propertize (format "%s/%s" .error .warning) 'face '(:foreground "black" :background "#cd5542" :weight bold)))
+                               (propertize (format "%s/%s" .error .warning) 'face '(:foreground "black" :background "ample/red" :weight bold)))
                               (.error
-                               (propertize (format "%s" .error) 'face '(:foreground "black" :background "#cd5542" :weight bold)))
+                               (propertize (format "%s" .error) 'face '(:foreground "black" :background "ample/red" :weight bold)))
                               (.warning
-                               (propertize (format "%s" .warning) 'face '(:foreground "black" :background "#df9522" :weight bold)))
+                               (propertize (format "%s" .warning) 'face '(:foreground "black" :background "ample/orange" :weight bold)))
                               (t
                                "")))))
                   "  "

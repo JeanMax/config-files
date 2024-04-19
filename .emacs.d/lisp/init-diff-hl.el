@@ -27,13 +27,13 @@
 
   :config
   (when (version<= "24.4" emacs-version)
-    (setq diff-hl-flydiff-mode t))
-  (setq diff-hl-highlight-function nil)
-  (set-face-attribute 'diff-hl-insert t :background "green" :foreground "white")
-  (set-face-attribute 'diff-hl-delete t :background "red" :foreground "white")
-  (set-face-attribute 'diff-hl-change t :background "dark-orange" :foreground "white"))
+    (setq diff-hl-update-async t)
+    (setq diff-hl-flydiff-mode t)))
+  ;; (setq diff-hl-highlight-function nil)
 
 (bind-key* (kbd "C-c C-d") 'diff-hl-mode)
+(bind-key* (kbd "C-c C-s") 'diff-hl-show-hunk)
+
 
 (provide 'init-diff-hl)
 ;;; init-diff-hl.el ends here

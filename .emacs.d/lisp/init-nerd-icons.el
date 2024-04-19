@@ -15,8 +15,8 @@
 ;;; Code:
 (use-package nerd-icons
   :ensure t
-  :custom
-  (nerd-icons-font-family "Symbols Nerd Font Mono"))
+  :config
+  (setq nerd-icons-font-family "Symbols Nerd Font Mono"))
 
 (use-package treemacs-nerd-icons
   :after (nerd-icons treemacs)
@@ -30,7 +30,7 @@
   :hook (ibuffer-mode . nerd-icons-ibuffer-mode))
 
 (use-package nerd-icons-completion
-  :after (nerd-icons ibuffer) ;; marginalia
+  :after (nerd-icons marginalia)
   :ensure t
   :config
   (nerd-icons-completion-mode)

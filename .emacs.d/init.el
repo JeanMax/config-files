@@ -52,7 +52,7 @@
 			   (message "Init-time: %s" (emacs-init-time)))))
 (setq file-name-handler-alist nil)
 (setq load-prefer-newer t)
-;; (setq debug-on-error t)
+;; (setq debug-on-error t)  ; --debug-init
 
 (defun recompile-config ()
   "Recompile elisp config: `lisp/*.el', `site-lisp/*/*.el'.
@@ -114,7 +114,6 @@
   (require 'init-highlight-indent-guides)
   (require 'init-keyfreq)
   (require 'init-emms)
-  ;; (require 'init-company)
   (require 'init-corfu)
   (require 'init-magit)
   (require 'init-git-timemachine)
@@ -126,9 +125,10 @@
   (require 'init-yaml-mode)
   (require 'init-ledger-mode)
   (require 'init-tuareg)
-  (unless (or (string= "dumb" (getenv "TERM"))
-              (string= "linux" (getenv "TERM"))) ;; tty
-    (require 'init-nerd-icons))
+  (let (term-name (getenv "TERM"))
+    (unless (or (string= "dumb" term-name)
+                (string= "linux" term-name)) ;; tty
+      (require 'init-nerd-icons)))
   (require 'init-treemacs)
   (require 'init-flycheck)
   (require 'init-lsp-mode)
