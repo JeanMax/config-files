@@ -21,7 +21,11 @@
   :commands (treemacs lsp-treemacs-errors-list)
 
   :init
-  (bind-key* (kbd "<f1>") 'treemacs))
+  (bind-key* (kbd "<f1>") 'treemacs)
+
+  ;; :config
+  ;; (treemacs-project-follow-mode)
+  )
 
 
 (use-package treemacs-magit

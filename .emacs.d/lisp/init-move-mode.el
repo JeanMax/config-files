@@ -17,21 +17,22 @@
 (use-package move-mode
   :defer t
   :load-path
-  "~/.emacs.d/site-lisp/move")
+  "~/.emacs.d/site-lisp/move"
+  :commands (move-mode))
 
 (require 'altgr)
 (bind-key* (kbd *altgr-i*) 'move-mode)
 
-(bind-key* (kbd "M-i") 'previous-line)
-(bind-key* (kbd "M-j") 'left-char)
-(bind-key* (kbd "M-k") 'next-line)
-(bind-key* (kbd "M-l") 'right-char)
-(bind-key* (kbd "M-u") 'left-word)
-(bind-key* (kbd "M-o") 'right-word)
-(bind-key* (kbd "M-m") 'normdown)
-(bind-key* (kbd "M-p") 'normup)
-(bind-key* (kbd "M-_") 'move-beginning-of-line) ; 8
-(bind-key* (kbd "M-ç") 'move-end-of-line) ; 9
+(bind-key (kbd "M-i") 'previous-line)
+(bind-key (kbd "M-j") 'left-char)
+(bind-key (kbd "M-k") 'next-line)
+(bind-key (kbd "M-l") 'right-char)
+;; (bind-key* (kbd "M-u") 'left-word)
+;; (bind-key* (kbd "M-o") 'right-word)
+;; (bind-key* (kbd "M-m") 'normdown)
+;; (bind-key* (kbd "M-p") 'normup)
+;; (bind-key* (kbd "M-_") 'move-beginning-of-line) ; 8
+;; (bind-key* (kbd "M-ç") 'move-end-of-line) ; 9
 
 ;; (bind-key* (kbd "M-g") 'goto-line)
 

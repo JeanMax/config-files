@@ -34,7 +34,6 @@
   ;; (add-hook 'eldoc-documentation-functions #'embark-eldoc-first-target)
   ;; (setq eldoc-documentation-strategy #'eldoc-documentation-compose-eagerly)
 
-  :config
   (require 'altgr)
   (bind-key* (kbd *altgr-c*) 'embark-act)
   (bind-key* (kbd *altgr-z*) 'embark-dwim)
@@ -50,6 +49,7 @@
   :ensure t ; only need to install it, embark loads it after consult if found
   :hook
   (embark-collect-mode . consult-preview-at-point-mode))
+
 
 (provide 'init-embark)
 ;;; init-embark.el ends here

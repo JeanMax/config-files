@@ -94,7 +94,7 @@
 
 ;; site-lisp folder
 ;; (require 'init-42-mode)
-;; (require 'init-move-mode)
+(require 'init-move-mode)
 (require 'init-ample-theme)
 
 (when (< 23 emacs-major-version)
@@ -103,10 +103,13 @@
 
   ;; packages to download: package.el not builtin till emacs24... just give up
   ;; (require 'init-benchmark-init)  ; coment me when done playing around!
+
   ;; (require 'init-ido)
+
   (require 'init-vertico)
   (require 'init-orderless)
   (require 'init-marginalia)
+
   (require 'init-embark)
   (require 'init-consult)
   (require 'init-ace-window)

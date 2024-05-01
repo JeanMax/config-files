@@ -26,17 +26,18 @@
   (setq lsp-use-plists t)
   (setq lsp-keymap-prefix "C-c l")
 
-  :hook (
-         ;; (python-mode . lsp)
-         ;; (c-mode . lsp)
-         ;; (c++-mode . lsp)
-         ;; (dockerfile-mode . lsp)
-         ;; ;; (lua-mode . lsp)
-         ;; ;; (yaml-mode . lsp)
-         ;; ;; (json-mode . lsp)
-         ;; ;; (sh-mode . lsp)
-         ;; ;; (groovy-mode . lsp)
-         (lsp-mode . lsp-enable-which-key-integration))
+  ;; :hook (
+  ;;        (python-mode . lsp)
+  ;;        (c-mode . lsp)
+  ;;        (c++-mode . lsp)
+  ;;        ;; (dockerfile-mode . lsp)
+  ;;        ;; ;; (lua-mode . lsp)
+  ;;        ;; ;; (yaml-mode . lsp)
+  ;;        ;; ;; (json-mode . lsp)
+  ;;        ;; ;; (sh-mode . lsp)
+  ;;        ;; ;; (groovy-mode . lsp)
+  ;;        ;; (lsp-mode . lsp-enable-which-key-integration)
+  ;;        )
 
   :config
   (setq lsp-auto-guess-root t)
@@ -85,9 +86,7 @@
   ;; :defer t
   :diminish which-key-mode
   :config
-  (progn
-    (which-key-mode)
-    (which-key-setup-side-window-right-bottom)))
+  (which-key-mode))
 
 
 (provide 'init-lsp-mode)
