@@ -24,17 +24,14 @@
 ;; http://bling.github.io/blog/2016/01/18/why-are-you-changing-gc-cons-threshold/ )
 ;; (let ((gc-cons-threshold most-positive-fixnum))
 
-;; (defconst initial-gc-cons-threshold gc-cons-threshold)
-;; (setq gc-cons-threshold most-positive-fixnum)
+(setq gc-cons-threshold (* 16 1024 1024))
+(defconst initial-gc-cons-threshold gc-cons-threshold)
 
 ;; (add-hook 'minibuffer-setup-hook
 ;; 		  #'(lambda () (setq gc-cons-threshold most-positive-fixnum)))
 ;; (add-hook 'minibuffer-exit-hook
 ;; 		  #'(lambda () (setq gc-cons-threshold initial-gc-cons-threshold)))
 
-(setq gc-cons-threshold 100000000)
-
-(setq read-process-output-max 100000000)
 
 (setq read-process-output-max (* 1024 1024)) ;; 1mb
 
@@ -49,6 +46,7 @@
 			 (when (< 23 emacs-major-version)
 			   (ignore-errors (benchmark-init/activate))
                (recompile-config)
+               (setq native-comp-deferred-compilation t)
 			   (message "Init-time: %s" (emacs-init-time)))))
 (setq file-name-handler-alist nil)
 (setq load-prefer-newer t)
@@ -110,6 +108,7 @@
   (require 'init-orderless)
   (require 'init-marginalia)
 
+  (require 'init-gcmh)
   (require 'init-embark)
   (require 'init-consult)
   (require 'init-ace-window)
