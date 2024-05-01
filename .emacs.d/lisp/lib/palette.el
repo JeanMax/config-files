@@ -28,9 +28,10 @@ faces immediately.  Calls `custom-theme-set-faces', which see."
     ;; Apply advice for next time theme is enabled.
     (fset fn-name
           (lambda (enabled-theme)
-            (when (eq enabled-theme theme)
+            (when (eq enabled-theme 'ample)  ;TODO: symbol hardcoded cause of broken scope
+              (load-colors)
               (let ((custom--inhibit-theme-enable nil))
-                (apply #'custom-theme-set-faces theme faces)))))
+                (apply #'custom-theme-set-faces 'ample faces)))))
     (advice-remove #'enable-theme fn-name)
     (advice-add #'enable-theme :after fn-name)))
 
@@ -83,11 +84,12 @@ and blue components."
 
 (defun defcolor (color-name color-hex-value)
   "Define a new color COLOR-NAME COLOR-HEX-VALUE."
-  ;; (defconst color-name color-hex-value)
+  (defconst-1 (intern color-name) color-hex-value)
   (let ((color-rgb-value (if (hexrgb-rgb-hex-string-p color-hex-value)
                              (hexrgb-hex-to-rgb color-hex-value)
                            (x-color-values color-hex-value))))
-    (tty-color-define color-name 1 color-rgb-value)))
+    (unless (display-graphic-p)  ; can't easily set color on X
+      (tty-color-define color-name 1 color-rgb-value))))
 
 
 (defun load-colors ()
@@ -129,10 +131,14 @@ and blue components."
 
   ;; custom:
   (defcolor "ample/another-tan" "#b8b74b")
-  (defcolor "ample/salmon" "#ebc481"))
+  (defcolor "ample/salmon" "#ebc481")
+  (defcolor "ample/darker-red" "#663333")
+
+  (message "ample colors loaded!"))
 
 
 (add-hook 'tty-setup-hook 'load-colors)
+(load-colors)
 
 (provide 'palette)
 ;;; palette.el ends here

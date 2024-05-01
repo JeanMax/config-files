@@ -186,48 +186,52 @@
 
   ;; mode line customization (bottom bar)
   (require 'palette)
-  (setq-default mode-line-format
-                `(
-                  ;; full-memory error (never seen that...)
-                  "%e"
-                  ;; buffer-name + color readonly/modified
-                  (:eval (propertize " %b " 'face
-                                     (cond ((eql buffer-read-only t) ;TODO: what if it's read-only And mofified? (do we even care?!)
-                                            '(:foreground "black" :background "ample/light-blue" :weight bold))
-                                           ((buffer-modified-p)
-                                            '(:foreground "black" :background "ample/orange" :weight bold))
-                                           (t
-                                            '(:foreground "black"  :background "ample/green" :weight bold)))))
-                  ;; line/col number
-                  (:propertize "%4l:")
-                  (:eval (propertize (format "%-3s" (format-mode-line "%c")) 'face
-                                     (when (> (current-column) 80)
-                                       '(:background "ample/red"))))
-                  ;; are we on emacsclient?
-                  (:eval (propertize (if (frame-parameter nil 'client) "@" "")))
-                  ;; percent of buffer
-                  "%6p "
-                  ;; flycheck errors
-                  (:eval (when (fboundp 'flycheck-count-errors)
-                           (let-alist (flycheck-count-errors flycheck-current-errors)
-                             (cond
-                              ((and .error .warning)
-                               (propertize (format "%s/%s" .error .warning) 'face '(:foreground "black" :background "ample/red" :weight bold)))
-                              (.error
-                               (propertize (format "%s" .error) 'face '(:foreground "black" :background "ample/red" :weight bold)))
-                              (.warning
-                               (propertize (format "%s" .warning) 'face '(:foreground "black" :background "ample/orange" :weight bold)))
-                              (t
-                               "")))))
-                  "  "
-                  (:eval (propertize (extra-shorten-directory default-directory) 'face '(:weight bold)))
-                  "  "
-                  (:eval (when (project-current)
-                             (concat "[" (project-name (project-current)) "]  ")))
-                  ;vc branch
-                  ;; (vc-mode vc-mode)
-                  ;; actives modes
-                  mode-line-modes))
+  (setq-default
+   mode-line-format
+   '(
+     ;; full-memory error (never seen that...)
+     "%e"
+     ;; buffer-name + color readonly/modified
+     (:eval (propertize
+             " %b " 'face
+             ; TODO: what if it's read-only And mofified? (do we even care?!)
+             (cond ((eql buffer-read-only t)
+                    `(:foreground "black" :background ,ample/light-blue :weight bold))
+                   ((buffer-modified-p)
+                    `(:foreground "black" :background ,ample/orange :weight bold))
+                   (t
+                    `(:foreground "black"  :background ,ample/green :weight bold)))))
+     ;; line/col number
+     (:propertize "%4l:")
+     (:eval (propertize
+             (format "%-3s" (format-mode-line "%c")) 'face
+             (when (> (current-column) 80)
+               `(:background ,ample/red))))
+     ;; are we on emacsclient?
+     (:eval (propertize (if (frame-parameter nil 'client) "@" "")))
+     ;; percent of buffer
+     "%6p "
+     ;; flycheck errors
+     (:eval (when (fboundp 'flycheck-count-errors)
+              (let-alist (flycheck-count-errors flycheck-current-errors)
+                (cond
+                 ((and .error .warning)
+                  (propertize (format "%s/%s" .error .warning) 'face `(:foreground "black" :background ,ample/red :weight bold)))
+                 (.error
+                  (propertize (format "%s" .error) 'face `(:foreground "black" :background ,ample/red :weight bold)))
+                 (.warning
+                  (propertize (format "%s" .warning) 'face `(:foreground "black" :background ,ample/orange :weight bold)))
+                 (t
+                  "")))))
+     "  "
+     (:eval (propertize (extra-shorten-directory default-directory) 'face '(:weight bold)))
+     "  "
+     (:eval (when (project-current)
+              (concat "[" (project-name (project-current)) "]  ")))
+                                        ;vc branch
+     ;; (vc-mode vc-mode)
+     ;; actives modes
+     mode-line-modes))
 
   ;; enable col number
   (column-number-mode 1)
