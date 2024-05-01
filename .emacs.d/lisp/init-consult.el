@@ -14,13 +14,6 @@
 
 ;;; Code:
 
-;; TODO: I'd like to:
-;; rgrep (-> list content)  + editable? oO
-;; find-file (-> open buffer)
-;; find-files (-> list files)
-;; grep-files (-> list files)
-;; xref (-> list content)
-
 (use-package consult
   ;; Replace bindings. Lazily loaded due by `use-package'.
   :bind (;; C-c bindings in `mode-specific-map'
@@ -102,6 +95,7 @@
    consult-bookmark consult-recent-file consult-xref
    consult--source-bookmark consult--source-file-register
    consult--source-recent-file consult--source-project-recent-file
+   consult-buffer
    ;; :preview-key "M-."
    :preview-key '(:debounce 0.4 any))
 
@@ -135,6 +129,40 @@
 (keymap-set bookmark-map *altgr-$* 'consult-bookmark)
 (bind-key* (kbd *altgr-$*) 'bookmark-map)
 (bind-key* (kbd *altgr-b*) 'consult-buffer)
+
+
+
+(use-package consult-dir
+  :ensure t
+  :bind (("C-x C-d" . consult-dir)
+         :map vertico-map
+         ("C-x C-d" . consult-dir)
+         ("C-x C-j" . consult-dir-jump-file))
+
+  :config
+  (defun consult-dir--fd-dirs-in-project ()
+    "Return list of dirs in project (using fd)."
+    (let ((command (format
+                    "fd --color never --print0 --hidden --exclude .git --type d . %s | sort -z | uniq -z"
+                    (cdr (project-current t)))))
+      (split-string (shell-command-to-string command) "\0" t)))
+
+  (defvar consult-dir--source-fd-in-project
+    `(:name     "Project dirs"
+                :narrow   ?f
+                :category file
+                :face     consult-file
+                :history  file-name-history
+                :enabled  ,(lambda () (executable-find "fd"))
+                :items    ,#'consult-dir--fd-dirs-in-project)
+    "Fd directory source for `consult-dir'.")
+
+  (add-to-list 'consult-dir-sources 'consult-dir--source-fd-in-project t))
+
+
+
+(use-package wgrep
+  :ensure t)
 
 
 

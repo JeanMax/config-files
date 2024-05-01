@@ -17,10 +17,15 @@
 ;; TODO: add buffer menu shortcut (kill-buffer -f or rm file)
 ;; add describe fun/key/mode in M-x (-> embark)
 ;; multiselect?
+;; compilation-mode: no vertico completion?
 (use-package vertico
+  :defines crm-separator
+  ;TODO: use :defines :functions everywhere, and handle all the missing 'require
+
   :ensure t
   :bind (:map vertico-map
-              ("TAB" . 'vertico-insert-or-next)
+              ("TAB" . #'vertico-insert-or-next)
+              ;; ("RET" . #'vertico-insert)
               ("RET" . #'vertico-directory-enter)
               ("DEL" . #'vertico-directory-delete-char)
               ("C-d" . #'vertico-exit-input)
@@ -32,6 +37,15 @@
          (minibuffer-setup . vertico-repeat-save)) ; Make sure vertico state is saved
   :init
   (vertico-mode)
+
+  ;; TODO: move mouse / X handling to another file
+  (vertico-mouse-mode)
+  (setq blink-cursor-mode nil)
+
+
+
+  ;; ido-ish
+  (setq vertico-preselect 'first)
 
   ;; Show more candidates
   ;; (setq vertico-count 20)
@@ -46,10 +60,29 @@
 (defun vertico-insert-or-next ()
   "Insert current candidate in minibuffer or cycle to the next one."
   (interactive)
-  (if (= vertico--total 1)
+  (if (<= vertico--total 1)
       (vertico-insert)
     (vertico-next)))
 
+
+(defun down-from-outside ()
+  "Move to next candidate in minibuffer, even when minibuffer isn't selected."
+  (interactive)
+  (with-selected-window (active-minibuffer-window)
+    (execute-kbd-macro [down])))
+
+(defun up-from-outside ()
+  "Move to previous candidate in minibuffer, even when minibuffer isn't selected."
+  (interactive)
+  (with-selected-window (active-minibuffer-window)
+    (execute-kbd-macro [up])))
+
+(defun to-and-fro-minibuffer ()
+  "Go back and forth between minibuffer and other window."
+  (interactive)
+  (if (window-minibuffer-p (selected-window))
+      (select-window (minibuffer-selected-window))
+    (select-window (active-minibuffer-window))))
 
 
 ;; Persist history over Emacs restarts. Vertico sorts by history position.

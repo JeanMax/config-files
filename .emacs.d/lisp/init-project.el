@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t -*-
 ;;; init-project.el --- init project
 ;;; Commentary:
 ;******************************************************************************;
@@ -13,32 +14,44 @@
 ;******************************************************************************;
 
 ;;; Code:
+;; TODO: overide global key bind for project specific
+;; (ie: if in project, M-c trigger project-compile)
 (use-package project
   :bind-keymap ("£" . project-prefix-map)
   :bind (:map project-prefix-map
-         ("v" . 'magit-project-full)
-         ("f" . 'project-find-file)
-         ("F" . 'find-file-in-all-projects)
-         ("E" . 'project-or-external-find-file))
+              ("F" . 'find-file-in-all-projects)
+              ("b" . 'consult-project-buffer)
+              ("l" . 'consult-fd)
+
+              ("f" . 'project-find-file)
+              ("d" . 'consult-dir)
+              ("g" . 'consult-ripgrep)
+              ("v" . 'magit-project-full)
+              ("s" . 'eat-project-other-window)
+              ; c
+              ("k" . 'project-rm)
+              )
   :init
   (setq project-vc-merge-submodules t)
   (setq project-switch-use-entire-map t)
   (setq project-switch-commands
-        '((project-find-file "Find file" nil)
-          (project-find-regexp "Find regexp" nil)
-          (project-find-dir "Find directory" nil)
-          (magit-project-status "Magit" 109)
-          (mistty-in-project "Shell" nil) ;;TODO: key not showing
+        '((project-find-file "File" nil)
+          (consult-dir "Dir" nil)
+          (consult-ripgrep "Grep" nil)
+          (magit-project-full "Magit" nil)
+          (eat-project-other-window "Shell" nil)
           (project-compile "Compile" nil)
-          (project-kill-buffers "Kill" nil))))
+          (project-rm "Kill" nil))))
 
 
-;; (define-advice project-find-file (:around (old-fn))
-;;   "Set `find-program' back to find."
-;;   (let ((find-program "find"))
-;;     (call-interactively old-fn)))
 
-;; (setq find-program "fd --color never")
+(defun project-rm ()
+  "Remove current project from projects list and kill all its buffers."
+  (interactive)
+  (project-kill-buffers t)
+  (project-forget-project (cdr (project-current t)))
+  (project-forget-zombie-projects))
+
 
 
 

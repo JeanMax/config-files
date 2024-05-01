@@ -20,16 +20,25 @@
   ;; Configure a custom style dispatcher (see the Consult wiki)
   ;; (setq orderless-style-dispatchers '(+orderless-consult-dispatch orderless-affix-dispatch)
   ;;       orderless-component-separator #'orderless-escapable-split-on-space)
+
   (setq completion-styles '(orderless basic))
+
+   ;; For example, project-find-file uses 'project-files which uses
+   ;; substring completion by default. Set to nil to make sure it's using
+   ;; flx.
   (setq completion-category-defaults nil)
-  (setq completion-category-overrides '((file (styles partial-completion))))
+  (setq completion-category-overrides nil)
+
+  ;; (setq completion-category-overrides '((file (styles partial-completion))))
   (setq orderless-matching-styles '(orderless-literal
-                                    orderless-prefixes
-                                    orderless-initialism
+                                    ;; orderless-prefixes
+                                    ;; orderless-initialism
                                     orderless-regexp
                                     ;; orderless-flex
                                     ))
-  (setq orderless-component-separator 'orderless-escapable-split-on-space) ; Use backslash for literal space
+
+  ;; Use backslash for literal space
+  (setq orderless-component-separator 'orderless-escapable-split-on-space))
 
   )
 
