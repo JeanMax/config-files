@@ -54,7 +54,7 @@ command=~/.config/i3blocks/temperature.pl
 # Redshift
 #
 [redshift]
-command=~/.config/i3blocks/redshift.sh |& tee /tmp/toto
+command=~/.config/i3blocks/redshift.sh
 interval=10
 
 

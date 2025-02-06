@@ -106,6 +106,7 @@ case $WM in
         # xautolock -detectsleep -cornersize 50 -corners --00 -time 42 -locker 'systemctl suspend -i' &
 		# caffeine &
 		bash -x "$(command -v lightson+)" --delay 3 --audio 1 --mplayer 1 --vlc 1 --totem 0 --firefox-flash 1 --chromium-flash 1 --webkit-flash 1 --html5 1 --steam 0 --minitube 0 --minload 2 > /tmp/lightson.log 2>&1 &
+        # lightson+cmd on &
 
         screen1=$(xrandr | grep primary)
         screen2=$(xrandr | grep ' connected' | grep -v primary)
@@ -122,19 +123,19 @@ case $WM in
         pgrep redshift || redshift &
 
         # Background picture
-        feh --bg-max ~/Pictures/Wallpapers/xkcd.png &
+        # feh -V --bg-max ~/Pictures/Wallpapers/xkcd.png &
 
 		# synaptic daemon to block touchpad while typing
 		# syndaemon -i 0.5 -t -K -R -d &
 
 		# compositor
-        pgrep compton || compton --experimental-backends &
+        pgrep picom || picom -CG --backend xrender --xrender-sync-fence --unredir-if-possible --experimental-backends --vsync &
 
 		# numlock at startup
 		numlockx &
 
         # Lock screen at startup
-        # (while ! pgrep -x i3; do sleep 0.2; done; i3lock -f -t -i ~/Pictures/Wallpapers/xkcd.png) &
+        i3lock -f -t -i ~/Pictures/Wallpapers/xkcd.png
 
         exec i3;;
 	    # Use 25 MiB of RAM for debug logs
