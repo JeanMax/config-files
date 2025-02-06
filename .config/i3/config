@@ -138,7 +138,7 @@ mode "$mode_system" {
     bindsym o exec --no-startup-id xset dpms force off, mode "default"
     bindsym l exec --no-startup-id $Locker && systemctl suspend -i, mode "default"
     bindsym h exec --no-startup-id $Locker && systemctl hibernate -i, mode "default"
-    bindsym e exec --no-startup-id $Killer && i3-msg exit, mode "default"
+    bindsym e exec --no-startup-id $Killer && i3-msg exit, mode "default" && pkill Xorg
     bindsym r exec --no-startup-id $Killer && systemctl reboot -i, mode "default"
     bindsym s exec --no-startup-id $Killer && systemctl poweroff -i, mode "default"
 
@@ -203,8 +203,12 @@ bar {
 }
 font pango:Cantarell Bold 10
 
+# all screen
 bindsym Print exec "scrot -e 'mv $f ~/Pictures'"
-bindsym $mod+Print exec "scrot -ue 'mv $f ~/Pictures'"
+# only current window
+bindsym Shift+Print exec "scrot -u -e 'mv $f ~/Pictures'"
+# select rectangle
+bindsym --release $mod+Print exec "scrot -s -f -e 'mv $f ~/Pictures'"
 
 
 bindsym $mod+o workspace next
@@ -223,13 +227,17 @@ bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 set $mute        BLOCK_BUTTON=3
 set $raise       BLOCK_BUTTON=4
 set $lower       BLOCK_BUTTON=5
-set $volume      /usr/lib/i3blocks/volume
+set $volume      /usr/lib/i3blocks/volume/volume
 set $sound_notif paplay /usr/share/sounds/freedesktop/stereo/audio-volume-change.oga
 
 bindsym XF86AudioMute        exec $mute  $volume && $sound_notif
 bindsym XF86AudioRaiseVolume exec $raise $volume && $sound_notif
 bindsym XF86AudioLowerVolume exec $lower $volume && $sound_notif
 bindsym XF86AudioMicMute exec --no-startup-id amixer -q sset Capture toggle
+
+bindsym $mod+KP_Add          exec $raise $volume && $sound_notif
+bindsym $mod+KP_Subtract     exec $lower $volume && $sound_notif
+bindsym $mod+KP_Multiply     exec $mute  $volume && $sound_notif
 
 # screen brightness controls
 bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 1 -time 0
@@ -243,6 +251,11 @@ bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 1 -time 0
 # for_window [window_type="dialog"] floating enable
 # for_window [window_type="menu"] floating enable
 for_window [class="Conky"] floating enable
+for_window [class="d2r.exe"] floating enable move position -6 -6
+for_window [class="smrfhck"] floating enable
+for_window [class="d2glf"] floating enable move position 1550 570
+for_window [class="org-sikuli-ide-SikulixIDE"] floating enable
+
 
 # windows border (normal|pixel|1pixel|none)
 new_window pixel 4
@@ -251,7 +264,7 @@ bindsym $mod+b border pixel 4
 bindsym $mod+Shift+b border normal 4
 
 # The middle button over a titlebar kills the window
-# bindsym --release button2 kill #bjorked
+bindsym --release button2 kill
 
 # hides borders on workspaces with only one window visible
 # hide_edge_borders smart
@@ -279,10 +292,10 @@ workspace "6:emacs" output $screen2
 workspace "7:term" output $screen2
 
 exec --no-startup-id feh -V --bg-max ~/Pictures/Wallpapers/xkcd.png
-# exec --no-startup-id i3lock -f -t -i ~/Pictures/Wallpapers/xkcd.png
+exec --no-startup-id i3lock -f -t -i ~/Pictures/Wallpapers/xkcd.png
 # exec --no-startup-id xmodmap ~/.Xmodmap
 
-exec --no-startup-id i3-msg 'workspace 1:firefox; exec firefox'
+exec --no-startup-id i3-msg 'workspace 1:firefox; exec firefox > ~/.firefox.log 2>&1'
 exec --no-startup-id i3-msg 'workspace 2:emacs;   exec emacs-term'
 exec --no-startup-id i3-msg 'workspace 3:term;    exec i3-sensible-terminal'
 exec --no-startup-id i3-msg 'workspace 3:term;    exec i3-sensible-terminal'

@@ -41,15 +41,14 @@
   ;; (setq flycheck-mode-line-prefix "f")
   (setq flycheck-clang-include-path
         '(
-		  "/home/mc/data-bloomberg/bloomberg/bloomberg-utils/inc"
-		  "/home/mc/data-bloomberg/bloomberg/datafeed-intraday/inc"
-		  "/home/mc/data-bloomberg/bloomberg/datafeed-reference/inc"
-		  "/home/mc/data-bloomberg/intraday-dumper/inc"
-		  "/home/mc/data-bloomberg/utils/inc"
-		  "/home/mc/data-bloomberg/utils/inc/nats"
-		  "/home/mc/data-bloomberg/utils/inc/json"
-		  "/home/mc/data-bloomberg/extern/inc/"
-		  "/home/mc/data-bloomberg/extern/inc/blpapi"
+          "/home/mc/Documents/code/vmread/include/"
+          "/home/mc/Documents/code/vmread/extern/libsmrf/include/"
+          "/home/mc/Documents/code/vmread/extern/libsmrf/include/smrf/"
+          "/home/mc/Documents/code/vmread/extern/libsmrf/include/smrf/util/"
+          "/home/mc/Documents/code/vmread/extern/imgui/"
+          "/home/mc/Documents/code/vmread/extern/imgui/backends/"
+          "/home/mc/Documents/code/vmread/extern/inih/"
+          "/usr/include/SDL2"
 		  ))
 
   ;; (setq flycheck-clang-include-path
@@ -73,7 +72,7 @@
 
 
 
-  ;; (setq flycheck-clang-language-standard "-std=c++11")
+  (setq flycheck-clang-language-standard "-std=c++11")  ;c11
   ;; (setq flycheck-clang-args '("-std=c++11"))
   (setq flycheck-clang-warnings '("all" "extra"))
   (setq flycheck-clang-definitions '("__linux__" "LINUX" "NDEBUG"))

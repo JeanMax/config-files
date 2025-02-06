@@ -47,9 +47,9 @@ export SMTPSERVER="smtp.gmail.com"
 ASAN_SYMBOLIZER_PATH=$(which llvm-symbolizer 2>/dev/null)
 export ASAN_SYMBOLIZER_PATH
 
-# Big boys use big history
-HISTSIZE=20000
-SAVEHIST=15000
+# big history
+HISTSIZE=32767
+HISTFILESIZE=15000
 HISTFILE=~/.zsh_history
 
 stty -ixon #forward search with ^s (disable interupt)
@@ -62,8 +62,12 @@ else
 fi
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.roswell/bin:$PATH"
+export PATH="$HOME/sh_script:$PATH"
 if hash ruby 2>/dev/null; then
    export PATH="$HOME/.gem/ruby/2.6.0/bin:$PATH"
+fi
+if hash go 2>/dev/null; then
+   export PATH="$HOME/go/bin:$PATH"
 fi
 
 # locales

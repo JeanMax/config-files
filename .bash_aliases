@@ -16,14 +16,15 @@ man_emacs() {
     emacsclient -t --eval "(progn (man \"$1\") (other-window 1) (delete-other-windows))"
 }
 
-sizeof() {
+_sizeof() {
     find "${1:-$PWD}" -maxdepth 1 -print0 \
         | du -ah -d1 --files0-from - \
         | sort -h
 }
+alias sizeof=_sizeof
 
 prev() {
-    fd --print0 $@ \
+    fd --print0 . $@ \
         | fzf --read0 --preview '{bat --color=always {} || tree -C {}} 2>/dev/null | head -500'
 }
 
@@ -57,7 +58,7 @@ SQL_ARGS="--silent --prompt=\"$(echo -e '\\d@\\h> \033[0m')\" -u genesys -p"
 alias sql="mysql $SQL_ARGS"
 alias emount="~/sh_script/crypt.sh mount"
 alias eumount="~/sh_script/crypt.sh umount"
-alias sz="sizeof"
+alias sz="_sizeof"
 alias lsblk="lsblk -o NAME,LABEL,SIZE,FSAVAIL,FSUSE%,MOUNTPOINT,UUID"
 
 
@@ -76,12 +77,15 @@ alias aconf='e ~/.bash_aliases && . ~/.bash_aliases'
 alias econf='e ~/.emacs.d/init.el'
 
 # git aliases
+alias gsub='git submodule sync && git submodule update --init --recursive'
 alias ga='git add -A'
 alias gb='PAGER= git branch'
 alias gbb='git remote show origin'
 alias gcm='git commit -m'
+alias gcf='git commit --fixup'
 alias gce='git commit'
 alias gco='git checkout'
+alias gplf='git pull'
 alias gpl='git pull --ff-only'
 alias gplo='git pull --ff-only origin'
 alias gplom='git pull --ff-only origin master'
@@ -89,6 +93,7 @@ alias gp='git push'
 alias gpo='git push origin'
 alias gpa='git push --all origin'  #yolo
 alias gpom='git push origin master'
+alias gpf='git push --force-with-lease'
 alias gm='git merge --verbose --progress --no-ff'
 alias gs='git status'
 alias gh='git stash'
@@ -101,11 +106,19 @@ alias ghp='git stash pop'
 alias gf="git fetch --verbose --progress --all --prune -j$(nproc 2>/dev/null || echo 1)"
 alias gd='git diff'
 alias gdc='git diff --cached'
+alias gds='PAGER= git diff --stat'
+alias gdcs='PAGER= git diff --cached --stat'
 alias gtree='git log --oneline --graph --decorate --branches --remotes --tags --notes'
 alias gl='git log --oneline --graph --decorate'
 alias gll='git log'
 alias gr='git reset'
 alias gcl='git clone --recursive'
+alias git-974=~/sh_script/git-974.sh
+alias git-splootch="git commit --amend --reuse-message=HEAD && git-974"
+alias grb="git rebase"
+alias grbi="git rebase --autosquash -i master"
+alias grbm="git rebase master"
+alias gref="git reflog"
 
 gpla() {
     # git-pull_all-my-branches
@@ -208,6 +221,7 @@ alias wdiff='dwdiff -c'
 alias pacsearch='pacsearch -c'
 alias pactree='pactree -c'
 alias bb='bb-wrapper --aur --build-dir /tmp/bb-build'
+alias bat='bat --color=always -p --paging never'
 
 
 # support colors in less
@@ -290,7 +304,7 @@ if [ "$TERM" != dumb ] && $(hash grc 2>/dev/null); then
     alias docker-compose="colourify docker-compose"
 
     colored_sizeof() {
-        sizeof "$1" | grcat /usr/share/grc/conf.du
+        _sizeof "$1" | grcat /usr/share/grc/conf.du
     }
     alias sizeof="colored_sizeof"
 

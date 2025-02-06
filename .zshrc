@@ -119,9 +119,12 @@ else
     bindkey "^[z" fg
 fi
 
+SAVEHIST=$HISTFILESIZE
 setopt APPEND_HISTORY
 setopt SHARE_HISTORY
 setopt HIST_EXPIRE_DUPS_FIRST
+setopt HIST_FIND_NO_DUPS
+setopt HIST_REDUCE_BLANKS
 #setopt EXTENDED_HISTORY
 
 # report the status of backgrounds jobs immediately

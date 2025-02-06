@@ -100,13 +100,24 @@ ulimit -c unlimited
 set -x
 case $WM in
     i3)
+        # nvidia-settings --load-config-only &
+        # nvidia-settings -a "[gpu:0]/GPUFanControlState=1" -a "[fan:0]/GPUTargetFanSpeed=35"
+
+        pgrep emacs || rm -f /home/mc/.emacs.d/.emacs.desktop.lock
 
 		# Auto screen lock
         xautolock -detectsleep -cornersize 50 -corners --00 -time 10 -locker 'xset dpms force off' &
         # xautolock -detectsleep -cornersize 50 -corners --00 -time 42 -locker 'systemctl suspend -i' &
 		# caffeine &
-		bash -x "$(command -v lightson+)" --delay 3 --audio 1 --mplayer 1 --vlc 1 --totem 0 --firefox-flash 1 --chromium-flash 1 --webkit-flash 1 --html5 1 --steam 0 --minitube 0 --minload 2 > /tmp/lightson.log 2>&1 &
+		# bash -x "$(command -v lightson+)" --delay 3 --audio 1 --mplayer 1 --vlc 1 --totem 0 --firefox-flash 1 --chromium-flash 1 --webkit-flash 1 --html5 1 --steam 0 --minitube 0 --celluloid 1 --guitarix 1 --rocketleague 1 > ~/.log/lightson.log 2>&1 &
+		bash -x lightson+ --delay 3 --audio 1 \
+             --mplayer 1 --vlc 1 --totem 0 --flash 1 --html5 1 \
+             --steam 0 --minitube 0 --celluloid 1 --guitarix 1 --rocketleague 1 \
+             > ~/.log/lightson.log 2>&1 &
         # lightson+cmd on &
+
+        systembus-notify &
+        dunst -print > ~/.log/dunst-notif.log 2>&1 &
 
         screen1=$(xrandr | grep primary)
         screen2=$(xrandr | grep ' connected' | grep -v primary)
@@ -129,13 +140,16 @@ case $WM in
 		# syndaemon -i 0.5 -t -K -R -d &
 
 		# compositor
-        pgrep picom || picom -CG --backend xrender --xrender-sync-fence --unredir-if-possible --experimental-backends --vsync &
+        # pgrep picom || picom -CG --backend xrender --xrender-sync-fence --unredir-if-possible --experimental-backends --vsync &
+        pgrep picom || picom &
 
 		# numlock at startup
 		numlockx &
 
+        psensor &
+
         # Lock screen at startup
-        i3lock -f -t -i ~/Pictures/Wallpapers/xkcd.png
+        # i3lock -f -t -i ~/Pictures/Wallpapers/xkcd.png
 
         exec i3;;
 	    # Use 25 MiB of RAM for debug logs
@@ -150,12 +164,12 @@ case $WM in
         export SDL_VIDEODRIVER=wayland
         export _JAVA_AWT_WM_NONREPARENTING=1
 
-        exec dbus-launch --sh-syntax --exit-with-session sway -d &> /tmp/sway.log
-        # sway -d &> /var/log/sway.log
+        exec dbus-launch --sh-syntax --exit-with-session sway -d &> ~/.log/sway.log
+        # sway -d &> ~/.log/sway.log
 
         ;;
 
     *) # No known WM, try to run it as command
-		echo $WM > /tmp/wm.log
+		echo $WM > ~/.log/wm.log
         exec $1;;
-esac | tee /tmp/.xinit.log 2>&1
+esac |& tee ~/.log/xinit.log

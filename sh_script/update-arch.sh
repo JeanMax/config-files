@@ -1,7 +1,5 @@
 #!/bin/bash
 
-COOKIE=/tmp/.yay.cookie
-
 
 usage() {
     this_script="$1"
@@ -58,29 +56,67 @@ arg_parse() {
     done
 }
 
+main() {
+    local updates need_reboot
+
+    # get package list to update, check if there's anything touchy
+    updates=$(checkupdates) || {
+        echo "~ Up to date! ~"
+        exit 0
+    }
+    grep -Eq 'systemd' <<< "$updates" \
+        && need_reboot=systemd
+    grep -Eq '(^linux-)|(-dkms$)' <<< "$updates" \
+        && need_reboot=y
+    echo "$updates"
+
+    # get archlinux news
+    yay -Pws
+
+    # system infos
+    yay -Ps # TODO: remove if printed with news
+
+    # exit if needed
+    if ! test "$FORCE" && test "$need_reboot"; then
+	    echo 'Reboot might be needed, use -f/--force if you want to proceed anyway.'
+	    exit 42
+    fi
+
+    # alph key...
+    sudo pacman-key --refresh-keys 0D4D2FDAF45468F3DDF59BEDE3D0D2CD3952E298
+    # in case keys are out of date
+    yay -Sy --needed alhp-keyring alhp-mirrorlist archlinux-keyring
+
+    # actually update
+    yay && yay -Yc  # TODO: handle errors!
+
+    # handle qt bullshit
+    grep -q 'qt' <<< "$updates" \
+        && yay -S --rebuild qt5-styleplugins
+
+    # clean if needed
+    if test "$CLEAN"; then
+        sudo pacman -Scc --noconfirm
+        sudo find /usr/share/{doc,info,man} \
+             /usr/lib/python*/test \
+             -mindepth 2 \
+             -delete
+    fi
+    paccache -r  # remove old package cache, keep last 3 versions
+
+    # handle reboot
+    if test "$need_reboot"; then
+        echo 'Reboot might be needed'
+
+        if test "$REBOOT"; then
+            echo "Reboot!"
+            sudo systemctl reboot
+        elif test "$need_reboot" == systemd; then
+            echo "Reexec systemd"
+            sudo systemctl daemon-reexec
+        fi
+    fi
+}
 
 arg_parse $@
-
-yay -Pw
-yes no | yay |& tee "$COOKIE"
-grep -Eq 'linux-[0-9]|linux-headers|systemd' "$COOKIE" \
-    && NEED_REBOOT=t
-rm -f "$COOKIE"
-
-if ! test "$FORCE" && test "$NEED_REBOOT"; then
-	echo 'Reboot might be needed, use -f/--force if you want to proceed anyway.'
-	exit 42
-fi
-
-yay && yay -c
-if test "$CLEAN"; then
-    sudo pacman -Scc --noconfirm
-    sudo find /usr/share/{doc,info,man} \
-         /usr/lib/python*/test \
-         -mindepth 2 \
-         -delete
-fi
-if test "$NEED_REBOOT"; then
-    echo 'Reboot might be needed'
-    test "$REBOOT" && sudo systemctl reboot
-fi
+main

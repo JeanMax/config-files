@@ -37,6 +37,6 @@ for f in test_write test_read test_cache
 do
     echo "+ $f"
     sync
-    $f |& grep '1,0 GiB'
+    $f |& grep -E '1.0 GiB'
 done
 rm -f "$TMP_FILE"

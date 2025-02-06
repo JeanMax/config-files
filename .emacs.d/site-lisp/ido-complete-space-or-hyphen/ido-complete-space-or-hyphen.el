@@ -181,18 +181,19 @@ It allows user press SPACE twice to insert real SPACE.
   "Enable ido-complete-space-or-hyphen"
   (interactive)
   (ido-complete-space-or-hyphen-mode 1))
-(make-obsolete
- 'ido-complete-space-or-hyphen-enable
- "use `(ido-complete-space-or-hyphen-mode 1)' instead.")
+
+;; (make-obsolete
+;;  'ido-complete-space-or-hyphen-enable
+;;  "use `(ido-complete-space-or-hyphen-mode 1)' instead.")
 
 ;;;###autoload
 (defun ido-complete-space-or-hyphen-disable ()
   "Disable ido-complete-space-or-hyphen"
   (interactive)
   (ido-complete-space-or-hyphen-mode 1))
-(make-obsolete
- 'ido-complete-space-or-hyphen-enable
- "use `(ido-complete-space-or-hyphen-mode 0)' instead.")
+;; (make-obsolete
+;;  'ido-complete-space-or-hyphen-enable
+;;  "use `(ido-complete-space-or-hyphen-mode 0)' instead.")
 
 (provide 'ido-complete-space-or-hyphen)
 

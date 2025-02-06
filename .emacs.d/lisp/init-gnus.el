@@ -37,21 +37,18 @@
 				(define-key gnus-group-mode-map (kbd "g") 'email-check)))
 
 	(setq gnus-posting-styles
-		  '(((header "to" "mc.maxcanal@gmail.com") (address "mc.maxcanal@gmail.com"))
+		  '(((header "to" "jeanmax@disroot.org") (address "jeanmax@disroot.org"))
+			((header "cc" "jeanmax@disroot.org") (address "jeanmax@disroot.org"))
+
+		    ((header "to" "mc.maxcanal@gmail.com") (address "mc.maxcanal@gmail.com"))
 			((header "cc" "mc.maxcanal@gmail.com") (address "mc.maxcanal@gmail.com"))
 
 			((header "to" "yodator_9@hotmail.com") (address "yodator_9@hotmail.com"))
-			((header "cc" "yodator_9@hotmail.com") (address "yodator_9@hotmail.com"))
+			((header "cc" "yodator_9@hotmail.com") (address "yodator_9@hotmail.com"))))
 
-			((header "to" "max.canal@unchartech.com") (address "max.canal@unchartech.com"))
-			((header "cc" "max.canal@unchartech.com") (address "max.canal@unchartech.com"))
-
-			((header "to" "m.canal@pleiade-am.com") (address "m.canal@pleiade-am.com"))
-			((header "cc" "m.canal@pleiade-am.com") (address "m.canal@pleiade-am.com"))))
-
-    (setq gnus-select-method '(nnimap "gmail"
-									  (nnimap-address "imap.gmail.com")
-									  (nnimap-server-port "imaps")
+    (setq gnus-select-method '(nnimap "disroot"
+									  (nnimap-address "disroot.org")
+									  (nnimap-server-port 993)
 									  (nnimap-authinfo-file "~/.authinfo")
 									  (nnimap-stream ssl)))
 
@@ -69,7 +66,7 @@
 		  gnus-use-full-window nil
 		  gnus-article-skip-boring t
 		  send-mail-function 'smtpmail-send-it
-		  user-mail-address "mc.maxcanal@gmail.com"
+		  user-mail-address "jeanmax@disroot.org"
 		  user-full-name "Max Canal"
 		  smtpmail-smtp-service 587
 		  gnus-summary-line-format "%U%R%z %(%&user-date;  %-21,21f  %B%s%)\n"
@@ -122,7 +119,8 @@
   "Log new mails count in a file."
   (let ((mail-count-file "~/.mail-count")
 		(buf-str (with-current-buffer "*Group*" (buffer-string))))
-	(if (string-match "[^0-9]*\\([1-9][0-9]*\\).*: .*Tous.*" buf-str)
+	(if (string-match "[^0-9]*\\([1-9][0-9]*\\).*: .*INBOX.*" buf-str)
+	;; (if (string-match "[^0-9]*\\([1-9][0-9]*\\).*: .*Tous.*" buf-str)
 		(write-region (match-string 1 buf-str) nil mail-count-file)
 	  (write-region "" nil mail-count-file))))
 
@@ -130,6 +128,7 @@
   "Launch gnus then gnus-demon (Ok I missed something in the config)..."
   (interactive)
   (gnus)
+  ;; (gnus-group-list-all-groups)
   (log-mail-count)
   (gnus-demon-add-handler
    '(lambda()
@@ -187,7 +186,8 @@
   "Search in 'Tous les messages' folder."
   (interactive)
   (switch-to-buffer "*Group*")
-  (gnus-group-jump-to-group "[Gmail]/Tous les messages")
+  ;; (gnus-group-jump-to-group "[Gmail]/Tous les messages")
+  (gnus-group-jump-to-group "INBOX")
   (gnus-group-make-nnir-group nil))
 
 (provide 'init-gnus)

@@ -89,3 +89,16 @@ keycode 49 = greater less less
 ! keycode 233 = XF86MonBrightnessUp NoSymbol XF86MonBrightnessUp
 ! keycode 237 = XF86KbdBrightnessDown NoSymbol XF86KbdBrightnessDown
 ! keycode 238 = XF86KbdBrightnessUp NoSymbol XF86KbdBrightnessUp
+
+
+! XF86Sleep
+keycode 150 = XF86AudioLowerVolume NoSymbol XF86AudioLowerVolume
+
+! XF86HomePage
+keycode 180 = XF86AudioRaiseVolume NoSymbol XF86AudioRaiseVolume
+
+! XF86Mail
+! keycode 163
+
+! XF86Calculator
+keycode 148 = XF86AudioMute NoSymbol XF86AudioMute

@@ -26,14 +26,14 @@
 (setq gc-cons-threshold most-positive-fixnum)
 
 (add-hook 'minibuffer-setup-hook
-		  '(lambda () (setq gc-cons-threshold most-positive-fixnum)))
+		  #'(lambda () (setq gc-cons-threshold most-positive-fixnum)))
 (add-hook 'minibuffer-exit-hook
-		  '(lambda () (setq gc-cons-threshold initial-gc-cons-threshold)))
+		  #'(lambda () (setq gc-cons-threshold initial-gc-cons-threshold)))
 
 ;; compile config files
 (defconst initial-file-name-handler-alist file-name-handler-alist)
 (add-hook 'after-init-hook
-		  '(lambda ()
+		  #'(lambda ()
 			 ;; (setq gc-cons-threshold initial-gc-cons-threshold)
 			 (setq file-name-handler-alist initial-file-name-handler-alist)
 			 (when (< 23 emacs-major-version)

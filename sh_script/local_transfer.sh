@@ -13,11 +13,11 @@ EOF
 }
 
 recv() {
-    nc -vlp "$PORT" | tar -xv"$COMPRESS"
+    nc -vlp "$PORT" | tar --checkpoint -xv"$COMPRESS"
 }
 
 send() {
-    (tar -cv"$COMPRESS"pf - "$FILE" && sync && sleep 1 && pkill -f "nc -v $IP $PORT") \
+    (tar --checkpoint -cv"$COMPRESS"pf - "$FILE" && sync && sleep 1 && pkill -f "nc -v $IP $PORT") \
         | nc -v "$IP" "$PORT"
 }
 
