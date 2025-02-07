@@ -80,10 +80,16 @@ iperl() {
     rlwrap -A -pgreen -S"perl> " perl -wnE'say eval()//$@'
 }
 
+
+
 # emacs stuffs
-alias e="$EDITOR"
+# alias e="$EDITOR"
+e() {
+    emacsclient -c $@ &
+}
 alias em='emacs --no-window-system --no-x-resources --no-splash'
-alias v="$VISUAL"
+# alias v="$VISUAL"
+alias v="$EDITOR"
 alias se="SUDO_EDITOR=\"emacsclient -t -a emacs\" sudoedit"
 alias man='man_emacs'
 alias mail='em --eval "(progn (sleep-for 0.1) (gnu))"'

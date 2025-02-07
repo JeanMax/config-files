@@ -92,7 +92,9 @@ PS1="\[${CLR_BOLD}${CLR_BLUE}\]${USER}@\[${CLR_YELLOW}\]${HOSTNAME}\[${CLR_WHITE
 
 # default editor
 export ALTERNATE_EDITOR=""
-export EDITOR="emacsclient -t"
+export EDITOR="emacs --no-window-system --no-x-resources --no-splash"
+# TODO: big red screen???
+# export EDITOR="emacsclient -t"
 # export VISUAL="emacsclient -c" # it's kinda annoying
 
 # cat if less (eheh) than one page
@@ -126,9 +128,6 @@ fi
 for d in .local/bin go/bin .roswell/bin; do
     test -e "$HOME/$d" && export PATH="$HOME/$d/:$PATH"
 done
-# if hash ruby 2>/dev/null; then
-#    export PATH="$HOME/.gem/ruby/2.6.0/bin:$PATH"
-# fi
 
 # locales
 # export LANG=en_US.UTF-8
@@ -244,20 +243,15 @@ export AWS_DEFAULT_OUTPUT=json
 
 source ~/.bash_aliases
 
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
-
-
 #TODO: broken at boot
-ssh_agent_cookie=/tmp/.ssh-agent
-if ! test -e "$ssh_agent_cookie"; then
-    ssh-agent > "$ssh_agent_cookie"
-    eval "$(< "$ssh_agent_cookie")"
-    ssh-add $(find ~/.ssh -type f | grep -vE '.pub|.old|config|known_hosts')
-else
-    eval "$(< "$ssh_agent_cookie")" >/dev/null
-fi
+# ssh_agent_cookie=/tmp/.ssh-agent
+# if ! test -e "$ssh_agent_cookie"; then
+#     ssh-agent > "$ssh_agent_cookie"
+#     eval "$(< "$ssh_agent_cookie")"
+#     ssh-add $(find ~/.ssh -type f | grep -vE '.pub|.old|config|known_hosts')
+# else
+#     eval "$(< "$ssh_agent_cookie")" >/dev/null
+# fi
 
 export LSP_USE_PLISTS=true
 

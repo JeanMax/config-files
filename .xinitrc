@@ -102,8 +102,8 @@ case $WM in
     i3)
 
 		# Auto screen lock
-        # xautolock -detectsleep -cornersize 50 -corners --00 -time 3 -locker 'xset dpms force off' &
-        xautolock -detectsleep -cornersize 50 -corners --00 -time 5 -locker 'i3lock -f -t -i /home/mcanal/Pictures/Wallpapers/xkcd.png && sleep 1 && xset dpms force off' &
+        xautolock -detectsleep -cornersize 50 -corners --00 -time 3 -locker 'xset dpms force off' &
+        # xautolock -detectsleep -cornersize 50 -corners --00 -time 5 -locker 'i3lock -f -t -i /home/mcanal/Pictures/Wallpapers/xkcd.png && sleep 1 && xset dpms force off' &
         # xautolock -detectsleep -cornersize 50 -corners --00 -time 42 -locker 'systemctl suspend -i' &
 		# caffeine &
 		#bash -x "$(command -v lightson+)" --delay 3 --audio 1 --mplayer 1 --vlc 1 --totem 0 --firefox-flash 1 --chromium-flash 1 --webkit-flash 1 --html5 1 --steam 0 --minitube 0 --minload 2 > /tmp/lightson.log 2>&1 &
@@ -141,6 +141,9 @@ case $WM in
 
         # pgrep redshift || redshift &
 
+        # TODO: you need a udev hook on unplug for this
+        powertop --auto-tune
+
         # Background picture
         feh -V --bg-max ~/Pictures/Wallpapers/xkcd.png &
 
@@ -148,17 +151,17 @@ case $WM in
 		# syndaemon -i 0.5 -t -K -R -d &
 
 		# compositor
-        pgrep compfy || {
-            sleep 3 # wait for firefox to start
-            compfy --corner-radius 0 --vsync --xrender-sync-fence --unredir-if-possible --animation-for-open-window auto --animation-for-unmap-window auto --animation-dampening 12
-        } &
+        pgrep picom || picom -CG --backend xrender --xrender-sync-fence --unredir-if-possible --experimental-backends --vsync &
+        # pgrep compfy || {
+        #     sleep 3 # wait for firefox to start
+        #     compfy --corner-radius 0 --vsync --xrender-sync-fence --unredir-if-possible --animation-for-open-window auto --animation-for-unmap-window auto --animation-dampening 12
+        # } &
 
 		# numlock at startup
 		numlockx &
 
         # Lock screen at startup
-
-        if ! test "$NOP"; then
+        if ! test "$NOP"; then  # don't actually start X, just env config
             i3lock -f -t -i ~/Pictures/Wallpapers/xkcd.png
             exec i3
         fi

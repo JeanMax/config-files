@@ -1,0 +1,26 @@
+## If your Emacs is installed in a non-standard location, you may need
+## to copy this file to a standard directory, eg ~/.config/systemd/user/ .
+## If you install this file by hand, change the "Exec" lines below
+## to use absolute file names for the executables.
+[Unit]
+Description=Emacs pouet editor
+After=graphical-session.target
+
+[Service]
+Type=forking
+# rm -vf ~/.emacs.d/.emacs.desktop.lock
+ExecStart=zsh -i -c 'emacs --daemon'
+ExecStop=emacsclient -e '(progn (kill-matching-buffers "^timemachine:.*") (save-some-buffers) (desktop-save "~/.emacs.d") (kill-emacs))'
+
+# Emacs will exit with status 15 after having received SIGTERM, which
+# is the default "KillSignal" value systemd uses to stop services.
+SuccessExitStatus=15
+
+# The location of the SSH auth socket varies by distribution, and some
+# set it from PAM, so don't override by default.
+# Environment=SSH_AUTH_SOCK=%t/keyring/ssh
+Restart=on-abnormal
+RestartSec=3
+
+[Install]
+WantedBy=default.target

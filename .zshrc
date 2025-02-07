@@ -84,8 +84,9 @@ precmd ()
 	fi
 
 
-	if [[ $TERM = dumb ]]; then
+	if [[ $TERM = dumb ]] || [[ $TERM = eterm-color ]] || [[ $TERM = eat-truecolor ]]; then
 		DUMB_PROMPT="$RPROMPT"
+        RPROMPT=
 	fi
 
     PROMPT="%B%{$fg[blue]%}%n@%{$fg[yellow]%}%m%{$fg[white]%}:%{$fg[red]%}%~        $DUMB_PROMPT
@@ -123,10 +124,11 @@ setopt HIST_EXPIRE_DUPS_FIRST
 # report the status of backgrounds jobs immediately
 setopt notify
 
-# Autocompletion de type menu
-fpath=(~/.zsh_fpath $fpath)
-export FPATH=~/.zsh_fpath:$FPATH
+# custom comp for make / docker (sloooow)
+# fpath=(~/.zsh_fpath $fpath)
+# export FPATH=~/.zsh_fpath:$FPATH
 
+# Autocompletion de type menu
 zstyle ':completion:*' menu select
 zstyle ':completion:*:*:make:*' tag-order 'targets'
 autoload -Uz compinit promptinit && compinit && promptinit
@@ -210,7 +212,7 @@ test -e /usr/share/fzf/completion.zsh \
 # export OPAMEXTERNALSOLVER=$(which packup 2> /dev/null)
 
 # OPAM configuration
-. /home/mc/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+# . /home/mc/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
 
 
 # fortune | cowsay -n | lolcat -v 1 -h 0.2
@@ -218,7 +220,3 @@ test -e /usr/share/fzf/completion.zsh \
 
 # add completion on aliases
 setopt complete_aliases
-
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
