@@ -40,7 +40,31 @@
   ;; Use backslash for literal space
   (setq orderless-component-separator 'orderless-escapable-split-on-space))
 
-  )
+
+;; (use-package fussy
+;;   :ensure t
+;;   :config
+;;   (push 'fussy completion-styles)
+;;   (setq
+;;    ;; For example, project-find-file uses 'project-files which uses
+;;    ;; substring completion by default. Set to nil to make sure it's using
+;;    ;; flx.
+;;    completion-category-defaults nil
+;;    completion-category-overrides nil)
+
+;;   ;; (setq fussy-use-cache t)
+
+;;   (setq fussy-filter-fn 'fussy-filter-default)
+
+;;   ;; (setq fussy-filter-fn 'fussy-filter-orderless-flex)
+;;   ;; (setq fussy-filter-fn 'fussy-filter-orderless)
+;;   )
+
+
+;; (use-package hotfuzz
+;;   :ensure t
+;;   :config
+;;   (setq fussy-score-fn 'fussy-hotfuzz-score))
 
 
 (provide 'init-orderless)

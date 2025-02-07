@@ -14,6 +14,10 @@
 
 ;;; Code:
 
+;; note: embark menu help might (is always?) incomplete
+;;        -> S for collect (Snapshot)
+
+
 (use-package embark
   :ensure t
 

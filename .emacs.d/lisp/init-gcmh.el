@@ -19,8 +19,9 @@
   :diminish gcmh-mode
   :config
   (gcmh-mode 1)
-  ;; (setq gcmh-idle-delay 30)
+  (setq gcmh-idle-delay 30)
   (setq gcmh-high-cons-threshold initial-gc-cons-threshold)
+  (setq gc-cons-percentage 0.3)
   (setq gcmh-verbose t)
   (setq garbage-collection-messages t))
 

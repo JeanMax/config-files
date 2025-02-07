@@ -22,6 +22,8 @@
   ;; selecting region with shift
   (transient-mark-mode t)
 
+  (visual-line-mode t)
+
   (bind-key* (kbd "<home>") 'backward-page)
   (bind-key* (kbd "<end>") 'forward-page)
 
@@ -119,10 +121,9 @@
   (defun insert-debug-comment()
     "Insert a 'debug' comment."
     (interactive)
-    (point-to-register 'm)
-    (comment-dwim nil)
-    (insert "DEBUG")
-    (jump-to-register 'm))
+    (save-excursion
+      (comment-dwim nil)
+      (insert "DEBUG")))
 
   (defun set-comment-char (char)
     "Set comment CHAR for current buffer."

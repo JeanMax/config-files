@@ -35,7 +35,7 @@
 ;; don't forget to save it!
 
 (use-package emms-streams
-  ;; :defer t
+  :after emms
 
   :config
   (setq emms-stream-default-action "play"))

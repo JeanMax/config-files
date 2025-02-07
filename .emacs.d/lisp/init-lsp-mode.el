@@ -49,13 +49,17 @@
   (setq lsp-pylsp-plugins-mypy-enabled t)
   (setq lsp-enable-symbol-highlighting nil)
   (setq lsp-keep-workspace-alive nil)
-  (setq lsp-headerline-breadcrumb-enable nil))
+  (setq lsp-headerline-breadcrumb-enable nil)
+  (setq lsp-enable-snippet nil)
+  (add-hook 'lsp-configure-hook (lambda ()
+                             (setq xref-backend-functions #'etags--xref-backend))))
 
 ;; (require 'lsp-ido)
 
 
 (use-package lsp-ui
   :ensure t
+  :after lsp-mode
   :commands lsp-ui-mode
   ;; :config
   ;; (setq lsp-ui-doc-enable nil)
@@ -67,8 +71,8 @@
   )
 
 (use-package lsp-lens
-  :diminish lsp-lens-mode
-  )
+  :after lsp-mode
+  :diminish lsp-lens-mode)
 
 (use-package lsp-treemacs
   :ensure t

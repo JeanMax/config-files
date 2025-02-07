@@ -15,12 +15,20 @@
 ;;; Code:
 
 ;; detect emacsclient/os
-(defconst *is-a-server*
-  (let ((prev_cmd (getenv "_")))
-	(if (eq nil prev_cmd)
-		nil
-	  (string-equal "emacsclient" (file-name-nondirectory prev_cmd)))))
+(defconst *is-a-server* ;server-mode)
+  (daemonp))
+
+  ;; (let ((prev_cmd (getenv "_")))
+  ;;   (if (eq nil prev_cmd)
+  ;;   	nil
+  ;;     (progn
+  ;;       (message "pouet %S" prev_cmd)
+  ;;       (string-equal "emacsclient" (file-name-nondirectory prev_cmd))))))
+
 (defconst *is-a-mac* (eq system-type 'darwin))
+
+;; note: started up as gui, but you could still open a term (or the opposite)
+(defconst *is-a-gui* (display-graphic-p))
 
 
   ;; alias for altgr keys, since they change a lot between keyboards

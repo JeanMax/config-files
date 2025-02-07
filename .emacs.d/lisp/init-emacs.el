@@ -16,8 +16,6 @@
 
 (use-package emacs
   :init
-  (use-package diminish
-    :ensure t)
 
   ;; :config
 
@@ -60,11 +58,10 @@
   (setq inhibit-startup-buffer-menu t)
 
   ;; no *scratch* at startup, use the previous buffer
-  (require 'altgr)
-  (when *is-a-server*
-    (setq initial-buffer-choice
-          '(lambda ()
-             (switch-to-buffer (other-buffer (current-buffer) t)))))
+  ;; (when *is-a-server*
+  ;;   (setq initial-buffer-choice
+  ;;         '(lambda ()
+  ;;            (switch-to-buffer (other-buffer (current-buffer) t)))))
 
   ;; format line number (fringe)
   (setq linum-format "%3d ")
@@ -122,18 +119,19 @@
   ;; search and replace
   (bind-key* (kbd "<f10>") 'query-replace)
   ;; (bind-key* (kbd "C-r") 'rgrep)
-  (bind-key* (kbd "C-r") 'isearch-backward)
+  (bind-key (kbd "C-r") 'isearch-backward)
   (bind-key* (kbd "M-r") 'query-replace-regexp)
   (bind-key* (kbd "C-o") 'occur)
 
   ;; completion
+  (require 'altgr)
   (bind-key (kbd "<backtab>") 'dabbrev-expand)
   (bind-key* (kbd *altgr-h*) 'hippie-expand)
 
-  ;; registers ;; TODO: bugged on jump (actually it works, but completion throws an error)
+  ;; registers
   ;; we'll use the consult versions
-  (bind-key* (kbd "<f7>") 'point-to-register)
-  (bind-key* (kbd "<f9>") 'jump-to-register)
+  (bind-key (kbd "<f7>") 'point-to-register)
+  (bind-key (kbd "<f9>") 'jump-to-register)
   ;; (bind-key* (kbd *altgr-m*) 'point-to-register)
 
   ;; misc
@@ -146,13 +144,7 @@
   (bind-key* (kbd "M-q") 'comment) ; -> elisp-functions.el
   (bind-key (kbd "C-q") 'insert-debug-comment) ; -> elisp-functions.el
 
-  ;; gui font (default is actually set in .Xressources)
-  (when (member "CodeNewRoman" (font-family-list))
-    (set-frame-font "CodeNewRoman 12" t nil))
-  ;; (when (member "Symbola" (font-family-list))
-  ;;   (set-font t 'unicode "Symbola" nil 'prepend))
-
-  ;; (setq default-frame-alist '((font . "CodeNewRoman-13")))
+  (setq default-frame-alist '((font . "CodeNewRoman Nerd Font Mono 13")))
 
   ;; delay before printing prefix key(s) in the messages bar
   (setq suggest-key-bindings 0)
@@ -277,6 +269,18 @@
   (interactive)
   (let ((inhibit-read-only t))
     (ansi-color-apply-on-region (point-min) (point-max))))
+
+
+(use-package zone
+  :config (setq zone-when-idle 120))
+
+
+(use-package diminish
+  :ensure t)
+
+(require 'use-package)
+(require 'bind-key)
+
 
 (provide 'init-emacs)
 ;;; init-emacs.el ends here

@@ -82,6 +82,8 @@
   ;; after lazily loading the package.
   :config
 
+  (require 'consult-xref)
+
   ;; Optionally configure preview. The default value
   ;; is 'any, such that any key triggers the preview.
   ;; (setq consult-preview-key 'any)
@@ -134,6 +136,7 @@
 
 (use-package consult-dir
   :ensure t
+  :after consult
   :bind (("C-x C-d" . consult-dir)
          :map vertico-map
          ("C-x C-d" . consult-dir)

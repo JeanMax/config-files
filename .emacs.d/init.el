@@ -14,43 +14,12 @@
 ;******************************************************************************;
 
 ;;; Code:
-;; (package-initialize); otherwise Package.el add it...
-
-(when (< emacs-major-version 22)
-  (error "Emacs version 22 or greater required!"))
-
-;; tricks to save some startup time
-;; ( https://www.reddit.com/r/emacs/comments/3kqt6e/2_easy_little_known_steps_to_speed_up_emacs_start/
-;; http://bling.github.io/blog/2016/01/18/why-are-you-changing-gc-cons-threshold/ )
-;; (let ((gc-cons-threshold most-positive-fixnum))
-
-(setq gc-cons-threshold (* 16 1024 1024))
-(defconst initial-gc-cons-threshold gc-cons-threshold)
-
-;; (add-hook 'minibuffer-setup-hook
-;; 		  #'(lambda () (setq gc-cons-threshold most-positive-fixnum)))
-;; (add-hook 'minibuffer-exit-hook
-;; 		  #'(lambda () (setq gc-cons-threshold initial-gc-cons-threshold)))
-
-
-(setq read-process-output-max (* 1024 1024)) ;; 1mb
-
-(setq lexical-binding t)
 
 ;; compile config files
-(defconst initial-file-name-handler-alist file-name-handler-alist)
 (add-hook 'after-init-hook
-		  #'(lambda ()
-			 ;; (setq gc-cons-threshold initial-gc-cons-threshold)
-			 (setq file-name-handler-alist initial-file-name-handler-alist)
-			 (when (< 23 emacs-major-version)
-			   (ignore-errors (benchmark-init/activate))
-               (recompile-config)
-               (setq native-comp-deferred-compilation t)
-			   (message "Init-time: %s" (emacs-init-time)))))
-(setq file-name-handler-alist nil)
-(setq load-prefer-newer t)
-;; (setq debug-on-error t)  ; --debug-init
+		  (lambda ()
+            (recompile-config)
+            (setq native-comp-jit-compilation t)))
 
 (defun recompile-config ()
   "Recompile elisp config: `lisp/*.el', `site-lisp/*/*.el'.
@@ -66,10 +35,17 @@
     (byte-recompile-file config-file nil 0)))
 
 
+(setq load-prefer-newer t)
 (add-to-list 'load-path "~/.emacs.d/lisp")
 (add-to-list 'load-path "~/.emacs.d/lisp/lib")
+
+;; auto-generated customizations
+(setq custom-file "~/.emacs.d/lisp/custom.el")
+(add-hook 'elpaca-after-init-hook (lambda () (load custom-file)))
+
 ;; builtin packages
 (require 'init-package) ; need to be 1st
+;; (require 'init-elpaca) ; need to be 1st
 (require 'init-emacs) ;   "    "  "  2nd
 (require 'init-simple)
 (require 'init-frame)
@@ -146,9 +122,34 @@
   ;;   (require 'init-vc-dir))
   )
 
-;; auto-generated customizations
-(setq custom-file "~/.emacs.d/lisp/custom.el")
-(load custom-file)
+
+
+;; TODO: flex AGR- prefix / complete with symbol at point
+(defun jira (ticket)
+  "Pouet TICKET."
+  (interactive "sAGR-")
+  (async-shell-command
+   (concat
+    "JIRA_API_TOKEN=$(< ~/.jira.token) jira issue view --comments 42 --plain "
+    ticket)
+   (concat "*AGR-" ticket "*")))
+
+
+(use-package docker
+  :ensure t
+  :bind ("C-c d" . docker))
+
+
+(use-package i3wm-config-mode
+  :ensure t)
+
+(use-package groovy-mode
+  :ensure t)
+
+(use-package lua-mode
+  :ensure t)
+
+
 
 (provide 'init)
 ;;; init.el ends here

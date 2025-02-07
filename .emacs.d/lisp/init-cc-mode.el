@@ -45,10 +45,9 @@
 (defun semi-c ()
   "Semi-colon at end of line, without moving!"
   (interactive)
-  (point-to-register 'm)
-  (move-end-of-line nil)
-  (insert ";")
-  (jump-to-register 'm))
+  (save-excursion
+    (move-end-of-line nil)
+    (insert ";")))
 
 (defun headcomment ()
   "Head comment."

@@ -21,7 +21,7 @@
   :diminish keyfreq-mode
   :defines *is-a-server*
 
-  :init
+  :config
   (when *is-a-server*
     (keyfreq-mode 1))
   (keyfreq-autosave-mode 1)

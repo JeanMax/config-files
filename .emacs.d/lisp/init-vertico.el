@@ -15,7 +15,6 @@
 ;;; Code:
 
 ;; TODO: add buffer menu shortcut (kill-buffer -f or rm file)
-;; add describe fun/key/mode in M-x (-> embark)
 ;; multiselect?
 ;; compilation-mode: no vertico completion?
 (use-package vertico
@@ -25,7 +24,7 @@
   :ensure t
   :bind (:map vertico-map
               ("TAB" . #'vertico-insert-or-next)
-              ;; ("RET" . #'vertico-insert)
+              ("M-o" . #'vertico-insert)
               ("RET" . #'vertico-directory-enter)
               ("DEL" . #'vertico-directory-delete-char)
               ("C-d" . #'vertico-exit-input)
@@ -37,6 +36,7 @@
          (minibuffer-setup . vertico-repeat-save)) ; Make sure vertico state is saved
   :init
   (vertico-mode)
+  (bind-key* (kbd "C-M-x") 'vertico-repeat)
 
   ;; TODO: move mouse / X handling to another file
   (vertico-mouse-mode)
@@ -83,6 +83,16 @@
   (if (window-minibuffer-p (selected-window))
       (select-window (minibuffer-selected-window))
     (select-window (active-minibuffer-window))))
+
+
+
+(defun force-debug (func &rest args)
+  (condition-case e
+      (apply func args)
+    ((debug error) (signal (car e) (cdr e)))))
+
+(advice-add #'vertico--exhibit :around #'force-debug)
+
 
 
 ;; Persist history over Emacs restarts. Vertico sorts by history position.

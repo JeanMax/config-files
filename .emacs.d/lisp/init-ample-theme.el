@@ -15,11 +15,9 @@
 ;;; Code:
 (use-package ample-theme
   :ensure t
-  :init
+  :config
   (load-theme 'ample t t) ; ample{,flat,light}
   (enable-theme 'ample)
-
-  :config
   (require 'palette)
   (unpackaged/customize-theme-faces
     'ample
