@@ -18,9 +18,6 @@
   :defer t
   :ensure t
   :mode ("\\.ledger\\'" . ledger-mode)
-
-  :config
-  (set-face-attribute 'ledger-font-xact-highlight-face t :background "brightblack")
   )
 
 (bind-key (kbd "C-c b") (lambda () (interactive) (insert "₿")))

@@ -26,7 +26,7 @@
   (setq slime-contribs '(slime-fancy))
   ;; (setq inferior-lisp-program /"usr/bin/sbcl")
   ;; (setq inferior-lisp-program "ros -Q run")
-  (setq inferior-lisp-program "ros -Q -l ~/.sbclrc -L sbcl-bin run") ;TODO: symlink
+  (setq inferior-lisp-program "ros -Q -l ~/.sbclrc -L sbcl-bin run")
   (setq slime-load-failed-fasl 'never)
   (define-key slime-repl-mode-map (kbd "C-c r")
     'slime-repl-previous-matching-input)

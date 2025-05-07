@@ -13,7 +13,6 @@
 ;******************************************************************************;
 
 ;;; Code:
-
 (use-package python
   :defer t
   :mode
@@ -21,9 +20,9 @@
 
   :init
   (progn
+    (setenv "FORCE_COLOR" "t")
     (setenv "IPY_TEST_SIMPLE_PROMPT" "1")
     (setenv "PATH" (concat "~/.local/bin:" (getenv "PATH")))
-    ;; (add-hook 'python-mode-hook 'company-mode)
     (add-hook 'python-mode-hook 'eldoc-mode)
 
     (setq python-eldoc-setup-code
@@ -61,10 +60,10 @@
     except:
         ret = ''
     return ret")
-    (setq python-shell-interpreter "ipython")
-    ;; (setq python-shell-interpreter-args "-i --pdb --TerminalIPythonApp.interactive_shell_class=rlipython.TerminalInteractiveShell -m babao")
-    (setq python-shell-interpreter-args "-i --pdb --TerminalIPythonApp.interactive_shell_class=rlipython.TerminalInteractiveShell")
-    ;; (setq python-shell-interpreter-args "-i --pdb --TerminalIPythonApp.interactive_shell_class=rlipython.TerminalInteractiveShell manage.py shell")  ;;debugsql
+
+    (setq python-shell-interpreter "ipython"
+          python-shell-interpreter-args "--pdb -i --simple-prompt --InteractiveShell.display_page=True")
+
     (use-package cython-mode
       :ensure t
       :defer t
@@ -89,7 +88,11 @@
   (define-key python-mode-map (kbd "<backtab>") nil)
   (define-key python-mode-map (kbd "C-c f") 'insert-python-def)
 
-  (define-key inferior-python-mode-map (kbd "C-c r") 'comint-history-isearch-backward))
+  (define-key inferior-python-mode-map (kbd "C-c r") 'comint-history-isearch-backward)
+  (define-key inferior-python-mode-map (kbd "C-c l") 'comint-clear-buffer))
+
+;; (setq major-mode-remap-alist
+;;       '((python-mode . python-ts-mode)))
 
 ;; (defun ipython()
 ;;   (interactive)
@@ -102,6 +105,13 @@
   (indent-according-to-mode)
   (insert "\"\"\"TODO\"\"\"\n\n")
   (indent-according-to-mode))
+
+
+
+(use-package eldoc
+  :defer t
+  :diminish eldoc-mode)
+
 
 (provide 'init-python-mode)
 ;;; init-python-mode.el ends here

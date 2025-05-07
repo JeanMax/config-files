@@ -58,6 +58,9 @@
 
     (setq gnus-message-archive-method nil)
 
+    (setq gnus-visible-headers
+          '("^From:" "^Newsgroups:" "^Subject:" "^Date:" "^Followup-To:" "^Reply-To:" "^Organization:" "^Summary:" "^Keywords:" "^To:" "^[BGF]?Cc:" "^Posted-To:" "^Mail-Copies-To:" "^Mail-Followup-To:" "^Apparently-To:" "^Gnus-Warning:" "^Resent-From:" "^X-Sent:" "^X-AnteSpam-Report:"))
+
     (setq message-citation-line-function 'message-insert-formatted-citation-line
 		  message-citation-line-format "Le %a%e %b %Y à %H:%M, %f a écrit:\n"
 		  gnus-save-newsrc-file nil

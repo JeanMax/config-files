@@ -37,5 +37,10 @@
   (bind-key* (kbd "<M-right>") 'hs-show-all)))
 
 
+
+
+
+
+
 (provide 'init-hideshow)
 ;;; init-hideshow.el ends here

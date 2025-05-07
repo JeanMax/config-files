@@ -24,10 +24,10 @@
   ("\\.dbj\\'" . js2-mode)
 
   :config
-  (setq js-indent-level 4)
+  (setq js-indent-level 4))
   ;; (setq tab-width 2) ; or any other preferred value
-  (defvaralias 'c-basic-offset 'tab-width)
-  (defvaralias 'cperl-indent-level 'tab-width))
+(defvaralias 'c-basic-offset 'tab-width)
+(defvaralias 'cperl-indent-level 'tab-width)
 
 
 (use-package json-mode

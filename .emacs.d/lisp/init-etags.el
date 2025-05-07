@@ -34,13 +34,16 @@
    (list (read-from-minibuffer
           (concat "tag pattern (default " (nth 0 tags-make-n-visit-history) "): ")
           nil nil nil 'tags-make-n-visit-history)))
-  (shell-command (concat "etags -o ~/.emacs.d/TAGS "
+  (shell-command (concat "etags -o ~/config-files/.emacs.d/TAGS "
                          (if (string= "" file-pattern)
                              (nth 0 tags-make-n-visit-history)
                            file-pattern)))
-  (visit-tags-table "~/.emacs.d/TAGS"))
+  (visit-tags-table "~/config-files/.emacs.d/TAGS"))
+
+  ;; (setq tags-table-list '("/home/mcanal/.emacs.d/TAGS"))))
 
 
+(require 'altgr)
 (bind-key* (kbd *altgr-t*) 'tags-make-n-visit)
 (bind-key* (kbd *altgr-g*) 'xref-find-definitions)
 (bind-key* (kbd *altgr-x*) 'xref-find-references)
@@ -52,9 +55,9 @@
   :defer t
 
   :init
-  (use-package gtags
-    :ensure t
-    :defer t)
+  ;; (use-package gtags
+  ;;   :ensure t
+  ;;   :defer t)
   (add-hook 'c-mode-common-hook
 			(lambda ()
 			  (when (derived-mode-p 'c-mode 'c++-mode)

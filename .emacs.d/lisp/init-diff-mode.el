@@ -17,13 +17,15 @@
 (use-package diff-mode
   :defer t
 
-  :config
-  (defadvice kill-new (before strip-leading-diff-chars activate)
-    "When copying from a diff buffer, strip the leading -, +, ! characters."
-    (if (or
-		 (eq major-mode 'diff-mode)
-		 (eq major-mode 'magit-revision-mode))
-        (ad-set-arg 0 (replace-regexp-in-string "^." "" (ad-get-arg 0))))))
+  ;TODO: this is annoying in magit buffes
+  ;; :config
+  ;; (defadvice kill-new (before strip-leading-diff-chars activate)
+  ;;   "When copying from a diff buffer, strip the leading -, +, ! characters."
+  ;;   (if (or
+  ;;   	 (eq major-mode 'diff-mode)
+  ;;   	 (eq major-mode 'magit-revision-mode))
+  ;;       (ad-set-arg 0 (replace-regexp-in-string "^." "" (ad-get-arg 0)))))
+  )
 
 (use-package ediff
   :defer t
@@ -37,7 +39,7 @@
                       (ediff-get-region-contents ediff-current-difference 'B ediff-control-buffer))))
 
   (add-hook 'ediff-keymap-setup-hook
-            '(lambda ()
+            #'(lambda ()
                (define-key ediff-mode-map (kbd "c") 'ediff-copy-both-to-C))))
 
 

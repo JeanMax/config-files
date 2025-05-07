@@ -53,8 +53,8 @@
             (define-key map (kbd "w") 'smex)
 
 
-            (define-key map (kbd "?") '(lambda ()
-                                         message "\\{move-mode-map}"))
+            (define-key map (kbd "?") #'(lambda ()
+                                         (message "\\{move-mode-map}")))
 ;; i previous-line
 ;; j left-char
 ;; k next-line

@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2018/01/17 13:54:55 by mc               ###   ########.fr        ;
+;    you want with this stuff. If we meet some day, and you     |:: '   :|     ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -66,21 +66,23 @@
   (setq package-enable-at-startup nil)
   ;; (setq nsm-settings-file "~/.emacs.d/misc/network-security.data")
   (setq package-archives
-        '(
-          ;; ("marmalade" . "http://marmalade-repo.org/packages/") ;; RIP
-          ("melpa" . "http://melpa.org/packages/")
-          ("gnu" . "http://elpa.gnu.org/packages/")))
+        '(("melpa" . "http://melpa.org/packages/")
+          ("gnu" . "http://elpa.gnu.org/packages/")
+          ("nongnu" . "https://elpa.nongnu.org/nongnu/")))
+  (setq package-native-compile t)
   (package-initialize)
 
   ;; Bootstrap `use-package'
   (unless (package-installed-p 'use-package)
     (package-refresh-contents)
     (package-install 'use-package))
-  (eval-when-compile
-    (require 'use-package))
+  (require 'use-package)
+  (setq use-package-compute-statistics t)
+  (setq use-package-verbose t)
   (require 'bind-key)
-  (when *is-a-server*
-    (setq use-package-verbose t)))
+  (require 'altgr))
+
+
 
 ;; (defun clone-package (package git)
 ;;   "Ugly hack to clone PACKAGE from GIT url when package.el is missing."

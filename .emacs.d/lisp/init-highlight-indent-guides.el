@@ -17,14 +17,18 @@
 (use-package highlight-indent-guides
   :ensure t
   :defer t
+  :diminish highlight-indent-guides-mode
   :commands (highlight-indent-guides-mode)
 
   ;; :init
-  ;; (add-hook 'prog-mode-hook 'highlight-indent-guides-mode) ;that thing fuck up the syntax highlighting :/
+  ;; (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
 
   :config
-  (setq highlight-indent-guides-method 'column)
-  (set-face-attribute 'highlight-indent-guides-character-face t :foreground "color-241"))
+  (progn
+    (setq highlight-indent-guides-method 'column)
+    (setq highlight-indent-guides-auto-character-face-perc 50)
+    (setq highlight-indent-guides-auto-even-face-perc 40)
+    (setq highlight-indent-guides-auto-odd-face-perc 30)))
 
 ;; (when (version< "23" emacs-version)
   ;; (bind-key* (kbd *altgr-h*) 'highlight-indent-guides-mode))
