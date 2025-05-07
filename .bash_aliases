@@ -7,11 +7,12 @@
 #    By: mc </var/spool/mail/mc>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/26 20:50:04 by mc                #+#    #+#              #
-#    Updated: 2020/06/03 13:03:19 by mc               ###   ########.fr        #
+#    you want with this stuff. If we meet some day, and you     |:: '   :|     #
 #                                                                              #
 # **************************************************************************** #
 
 # functions are way better than aliases actually!  (actually bis: not really?)
+# TODO: add fun showing fun/alias source (alias X || type X, but with zsh compat)
 man_emacs() {
     emacsclient -t --eval "(progn (man \"$1\") (other-window 1) (delete-other-windows))"
 }
@@ -34,6 +35,21 @@ vm() {
 }
 
 
+bob() {
+    python -c '
+import sys
+args = sys.argv[1:] if sys.stdin.isatty() else sys.stdin
+for s in args:
+  print(
+    "".join(
+      [s[i:i+2].capitalize() for i in range(0, len(s), 2)]
+    ).rstrip()
+  )
+' "${@:1}"
+}
+
+
+alias tree="tree -I '__pycache__|.git' --sort version --dirsfirst"
 
 # misc aliases
 alias l='ls'
@@ -61,11 +77,20 @@ alias eumount="~/sh_script/crypt.sh umount"
 alias sz="_sizeof"
 alias lsblk="lsblk -o NAME,LABEL,SIZE,FSAVAIL,FSUSE%,MOUNTPOINT,UUID"
 
+iperl() {
+    rlwrap -A -pgreen -S"perl> " perl -wnE'say eval()//$@'
+}
+
+
 
 # emacs stuffs
-alias e="$EDITOR"
+# alias e="$EDITOR"
+e() {
+    emacsclient -c $@ &
+}
 alias em='emacs --no-window-system --no-x-resources --no-splash'
-alias v="$VISUAL"
+# alias v="$VISUAL"
+alias v="$EDITOR"
 alias se="SUDO_EDITOR=\"emacsclient -t -a emacs\" sudoedit"
 alias man='man_emacs'
 alias mail='em --eval "(progn (sleep-for 0.1) (gnu))"'
@@ -75,15 +100,16 @@ alias zconf='e ~/.zshrc'
 alias bconf='e ~/.bashrc'
 alias aconf='e ~/.bash_aliases && . ~/.bash_aliases'
 alias econf='e ~/.emacs.d/init.el'
+alias iconf='e ~/.config/i3/config'
 
 # git aliases
 alias gsub='git submodule sync && git submodule update --init --recursive'
 alias ga='git add -A'
 alias gb='PAGER= git branch'
 alias gbb='git remote show origin'
-alias gcm='git commit -m'
-alias gcf='git commit --fixup'
-alias gce='git commit'
+gcm() { git commit -m "$@" && git-974; }
+gcf() { git commit --fixup "$@" && git-974; }
+alias gce='git commit && git-974'
 alias gco='git checkout'
 alias gplf='git pull'
 alias gpl='git pull --ff-only'
@@ -91,7 +117,7 @@ alias gplo='git pull --ff-only origin'
 alias gplom='git pull --ff-only origin master'
 alias gp='git push'
 alias gpo='git push origin'
-alias gpa='git push --all origin'  #yolo
+# alias gpa='git push --all origin'  #yolo
 alias gpom='git push origin master'
 alias gpf='git push --force-with-lease'
 alias gm='git merge --verbose --progress --no-ff'
@@ -113,12 +139,53 @@ alias gl='git log --oneline --graph --decorate'
 alias gll='git log'
 alias gr='git reset'
 alias gcl='git clone --recursive'
-alias git-974=~/sh_script/git-974.sh
 alias git-splootch="git commit --amend --reuse-message=HEAD && git-974"
+alias poule="~/sh_script/poule.sh"
 alias grb="git rebase"
 alias grbi="git rebase --autosquash -i master"
 alias grbm="git rebase master"
 alias gref="git reflog"
+# alias grbm="git checkout master && git pull && git checkout - && git rebase master"
+alias gw="git worktree"
+alias gwl="git worktree list"
+
+gwa() {
+    local ref=$(gbex "$1" || echo "$1")
+    local dst="$HOME/aggron-worktrees/$ref"
+    echo "Adding $dst ..."
+    git worktree add "$dst" "$ref" \
+        || git worktree add -b "$ref" "$dst"
+    cd "$dst"
+    # rsync -harz --exclude .git ~/aggron/external/ external
+    # for f in $(find external -name .git); do
+    #     sed -i -E "s|../../.git|../../../../aggron/.git/worktrees/$ref|" "$f"
+    # done
+    gsub
+    gwl
+}
+
+gwrm() {
+    local ref=$(gbex "$1" || echo "$1")
+    echo "Removing $ref ..."
+    cd ~/aggron
+    git worktree remove -f "$ref"
+    gwl
+}
+
+gbex() {
+    git rev-parse --abbrev-ref --all \
+        | sed -E 's|^origin/||g' \
+        | sort | uniq \
+        | grep -Em1 "$@"
+}
+
+gcoo() {
+    git checkout "$(gbex "$@")"
+}
+
+gcp() {
+    git commit -m "$(git log --oneline | head -n1 | cut -d' ' -f2-)" -e
+}
 
 gpla() {
     # git-pull_all-my-branches
@@ -162,6 +229,19 @@ $branches" | sort | uniq)
         # git stash apply # pop?
     fi
 }
+
+git-974() {
+    local short commits rand_bytes
+    short=$(git rev-parse --short HEAD)
+    commits=$(git log --branches --remotes --pretty=format:"%h")
+    while true; do
+        rand_bytes=$(head -c2 /dev/urandom | xxd -p | head -c3)
+        gitc0ffee --update-ref --prefix 974"$rand_bytes"
+        short=$(git rev-parse --short HEAD)
+        grep -q "$short" <<< "$commits" || break
+    done
+}
+
 
 # keep aliases after those
 alias sudo='sudo '
@@ -213,11 +293,10 @@ fi
 
 alias dir='dir --color=auto'
 alias vdir='vdir --color=auto'
-alias grep='grep --color=auto'
+alias grep='grep --color=auto -I --exclude-dir .git'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 alias diff='diff --color=auto'
-alias wdiff='dwdiff -c'
 alias pacsearch='pacsearch -c'
 alias pactree='pactree -c'
 alias bb='bb-wrapper --aur --build-dir /tmp/bb-build'
@@ -233,7 +312,7 @@ export LESS_TERMCAP_se=$(printf "\e[0m")
 export LESS_TERMCAP_so=$(printf "\e[1;44;33m")
 export LESS_TERMCAP_ue=$(printf "\e[0m")
 export LESS_TERMCAP_us=$(printf "\e[1;32m")
-
+# LESSOPEN="|/usr/bin/lesspipe.sh %s"
 
 # moar colors
 if [ "$TERM" != dumb ] && $(hash grc 2>/dev/null); then
@@ -302,6 +381,7 @@ if [ "$TERM" != dumb ] && $(hash grc 2>/dev/null); then
     alias docker="colourify docker"
     alias docker-machine="colourify docker-machine"
     alias docker-compose="colourify docker-compose"
+    alias wdiff="colourify wdiff"
 
     colored_sizeof() {
         _sizeof "$1" | grcat /usr/share/grc/conf.du
@@ -331,3 +411,6 @@ if [ "$TERM" != dumb ] && $(hash grc 2>/dev/null); then
     # alias wdiff="colourify wdiff"
 fi
 unset SQL_ARGS
+
+
+alias pc='gpg -d ~/.pass.gpg 2>/dev/null | xsel --clipboard && {sleep 60; xsel --clipboard --delete} &'

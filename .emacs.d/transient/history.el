@@ -8,6 +8,7 @@
  (docker-image-ls
   ("--all" "--filter dangling=true")
   ("--all"))
+ (docker-image-ls nil)
  (docker-image-rm nil)
  (git-timemachine-help nil)
  (magit-blame
@@ -36,4 +37,9 @@
  (magit-rebase nil)
  (magit-reset nil)
  (magit-stash nil)
- (magit-status-jump nil))
+ (magit-status-jump nil)
+ (nil)
+ (nil)
+ (nil)
+ (nil)
+ (nil))

@@ -13,12 +13,16 @@ for i in {$CHRONO..1}; do
 done
 
 echo "shutdown now!"
-# ~/.config/i3/graceful_exit.sh
-# systemctl poweroff -i
-i3lock -f -t -i ~/Pictures/Wallpapers/xkcd.png
-sleep 1
-# systemctl hibernate -i
-systemctl suspend -i
+~/.config/i3/graceful_exit.sh
+systemctl poweroff -i
+
+#i3lock -f -t -i ~/Pictures/Wallpapers/xkcd.png
+#sleep 1
+#systemctl hibernate -i
+
+# systemctl suspend -i
+
+
 EOF
 chmod 755 $TMP_SCRIPT
 

@@ -19,7 +19,7 @@ function tab_cd() {
 		\cd
 		echo -ne "\033]0;$USER@$HOST:~\007"
 	elif [ ! -d "$1" -a "$1" != "-" ]; then
-		echo "I'm pretty sure you're stoned again..."
+		echo "Nop..."
 	else
 		\cd "$1"
 		echo -ne "\033]0;$USER@$HOST:${PWD/$HOME/~}\007"

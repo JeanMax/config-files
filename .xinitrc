@@ -44,6 +44,9 @@ xset s off
 # Disable bell
 xset -b
 
+# set keyboard speed (delay, repeat speed)
+xset r rate 400 40
+
 # Enable zapping (C-A-<Bksp> kills X)
 # setxkbmap -option terminate:ctrl_alt_bksp
 # setxkbmap -option caps:super
@@ -75,8 +78,8 @@ export LC_TIME=fr_FR.UTF-8
 # This helps i3...
 export EDITOR="emacsclient -t"
 # export VISUAL="emacsclient -c"
-# export TERMINAL="urxvtc"
 export TERMINAL="mate-terminal"
+# export TERMINAL="alacritty"
 
 # this helps rofi-themes
 export XDG_DATA_DIRS=/usr/share:/usr/local/share
@@ -90,9 +93,6 @@ else
     echo 'style=gtk2' >> ~/.config/Trolltech.conf
 fi
 
-
-# urxvt server
-test $TERMINAL == "urxvtc" && urxvtd -q -f -o
 
 # Enable core dumps in case something goes wrong
 ulimit -c unlimited
@@ -109,7 +109,7 @@ case $WM in
         xautolock -detectsleep -cornersize 50 -corners --00 -time 10 -locker 'xset dpms force off' &
         # xautolock -detectsleep -cornersize 50 -corners --00 -time 42 -locker 'systemctl suspend -i' &
 		# caffeine &
-		# bash -x "$(command -v lightson+)" --delay 3 --audio 1 --mplayer 1 --vlc 1 --totem 0 --firefox-flash 1 --chromium-flash 1 --webkit-flash 1 --html5 1 --steam 0 --minitube 0 --celluloid 1 --guitarix 1 --rocketleague 1 > ~/.log/lightson.log 2>&1 &
+
 		bash -x lightson+ --delay 3 --audio 1 \
              --mplayer 1 --vlc 1 --totem 0 --flash 1 --html5 1 \
              --steam 0 --minitube 0 --celluloid 1 --guitarix 1 --rocketleague 1 \
@@ -119,19 +119,36 @@ case $WM in
         systembus-notify &
         dunst -print > ~/.log/dunst-notif.log 2>&1 &
 
-        screen1=$(xrandr | grep primary)
-        screen2=$(xrandr | grep ' connected' | grep -v primary)
-        if test "$screen2"; then
-            screen1_name=$(echo "$screen1" | cut -d' ' -f1)
-            screen2_name=$(echo "$screen2" | cut -d' ' -f1)
-            screen1_resolution=$(echo "$screen1" | sed -E 's/.* ([0-9]+x[0-9]+).*/\1/')
-            screen2_resolution=$(echo "$screen2" | sed -E 's/.* ([0-9]+x[0-9]+).*/\1/')
-            xrandr --output "$screen2_name" --mode "$screen1_resolution" \
-                   --output "$screen1_name" --mode "$screen2_resolution" \
-                                            --left-of "$screen2_name"
-        fi
+        # screens=$(xrandr | grep ' connected')
+        # screen1=$(echo "$screens" | grep 'eDP')
+        # screen2=$(echo "$screens" | grep -v 'eDP')
+        # if test "$screen2"; then
+        #     screen1_name=$(echo "$screen1" | cut -d' ' -f1)
+        #     screen2_name=$(echo "$screen2" | cut -d' ' -f1)
+        #     screen1_resolution=$(echo "$screen1" | sed -E 's/.* ([0-9]+x[0-9]+).*/\1/')
+        #     screen2_resolution=$(echo "$screen2" | sed -E 's/.* ([0-9]+x[0-9]+).*/\1/')
+        #     xrandr --output "$screen1_name" --mode "$screen1_resolution" \
+        #                                     --pos 2560x360 \
+        #            --output "$screen2_name" --mode "$screen2_resolution" \
+        #                                     --left-of "$screen1_name"
+        # fi
 
-        pgrep redshift || redshift &
+        # just use arandr...
+        # if hwinfo --monitor --short | grep -q "LG FULL HD"; then
+        #     # home setup
+        #     xrandr --output eDP-1 --primary --mode 1920x1080 --pos 0x1080 --rotate normal \
+        #            --output HDMI-1 --mode 1920x1080 --pos 0x0 --rotate normal \
+        #            --output DP-1 --off --output DP-2 --off --output DP-3 --off --output DP-4 --off
+        # else
+        #     xrandr --output eDP-1 --primary --mode 1920x1080 --pos 2560x360 --rotate normal \
+        #            --output HDMI-1 --mode 2560x1440 --pos 0x0 --rotate normal \
+        #            --output DP-1 --off --output DP-2 --off --output DP-3 --off --output DP-4 --off
+        # fi
+
+        # pgrep redshift || redshift &
+
+        # TODO: you need a udev hook on unplug for this
+        powertop --auto-tune
 
         # Background picture
         # feh -V --bg-max ~/Pictures/Wallpapers/xkcd.png &
@@ -149,12 +166,14 @@ case $WM in
         psensor &
 
         # Lock screen at startup
-        # i3lock -f -t -i ~/Pictures/Wallpapers/xkcd.png
+        if ! test "$NOP"; then  # don't actually start X, just env config
+            i3lock -f -t -i ~/Pictures/Wallpapers/xkcd.png
+            exec i3
+        fi
 
-        exec i3;;
 	    # Use 25 MiB of RAM for debug logs
 	    # exec i3 --shmlog-size=26214400;;
-
+        ;;
     sway)
         # export GDK_BACKEND=wayland
         export CLUTTER_BACKEND=wayland
