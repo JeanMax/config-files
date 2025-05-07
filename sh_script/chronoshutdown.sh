@@ -17,7 +17,8 @@ echo "shutdown now!"
 # systemctl poweroff -i
 i3lock -f -t -i ~/Pictures/Wallpapers/xkcd.png
 sleep 1
-systemctl hibernate -i
+# systemctl hibernate -i
+systemctl suspend -i
 EOF
 chmod 755 $TMP_SCRIPT
 

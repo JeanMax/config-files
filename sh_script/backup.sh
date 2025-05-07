@@ -1,17 +1,10 @@
-#!/bin/bash -xe
+#!/bin/bash
 
 export BORG_REPO=/backup
 # export BORG_PASSPHRASE=''
 
-# borg init --encryption=none $BORG_REPO
-borg break-lock $BORG_REPO # hacky
-
-WIN_DEV=/dev/sda1
-WIN_DIR=/tmp/mnt/win7
-
-BACKUP_DEV=/dev/sdb3
-BACKUP_DIR=/tmp/mnt/backup
-BACKUP_UUID="7d969b47-855d-404e-869f-455acd9a5822"
+BACKUP_DEV=/dev/sda2
+BACKUP_UUID="3109a4f0-0f51-4b60-af00-86fe49c3c29b"
 
 # some helpers and error handling:
 info() { printf "\n%s %s\n\n" "$( date )" "$*" >&2; }
@@ -32,22 +25,43 @@ PRUNE_OPTS="--list                          \
             --keep-monthly  6"
 
 
+mkdir -p $BORG_REPO
+mount -v $BACKUP_DEV $BORG_REPO || exit 42
+if ! test "$(find $BORG_REPO -maxdepth 1 | tail -n+2)"; then
+    info "Init Borg repo"
+    borg init --encryption=none $BORG_REPO
+fi
+
+borg break-lock $BORG_REPO # hacky
+
 info "Starting linux backup"
 borg create $BORG_OPTS               \
+    --exclude '/home/*/.android/*'   \
+    --exclude '/home/*/.bitmonero/*' \
+    --exclude '/home/*/.babao.d/*'   \
     --exclude '/home/*/.cache/*'     \
     --exclude '/home/*/.ccache/*'    \
+    --exclude '/home/*/.gem/*'       \
+    --exclude '/home/*/.gradle/*'    \
     --exclude '/home/*/.local/*'     \
-    --exclude '/home/*/.bitmonero/*' \
+    --exclude '/home/*/.npm/*'       \
+    --exclude '/home/*/.nv/*'        \
+    --exclude '/home/*/.nuget/*'     \
+    --exclude '/home/*/.roswell/*'   \
+    --exclude '/home/*/.slime/*'     \
+    --exclude '/home/*/.steam/*'     \
     --exclude '/home/*/.wine/*'      \
-    --exclude '/home/*/valx/*'       \
-    --exclude '/home/*/Pictures/*'   \
-    --exclude '/home/*/Videos/*'     \
-    --exclude '/home/*/Music/*'      \
+    --exclude '/home/*/Android/*'    \
     --exclude '/home/*/Downloads/*'  \
-    --exclude '/home/*/Desktop/*'    \
+    --exclude '/home/*/Games/*'      \
+    --exclude '/home/*/Music/*'      \
+    --exclude '/home/*/Pictures/*'   \
     --exclude '/home/*/Shared/*'     \
+    --exclude '/home/*/Videos/*'     \
+    --exclude '/home/*/VirtualBox VMs/*' \
     --exclude '/root/.cache/*'       \
     --exclude '/root/.local/*'       \
+    --exclude '/root/.wine/*'        \
     --exclude '/root/arch/out/*'     \
     --exclude '/root/arch/work/*'    \
     --exclude '/var/cache/*'         \
@@ -55,44 +69,35 @@ borg create $BORG_OPTS               \
     --exclude '/var/log/*'           \
     --exclude '/var/lib/docker/*'    \
     --exclude '/var/lib/dhcpcd/*'    \
+    --exclude '/var/lib/systemd/coredump/*' \
     ::'linux-{now}'                  \
     /etc                             \
     /home                            \
     /root                            \
     /var
+backup_exit=$?
 
 info "Pruning linux repository"
-borg prune $PRUNE_OPTS --prefix 'linux-'
+borg prune $PRUNE_OPTS --glob-archives 'linux-*'
+prune_exit=$?
 
 
-if ! mount | grep -q $WIN_DEV; then
-	info "Starting win backup"
-	mkdir -pv $WIN_DIR
-	mount -v $WIN_DEV $WIN_DIR
+info "Compacting repository"
+borg compact
+compact_exit=$?
 
-	borg create $BORG_OPTS                        \
-		 --exclude $WIN_DIR/Users'/*/AppData/*'   \
-		 --exclude $WIN_DIR/Users'/*/Downloads/*' \
-		 ::'win-{now}'                            \
-		 $WIN_DIR/Users
+sync
+umount -v $BORG_REPO
 
-	umount -v $WIN_DIR
-	rmdir -v $WIN_DIR
+global_exit=$(( backup_exit > prune_exit ? backup_exit : prune_exit ))
+global_exit=$(( compact_exit > global_exit ? compact_exit : global_exit ))
 
-	info "Pruning win repository"
-	borg prune $PRUNE_OPTS --prefix 'win-'
+if [ ${global_exit} -eq 0 ]; then
+    info "Backup, Prune, and Compact finished successfully"
+elif [ ${global_exit} -eq 1 ]; then
+    info "Backup, Prune, and/or Compact finished with warnings"
+else
+    info "Backup, Prune, and/or Compact finished with errors"
 fi
 
-
-if ! mount | grep -q $BACKUP_DEV \
-		&& blkid | grep $BACKUP_DEV | grep -q $BACKUP_UUID; then
-	info "Sync to backup device"
-	mkdir -pv $BACKUP_DIR
-	mount -v $BACKUP_DEV $BACKUP_DIR
-
-	rsync -harv --delete $BORG_REPO/ $BACKUP_DIR/.
-
-	sync
-	umount -v $BACKUP_DIR
-	rmdir -v $BACKUP_DIR
-fi
+exit ${global_exit}

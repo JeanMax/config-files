@@ -19,16 +19,16 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(emms-player-list '(emms-player-vlc emms-player-vlc-playlist))
  '(erc-log-write-after-insert t)
  '(erc-log-write-after-send t)
- '(flycheck-clang-language-standard "c++17")
+ '(flycheck-pylintrc "~/Documents/code/d2glf/setup.cfg")
  '(gnus-visible-headers
-   (quote
-    ("^From:" "^Newsgroups:" "^Subject:" "^Date:" "^Followup-To:" "^Reply-To:" "^Organization:" "^Summary:" "^Keywords:" "^To:" "^[BGF]?Cc:" "^Posted-To:" "^Mail-Copies-To:" "^Mail-Followup-To:" "^Apparently-To:" "^Gnus-Warning:" "^Resent-From:" "^X-Sent:" "^X-AnteSpam-Report:")))
+   '("^From:" "^Newsgroups:" "^Subject:" "^Date:" "^Followup-To:" "^Reply-To:" "^Organization:" "^Summary:" "^Keywords:" "^To:" "^[BGF]?Cc:" "^Posted-To:" "^Mail-Copies-To:" "^Mail-Followup-To:" "^Apparently-To:" "^Gnus-Warning:" "^Resent-From:" "^X-Sent:" "^X-AnteSpam-Report:"))
  '(js-indent-level 4)
+ '(magit-diff-refine-hunk t)
  '(package-selected-packages
-   (quote
-    (rjsx-mode slime csv-mode jsx-mode dockerfile-mode autodisass-llvm-bitcode sass-mode json-mode inf-ruby yaml-mode web-mode utop use-package tuareg smex rainbow-delimiters projectile php-mode php-eldoc markdown-mode magit ledger-mode keyfreq js2-mode ido-grid-mode ido-completing-read+ ido-complete-space-or-hyphen highlight-numbers highlight-indent-guides gtags git-timemachine ggtags flycheck-ocaml flycheck-ledger flycheck-cython flx-ido emms diminish diff-hl cython-mode company-statistics benchmark-init ace-window))))
+   '(gradle-mode csharp-mode luarocks lua-mode dotnet csv-mode go-mode dumb-jump inf-ruby highlight-numbers benchmark-init flycheck-ledger flycheck-grammalecte utop flycheck-ocaml merlin tuareg ledger-mode yaml-mode rjsx-mode json-mode js2-mode php-eldoc php-mode web-mode markdown-mode diff-hl git-timemachine magit company-statistics company emms keyfreq highlight-indent-guides rainbow-delimiters ace-window projectile ido-grid-mode smex flx-ido ido-completing-read+ slime bbdb flycheck-cython cython-mode gtags ggtags diminish use-package)))
 
 
 (custom-set-faces

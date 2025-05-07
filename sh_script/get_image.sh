@@ -7,8 +7,9 @@ REQ=$(mktemp)
 
 curl -s https://xkcd.com > $REQ
 rm -f $IMG
-IMG_URL=$(grep -Eo "https://imgs\.xkcd\.com/.*\.(png|gif)" $REQ \
-              | grep -v "_2x.")
+IMG_URL=$(grep -Eo 'https://imgs\.xkcd\.com/[^"]*\.(png|gif)' $REQ \
+              | grep -v "_2x." \
+              | head -n1 )
 TEMP_IMG="/tmp/$(basename "$IMG_URL")"
 wget -q "$IMG_URL" -O "$TEMP_IMG"
 

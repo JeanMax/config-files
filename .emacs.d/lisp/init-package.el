@@ -66,7 +66,8 @@
   (setq package-enable-at-startup nil)
   ;; (setq nsm-settings-file "~/.emacs.d/misc/network-security.data")
   (setq package-archives
-        '(("marmalade" . "http://marmalade-repo.org/packages/")
+        '(
+          ;; ("marmalade" . "http://marmalade-repo.org/packages/") ;; RIP
           ("melpa" . "http://melpa.org/packages/")
           ("gnu" . "http://elpa.gnu.org/packages/")))
   (package-initialize)

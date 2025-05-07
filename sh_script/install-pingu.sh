@@ -1,7 +1,7 @@
 #!/bin/bash
 
 TARGET=/mnt
-DEVICE=/dev/sda2
+DEVICE=/dev/sda1
 
 echo -e "-Target: $TARGET"
 du -csh $TARGET

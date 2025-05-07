@@ -35,7 +35,12 @@
 		 " Proj"
 	   (format " Proj[%s]"
 			   (projectile-project-name))))))
-  (setq projectile-switch-project-action (lambda nil (projectile-ibuffer 0))))
+  (setq projectile-switch-project-action (lambda nil (projectile-ibuffer 0)))
+
+  (setq projectile-project-root-functions '(projectile-root-local
+                                          projectile-root-top-down
+                                          projectile-root-top-down-recurring
+                                          projectile-root-bottom-up)))
 
 (provide 'init-projectile)
 ;;; init-projectile.el ends here

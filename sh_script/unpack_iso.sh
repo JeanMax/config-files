@@ -30,7 +30,7 @@ mount -o loop "$ISO" $MNT_ISO
 
 # mkfs.ext4 -v "$DEVICE"
 # e2label "$DEVICE" "$(grep archisolabel $MNT_ISO/arch/boot/syslinux/archiso_sys.cfg | cut -d= -f3)"
-mkfs.ext4 -v -O ^64bit -L "$(grep archisolabel $MNT_ISO/arch/boot/syslinux/archiso_sys.cfg | cut -d= -f3)" "$DEVICE"
+mkfs.ext4 -v -O ^64bit -L "$(grep -o 'archisolabel[^ ]*' $MNT_ISO/arch/boot/syslinux/archiso_sys.cfg | cut -d= -f2)" "$DEVICE"
 parted $(echo "$DEVICE" | sed -E 's|(/dev/.+)([0-9]+)|\1 set \2|') boot on
 
 mkdir -p $MNT_DEVICE

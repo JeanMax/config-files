@@ -15,14 +15,16 @@
 ;;; Code:
 
 (use-package ample-theme
-  :load-path "~/.emacs.d/site-lisp/ample-theme"
+  :ensure t
+  ;; :load-path "~/.emacs.d/site-lisp/ample-theme"
 
   ;; :init
     ;; (clone-package "ample-theme" "https://github.com/jordonbiondo/ample-theme"))
 
 
-  ;; (load-theme 'ample t t) ; ample{,flat,light}
-  ;; (enable-theme 'ample)
+  :init
+  (load-theme 'ample t t) ; ample{,flat,light}
+  (enable-theme 'ample)
 
   :config
   (set-face-attribute 'minibuffer-prompt t :foreground "#528fd1")
