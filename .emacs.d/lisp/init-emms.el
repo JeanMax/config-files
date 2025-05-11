@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2019/10/18 10:45:43 by mc               ###   ########.fr        ;
+;    you want with this stuff. If we meet some day, and you     |:: '   :|     ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -25,6 +25,7 @@
   (emms-all)
   (emms-default-players)
   (setq emms-source-file-default-directory "~/Music/")
+  (setq emms-player-list '(emms-player-vlc emms-player-vlc-playlist))
   (require 'emms-info-mp3info)
   (add-to-list 'emms-info-functions 'emms-info-mp3info))
 
@@ -34,7 +35,7 @@
 ;; don't forget to save it!
 
 (use-package emms-streams
-  ;; :defer t
+  :after emms
 
   :config
   (setq emms-stream-default-action "play"))

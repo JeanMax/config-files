@@ -22,6 +22,11 @@
   ;; selecting region with shift
   (transient-mark-mode t)
 
+  (visual-line-mode t)
+
+  (bind-key* (kbd "<home>") 'backward-page)
+  (bind-key* (kbd "<end>") 'forward-page)
+
   ;; copy / cut / paste / smurf
   (bind-key* (kbd "<f2>") 'kill-region)
   (bind-key* (kbd "<f3>") 'kill-ring-save)
@@ -39,46 +44,18 @@
   (bind-key* (kbd "M--") 'inc) ; 6
   ;; insert \n && \t
   (bind-key* (kbd "C-c RET") 'insert-eol)
+  (require 'altgr)
   (bind-key* (kbd *altgr-a*) 'tab-to-tab-stop)
   (bind-key* (kbd *console*) 'tab-to-tab-stop)
-
-
-  (defun xah-toggle-letter-case ()
-    "Toggle the letter case of current word or text selection.
-Always cycle in this order: ALL CAPS, all lower.
-
-URL `http://ergoemacs.org/emacs/modernization_upcase-word.html'
-Version 2016-01-08"
-
-    ;; TODO:
-    ;; if end of word     toggle word's caps (check case of previous char)
-    ;; else               toggle char at cursor caps
-    (interactive)
-    (let (
-          (deactivate-mark nil)
-          -p1 -p2)
-      (if (use-region-p)
-          (setq -p1 (region-beginning)
-                -p2 (region-end))
-        (save-excursion
-          (skip-chars-backward "[:alnum:]")
-          (setq -p1 (point))
-          (skip-chars-forward "[:alnum:]")
-          (setq -p2 (point))))
-      (when (not (eq last-command this-command))
-        (put this-command 'state 0))
-      (cond
-       ((equal 0 (get this-command 'state))
-        (upcase-region -p1 -p2)
-        (put this-command 'state 1))
-       ((equal 1 (get this-command 'state))
-        (downcase-region -p1 -p2)
-        (put this-command 'state 0)))))
 
   (defun copy-killring-to-clipboard()
     "Copy killring to clipboard!"
     (interactive)
-    (shell-command (concat "xsel -ib << EOF \n" (car kill-ring)))
+    (let ((temp-file "/tmp/.clipboard"))
+      (with-temp-file temp-file (yank))
+      (shell-command (format
+                      "xsel --clipboard --input < %s && rm -f %s"
+                      temp-file temp-file)))
     (message "Kill-ring copied to clipboard!"))
 
   (defun par()
@@ -92,17 +69,6 @@ Version 2016-01-08"
     (interactive)
     (insert "[]")
     (backward-char 1))
-
-  ;; (defun aco()
-  ;;   "ac"
-  ;;   (interactive)
-  ;;   (move-end-of-line 1)
-  ;;   (insert "\n{")
-  ;;   (indent-for-tab-command)
-  ;;   (insert "\n\n}")
-  ;;   (indent-for-tab-command)
-  ;;   (previous-line 1)
-  ;;   (indent-for-tab-command))
 
   (defun aco()
     "ac"
@@ -155,10 +121,9 @@ Version 2016-01-08"
   (defun insert-debug-comment()
     "Insert a 'debug' comment."
     (interactive)
-    (point-to-register 'm)
-    (comment-dwim nil)
-    (insert "DEBUG")
-    (jump-to-register 'm))
+    (save-excursion
+      (comment-dwim nil)
+      (insert "DEBUG")))
 
   (defun set-comment-char (char)
     "Set comment CHAR for current buffer."

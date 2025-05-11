@@ -36,9 +36,6 @@
 
 
     ;; (setq ido-save-directory-list-file "~/.emacs.d/misc/ido.last")
-    (set-face-attribute 'ido-first-match t :foreground "#ebc481") ;TODO: highlight?
-    (set-face-attribute 'ido-subdir t :foreground "#5180b3")
-
     (add-hook 'ido-setup-hook (lambda ()
                                 (define-key ido-completion-map (kbd "TAB") 'ido-complete)
                                 (define-key ido-completion-map (kbd "<C-up>") 'previous-line-or-history-element)
@@ -95,7 +92,6 @@
   (ido-grid-mode t)
 
   :config
-  (set-face-attribute 'ido-grid-mode-match t :weight 'bold) ;TODO: highlight?
   ;; (setq ido-grid-mode-keys nil)
   ;; (setq ido-grid-mode-first-line '(ido-grid-mode-count "   " ido-grid-mode-long-count))
   (setq
@@ -143,7 +139,7 @@
      (expand-file-name
       (ido-completing-read
        "Project file: " (tags-table-files) nil t)))))
-(bind-key (kbd *altgr-o*) 'ido-find-file-in-tag-files)
+;; (bind-key (kbd *altgr-o*) 'ido-find-file-in-tag-files)
 
 (provide 'init-ido)
 ;;; init-ido.el ends here

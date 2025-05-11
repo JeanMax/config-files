@@ -3377,11 +3377,6 @@ colorthres-similaritythres=93
 # List special files (boolean)
 #list-special-files=0
 
-[nfs] # NFS input
-
-# Set NFS uid/guid automatically (boolean)
-#nfs-auto-guid=1
-
 [libbluray] # Blu-ray Disc support (libbluray)
 
 # Blu-ray menus (boolean)

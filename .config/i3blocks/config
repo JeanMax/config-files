@@ -48,7 +48,7 @@ markup=none
 [temperature]
 # label=TEMP
 interval=10
-command=~/.config/i3blocks/temperature.pl --chip zenpower-pci-00c3
+command=~/.config/i3blocks/temperature.pl --chip CPU
 
 
 # Gamepad
@@ -78,7 +78,7 @@ interval=15
 # If the instance is not specified, use the interface used for default route.
 # The address can be forced to IPv4 or IPv6 with -4 or -6 switches.
 [iface]
-instance=wlp3s0
+instance=wlp0s20f3
 # color=#00FF00
 interval=10
 separator=true
@@ -128,7 +128,7 @@ interval=60
 # label=⚡
 # #instance=1
 # interval=30
-# command=/usr/lib/i3blocks/battery/battery
+# command=~/.config/i3blocks/battery.pl
 
 
 # Volume indicator
@@ -142,7 +142,7 @@ instance=Master
 #instance=PCM
 interval=1
 signal=1
-command=/usr/lib/i3blocks/volume/volume 5% pulse
+command=~/.config/i3blocks/volume.sh 5% pulse
 
 
 # Disk usage

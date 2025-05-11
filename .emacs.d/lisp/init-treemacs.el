@@ -1,26 +1,36 @@
-;;; init-highlight-numbers.el --- init highlight-numbers
+;;; init-treemacs.el --- init treemacs
 ;;; Commentary:
 ;******************************************************************************;
 ;                                                                              ;
 ;                                                         :::      ::::::::    ;
-;    init-highlight-numbers.el                          :+:      :+:    :+:    ;
+;    init-treemacs.el                                   :+:      :+:    :+:    ;
 ;                                                     +:+ +:+         +:+      ;
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2018/02/18 12:06:51 by mc               ###   ########.fr        ;
+;    you want with this stuff. If we meet some day, and you     |:: '   :|     ;
 ;                                                                              ;
 ;******************************************************************************;
 
 ;;; Code:
 
-(use-package highlight-numbers
-  :defer t
+(use-package treemacs
   :ensure t
-  :commands (highlight-numbers-mode)
+  :no-require t
+  ;; :defer t
+  :commands (treemacs lsp-treemacs-errors-list)
 
   :init
-  (add-hook 'prog-mode-hook 'highlight-numbers-mode))
+  (bind-key* (kbd "<f1>") 'treemacs)
 
-(provide 'init-highlight-numbers)
-;;; init-highlight-numbers.el ends here
+  ;; :config
+  ;; (treemacs-project-follow-mode)
+  )
+
+
+(use-package treemacs-magit
+  :after treemacs
+  :ensure t)
+
+(provide 'init-treemacs)
+;;; init-treemacs.el ends here

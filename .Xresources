@@ -12,8 +12,8 @@ Xft.dpi: 101
 xpdf.initialZoom: 150
 
 ! Emacs.fontBackend: xft
-Emacs.font: Monaco-11
-Emacs.lineSpacing: 0
+! Emacs.font: CodeNewRoman
+! Emacs.lineSpacing: 0
 
 ! TODO: tab bug in emacs
 ! http://www.deskdr.com/dr/solved-emacs-rxvt-unicode-cursor-bug.html

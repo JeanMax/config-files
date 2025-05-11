@@ -6,7 +6,7 @@
 #    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/23 17:38:59 by mcanal            #+#    #+#              #
-#    Updated: 2019/11/26 23:26:10 by mc               ###   ########.fr        #
+#    you want with this stuff. If we meet some day, and you     |:: '   :|     #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,10 +20,13 @@ source ~/.bashrc
 REPORTTIME=5
 
 # Definition du prompt
+if false; then #hash starship 2>/dev/null; then
+    eval "$(starship init zsh)"
+else
 precmd ()
 {
     if [ $? -eq 0 ]; then
-        CMD_COLOR="%{$fg[green]%}"
+        CMD_COLOR="%{$fg[blue]%}"
     else
         CMD_COLOR="%{$fg[red]%}"
     fi
@@ -81,13 +84,15 @@ precmd ()
 	fi
 
 
-	if [[ $TERM = dumb ]]; then
+	if [[ $TERM = dumb ]] || [[ $TERM = eterm-color ]] || [[ $TERM = eat-truecolor ]]; then
 		DUMB_PROMPT="$RPROMPT"
+        RPROMPT=
 	fi
 
-    PROMPT="%B%{$fg[green]%}%n@%{$fg[yellow]%}%m%{$fg[white]%}:%{$fg[red]%}%~        $DUMB_PROMPT
+    PROMPT="%B%{$fg[blue]%}%n@%{$fg[yellow]%}%m%{$fg[white]%}:%{$fg[red]%}%~        $DUMB_PROMPT
 %{$CMD_COLOR%}>%{$reset_color%}%b "
 }
+fi # starship
 
 # Reglage du terminal
 if [[ $TERM = dumb ]]; then
@@ -98,20 +103,12 @@ else
 	tab_cd "$(test -e ~/.pwd && cat ~/.pwd)"
 	alias cd='tab_cd'
 
-    if [[ $TERM != rxvt-256color ]]; then
-        TERM=xterm-256color
-        # Correction de la touche Delete / ctrl-left / ctrl-right
-        bindkey "\e[3~"   delete-char
-        bindkey "\e[1;5D" backward-word
-        bindkey "\e[1;5C" forward-word
-        bindkey "\e[3;5~" kill-word
-    else
-        bindkey "\e[3~"   delete-char
-        bindkey "^[Od" backward-word
-        bindkey "^[Oc" forward-word
-        bindkey "\e[3;5~" kill-word
-        # bindkey "\e[3^" kill-word
-    fi
+    # TERM=xterm-256color
+    # Correction de la touche Delete / ctrl-left / ctrl-right
+    bindkey "\e[3~"   delete-char
+    bindkey "\e[1;5D" backward-word
+    bindkey "\e[1;5C" forward-word
+    bindkey "\e[3;5~" kill-word
 
     # bind alt-z to fg
     _fg() { fg }
@@ -121,18 +118,33 @@ fi
 
 SAVEHIST=$HISTFILESIZE
 setopt APPEND_HISTORY
-setopt SHARE_HISTORY
-setopt HIST_EXPIRE_DUPS_FIRST
-setopt HIST_FIND_NO_DUPS
-setopt HIST_REDUCE_BLANKS
-#setopt EXTENDED_HISTORY
+
+# setopt BANG_HIST                 # Treat the '!' character specially during expansion.
+# setopt EXTENDED_HISTORY          # Write the history file in the ":start:elapsed;command" format.
+# setopt INC_APPEND_HISTORY        # Write to the history file immediately, not when the shell exits.
+setopt SHARE_HISTORY             # Share history between all sessions.
+setopt HIST_EXPIRE_DUPS_FIRST    # Expire duplicate entries first when trimming history.
+# setopt HIST_IGNORE_DUPS          # Don't record an entry that was just recorded again.
+# setopt HIST_IGNORE_ALL_DUPS      # Delete old recorded entry if new entry is a duplicate.
+setopt HIST_FIND_NO_DUPS         # Do not display a line previously found.
+# setopt HIST_IGNORE_SPACE         # Don't record an entry starting with a space.
+# setopt HIST_SAVE_NO_DUPS         # Don't write duplicate entries in the history file.
+setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks before recording entry.
+# setopt HIST_VERIFY               # Don't execute immediately upon history expansion.
+# setopt HIST_BEEP                 # Beep when accessing nonexistent history.
+
 
 # report the status of backgrounds jobs immediately
 setopt notify
 
+# custom comp for make / docker (sloooow)
+# fpath=(~/.zsh_fpath $fpath)
+# export FPATH=~/.zsh_fpath:$FPATH
+
 # Autocompletion de type menu
-autoload -Uz compinit promptinit && compinit && promptinit
 zstyle ':completion:*' menu select
+zstyle ':completion:*:*:make:*' tag-order 'targets'
+autoload -Uz compinit promptinit && compinit && promptinit
 setopt COMPLETE_ALIASES
 
 # Use modern completion system
@@ -183,13 +195,14 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*:*:kill:*:processes' list-colors "=(#b) #([0-9]#)*=36=31"
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
-# zsh-syntax-highlighting
-test -e /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh \
-	&& source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-# zsh autosuggestion
-test -e /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh \
-	&& source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+# Plugins
+local zsh_plugin_dir=/usr/share/zsh/plugins
+for p in zsh-syntax-highlighting zsh-autosuggestions; do
+    local plugin=$zsh_plugin_dir/$p/$p.zsh
+    test -e $plugin && source $plugin
+done
+
 
 # fzf
 test -e /usr/share/fzf/completion.zsh \
@@ -202,16 +215,22 @@ test -e /usr/share/fzf/completion.zsh \
 #   fd --type d --hidden --follow --exclude ".git" . "$1"
 # }
 
+
+
+# hash mcfly 2>/dev/null && eval "$(mcfly init zsh)"
+
+
 # TODO: get familiar with these funny tools: bat fd fzf rg
+# https://remysharp.com/2018/08/23/cli-improved
 
 # export OPAMEXTERNALSOLVER=$(which packup 2> /dev/null)
 
 # OPAM configuration
-. /home/mc/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+# . /home/mc/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
 
 
 # fortune | cowsay -n | lolcat -v 1 -h 0.2
 
 
 # add completion on aliases
-unsetopt complete_aliases
+setopt complete_aliases

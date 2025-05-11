@@ -28,7 +28,8 @@
 (bind-key* (kbd "M-v") 'vc-dir)
 
 (defun vc-dir-find-files (&optional arg)
-  "Open each of the marked files, or the file under the point, or when prefix ARG, the next N files."
+  "Open each of the marked files, or the file under the point,
+or when prefix ARG, the next N files."
   (interactive "P")
   (let* ((fn-list (vc-dir-marked-files)))
     (mapc 'find-file fn-list)))

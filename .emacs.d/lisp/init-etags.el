@@ -34,15 +34,26 @@
    (list (read-from-minibuffer
           (concat "tag pattern (default " (nth 0 tags-make-n-visit-history) "): ")
           nil nil nil 'tags-make-n-visit-history)))
-  (shell-command (concat "etags -o ~/.emacs.d/TAGS "
+  (shell-command (concat "etags -o ~/config-files/.emacs.d/TAGS "
                          (if (string= "" file-pattern)
                              (nth 0 tags-make-n-visit-history)
                            file-pattern)))
-  (visit-tags-table "~/.emacs.d/TAGS"))
+  (visit-tags-table "~/config-files/.emacs.d/TAGS"))
+
+;; (setq tags-table-list '("/home/mcanal/.emacs.d/TAGS"))))
 
 
+(defun find-definition-maybe-lsp-maybe-xref (identifier) ; &key display-action)
+  "Use either xref-find-definitions or lsp-find-definitions to find IDENTIFIER."
+  (interactive (list (or lsp-mode (xref--read-identifier "Find definitions of: "))))
+  (if lsp-mode
+      (lsp-find-definition) ; :display-action display-action)
+    (xref-find-definitions identifier)))
+
+
+(require 'altgr)
 (bind-key* (kbd *altgr-t*) 'tags-make-n-visit)
-(bind-key* (kbd *altgr-g*) 'xref-find-definitions)
+(bind-key* (kbd *altgr-g*) 'find-definition-maybe-lsp-maybe-xref)
 (bind-key* (kbd *altgr-x*) 'xref-find-references)
 ;; (bind-key* (kbd *altgr-r*) 'recentf-open-files)
 
@@ -52,9 +63,9 @@
   :defer t
 
   :init
-  (use-package gtags
-    :ensure t
-    :defer t)
+  ;; (use-package gtags
+  ;;   :ensure t
+  ;;   :defer t)
   (add-hook 'c-mode-common-hook
 			(lambda ()
 			  (when (derived-mode-p 'c-mode 'c++-mode)

@@ -15,7 +15,7 @@
 ;;; Code:
 
 (use-package recentf
-  :defer t
+  ;; :defer t
 
   :config
   ;; (setq-default recentf-save-file "~/.emacs.d/misc/recentf")

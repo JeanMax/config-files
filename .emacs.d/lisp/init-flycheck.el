@@ -8,7 +8,7 @@
 ;    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2016/08/24 18:42:21 by mcanal            #+#    #+#              ;
-;    Updated: 2019/09/16 12:07:56 by mc               ###   ########.fr        ;
+;    you want with this stuff. If we meet some day, and you     |:: '   :|     ;
 ;                                                                              ;
 ;******************************************************************************;
 
@@ -22,16 +22,6 @@
   :init
   (add-hook 'prog-mode-hook 'global-flycheck-mode)
 
-  (setq flycheck-grammalecte-enabled-modes
-		'(mail-mode message-mode))
-  ;; (flycheck-grammalecte-download-grammalecte) ;once
-  (use-package flycheck-grammalecte
-    ;; :defer t
-    :ensure t
-	:init
-	(setq flycheck-grammalecte-report-esp nil)
-	(setq flycheck-grammalecte-report-nbsp nil))
-
   (use-package flycheck-ledger
     :defer t
     :ensure t)
@@ -39,60 +29,46 @@
 
   :config
   ;; (setq flycheck-mode-line-prefix "f")
-  (setq flycheck-clang-include-path
-        '(
-          "/home/mc/Documents/code/vmread/include/"
-          "/home/mc/Documents/code/vmread/extern/libsmrf/include/"
-          "/home/mc/Documents/code/vmread/extern/libsmrf/include/smrf/"
-          "/home/mc/Documents/code/vmread/extern/libsmrf/include/smrf/util/"
-          "/home/mc/Documents/code/vmread/extern/imgui/"
-          "/home/mc/Documents/code/vmread/extern/imgui/backends/"
-          "/home/mc/Documents/code/vmread/extern/inih/"
-          "/usr/include/SDL2"
-		  ))
 
-  ;; (setq flycheck-clang-include-path
-  ;;       '(
-  ;; 		  "/home/mc/data-bloomberg/bloomberg/bloomberg-utils/inc"
-  ;; 		  "/home/mc/data-bloomberg/bloomberg/datafeed-intraday/inc"
-  ;; 		  "/home/mc/data-bloomberg/bloomberg/datafeed-reference/inc"
-  ;; 		  "/home/mc/data-bloomberg/extern/inc/blpapi"
-  ;; 		  "/home/mc/data-bloomberg/extern/inc/json"
-  ;; 		  "/home/mc/data-bloomberg/extern/inc/nats"
-  ;; 		  "/home/mc/data-bloomberg/extern/inc/nats/adapters"
-  ;; 		  "/home/mc/data-bloomberg/extern/inc/nats/include"
-  ;; 		  "/home/mc/data-bloomberg/extern/inc/nats/stan"
-  ;; 		  "/home/mc/data-bloomberg/extern/inc/pqxx"
-  ;; 		  "/home/mc/data-bloomberg/extern/inc/pqxx/internal"
-  ;; 		  "/home/mc/data-bloomberg/extern/inc/pqxx/internal/gates"
-  ;; 		  "/home/mc/data-bloomberg/intraday-dumper/inc"
-  ;; 		  "/home/mc/data-bloomberg/utils/inc"
-  ;; 		  "/home/mc/data-bloomberg/utils/inc/nats"
-  ;; 		  ))
+  (setq-default flycheck-disabled-checkers '(python-pylint python-mypy python-flake8))
+
+  ;; (setq flycheck-clang-language-standard "-std=c11")
+  ;; (setq flycheck-clang-warnings '("all" "extra" "switch-enum" "float-conversion"  "no-error=deprecated-declarations" "deprecated-declarations" "no-unknown-pragmas" "no-type-limits" "implicit-function-declaration"))  ; "no-unused-parameter" "no-unused-variable"
+  ;; (setq flycheck-clang-args '("-ffunction-sections" "-fdata-sections" "-nostdinc" "-nostartfiles" "-nostdlib" "-static"))
 
 
+  ;; (setq flycheck-clang-definitions '("__linux__" "LINUX" "NDEBUG" ))
+  ;; (setq flycheck-clang-definitions '("_GNU_SOURCE" "PB_NO_PACKED_STRUCTS" "PB_BUFFER_ONLY" "PB_FIELD_32BIT"))
 
-  (setq flycheck-clang-language-standard "-std=c++11")  ;c11
-  ;; (setq flycheck-clang-args '("-std=c++11"))
-  (setq flycheck-clang-warnings '("all" "extra"))
-  (setq flycheck-clang-definitions '("__linux__" "LINUX" "NDEBUG"))
-  ;; (setq flycheck-idle-change-delay 2)
+
+  ;; (setq flycheck idle-change-delay 2)
   (setq flycheck-check-syntax-automatically
         '(save
           mode-enabled
           new-line)))
 
-(defun update-include-path ()
-  "Update flycheck clang include path."
-  (interactive)
+
+;; lsp is enough?
+;; (use-package flycheck-clang-tidy
+;;   :ensure t
+;;   :defer t
+;;   :after flycheck
+;;   :hook (flycheck-mode . flycheck-clang-tidy-setup))
+
+
+(defun update-include-path (path)
+  "Update flycheck clang include PATH."
+  (interactive "DPath? ")
   (let ((includes (shell-command-to-string
                    (concat " find "
-                           default-directory
+                           path
                            ;; " /usr/include "
                            " -regex '.*\\.\\(h\\|hpp\\)' "
                            " | xargs dirname | sort | uniq "))))
     (message includes)
-    (setq flycheck-clang-include-path (split-string includes "\n"))))
+    (setq flycheck-clang-include-path (split-string (concat
+                                                     "/home/mcanal/aggron/external/lwip/src/include"
+                                                     includes)))))
 
 (provide 'init-flycheck)
 ;;; init-flycheck.el ends here

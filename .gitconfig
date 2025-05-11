@@ -1,12 +1,16 @@
 [push]
 	default = simple
+	autoSetupRemote = true
 [core]
 	excludesfile = ~/.gitignore_global
+[fetch]
+    prune = on
+[grep]
+	lineNumber = true
+	extendRegexp = true
+
 [user]
 	email = mc@rmrf.fr
 	name = JeanMax
-[filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
+[color]
+	ui = auto

@@ -23,7 +23,7 @@
 
   ;; :config
   (add-hook 'comint-mode-hook
-            '(lambda ()
+            #'(lambda ()
                (define-key comint-mode-map (kbd "C-c r") 'comint-history-isearch-backward))))
 
 
