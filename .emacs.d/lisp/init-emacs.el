@@ -103,6 +103,9 @@
   (bind-key* (kbd "<mouse-4>") 'previous-line)
   (bind-key* (kbd "<mouse-5>") 'next-line)
 
+  ;; right click menu
+  (context-menu-mode)
+
   ;; linum
   (cond
    ((version< emacs-version "23")

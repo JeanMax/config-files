@@ -8,7 +8,8 @@ set -ex
 # tag=emacs-26.3
 # tag=emacs-27.2
 # tag=emacs-28.2
-tag=emacs-29.3
+# tag=emacs-29.4
+tag=emacs-30.1
 
 with_prefix=t
 

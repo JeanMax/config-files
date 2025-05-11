@@ -18,6 +18,9 @@
 ;      (note: running project-find-file in 2 differents projects works as expected)
 
 
+;TODO: submodule management is weird
+
+
 ;;; Code:
 ;; TODO: overide global key bind for project specific
 ;; (ie: if in project, M-c trigger project-compile)

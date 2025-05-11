@@ -177,7 +177,7 @@ get_temps() {
     local sensors_out=$(sensors)
     local rgx='s/.*[^=] \+?([0-9]+).*°?C.*/\1/'
     CPU_TEMP=$(echo "$sensors_out" \
-                   | grep Tdie \
+                   | grep CPU: \
                    | sed -E "$rgx")
     MOBO_TEMP=$(echo "$sensors_out" \
                    | grep -m 1 temp1 \

@@ -112,8 +112,8 @@ ASAN_SYMBOLIZER_PATH=$(which llvm-symbolizer 2>/dev/null)
 export ASAN_SYMBOLIZER_PATH
 
 # big history
-HISTSIZE=32767
-HISTFILESIZE=15000
+HISTSIZE=32767  # on memory
+HISTFILESIZE=150000  # on disk
 HISTFILE=~/.zsh_history
 
 stty -ixon #forward search with ^s (disable interupt)

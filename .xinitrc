@@ -47,6 +47,7 @@ xset -b
 # set keyboard speed (delay, repeat speed)
 xset r rate 400 40
 
+setxkbmap -layout fr -variant oss -option caps:super -option terminate:ctrl_alt_bksp
 # Enable zapping (C-A-<Bksp> kills X)
 # setxkbmap -option terminate:ctrl_alt_bksp
 # setxkbmap -option caps:super
@@ -106,18 +107,18 @@ case $WM in
         pgrep emacs || rm -f /home/mc/.emacs.d/.emacs.desktop.lock
 
 		# Auto screen lock
-        xautolock -detectsleep -cornersize 50 -corners --00 -time 10 -locker 'xset dpms force off' &
+        pgrep xautolock || xautolock -detectsleep -cornersize 50 -corners --00 -time 10 -locker 'xset dpms force off' &
         # xautolock -detectsleep -cornersize 50 -corners --00 -time 42 -locker 'systemctl suspend -i' &
 		# caffeine &
 
-		bash -x lightson+ --delay 3 --audio 1 \
+		pgrep lightson || bash -x lightson+ --delay 3 --audio 1 \
              --mplayer 1 --vlc 1 --totem 0 --flash 1 --html5 1 \
              --steam 0 --minitube 0 --celluloid 1 --guitarix 1 --rocketleague 1 \
              > ~/.log/lightson.log 2>&1 &
         # lightson+cmd on &
 
-        systembus-notify &
-        dunst -print > ~/.log/dunst-notif.log 2>&1 &
+        pgrep systembus-notify || systembus-notify &
+        pgrep dunst || dunst -print > ~/.log/dunst-notif.log 2>&1 &
 
         # screens=$(xrandr | grep ' connected')
         # screen1=$(echo "$screens" | grep 'eDP')
@@ -148,7 +149,7 @@ case $WM in
         # pgrep redshift || redshift &
 
         # TODO: you need a udev hook on unplug for this
-        powertop --auto-tune
+        # powertop --auto-tune
 
         # Background picture
         # feh -V --bg-max ~/Pictures/Wallpapers/xkcd.png &
@@ -161,13 +162,13 @@ case $WM in
         pgrep picom || picom &
 
 		# numlock at startup
-		numlockx &
+		pgrep numlockx || numlockx &
 
         psensor &
 
         # Lock screen at startup
         if ! test "$NOP"; then  # don't actually start X, just env config
-            i3lock -f -t -i ~/Pictures/Wallpapers/xkcd.png
+            # i3lock -f -t -i ~/Pictures/Wallpapers/xkcd.png
             exec i3
         fi
 

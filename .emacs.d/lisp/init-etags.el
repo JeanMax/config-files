@@ -40,12 +40,20 @@
                            file-pattern)))
   (visit-tags-table "~/config-files/.emacs.d/TAGS"))
 
-  ;; (setq tags-table-list '("/home/mcanal/.emacs.d/TAGS"))))
+;; (setq tags-table-list '("/home/mcanal/.emacs.d/TAGS"))))
+
+
+(defun find-definition-maybe-lsp-maybe-xref (identifier) ; &key display-action)
+  "Use either xref-find-definitions or lsp-find-definitions to find IDENTIFIER."
+  (interactive (list (or lsp-mode (xref--read-identifier "Find definitions of: "))))
+  (if lsp-mode
+      (lsp-find-definition) ; :display-action display-action)
+    (xref-find-definitions identifier)))
 
 
 (require 'altgr)
 (bind-key* (kbd *altgr-t*) 'tags-make-n-visit)
-(bind-key* (kbd *altgr-g*) 'xref-find-definitions)
+(bind-key* (kbd *altgr-g*) 'find-definition-maybe-lsp-maybe-xref)
 (bind-key* (kbd *altgr-x*) 'xref-find-references)
 ;; (bind-key* (kbd *altgr-r*) 'recentf-open-files)
 

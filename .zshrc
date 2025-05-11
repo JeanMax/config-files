@@ -6,7 +6,7 @@
 #    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/23 17:38:59 by mcanal            #+#    #+#              #
-#    Updated: 2019/11/26 23:26:10 by mc               ###   ########.fr        #
+#    you want with this stuff. If we meet some day, and you     |:: '   :|     #
 #                                                                              #
 # **************************************************************************** #
 
@@ -118,11 +118,21 @@ fi
 
 SAVEHIST=$HISTFILESIZE
 setopt APPEND_HISTORY
-setopt SHARE_HISTORY
-setopt HIST_EXPIRE_DUPS_FIRST
-setopt HIST_FIND_NO_DUPS
-setopt HIST_REDUCE_BLANKS
-#setopt EXTENDED_HISTORY
+
+# setopt BANG_HIST                 # Treat the '!' character specially during expansion.
+# setopt EXTENDED_HISTORY          # Write the history file in the ":start:elapsed;command" format.
+# setopt INC_APPEND_HISTORY        # Write to the history file immediately, not when the shell exits.
+setopt SHARE_HISTORY             # Share history between all sessions.
+setopt HIST_EXPIRE_DUPS_FIRST    # Expire duplicate entries first when trimming history.
+# setopt HIST_IGNORE_DUPS          # Don't record an entry that was just recorded again.
+# setopt HIST_IGNORE_ALL_DUPS      # Delete old recorded entry if new entry is a duplicate.
+setopt HIST_FIND_NO_DUPS         # Do not display a line previously found.
+# setopt HIST_IGNORE_SPACE         # Don't record an entry starting with a space.
+# setopt HIST_SAVE_NO_DUPS         # Don't write duplicate entries in the history file.
+setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks before recording entry.
+# setopt HIST_VERIFY               # Don't execute immediately upon history expansion.
+# setopt HIST_BEEP                 # Beep when accessing nonexistent history.
+
 
 # report the status of backgrounds jobs immediately
 setopt notify
@@ -185,13 +195,14 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*:*:kill:*:processes' list-colors "=(#b) #([0-9]#)*=36=31"
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
-# zsh-syntax-highlighting
-test -e /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh \
-	&& source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-# zsh autosuggestion
-test -e /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh \
-	&& source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+# Plugins
+local zsh_plugin_dir=/usr/share/zsh/plugins
+for p in zsh-syntax-highlighting zsh-autosuggestions; do
+    local plugin=$zsh_plugin_dir/$p/$p.zsh
+    test -e $plugin && source $plugin
+done
+
 
 # fzf
 test -e /usr/share/fzf/completion.zsh \

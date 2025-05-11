@@ -1,17 +1,4 @@
-((dirvish-dispatch nil)
- (docker nil)
- (docker-container-help nil)
- (docker-container-logs nil)
- (docker-container-ls
-  ("--all"))
- (docker-image-help nil)
- (docker-image-ls
-  ("--all" "--filter dangling=true")
-  ("--all"))
- (docker-image-ls nil)
- (docker-image-rm nil)
- (git-timemachine-help nil)
- (magit-blame
+((magit-blame
   ("-w"))
  (magit-branch nil)
  (magit-cherry-pick
@@ -23,23 +10,13 @@
  (magit-ediff nil)
  (magit-log
   ("-n256" "--graph" "--decorate")
-  (("--" "Makefile"))
   ("-n256" "--graph" "--color" "--decorate")
   ("-n256"))
  (magit-margin-settings nil)
  (magit-merge nil)
- (magit-patch nil)
- (magit-patch-apply nil)
- (magit-push
-  ("--force-with-lease")
-  nil
-  ("--force"))
- (magit-rebase nil)
+ (magit-push nil
+             ("--force"))
  (magit-reset nil)
- (magit-stash nil)
- (magit-status-jump nil)
- (nil)
- (nil)
- (nil)
- (nil)
- (nil))
+ (magit-revert
+  ("--edit"))
+ (magit-stash nil))

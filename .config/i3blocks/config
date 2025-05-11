@@ -48,7 +48,7 @@ markup=none
 [temperature]
 # label=TEMP
 interval=10
-command=~/.config/i3blocks/temperature.pl --chip zenpower-pci-00c3
+command=~/.config/i3blocks/temperature.pl --chip CPU
 
 
 # Gamepad
